@@ -1,0 +1,4 @@
+#!/bin/bash
+
+# use taskset to start mahjongg on core 4 only
+taskset 0x08 /usr/games/gnome-mahjongg
