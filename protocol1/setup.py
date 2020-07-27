@@ -4,7 +4,7 @@ import os
 import sys
 
 def setup():
-    os.system("./throttle 2000MHz  > /dev/null 2>&1")
+    os.system("./throttle 1200MHz  > /dev/null 2>&1")
     os.system('cls' if os.name == 'nt' else 'clear')
     print(textwrap.fill("This experiment is designed to test how computer users respond to some computer system modifications we are prototyping. We will first have you complete some simple tasks with these modifications turned off. Later, we will turn on these modifications and ask you to complete the same set of tasks."))
 
