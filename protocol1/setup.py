@@ -33,7 +33,7 @@ def patch():
 
     print("done!")
 
-    input(textwrap.fill("\n\nThis computer has now been modified. Please press Enter to continue"))
+    input(textwrap.fill("\n\nThis computer has now been modified. You will now repeat the previous tasks but on the modified system. Please press Enter to continue"))
 
 
 def wrapup():
