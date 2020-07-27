@@ -23,7 +23,7 @@ def browser(version):
         infotask=infotask2
 
     os.system('cls' if os.name == 'nt' else 'clear')
-    print(textwrap.fill("In this task you will use a web browser to complete simple tasks. Specifically, your goal is to login to your email account and send and email to hastings@cs.columbia.edu that contains the following information:\n\n"))
+    print(textwrap.fill("In this task you will use a web browser to complete simple tasks. Specifically, your goal is to login to your email account and send an email to hastings@cs.columbia.edu that contains the following information:\n\n"))
 
     print("\t1) The street address of " + mapsloc)
     print("\t2) A picture of " + pictask)
@@ -34,7 +34,7 @@ def browser(version):
     print(textwrap.fill("\n\nOnce you are done, exit the web browser by clicking the 'x' in the top right corner."))
 
     input("\n\nWhen you are ready, press Enter to launch the web browser")
-    os.system("sudo -H -u adam bash -c google-chrome -incognito > /dev/null 2>&1")
+    os.system("sudo -H -u adam google-chrome --incognito > /dev/null 2>&1")
 
     response=""
     while(response.lower() != "done"):

@@ -4,7 +4,7 @@ import textwrap
 
 def solitaire():
     os.system('cls' if os.name == 'nt' else 'clear')
-    print(textwrap.fill("In this task you will play a game of solitaire. The purpose of this task is to get you used to using this computer. We do NOT care about how well you do in this game or how long you play. Just play until you can't make any more moves, or are bored and want to continue with the experiment. Once you are done, exit the game by clicking the 'x' in the top right corner."))
+    print(textwrap.fill("In this task you will play a game of solitaire. We do NOT care about how well you do in this game or how long you play. Just play until you can't make any more moves, or are bored and want to continue with the experiment. Once you are done, exit the game by clicking the 'x' in the top right corner."))
 
     response= input("\n\nWhen you are ready, press Enter to start the game of solitaire")
 
@@ -13,4 +13,4 @@ def solitaire():
     
     response=""
     while(response.lower() != "done"):
-        response = input("\n\nWhen you are done with this task and ready to continue, type done' and press Enter: ")
+        response = input("\n\nWhen you are done with this task and ready to continue, type 'done' and press Enter: ")
