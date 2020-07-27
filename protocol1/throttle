@@ -1,0 +1,11 @@
+#!/bin/bash
+
+CPU="4"
+
+modprobe cpufreq_userspace
+#cpupower -c $CPU frequency-set --governor userspace
+cpupower frequency-set --governor userspace
+#cpupower -c $CPU frequency-set --freq $SPEED
+cpupower --cpu all frequency-set --freq 400MHz
+FREQ=$(cat /sys/devices/system/cpu/cpu$CPU/cpufreq/scaling_cur_freq)
+echo "CPU $CPU running at $FREQ"
