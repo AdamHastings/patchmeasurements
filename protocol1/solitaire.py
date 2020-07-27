@@ -10,3 +10,7 @@ def solitaire():
 
 
     os.system("/usr/games/sol")
+    
+    response=""
+    while(response.lower() != "done"):
+        response = input("\n\nWhen you are done with this task and ready to continue, type done' and press Enter: ")

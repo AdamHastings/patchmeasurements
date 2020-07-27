@@ -52,6 +52,7 @@ def wrapup():
 
     if (diff.lower() == "y"):
         diffresp = input("How were things different after the modifications were made? Please be descriptive.\n\nType your response and then press Enter: ")
+        diffresp = '"' + diffresp + '"'
     else:
         diffresp = ""
     

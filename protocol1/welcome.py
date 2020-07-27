@@ -21,3 +21,15 @@ def welcome():
         sys.exit()
     else:
         return name
+
+
+def finish():
+    os.system('cls' if os.name == 'nt' else 'clear')
+    print("Thanks for you participation! You are now finished. You may return the laptop to Adam")
+
+    cleanup=""
+    while (cleanup != "save"):
+        cleanup=input()
+    
+    os.system("./throttle 2000MHz  > /dev/null 2>&1")
+    return
