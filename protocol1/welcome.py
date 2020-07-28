@@ -25,7 +25,7 @@ def welcome():
 
 def finish():
     os.system('cls' if os.name == 'nt' else 'clear')
-    print("Thanks for you participation! You are now finished. You may return the laptop to Adam")
+    print("Thanks for you participation! You are now finished. Please do not discuss the details of this experiment with others.\n\nYou may return the laptop to Adam")
 
     cleanup=""
     while (cleanup != "save"):

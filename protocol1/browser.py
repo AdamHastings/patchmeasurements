@@ -31,7 +31,7 @@ def browser(version):
     
     
 
-    print(textwrap.fill("\n\nOnce you are done, exit the web browser by clicking the 'x' in the top right corner."))
+    print(textwrap.fill("\n\nOnce you are done, you may close the web browser."))
 
     input("\n\nWhen you are ready, press Enter to launch the web browser")
     os.system("sudo -H -u adam google-chrome --incognito > /dev/null 2>&1")
