@@ -6,6 +6,7 @@ import sys
 def setup():
     os.system("./throttle 1200MHz  > /dev/null 2>&1")
     os.system('cls' if os.name == 'nt' else 'clear')
+    
     print(textwrap.fill("This experiment is designed to test how computer users respond to some computer system modifications we are prototyping. We will first have you complete some simple tasks with these modifications turned off. Later, we will turn on these modifications and ask you to complete the same set of tasks."))
 
     response=""
@@ -16,7 +17,8 @@ def setup():
         print("\n\nThanks for your participation.\n\n")
         sys.exit()
     else:
-        return
+        freqs = os.popen('cat /proc/cpuinfo | grep MHz').read()
+        return freqs
 
 
 def patch():
@@ -34,7 +36,9 @@ def patch():
     print("done!")
 
     input(textwrap.fill("\n\nThis computer has now been modified. You will now repeat the previous tasks but on the modified system. Please press Enter to continue"))
-
+    
+    freqs = os.popen('cat /proc/cpuinfo | grep MHz').read()
+    return freqs
 
 def wrapup():
     os.system('cls' if os.name == 'nt' else 'clear')

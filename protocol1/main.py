@@ -6,10 +6,11 @@ from solitaire import solitaire
 
 # Run experiment
 name = welcome()
-setup()
+freqs = setup()
+print(freqs)
 solitaire()
 browser(1)
-patch()
+freqs2 = patch()
 solitaire()
 browser(2)
 diff, diffresp, slower, percentage = wrapup()
@@ -18,4 +19,4 @@ finish()
 
 # Append results to file
 log = open("log.txt", "a")
-log.write(",".join([name, diff, diffresp, slower, percentage, str(WTA), "\n"]))
+log.write(",".join([name, diff, diffresp, slower, percentage, str(WTA), freqs, freqs2, "\n"]))

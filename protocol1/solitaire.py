@@ -13,4 +13,4 @@ def solitaire():
     
     response=""
     while(response.lower() != "done"):
-        response = input("\n\nWhen you are done with this task and ready to continue, type 'done' and press Enter: ")
+        response = input("\n\nWhen you are done with this task and ready to continue, type 'done': ")
