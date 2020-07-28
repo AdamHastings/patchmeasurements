@@ -8,13 +8,13 @@ def get_WTA():
     #name = input("Please type your name: ")
     os.system('cls' if os.name == 'nt' else 'clear')
     x = 1
-    slowdown = str(20)
+    slowdown = str(30)
     accept = False
 
 
 
     while (not accept):
-        response = input("Would you be willing to accept a permanent " + slowdown + "% slowdown on your own computer in exchange for \n\n\t$" + str(x) + "?\n\n Type y/n: ")
+        response = input("Would you be willing to accept a permanent " + slowdown + "% slowdown on your own computer in exchange for \n\n\t$" + str(x) + "?\n\nThis is for your current computer only and does not apply to any future computers you may buy.\n\nType y/n: ")
         if (response.lower() == "y" or response.lower() == "yes"):
             accept = True
         elif (response.lower() == "n" or response.lower() == "no"):
@@ -35,7 +35,7 @@ def get_WTA():
     lower = x/2
     while (upper - lower > 2):
         midpoint = int((upper + lower)/2)
-        response = input("Would you be willing to accept a permanent " + slowdown + "% slowdown on your own computer in exchange for \n\n\t$" + str(midpoint) + "?\n\n Type y/n: ")
+        response = input("Would you be willing to accept a permanent " + slowdown + "% slowdown on your own computer in exchange for \n\n\t$" + str(midpoint) + "?\n\nThis is for your current computer     only and does not apply to any future computers you may buy.\n\nType y/n: ")
 
         if (response.lower() == "y" or response.lower() == "yes"):
             upper = midpoint        

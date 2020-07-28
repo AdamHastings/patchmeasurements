@@ -50,7 +50,7 @@ def wrapup():
     
     diff=""
     while (diff.lower() != "n" and diff.lower() != "y"):
-        diff=input(("Did you notice any differences before and after the modifications?\n\nType y/n and press Enter: "))
+        diff=input(("Did you notice any differences before and after the modifications? Do not consider differences in questions asked in the web browsing task.\n\nType y/n and press Enter: "))
     
     os.system('cls' if os.name == 'nt' else 'clear')
 
