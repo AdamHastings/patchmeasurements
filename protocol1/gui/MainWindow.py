@@ -1,4 +1,4 @@
-import sys
+import sys, os
 from PyQt5.QtWidgets import QApplication, QMainWindow
 
 from Ui_MainWindow import Ui_MainWindow
@@ -10,11 +10,6 @@ class MainWindow:
         self.ui.setupUi(self.main_win)
                 
         self.ui.stackedWidget.setCurrentWidget(self.ui.start_page)
-
-        #self.ui.blu_btn.clicked.connect(self.showBlue)
-        #self.ui.red_btn.clicked.connect(self.showRed)
-        #self.ui.ylw_btn.clicked.connect(self.showYellow)
-
         self.ui.not_consent_btn.clicked.connect(self.showGoodbye)
         self.ui.consent_btn.clicked.connect(self.showTask1)
         self.ui.task1_continue_btn.clicked.connect(self.showPatch)
@@ -39,11 +34,15 @@ class MainWindow:
 
     def show(self):
         self.main_win.show()
+        # Temp set freq. Works for linux only. TODO make cross platform
+        os.system("./throttle 1200MHz  > /dev/null 2>&1")
 
     def showGoodbye(self):
         self.ui.stackedWidget.setCurrentWidget(self.ui.goodbye_page)
 
     def close(self):
+        # Restore clock speed
+        os.system("./throttle 1200MHz  > /dev/null 2>&1")
         sys.exit()
 
     def showTask1(self):
@@ -51,6 +50,9 @@ class MainWindow:
 
     def showPatch(self):
         self.ui.stackedWidget.setCurrentWidget(self.ui.patch_page)
+        
+        # Lower clock speed
+        os.system("./throttle 800MHz  > /dev/null 2>&1")
 
     def showTask2(self):
         self.ui.stackedWidget.setCurrentWidget(self.ui.task2_page)
