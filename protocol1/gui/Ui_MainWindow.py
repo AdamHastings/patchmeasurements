@@ -226,7 +226,44 @@ class Ui_MainWindow(object):
         self.wta_page.setObjectName("wta_page")
         self.stackedWidget.addWidget(self.wta_page)
 
+        # self.wta_button_group = QtWidgets.QButtonGroup(self.wta_page)
+        # self.wta_yes_btn = QtWidgets.QRadioButton(self.wta_page)
+        # self.wta_yes_btn.setGeometry(QtCore.QRect(WIDTH/2 - BUTTON_WIDTH/2, 220, BUTTON_WIDTH, BUTTON_HEIGHT))
+        # self.wta_no_btn = QtWidgets.QRadioButton(self.wta_page)
+        # self.wta_no_btn.setGeometry(QtCore.QRect(WIDTH/2 - BUTTON_WIDTH/2, 220 + BUTTON_HEIGHT + 10, BUTTON_WIDTH, BUTTON_HEIGHT))
+        # self.wta_button_group.addButton(self.wta_yes_btn)
+        # self.wta_button_group.addButton(self.wta_no_btn)
 
+        # self.wta_continue_btn = QtWidgets.QPushButton(self.wta_page)
+        # self.wta_continue_btn.setDisabled(True)
+        # self.wta_continue_btn.setGeometry(QtCore.QRect(WIDTH/2 - BUTTON_WIDTH/2, 330, BUTTON_WIDTH, BUTTON_HEIGHT))
+        # self.wta_continue_btn.setObjectName("wta_continue_btn")
+
+        self.wta_label = QtWidgets.QLabel(self.wta_page)
+        self.wta_label.setGeometry(QtCore.QRect(H_MARGIN, V_MARGIN, WIDTH-(2*H_MARGIN), 80))
+        self.wta_label.setAlignment(QtCore.Qt.AlignHCenter|QtCore.Qt.AlignVCenter)
+        self.wta_label.setWordWrap(True)
+
+        self.wta_offer = QtWidgets.QLabel(self.wta_page)
+        self.wta_offer.setGeometry(QtCore.QRect(WIDTH/2-H_MARGIN, 120, 2*H_MARGIN, 50))
+        self.wta_offer.setAlignment(QtCore.Qt.AlignHCenter|QtCore.Qt.AlignVCenter)
+        self.font = QtGui.QFont()
+        self.font.setBold(True)
+        self.font.setPointSize(30)
+        self.wta_offer.setFont(self.font)
+
+        self.wta_disclaimer_label = QtWidgets.QLabel(self.wta_page)
+        self.wta_disclaimer_label.setGeometry(QtCore.QRect(H_MARGIN, 180, WIDTH-(2*H_MARGIN), 100))
+        self.wta_disclaimer_label.setAlignment(QtCore.Qt.AlignHCenter|QtCore.Qt.AlignVCenter)
+        self.wta_disclaimer_label.setWordWrap(True)
+
+        self.wta_yes_btn = QtWidgets.QPushButton(self.wta_page)
+        self.wta_yes_btn.setGeometry(QtCore.QRect(WIDTH/2 - BUTTON_WIDTH - H_MARGIN, 330, BUTTON_WIDTH, BUTTON_HEIGHT))        
+        
+        self.wta_no_btn = QtWidgets.QPushButton(self.wta_page)
+        self.wta_no_btn.setGeometry(QtCore.QRect(WIDTH/2 + H_MARGIN, 330, BUTTON_WIDTH, BUTTON_HEIGHT))
+
+        #######################################################################
 
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(MainWindow)
@@ -268,5 +305,11 @@ class Ui_MainWindow(object):
         self.q3_no_btn.setText(_translate("MainWindow", "No"))
         self.q2_label.setText(_translate("MainWindow", "How were things different after the modifications were made? Please be descriptive."))
         self.q4_label.setText(_translate("MainWindow", "If you had to guess by what percentage this computer was made slower in the second set of tasks, what would your guess be? For example, if a computer could normally open a web browser in 1 second and was slowed down by 50%, the slowed-down computer could open a web browser in 1.5 seconds. By what percentage do you think this computer was slowed down?"))
+        self.wta_yes_btn.setText(_translate("MainWindow", "Yes"))
+        self.wta_no_btn.setText(_translate("MainWindow", "No"))
+        self.wta_label.setText(_translate("MainWindow", "Would you be willing to accept a permanent 30% slowdown on your own computer in exchange for:"))
+        self.wta_disclaimer_label.setText(_translate("MainWindow","This is for your current computer only and does not apply to any future computers you may buy."))
+        self.wta_offer.setText(_translate("MainWindow", "$1"))
+
 
 
