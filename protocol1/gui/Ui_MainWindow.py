@@ -110,7 +110,7 @@ class Ui_MainWindow(object):
 
         self.patch_label = QtWidgets.QLabel(self.patch_page)
         self.patch_label.setGeometry(QtCore.QRect(H_MARGIN, V_MARGIN, WIDTH-(2*H_MARGIN), 200))
-        self.patch_label.setAlignment(QtCore.Qt.AlignHCenter|QtCore.Qt.AlignVCenter)
+        self.patch_label.setAlignment(QtCore.Qt.AlignJustify|QtCore.Qt.AlignVCenter)
         self.patch_label.setWordWrap(True)
         self.patch_label.setObjectName("patch_label")
 
@@ -142,7 +142,7 @@ class Ui_MainWindow(object):
 
         self.q1_label = QtWidgets.QLabel(self.q1_page)
         self.q1_label.setGeometry(QtCore.QRect(H_MARGIN, V_MARGIN, WIDTH-(2*H_MARGIN), 200))
-        self.q1_label.setAlignment(QtCore.Qt.AlignHCenter|QtCore.Qt.AlignVCenter)
+        self.q1_label.setAlignment(QtCore.Qt.AlignJustify|QtCore.Qt.AlignVCenter)
         self.q1_label.setWordWrap(True)
         self.q1_label.setObjectName("q1_label")
 
@@ -167,7 +167,7 @@ class Ui_MainWindow(object):
 
         self.q2_label = QtWidgets.QLabel(self.q2_page)
         self.q2_label.setGeometry(QtCore.QRect(H_MARGIN, V_MARGIN, WIDTH-(2*H_MARGIN), 100))
-        self.q2_label.setAlignment(QtCore.Qt.AlignHCenter|QtCore.Qt.AlignVCenter)
+        self.q2_label.setAlignment(QtCore.Qt.AlignJustify|QtCore.Qt.AlignVCenter)
         self.q2_label.setWordWrap(True)
         self.q2_label.setObjectName("q2_label")
 
@@ -187,7 +187,7 @@ class Ui_MainWindow(object):
 
         self.q3_label = QtWidgets.QLabel(self.q3_page)
         self.q3_label.setGeometry(QtCore.QRect(H_MARGIN, V_MARGIN, WIDTH-(2*H_MARGIN), 200))
-        self.q3_label.setAlignment(QtCore.Qt.AlignHCenter|QtCore.Qt.AlignVCenter)
+        self.q3_label.setAlignment(QtCore.Qt.AlignJustify|QtCore.Qt.AlignVCenter)
         self.q3_label.setWordWrap(True)
         self.q3_label.setObjectName("q3_label")
 
@@ -212,12 +212,12 @@ class Ui_MainWindow(object):
 
         self.q4_label = QtWidgets.QLabel(self.q4_page)
         self.q4_label.setGeometry(QtCore.QRect(H_MARGIN, V_MARGIN, WIDTH-(2*H_MARGIN), 100))
-        self.q4_label.setAlignment(QtCore.Qt.AlignHCenter|QtCore.Qt.AlignVCenter)
+        self.q4_label.setAlignment(QtCore.Qt.AlignJustify|QtCore.Qt.AlignVCenter)
         self.q4_label.setWordWrap(True)
         self.q4_label.setObjectName("q4_label")
 
         self.q4_input = QtWidgets.QLineEdit(self.q4_page)
-        self.q4_input.setGeometry(QtCore.QRect(H_MARGIN, 180, BUTTON_WIDTH, BUTTON_HEIGHT))
+        self.q4_input.setGeometry(QtCore.QRect(WIDTH/2 - BUTTON_WIDTH/2, 180, BUTTON_WIDTH, BUTTON_HEIGHT))
         self.q4_input.setObjectName("q4_input")
 
         self.q4_continue_btn = QtWidgets.QPushButton(self.q4_page)
