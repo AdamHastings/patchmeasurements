@@ -22,18 +22,29 @@ class MainWindow:
         self.ui.task2_continue_btn.clicked.connect(self.showQ1)
         self.ui.q1_yes_btn.clicked.connect(self.q1Response)
         self.ui.q1_no_btn.clicked.connect(self.q1Response)
-        self.ui.q1_continue_btn.clicked.connect(self.showQ2)
+        self.ui.q1_continue_btn.clicked.connect(self.showQ1Next)
         self.ui.q2_continue_btn.clicked.connect(self.showQ3)
         self.ui.q3_continue_btn.clicked.connect(self.showQ4)
         self.ui.q3_yes_btn.clicked.connect(self.q3Response)
         self.ui.q3_no_btn.clicked.connect(self.q3Response)
         self.ui.q4_continue_btn.clicked.connect(self.showWTA)
+        self.ui.wta_yes_btn.clicked.connect(self.updateOffer_yes)
+        self.ui.wta_no_btn.clicked.connect(self.updateOffer_no)
+        self.ui.goodbye_close_btn.clicked.connect(self.close)
+
+        self.wta_offer_value = 1
+        self.wta_upper = -1
+        self.wta_lower = -1
+        self.first_accept = False
 
     def show(self):
         self.main_win.show()
 
     def showGoodbye(self):
         self.ui.stackedWidget.setCurrentWidget(self.ui.goodbye_page)
+
+    def close(self):
+        sys.exit()
 
     def showTask1(self):
         self.ui.stackedWidget.setCurrentWidget(self.ui.task1_page)
@@ -50,8 +61,11 @@ class MainWindow:
     def q1Response(self):
         self.ui.q1_continue_btn.setEnabled(True)
 
-    def showQ2(self):
-        self.ui.stackedWidget.setCurrentWidget(self.ui.q2_page)
+    def showQ1Next(self):
+        if self.ui.q1_yes_btn.isChecked():
+            self.ui.stackedWidget.setCurrentWidget(self.ui.q2_page)
+        else:
+            self.ui.stackedWidget.setCurrentWidget(self.ui.q3_page)
 
     def showQ3(self):
         self.ui.stackedWidget.setCurrentWidget(self.ui.q3_page)
@@ -63,16 +77,46 @@ class MainWindow:
         self.ui.stackedWidget.setCurrentWidget(self.ui.q4_page)
 
     def showWTA(self):
+        self.ui.wta_offer.setText("$" + str(self.wta_offer_value))
         self.ui.stackedWidget.setCurrentWidget(self.ui.wta_page)
 
-    #def showBlue(self):
-    #    self.ui.stackedWidget.setCurrentWidget(self.ui.Blue_page)
+    def updateOffer_yes(self):
+        if self.wta_offer_value < 4:
+            print(self.wta_offer_value)
+            self.ui.stackedWidget.setCurrentWidget(self.ui.goodbye_page)
+        elif not self.first_accept:
+            self.first_accept = True
+            self.upper = self.wta_offer_value
+            self.lower = self.wta_offer_value/2
+            self.wta_offer_value = int((self.lower + self.upper)/2)
+            self.showWTA()
+        else:
+            self.upper = self.wta_offer_value
+            self.wta_offer_value = int((self.lower + self.wta_offer_value)/2)
+            if (self.upper - self.lower <= 2):
+                print(self.wta_offer_value)
+                self.ui.stackedWidget.setCurrentWidget(self.ui.goodbye_page)
+            else:
+                self.showWTA()
 
-    #def showRed(self):
-    #    self.ui.stackedWidget.setCurrentWidget(self.ui.Red_page)
+      
 
-    #def showYellow(self):
-    #    self.ui.stackedWidget.setCurrentWidget(self.ui.Yellow_page)
+    def updateOffer_no(self):
+        if not self.first_accept:
+            self.wta_offer_value *= 2
+            self.showWTA()
+        else:
+            self.lower = self.wta_offer_value
+            self.wta_offer_value = int((self.wta_offer_value + self.upper)/2)
+            if (self.upper - self.lower <= 2):
+                print(self.wta_offer_value)
+                self.ui.stackedWidget.setCurrentWidget(self.ui.goodbye_page)
+            else:
+                self.showWTA()
+
+    
+
+    
 
 
 if __name__=='__main__':

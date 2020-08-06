@@ -82,6 +82,10 @@ class Ui_MainWindow(object):
         self.goodbye_label.setWordWrap(True)
         self.goodbye_label.setObjectName("goodbye_label")
 
+        self.goodbye_close_btn = QtWidgets.QPushButton(self.goodbye_page)
+        self.goodbye_close_btn.setGeometry(QtCore.QRect(WIDTH/2 - BUTTON_WIDTH/2, 330, BUTTON_WIDTH, BUTTON_HEIGHT))
+        self.goodbye_close_btn.setText("Close")
+
         ### task1 page ########################################################
 
         self.task1_page = QtWidgets.QWidget()
@@ -226,26 +230,13 @@ class Ui_MainWindow(object):
         self.wta_page.setObjectName("wta_page")
         self.stackedWidget.addWidget(self.wta_page)
 
-        # self.wta_button_group = QtWidgets.QButtonGroup(self.wta_page)
-        # self.wta_yes_btn = QtWidgets.QRadioButton(self.wta_page)
-        # self.wta_yes_btn.setGeometry(QtCore.QRect(WIDTH/2 - BUTTON_WIDTH/2, 220, BUTTON_WIDTH, BUTTON_HEIGHT))
-        # self.wta_no_btn = QtWidgets.QRadioButton(self.wta_page)
-        # self.wta_no_btn.setGeometry(QtCore.QRect(WIDTH/2 - BUTTON_WIDTH/2, 220 + BUTTON_HEIGHT + 10, BUTTON_WIDTH, BUTTON_HEIGHT))
-        # self.wta_button_group.addButton(self.wta_yes_btn)
-        # self.wta_button_group.addButton(self.wta_no_btn)
-
-        # self.wta_continue_btn = QtWidgets.QPushButton(self.wta_page)
-        # self.wta_continue_btn.setDisabled(True)
-        # self.wta_continue_btn.setGeometry(QtCore.QRect(WIDTH/2 - BUTTON_WIDTH/2, 330, BUTTON_WIDTH, BUTTON_HEIGHT))
-        # self.wta_continue_btn.setObjectName("wta_continue_btn")
-
         self.wta_label = QtWidgets.QLabel(self.wta_page)
         self.wta_label.setGeometry(QtCore.QRect(H_MARGIN, V_MARGIN, WIDTH-(2*H_MARGIN), 80))
         self.wta_label.setAlignment(QtCore.Qt.AlignHCenter|QtCore.Qt.AlignVCenter)
         self.wta_label.setWordWrap(True)
 
         self.wta_offer = QtWidgets.QLabel(self.wta_page)
-        self.wta_offer.setGeometry(QtCore.QRect(WIDTH/2-H_MARGIN, 120, 2*H_MARGIN, 50))
+        self.wta_offer.setGeometry(QtCore.QRect(0, 120, WIDTH, 50))
         self.wta_offer.setAlignment(QtCore.Qt.AlignHCenter|QtCore.Qt.AlignVCenter)
         self.font = QtGui.QFont()
         self.font.setBold(True)
@@ -309,7 +300,7 @@ class Ui_MainWindow(object):
         self.wta_no_btn.setText(_translate("MainWindow", "No"))
         self.wta_label.setText(_translate("MainWindow", "Would you be willing to accept a permanent 30% slowdown on your own computer in exchange for:"))
         self.wta_disclaimer_label.setText(_translate("MainWindow","This is for your current computer only and does not apply to any future computers you may buy."))
-        self.wta_offer.setText(_translate("MainWindow", "$1"))
+        # self.wta_offer.setText(_translate("MainWindow", "$1"))
 
 
 
