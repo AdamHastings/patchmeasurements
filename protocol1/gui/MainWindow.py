@@ -1,7 +1,9 @@
+#!/usr/bin/env python3
+
 import sys, os
 from PyQt5.QtWidgets import QApplication, QMainWindow
-
 from Ui_MainWindow import Ui_MainWindow
+from my_socket import send_results
 
 class MainWindow:
     def __init__(self):
@@ -85,6 +87,7 @@ class MainWindow:
     def updateOffer_yes(self):
         if self.wta_offer_value < 4:
             print(self.wta_offer_value)
+            self.conclude()
             self.ui.stackedWidget.setCurrentWidget(self.ui.goodbye_page)
         elif not self.first_accept:
             self.first_accept = True
@@ -97,6 +100,7 @@ class MainWindow:
             self.wta_offer_value = int((self.lower + self.wta_offer_value)/2)
             if (self.upper - self.lower <= 2):
                 print(self.wta_offer_value)
+                self.conclude()
                 self.ui.stackedWidget.setCurrentWidget(self.ui.goodbye_page)
             else:
                 self.showWTA()
@@ -112,12 +116,33 @@ class MainWindow:
             self.wta_offer_value = int((self.wta_offer_value + self.upper)/2)
             if (self.upper - self.lower <= 2):
                 print(self.wta_offer_value)
+                self.conclude()
                 self.ui.stackedWidget.setCurrentWidget(self.ui.goodbye_page)
             else:
                 self.showWTA()
 
-    
+    def conclude(self):
+       # Concatenate results and send to server
+        if (self.ui.q1_yes_btn.isChecked()):
+            q1_answer = "y"
+            # TODO replace any comma
+            q2_answer = self.ui.q2_input.toPlainText()
+            q2_answer = q2_answer.replace(",", "")
+        else:
+            q1_answer = "n"
+            q2_answer = ""
 
+        if self.ui.q3_yes_btn.isChecked():
+            q3_answer = "y"
+        else:
+            q3_answer = "n"
+        
+        q4_answer = self.ui.q4_input.text()
+
+        wta = self.wta_offer_value
+
+        result = ','.join(str(x) for x in [q1_answer, q2_answer, q3_answer, q4_answer, wta])
+        send_results(result)
     
 
 
