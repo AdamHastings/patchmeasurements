@@ -9,18 +9,23 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 
 class Ui_MainWindow(object):
-    def setupUi(self, MainWindow):
+    def setupUi(self, MainWindow, screen):
 
         ### Globals ###########################################################
 
-        HEIGHT = 400
-        WIDTH  = 600 
+        # HEIGHT = 400
+        # WIDTH  = 600 
 
-        H_MARGIN = 40
-        V_MARGIN = 40
+        screen_size = screen.size()
 
-        BUTTON_WIDTH  = 140
-        BUTTON_HEIGHT = 25
+        HEIGHT = screen_size.height()/3
+        WIDTH  = screen_size.width()/3
+
+        H_MARGIN = HEIGHT/10
+        V_MARGIN = H_MARGIN
+
+        BUTTON_WIDTH  = WIDTH/4
+        BUTTON_HEIGHT = HEIGHT/16
 
         ### Main setup ########################################################
 
@@ -43,29 +48,29 @@ class Ui_MainWindow(object):
         self.start_page.setObjectName("start_page")
         
         self.intro_label = QtWidgets.QLabel(self.start_page)
-        self.intro_label.setGeometry(QtCore.QRect(H_MARGIN, V_MARGIN, WIDTH-(2*H_MARGIN), 90))
+        self.intro_label.setGeometry(QtCore.QRect(H_MARGIN, V_MARGIN, WIDTH-(2*H_MARGIN), V_MARGIN * 3))
         self.intro_label.setAlignment(QtCore.Qt.AlignJustify|QtCore.Qt.AlignVCenter)
         self.intro_label.setWordWrap(True)
         self.intro_label.setObjectName("intro_label")
 
         self.outline_label = QtWidgets.QLabel(self.start_page)
-        self.outline_label.setGeometry(QtCore.QRect(H_MARGIN, 130, WIDTH-(2*H_MARGIN), 100))
+        self.outline_label.setGeometry(QtCore.QRect(H_MARGIN, V_MARGIN * 4, WIDTH-(2*H_MARGIN), V_MARGIN * 3))
         self.outline_label.setAlignment(QtCore.Qt.AlignJustify|QtCore.Qt.AlignVCenter)
         self.outline_label.setWordWrap(True)
         self.outline_label.setObjectName("outline_label")
         
         self.consent_label = QtWidgets.QLabel(self.start_page)
-        self.consent_label.setGeometry(QtCore.QRect(H_MARGIN, 220, WIDTH-(2*H_MARGIN), 50))
+        self.consent_label.setGeometry(QtCore.QRect(H_MARGIN, V_MARGIN * 7, WIDTH-(2*H_MARGIN), V_MARGIN))
         self.consent_label.setAlignment(QtCore.Qt.AlignJustify|QtCore.Qt.AlignVCenter)
         self.consent_label.setWordWrap(True)
         self.consent_label.setObjectName("consent_label")
 
         self.consent_btn = QtWidgets.QPushButton(self.start_page)
-        self.consent_btn.setGeometry(QtCore.QRect(WIDTH/2 - BUTTON_WIDTH - H_MARGIN, 330, BUTTON_WIDTH, BUTTON_HEIGHT))
+        self.consent_btn.setGeometry(QtCore.QRect(WIDTH/2 - BUTTON_WIDTH - H_MARGIN, V_MARGIN * 8, BUTTON_WIDTH, BUTTON_HEIGHT))
         self.consent_btn.setObjectName("consent_btn")
         
         self.not_consent_btn = QtWidgets.QPushButton(self.start_page)
-        self.not_consent_btn.setGeometry(QtCore.QRect(WIDTH/2 + H_MARGIN, 330, BUTTON_WIDTH, BUTTON_HEIGHT))
+        self.not_consent_btn.setGeometry(QtCore.QRect(WIDTH/2 + H_MARGIN, V_MARGIN*8, BUTTON_WIDTH, BUTTON_HEIGHT))
         self.not_consent_btn.setObjectName("not_consent_btn")
 
         self.stackedWidget.addWidget(self.start_page)
@@ -77,13 +82,13 @@ class Ui_MainWindow(object):
         self.stackedWidget.addWidget(self.goodbye_page)
 
         self.goodbye_label = QtWidgets.QLabel(self.goodbye_page)
-        self.goodbye_label.setGeometry(QtCore.QRect(H_MARGIN, V_MARGIN, WIDTH-(2*H_MARGIN), 100))
+        self.goodbye_label.setGeometry(QtCore.QRect(H_MARGIN, V_MARGIN, WIDTH-(2*H_MARGIN), V_MARGIN*4))
         self.goodbye_label.setAlignment(QtCore.Qt.AlignHCenter|QtCore.Qt.AlignVCenter)
         self.goodbye_label.setWordWrap(True)
         self.goodbye_label.setObjectName("goodbye_label")
 
         self.goodbye_close_btn = QtWidgets.QPushButton(self.goodbye_page)
-        self.goodbye_close_btn.setGeometry(QtCore.QRect(WIDTH/2 - BUTTON_WIDTH/2, 330, BUTTON_WIDTH, BUTTON_HEIGHT))
+        self.goodbye_close_btn.setGeometry(QtCore.QRect(WIDTH/2 - BUTTON_WIDTH/2, V_MARGIN*8, BUTTON_WIDTH, BUTTON_HEIGHT))
         self.goodbye_close_btn.setText("Close")
 
         ### task1 page ########################################################
@@ -93,13 +98,13 @@ class Ui_MainWindow(object):
         self.stackedWidget.addWidget(self.task1_page)
 
         self.task1_label = QtWidgets.QLabel(self.task1_page)
-        self.task1_label.setGeometry(QtCore.QRect(H_MARGIN, V_MARGIN, WIDTH-(2*H_MARGIN), 200))
+        self.task1_label.setGeometry(QtCore.QRect(H_MARGIN, V_MARGIN, WIDTH-(2*H_MARGIN), V_MARGIN*6))
         self.task1_label.setAlignment(QtCore.Qt.AlignLeft|QtCore.Qt.AlignVCenter)
         self.task1_label.setWordWrap(True)
         self.task1_label.setObjectName("task1_label")
 
         self.task1_continue_btn = QtWidgets.QPushButton(self.task1_page)
-        self.task1_continue_btn.setGeometry(QtCore.QRect(WIDTH/2 - BUTTON_WIDTH/2, 330, BUTTON_WIDTH, BUTTON_HEIGHT))
+        self.task1_continue_btn.setGeometry(QtCore.QRect(WIDTH/2 - BUTTON_WIDTH/2, V_MARGIN*8, BUTTON_WIDTH, BUTTON_HEIGHT))
         self.task1_continue_btn.setObjectName("task1_continue_btn")
 
         ### patch page ########################################################
@@ -109,13 +114,13 @@ class Ui_MainWindow(object):
         self.stackedWidget.addWidget(self.patch_page)
 
         self.patch_label = QtWidgets.QLabel(self.patch_page)
-        self.patch_label.setGeometry(QtCore.QRect(H_MARGIN, V_MARGIN, WIDTH-(2*H_MARGIN), 200))
+        self.patch_label.setGeometry(QtCore.QRect(H_MARGIN, V_MARGIN, WIDTH-(2*H_MARGIN), V_MARGIN*5))
         self.patch_label.setAlignment(QtCore.Qt.AlignJustify|QtCore.Qt.AlignVCenter)
         self.patch_label.setWordWrap(True)
         self.patch_label.setObjectName("patch_label")
 
         self.patch_continue_btn = QtWidgets.QPushButton(self.patch_page)
-        self.patch_continue_btn.setGeometry(QtCore.QRect(WIDTH/2 - BUTTON_WIDTH/2, 330, BUTTON_WIDTH, BUTTON_HEIGHT))
+        self.patch_continue_btn.setGeometry(QtCore.QRect(WIDTH/2 - BUTTON_WIDTH/2, V_MARGIN*8, BUTTON_WIDTH, BUTTON_HEIGHT))
         self.patch_continue_btn.setObjectName("patch_continue_btn")
 
         ### task2 page ########################################################
@@ -125,13 +130,13 @@ class Ui_MainWindow(object):
         self.stackedWidget.addWidget(self.task2_page)
 
         self.task2_label = QtWidgets.QLabel(self.task2_page)
-        self.task2_label.setGeometry(QtCore.QRect(H_MARGIN, V_MARGIN, WIDTH-(2*H_MARGIN), 200))
+        self.task2_label.setGeometry(QtCore.QRect(H_MARGIN, V_MARGIN, WIDTH-(2*H_MARGIN), V_MARGIN*6))
         self.task2_label.setAlignment(QtCore.Qt.AlignLeft|QtCore.Qt.AlignVCenter)
         self.task2_label.setWordWrap(True)
         self.task2_label.setObjectName("task2_label")
 
         self.task2_continue_btn = QtWidgets.QPushButton(self.task2_page)
-        self.task2_continue_btn.setGeometry(QtCore.QRect(WIDTH/2 - BUTTON_WIDTH/2, 330, BUTTON_WIDTH, BUTTON_HEIGHT))
+        self.task2_continue_btn.setGeometry(QtCore.QRect(WIDTH/2 - BUTTON_WIDTH/2, V_MARGIN*8, BUTTON_WIDTH, BUTTON_HEIGHT))
         self.task2_continue_btn.setObjectName("task2_continue_btn")
 
         ### q1 page ###########################################################
@@ -148,15 +153,15 @@ class Ui_MainWindow(object):
 
         self.q1_button_group = QtWidgets.QButtonGroup(self.q1_page)
         self.q1_yes_btn = QtWidgets.QRadioButton(self.q1_page)
-        self.q1_yes_btn.setGeometry(QtCore.QRect(WIDTH/2 - BUTTON_WIDTH/2, 220, BUTTON_WIDTH, BUTTON_HEIGHT))
+        self.q1_yes_btn.setGeometry(QtCore.QRect(WIDTH/2 - BUTTON_WIDTH/2, V_MARGIN*5, BUTTON_WIDTH, BUTTON_HEIGHT))
         self.q1_no_btn = QtWidgets.QRadioButton(self.q1_page)
-        self.q1_no_btn.setGeometry(QtCore.QRect(WIDTH/2 - BUTTON_WIDTH/2, 220 + BUTTON_HEIGHT + 10, BUTTON_WIDTH, BUTTON_HEIGHT))
+        self.q1_no_btn.setGeometry(QtCore.QRect(WIDTH/2 - BUTTON_WIDTH/2, V_MARGIN*6, BUTTON_WIDTH, BUTTON_HEIGHT))
         self.q1_button_group.addButton(self.q1_yes_btn)
         self.q1_button_group.addButton(self.q1_no_btn)
 
         self.q1_continue_btn = QtWidgets.QPushButton(self.q1_page)
         self.q1_continue_btn.setDisabled(True)
-        self.q1_continue_btn.setGeometry(QtCore.QRect(WIDTH/2 - BUTTON_WIDTH/2, 330, BUTTON_WIDTH, BUTTON_HEIGHT))
+        self.q1_continue_btn.setGeometry(QtCore.QRect(WIDTH/2 - BUTTON_WIDTH/2, V_MARGIN*8, BUTTON_WIDTH, BUTTON_HEIGHT))
         self.q1_continue_btn.setObjectName("q1_continue_btn")
 
         ### q2 page ###########################################################
@@ -166,17 +171,17 @@ class Ui_MainWindow(object):
         self.stackedWidget.addWidget(self.q2_page)
 
         self.q2_label = QtWidgets.QLabel(self.q2_page)
-        self.q2_label.setGeometry(QtCore.QRect(H_MARGIN, V_MARGIN, WIDTH-(2*H_MARGIN), 100))
+        self.q2_label.setGeometry(QtCore.QRect(H_MARGIN, V_MARGIN, WIDTH-(2*H_MARGIN), V_MARGIN*2))
         self.q2_label.setAlignment(QtCore.Qt.AlignJustify|QtCore.Qt.AlignVCenter)
         self.q2_label.setWordWrap(True)
         self.q2_label.setObjectName("q2_label")
 
         self.q2_input = QtWidgets.QTextEdit(self.q2_page)
-        self.q2_input.setGeometry(QtCore.QRect(H_MARGIN, 120, WIDTH-(2*H_MARGIN), 140))
+        self.q2_input.setGeometry(QtCore.QRect(H_MARGIN, V_MARGIN*4, WIDTH-(2*H_MARGIN), V_MARGIN*3))
         self.q2_input.setObjectName("q2_input")
 
         self.q2_continue_btn = QtWidgets.QPushButton(self.q2_page)
-        self.q2_continue_btn.setGeometry(QtCore.QRect(WIDTH/2 - BUTTON_WIDTH/2, 330, BUTTON_WIDTH, BUTTON_HEIGHT))
+        self.q2_continue_btn.setGeometry(QtCore.QRect(WIDTH/2 - BUTTON_WIDTH/2, V_MARGIN*8, BUTTON_WIDTH, BUTTON_HEIGHT))
         self.q2_continue_btn.setObjectName("q2_continue_btn")
 
         ### q3 page ###########################################################
@@ -186,22 +191,22 @@ class Ui_MainWindow(object):
         self.stackedWidget.addWidget(self.q3_page)
 
         self.q3_label = QtWidgets.QLabel(self.q3_page)
-        self.q3_label.setGeometry(QtCore.QRect(H_MARGIN, V_MARGIN, WIDTH-(2*H_MARGIN), 200))
+        self.q3_label.setGeometry(QtCore.QRect(H_MARGIN, V_MARGIN, WIDTH-(2*H_MARGIN), V_MARGIN*5))
         self.q3_label.setAlignment(QtCore.Qt.AlignJustify|QtCore.Qt.AlignVCenter)
         self.q3_label.setWordWrap(True)
         self.q3_label.setObjectName("q3_label")
 
         self.q3_button_group = QtWidgets.QButtonGroup(self.q3_page)
         self.q3_yes_btn = QtWidgets.QRadioButton(self.q3_page)
-        self.q3_yes_btn.setGeometry(QtCore.QRect(WIDTH/2 - BUTTON_WIDTH/2, 220, BUTTON_WIDTH, BUTTON_HEIGHT))
+        self.q3_yes_btn.setGeometry(QtCore.QRect(WIDTH/2 - BUTTON_WIDTH/2, V_MARGIN*5, BUTTON_WIDTH, BUTTON_HEIGHT))
         self.q3_no_btn = QtWidgets.QRadioButton(self.q3_page)
-        self.q3_no_btn.setGeometry(QtCore.QRect(WIDTH/2 - BUTTON_WIDTH/2, 220 + BUTTON_HEIGHT + 10, BUTTON_WIDTH, BUTTON_HEIGHT))
+        self.q3_no_btn.setGeometry(QtCore.QRect(WIDTH/2 - BUTTON_WIDTH/2, V_MARGIN*6, BUTTON_WIDTH, BUTTON_HEIGHT))
         self.q3_button_group.addButton(self.q3_yes_btn)
         self.q3_button_group.addButton(self.q3_no_btn)
 
         self.q3_continue_btn = QtWidgets.QPushButton(self.q3_page)
         self.q3_continue_btn.setDisabled(True)
-        self.q3_continue_btn.setGeometry(QtCore.QRect(WIDTH/2 - BUTTON_WIDTH/2, 330, BUTTON_WIDTH, BUTTON_HEIGHT))
+        self.q3_continue_btn.setGeometry(QtCore.QRect(WIDTH/2 - BUTTON_WIDTH/2, V_MARGIN*8, BUTTON_WIDTH, BUTTON_HEIGHT))
         self.q3_continue_btn.setObjectName("q3_continue_btn")
 
         ### q4 page ###########################################################
@@ -211,17 +216,17 @@ class Ui_MainWindow(object):
         self.stackedWidget.addWidget(self.q4_page)
 
         self.q4_label = QtWidgets.QLabel(self.q4_page)
-        self.q4_label.setGeometry(QtCore.QRect(H_MARGIN, V_MARGIN, WIDTH-(2*H_MARGIN), 100))
+        self.q4_label.setGeometry(QtCore.QRect(H_MARGIN, V_MARGIN, WIDTH-(2*H_MARGIN), V_MARGIN*3))
         self.q4_label.setAlignment(QtCore.Qt.AlignJustify|QtCore.Qt.AlignVCenter)
         self.q4_label.setWordWrap(True)
         self.q4_label.setObjectName("q4_label")
 
         self.q4_input = QtWidgets.QLineEdit(self.q4_page)
-        self.q4_input.setGeometry(QtCore.QRect(WIDTH/2 - BUTTON_WIDTH/2, 180, BUTTON_WIDTH, BUTTON_HEIGHT))
+        self.q4_input.setGeometry(QtCore.QRect(WIDTH/2 - BUTTON_WIDTH/2, V_MARGIN*5, BUTTON_WIDTH, BUTTON_HEIGHT))
         self.q4_input.setObjectName("q4_input")
 
         self.q4_continue_btn = QtWidgets.QPushButton(self.q4_page)
-        self.q4_continue_btn.setGeometry(QtCore.QRect(WIDTH/2 - BUTTON_WIDTH/2, 330, BUTTON_WIDTH, BUTTON_HEIGHT))
+        self.q4_continue_btn.setGeometry(QtCore.QRect(WIDTH/2 - BUTTON_WIDTH/2, V_MARGIN*8, BUTTON_WIDTH, BUTTON_HEIGHT))
         self.q4_continue_btn.setObjectName("q4_continue_btn")
 
         ### wta page ##########################################################
@@ -231,12 +236,12 @@ class Ui_MainWindow(object):
         self.stackedWidget.addWidget(self.wta_page)
 
         self.wta_label = QtWidgets.QLabel(self.wta_page)
-        self.wta_label.setGeometry(QtCore.QRect(H_MARGIN, V_MARGIN, WIDTH-(2*H_MARGIN), 80))
+        self.wta_label.setGeometry(QtCore.QRect(H_MARGIN, V_MARGIN, WIDTH-(2*H_MARGIN), V_MARGIN*2))
         self.wta_label.setAlignment(QtCore.Qt.AlignHCenter|QtCore.Qt.AlignVCenter)
         self.wta_label.setWordWrap(True)
 
         self.wta_offer = QtWidgets.QLabel(self.wta_page)
-        self.wta_offer.setGeometry(QtCore.QRect(0, 120, WIDTH, 50))
+        self.wta_offer.setGeometry(QtCore.QRect(0, V_MARGIN*3, WIDTH, V_MARGIN*2))
         self.wta_offer.setAlignment(QtCore.Qt.AlignHCenter|QtCore.Qt.AlignVCenter)
         self.font = QtGui.QFont()
         self.font.setBold(True)
@@ -244,23 +249,19 @@ class Ui_MainWindow(object):
         self.wta_offer.setFont(self.font)
 
         self.wta_disclaimer_label = QtWidgets.QLabel(self.wta_page)
-        self.wta_disclaimer_label.setGeometry(QtCore.QRect(H_MARGIN, 180, WIDTH-(2*H_MARGIN), 100))
+        self.wta_disclaimer_label.setGeometry(QtCore.QRect(H_MARGIN, V_MARGIN*5, WIDTH-(2*H_MARGIN), V_MARGIN*3))
         self.wta_disclaimer_label.setAlignment(QtCore.Qt.AlignHCenter|QtCore.Qt.AlignVCenter)
         self.wta_disclaimer_label.setWordWrap(True)
 
         self.wta_yes_btn = QtWidgets.QPushButton(self.wta_page)
-        self.wta_yes_btn.setGeometry(QtCore.QRect(WIDTH/2 - BUTTON_WIDTH - H_MARGIN, 330, BUTTON_WIDTH, BUTTON_HEIGHT))        
+        self.wta_yes_btn.setGeometry(QtCore.QRect(WIDTH/2 - BUTTON_WIDTH - H_MARGIN, V_MARGIN*8, BUTTON_WIDTH, BUTTON_HEIGHT))        
         
         self.wta_no_btn = QtWidgets.QPushButton(self.wta_page)
-        self.wta_no_btn.setGeometry(QtCore.QRect(WIDTH/2 + H_MARGIN, 330, BUTTON_WIDTH, BUTTON_HEIGHT))
+        self.wta_no_btn.setGeometry(QtCore.QRect(WIDTH/2 + H_MARGIN, V_MARGIN*8, BUTTON_WIDTH, BUTTON_HEIGHT))
 
         #######################################################################
 
         MainWindow.setCentralWidget(self.centralwidget)
-        self.menubar = QtWidgets.QMenuBar(MainWindow)
-        self.menubar.setGeometry(QtCore.QRect(0, 0, WIDTH, 22))
-        self.menubar.setObjectName("menubar")
-        MainWindow.setMenuBar(self.menubar)
         self.statusbar = QtWidgets.QStatusBar(MainWindow)
         self.statusbar.setObjectName("statusbar")
         MainWindow.setStatusBar(self.statusbar)

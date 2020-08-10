@@ -6,10 +6,10 @@ from Ui_MainWindow import Ui_MainWindow
 from my_socket import send_results
 
 class MainWindow:
-    def __init__(self):
+    def __init__(self, screen):
         self.main_win = QMainWindow()
         self.ui = Ui_MainWindow()
-        self.ui.setupUi(self.main_win)
+        self.ui.setupUi(self.main_win, screen)
                 
         self.ui.stackedWidget.setCurrentWidget(self.ui.start_page)
         self.ui.not_consent_btn.clicked.connect(self.showGoodbye)
@@ -148,6 +148,7 @@ class MainWindow:
 
 if __name__=='__main__':
     app = QApplication(sys.argv)
-    main_win = MainWindow()
+    screen = app.primaryScreen()
+    main_win = MainWindow(screen)
     main_win.show()
     sys.exit(app.exec())
