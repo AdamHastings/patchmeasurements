@@ -1,15 +1,15 @@
 #!/usr/bin/env python3
 
-import sys, os
+import sys, os, time
 from PyQt5.QtWidgets import QApplication, QMainWindow
 from Ui_MainWindow import Ui_MainWindow
 from my_socket import send_results
 
 class MainWindow:
-    def __init__(self):
+    def __init__(self, screen):
         self.main_win = QMainWindow()
         self.ui = Ui_MainWindow()
-        self.ui.setupUi(self.main_win)
+        self.ui.setupUi(self.main_win, screen)
                 
         self.ui.stackedWidget.setCurrentWidget(self.ui.start_page)
         self.ui.not_consent_btn.clicked.connect(self.showGoodbye)
@@ -34,17 +34,25 @@ class MainWindow:
         self.wta_lower = -1
         self.first_accept = False
 
+    def setFreq(self, freq):
+        if (os.name == 'nt'): # Windows
+            pass
+        else: 
+            arg = "./throttle " + str(freq) + " > /dev/null 2>&1"
+            os.system(arg)
+
+
     def show(self):
         self.main_win.show()
         # Temp set freq. Works for linux only. TODO make cross platform
-        os.system("./throttle 1200MHz  > /dev/null 2>&1")
+        self.setFreq(1200)
 
     def showGoodbye(self):
         self.ui.stackedWidget.setCurrentWidget(self.ui.goodbye_page)
 
     def close(self):
         # Restore clock speed
-        os.system("./throttle 1200MHz  > /dev/null 2>&1")
+        self.setFreq(1200)
         sys.exit()
 
     def showTask1(self):
@@ -52,9 +60,20 @@ class MainWindow:
 
     def showPatch(self):
         self.ui.stackedWidget.setCurrentWidget(self.ui.patch_page)
-        
         # Lower clock speed
-        os.system("./throttle 800MHz  > /dev/null 2>&1")
+        self.setFreq(800)
+
+        magic_thresh = 24
+
+        for i in range(magic_thresh):
+            self.ui.progress_bar.setValue(i)
+            time.sleep(0.1)
+
+        for i in range(100 - magic_thresh):
+            self.ui.progress_bar.setValue(i + magic_thresh + 1)
+            time.sleep(0.01)
+
+        self.ui.patch_continue_btn.setEnabled(True)
 
     def showTask2(self):
         self.ui.stackedWidget.setCurrentWidget(self.ui.task2_page)
@@ -148,6 +167,7 @@ class MainWindow:
 
 if __name__=='__main__':
     app = QApplication(sys.argv)
-    main_win = MainWindow()
+    screen = app.primaryScreen()
+    main_win = MainWindow(screen)
     main_win.show()
     sys.exit(app.exec())
