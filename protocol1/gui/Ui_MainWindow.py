@@ -119,9 +119,15 @@ class Ui_MainWindow(object):
         self.patch_label.setWordWrap(True)
         self.patch_label.setObjectName("patch_label")
 
+        self.progress_bar = QtWidgets.QProgressBar(self.patch_page)
+        self.progress_bar.setGeometry(QtCore.QRect(WIDTH/2 - 4*H_MARGIN, V_MARGIN*5, 8*H_MARGIN, V_MARGIN))
+        self.progress_bar.setMinimum(0)
+        self.progress_bar.setMaximum(100)
+
         self.patch_continue_btn = QtWidgets.QPushButton(self.patch_page)
         self.patch_continue_btn.setGeometry(QtCore.QRect(WIDTH/2 - BUTTON_WIDTH/2, V_MARGIN*8, BUTTON_WIDTH, BUTTON_HEIGHT))
         self.patch_continue_btn.setObjectName("patch_continue_btn")
+        self.patch_continue_btn.setEnabled(False)
 
         ### task2 page ########################################################
         
