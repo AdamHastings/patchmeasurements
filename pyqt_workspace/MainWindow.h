@@ -15,6 +15,11 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
 
+public slots:
+    void setBluePage(bool b);
+    void setRedPage(bool b);
+    void setYellowPage(bool b);
+
 private:
     Ui::MainWindow *ui;
 };

@@ -40,6 +40,10 @@ public:
     QMenuBar *menubar;
     QStatusBar *statusbar;
 
+    // void setBluePage(bool b) {
+    //     stackedWidget->setCurrentWidget(Blue_page);
+    // }
+
     void setupUi(QMainWindow *MainWindow)
     {
         if (MainWindow->objectName().isEmpty())
@@ -91,6 +95,7 @@ public:
         MainWindow->setStatusBar(statusbar);
 
         retranslateUi(MainWindow);
+        // QObject::connect(blu_btn, blu_btn->clicked, stackedWidget, &Ui_MainWindow::setBluePage);
 
         stackedWidget->setCurrentIndex(0);
 
