@@ -61,7 +61,11 @@ public:
     QLabel *goodbye_label;
     QPushButton *goodbye_btn;
     
-    // QWidget *task1_page;
+    QWidget *task1_page;
+    QLabel *task1_label;
+    QPushButton *task1_continue_btn;
+
+
     // QWidget *patch_page;
     // QWidget *task2_page;
     // QWidget *q1_page;
@@ -141,7 +145,7 @@ public:
         goodbye_page->setObjectName(QStringLiteral("goodbye_page"));
 
         goodbye_label = new QLabel(goodbye_page);
-        goodbye_label->setObjectName(QStringLiteral("outline"));
+        goodbye_label->setObjectName(QStringLiteral("goodbye_label"));
         goodbye_label->setGeometry(QRect(M, M, LINEWIDTH, M*4));
         goodbye_label->setAlignment(Qt::AlignHCenter|Qt::AlignVCenter);
         goodbye_label->setWordWrap(true);
@@ -152,12 +156,23 @@ public:
 
         stackedWidget->addWidget(goodbye_page);
 
-
-        
-
         // task1 page /////////////////////////////////////////////////////////
+        task1_page = new QWidget();
+        task1_page->setObjectName(QStringLiteral("task1_page"));
 
-        
+        task1_label = new QLabel(task1_page);
+        task1_label->setObjectName(QStringLiteral("task1_label"));
+        task1_label->setGeometry(QRect(M, M, LINEWIDTH, M*6));
+        task1_label->setAlignment(Qt::AlignLeft|Qt::AlignTop);
+        task1_label->setWordWrap(true);
+
+        task1_continue_btn = new QPushButton(task1_page);
+        task1_continue_btn->setObjectName(QStringLiteral("task1_continue_btn"));
+        task1_continue_btn->setGeometry(QRect(W/2 - BUTTON_WIDTH/2, M*8, BUTTON_WIDTH, BUTTON_HEIGHT));
+
+        stackedWidget->addWidget(task1_page);
+
+
         // task1_page = new QWidget();
         // task1_page->setObjectName(QStringLiteral("task1_page"));
         // task1_page->setStyleSheet(QStringLiteral("background-color:blue"));
@@ -209,8 +224,13 @@ public:
         outline_label->setText(QApplication::translate("MainWindow", "This experiment is designed to test how computer users respond to some computer system modifications we are prototyping. We will first have you complete some simple tasks with these modifications turned off. Later, we will turn on these modifications and ask you to complete the same set of tasks.", Q_NULLPTR));
         consent_label->setText(QApplication::translate("MainWindow", "Do you consent to participate in this study? You may exit the experiment at any point.", Q_NULLPTR));
         not_consent_btn->setText(QApplication::translate("MainWindow", "I do not consent", Q_NULLPTR));
+        
         goodbye_label->setText(QApplication::translate("MainWindow", "Thank you for your participation. You may now exit this window.", Q_NULLPTR));
         goodbye_btn->setText(QApplication::translate("MainWindow", "Close", Q_NULLPTR));
+
+        task1_label->setText(QApplication::translate("MainWindow", "You will now do some simple tasks. You must:\n\n    1) Open a web browser.\n    2) Login to your LionMail account.\n    3) Compose and email containing:\n        a) The distance (in miles) between Columbia University and\n             the Empire State Building\n        b) A picture of Low Library\n        c) Any music video you like (just copy and paste the URL into the video)\n    4) Send the email to hastings@cs.columbia.edu.\n    5) Click \"Continue\" below only once the above tasks are completed.", Q_NULLPTR));
+        task1_continue_btn->setText(QApplication::translate("MainWindow", "Continue", Q_NULLPTR));
+
 
     } // retranslateUi
 

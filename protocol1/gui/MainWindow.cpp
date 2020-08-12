@@ -2,7 +2,7 @@
 #include "Ui_MainWindow.h"
 #include <iostream>
 
-void MainWindow::setFreq() {
+void MainWindow::setFreq(bool b) {
     return;
 }
 
@@ -14,55 +14,55 @@ void MainWindow::close(bool b) {
     QApplication::quit();
 }
 
-void MainWindow::showTask1() {
+void MainWindow::showTask1(bool b) {
+    ui->stackedWidget->setCurrentWidget(ui->task1_page);
+}
+
+void MainWindow::showPatch(bool b) {
     return;
 }
 
-void MainWindow::showPatch() {
+void MainWindow::showTask2(bool b) {
     return;
 }
 
-void MainWindow::showTask2() {
+void MainWindow::showQ1(bool b) {
     return;
 }
 
-void MainWindow::showQ1() {
+void MainWindow::q1Response(bool b) {
     return;
 }
 
-void MainWindow::q1Response() {
+void MainWindow::showQ1Next(bool b) {
     return;
 }
 
-void MainWindow::showQ1Next() {
+void MainWindow::showQ3(bool b) {
     return;
 }
 
-void MainWindow::showQ3() {
+void MainWindow::q3Response(bool b) {
     return;
 }
 
-void MainWindow::q3Response() {
+void MainWindow::showQ4(bool b) {
     return;
 }
 
-void MainWindow::showQ4() {
+void MainWindow::showWTA(bool b) {
     return;
 }
 
-void MainWindow::showWTA() {
+void MainWindow::updateOffer_yes(bool b) {
     return;
 }
 
-void MainWindow::updateOffer_yes() {
+void MainWindow::updateOffer_no(bool b) {
     return;
 }
 
-void MainWindow::updateOffer_no() {
-    return;
-}
-
-void MainWindow::conclude() {
+void MainWindow::conclude(bool b) {
     return;
 }
 
@@ -75,6 +75,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     connect(ui->not_consent_btn, SIGNAL(clicked(bool)), this, SLOT(showGoodbye(bool)));
     connect(ui->goodbye_btn, SIGNAL(clicked(bool)), this, SLOT(close(bool)));
+    connect(ui->consent_btn, SIGNAL(clicked(bool)), this, SLOT(showTask1(bool)));
 
 
     // connect(ui->horizontalSlider, SIGNAL(valueChanged(int)),
