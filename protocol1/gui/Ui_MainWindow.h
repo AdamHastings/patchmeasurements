@@ -62,30 +62,41 @@ public:
         // QRect rec = QApplication::desktop()->screenGeometry();
         //QRect rec = QScreen::geometry();
         QRect rec = QApplication::desktop()->screenGeometry();
-        H = rec.height();
-        W = rec.width();
+        const int H = rec.height()/3;
+        const int W = rec.width()/3;
+
+        const int MARGIN = H/10;
+        const int LINEWIDTH = W - (2*MARGIN);
+
+        const int BUTTON_HEIGHT = H/16;
+        const int BUTTON_WIDTH = W/4;
 
 
-        /// Main setup ////////////////////////////////////////////////////////
+        /// main setup ////////////////////////////////////////////////////////
         
-        MainWindow->setMinimumSize(QSize(600, 400));
-        MainWindow->setMaximumSize(QSize(600, 400));
+        MainWindow->setMinimumSize(QSize(W, H));
+        MainWindow->setMaximumSize(QSize(W, H));
         centralwidget = new QWidget(MainWindow);
         centralwidget->setObjectName(QStringLiteral("centralwidget"));
-        centralwidget->setMinimumSize(QSize(600, 400));
-        centralwidget->setMaximumSize(QSize(600, 400));
+        centralwidget->setMinimumSize(QSize(W, H));
+        centralwidget->setMaximumSize(QSize(W, H));
         stackedWidget = new QStackedWidget(centralwidget);
         stackedWidget->setObjectName(QStringLiteral("stackedWidget"));
-        stackedWidget->setGeometry(QRect(0, 0, 600, 400));
-        stackedWidget->setMinimumSize(QSize(600, 400));
-        stackedWidget->setMaximumSize(QSize(600, 400));
+        stackedWidget->setGeometry(QRect(0, 0, W, H));
+        stackedWidget->setMinimumSize(QSize(W, H));
+        stackedWidget->setMaximumSize(QSize(W, H));
+        
+        /// start page ////////////////////////////////////////////////////////
+        
         start_page = new QWidget();
         start_page->setObjectName(QStringLiteral("start_page"));
+        
         intro = new QLabel(start_page);
         intro->setObjectName(QStringLiteral("intro"));
-        intro->setGeometry(QRect(40, 10, 511, 121));
+        intro->setGeometry(QRect(MARGIN, MARGIN, LINEWIDTH, MARGIN*3));
         intro->setAlignment(Qt::AlignJustify|Qt::AlignVCenter);
         intro->setWordWrap(true);
+        
         consent_btn = new QPushButton(start_page);
         consent_btn->setObjectName(QStringLiteral("consent_btn"));
         consent_btn->setGeometry(QRect(120, 290, 131, 25));
@@ -103,13 +114,18 @@ public:
         not_consent_btn->setObjectName(QStringLiteral("not_consent_btn"));
         not_consent_btn->setGeometry(QRect(320, 290, 141, 25));
         stackedWidget->addWidget(start_page);
-        consent_page = new QWidget();
-        consent_page->setObjectName(QStringLiteral("consent_page"));
-        consent_page->setStyleSheet(QStringLiteral(""));
-        label_2 = new QLabel(consent_page);
-        label_2->setObjectName(QStringLiteral("label_2"));
-        label_2->setGeometry(QRect(210, 81, 67, 17));
-        stackedWidget->addWidget(consent_page);
+        
+        
+        // consent_page = new QWidget();
+        // consent_page->setObjectName(QStringLiteral("consent_page"));
+        // consent_page->setStyleSheet(QStringLiteral(""));
+        // label_2 = new QLabel(consent_page);
+        // label_2->setObjectName(QStringLiteral("label_2"));
+        // label_2->setGeometry(QRect(210, 81, 67, 17));
+        // stackedWidget->addWidget(consent_page);
+        
+        /// goodbye page //////////////////////////////////////////////////////
+        
         goodbye_page = new QWidget();
         goodbye_page->setObjectName(QStringLiteral("goodbye_page"));
         stackedWidget->addWidget(goodbye_page);
