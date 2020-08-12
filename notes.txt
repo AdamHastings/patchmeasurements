@@ -1,0 +1,13 @@
+can we do patched and unpatched literally?
+    -
+
+Make this a binary for Windows, Mac, Linux
+make sure AMD and both Intel work
+
+Felt faster later? Maybe reboot or flush system caches
+
+Look at biometric/behavioral stuff
+Look into microcode. Can you undo?
+Look into making binaries
+
+Look into Brian Smith
