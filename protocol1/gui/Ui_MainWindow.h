@@ -24,6 +24,7 @@
 #include <QtWidgets/QProgressBar>
 #include <QtWidgets/QTextEdit>
 #include <QtWidgets/QLineEdit>
+#include <QtWidgets/QRadioButton>
 #include <QScreen>
 #include <QApplication>
 #include <QDesktopWidget>
@@ -81,8 +82,8 @@ public:
     QWidget *q1_page;
     QLabel *q1_label;
     QButtonGroup *q1_button_group;
-    QPushButton *q1_yes_btn;
-    QPushButton *q1_no_btn;
+    QRadioButton *q1_yes_btn;
+    QRadioButton *q1_no_btn;
     QPushButton *q1_continue_btn;
 
     QWidget *q2_page;
@@ -93,8 +94,8 @@ public:
     QWidget *q3_page;
     QLabel *q3_label;
     QButtonGroup *q3_button_group;
-    QPushButton *q3_yes_btn;
-    QPushButton *q3_no_btn;
+    QRadioButton *q3_yes_btn;
+    QRadioButton *q3_no_btn;
     QPushButton *q3_continue_btn;
 
     QWidget *q4_page;
@@ -252,6 +253,35 @@ public:
         task2_continue_btn->setGeometry(QRect(W/2 - BUTTON_WIDTH/2, M*8, BUTTON_WIDTH, BUTTON_HEIGHT));
         task2_continue_btn->setText("Continue");
 
+        //// q1 page //////////////////////////////////////////////////////////
+
+        q1_page = new QWidget();
+        q1_page->setObjectName(QStringLiteral("q1_page"));
+        stackedWidget->addWidget(q1_page);
+
+        q1_label = new QLabel(q1_page);
+        q1_label->setObjectName(QStringLiteral("q1_label"));
+        q1_label->setGeometry(QRect(M, M, LINEWIDTH, M*5));
+        q1_label->setAlignment(Qt::AlignLeft|Qt::AlignVCenter);
+        q1_label->setWordWrap(true);
+        q1_label->setText("Did you notice any differences before and after the modifications? Do not consider differences in questions asked in the web browsing task.");
+
+        q1_button_group = new QButtonGroup(q1_page);
+        q1_yes_btn = new QRadioButton(q1_page);
+        q1_yes_btn->setGeometry(QRect(W/2 - BUTTON_WIDTH/2, M*5, BUTTON_WIDTH, BUTTON_HEIGHT));
+        q1_yes_btn->setText("Yes");
+        q1_no_btn = new QRadioButton(q1_page);
+        q1_no_btn->setGeometry(QRect(W/2 - BUTTON_WIDTH/2, M*6, BUTTON_WIDTH, BUTTON_HEIGHT));
+        q1_no_btn->setText("No");
+        q1_button_group->addButton(q1_yes_btn);
+        q1_button_group->addButton(q1_no_btn);
+
+        q1_continue_btn = new QPushButton(q1_page);
+        q1_continue_btn->setEnabled(false);
+        q1_continue_btn->setGeometry(QRect(W/2 - BUTTON_WIDTH/2, M*8, BUTTON_WIDTH, BUTTON_HEIGHT));
+        q1_continue_btn->setText("Continue");
+
+        ///////////////////////////////////////////////////////////////////////
 
         retranslateUi(MainWindow);
 

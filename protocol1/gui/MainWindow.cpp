@@ -27,12 +27,12 @@ void MainWindow::showPatch(bool b) {
 
     for (int i=0; i<MAGIC_THRES; i++) {
         ui->patch_progress_bar->setValue(i);
-        std::this_thread::sleep_for(std::chrono::milliseconds(100));
+        // std::this_thread::sleep_for(std::chrono::milliseconds(100));
     }
 
     for (int i=MAGIC_THRES; i<=100; i++) {
         ui->patch_progress_bar->setValue(i);
-        std::this_thread::sleep_for(std::chrono::milliseconds(10));
+        // std::this_thread::sleep_for(std::chrono::milliseconds(10));
     }
 
     ui->patch_continue_btn->setEnabled(true);
@@ -46,15 +46,19 @@ void MainWindow::showTask2(bool b) {
 }
 
 void MainWindow::showQ1(bool b) {
-    return;
+    ui->stackedWidget->setCurrentWidget(ui->q1_page);
 }
 
 void MainWindow::q1Response(bool b) {
-    return;
+    ui->q1_continue_btn->setEnabled(true);
 }
 
 void MainWindow::showQ1Next(bool b) {
-    return;
+    if (ui->q1_yes_btn->isChecked()) {
+        ui->stackedWidget->setCurrentWidget(ui->q2_page);
+    } else{
+        ui->stackedWidget->setCurrentWidget(ui->q3_page);
+    }
 }
 
 void MainWindow::showQ3(bool b) {
@@ -97,6 +101,10 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->consent_btn, SIGNAL(clicked(bool)), this, SLOT(showTask1(bool)));
     connect(ui->task1_continue_btn, SIGNAL(clicked(bool)), this, SLOT(showPatch(bool)));
     connect(ui->patch_continue_btn, SIGNAL(clicked(bool)), this, SLOT(showTask2(bool)));
+    connect(ui->task2_continue_btn, SIGNAL(clicked(bool)), this, SLOT(showQ1(bool)));
+    connect(ui->q1_yes_btn, SIGNAL(clicked(bool)), this, SLOT(q1Response(bool)));
+    connect(ui->q1_no_btn, SIGNAL(clicked(bool)), this, SLOT(q1Response(bool)));
+    connect(ui->q1_continue_btn, SIGNAL(clicked(bool)), this, SLOT(showq1Next(bool)));
 
 
     // connect(ui->horizontalSlider, SIGNAL(valueChanged(int)),
