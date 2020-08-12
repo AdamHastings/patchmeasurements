@@ -25,6 +25,8 @@
 #include <QApplication>
 #include <QDesktopWidget>
 
+#include "Pages.h"
+
 
 QT_BEGIN_NAMESPACE
 
@@ -33,15 +35,19 @@ class Ui_MainWindow
 public:
     QWidget *centralwidget;
     QStackedWidget *stackedWidget;
+    
     QWidget *start_page;
-    QLabel *intro;
+    QLabel *intro_label;
     QPushButton *consent_btn;
-    QLabel *outline;
-    QLabel *consent;
+    QLabel *outline_label;
+    QLabel *consent_label;
     QPushButton *not_consent_btn;
     QWidget *consent_page;
-    QLabel *label_2;
+    
     QWidget *goodbye_page;
+    QLabel *goodbye_label;
+    QPushButton *goodbye_btn;
+    
     QWidget *task1_page;
     QWidget *patch_page;
     QWidget *task2_page;
@@ -52,6 +58,15 @@ public:
     QWidget *wta_page;
     QMenuBar *menubar;
     QStatusBar *statusbar;
+
+    void config_goodbye_page() {
+
+    }
+
+    void configPages() {
+        config_goodbye_page();
+
+    }
 
     void setupUi(QMainWindow *MainWindow)
     {
@@ -92,46 +107,56 @@ public:
         start_page = new QWidget();
         start_page->setObjectName(QStringLiteral("start_page"));
         
-        intro = new QLabel(start_page);
-        intro->setObjectName(QStringLiteral("intro"));
-        intro->setGeometry(QRect(MARGIN, MARGIN, LINEWIDTH, MARGIN*3));
-        intro->setAlignment(Qt::AlignJustify|Qt::AlignVCenter);
-        intro->setWordWrap(true);
+        intro_label = new QLabel(start_page);
+        intro_label->setObjectName(QStringLiteral("intro_label"));
+        intro_label->setGeometry(QRect(MARGIN, MARGIN, LINEWIDTH, MARGIN*3));
+        intro_label->setAlignment(Qt::AlignJustify|Qt::AlignVCenter);
+        intro_label->setWordWrap(true);
               
-        outline = new QLabel(start_page);
-        outline->setObjectName(QStringLiteral("outline"));
-        outline->setGeometry(QRect(MARGIN, MARGIN*4, LINEWIDTH, MARGIN*3));
-        outline->setAlignment(Qt::AlignJustify|Qt::AlignVCenter);
-        outline->setWordWrap(true);
+        outline_label = new QLabel(start_page);
+        outline_label->setObjectName(QStringLiteral("outline_label"));
+        outline_label->setGeometry(QRect(MARGIN, MARGIN*4, LINEWIDTH, MARGIN*3));
+        outline_label->setAlignment(Qt::AlignJustify|Qt::AlignVCenter);
+        outline_label->setWordWrap(true);
         
-        consent = new QLabel(start_page);
-        consent->setObjectName(QStringLiteral("consent"));
-        consent->setGeometry(QRect(MARGIN, MARGIN*7, LINEWIDTH, MARGIN));
-        consent->setAlignment(Qt::AlignJustify|Qt::AlignVCenter);
-        consent->setWordWrap(true);
-
-        not_consent_btn = new QPushButton(start_page);
-        not_consent_btn->setObjectName(QStringLiteral("not_consent_btn"));
-        not_consent_btn->setGeometry(QRect(W/2 + MARGIN, M*8, BUTTON_WIDTH, BUTTON_HEIGHT));
+        consent_label = new QLabel(start_page);
+        consent_label->setObjectName(QStringLiteral("consent_label"));
+        consent_label->setGeometry(QRect(MARGIN, MARGIN*7, LINEWIDTH, MARGIN));
+        consent_label->setAlignment(Qt::AlignJustify|Qt::AlignVCenter);
+        consent_label->setWordWrap(true);
         
         consent_btn = new QPushButton(start_page);
         consent_btn->setObjectName(QStringLiteral("consent_btn"));
-        consent_btn->setGeometry(QRect(W/2 - BUTTON_WIDTH - MARGIN, MARGIN*8, BUTTON_WIDTH, BUTTON_HEIGHT));
+        consent_btn->setGeometry(QRect(W/2 - BUTTON_WIDTH - M, M*8, BUTTON_WIDTH, BUTTON_HEIGHT));
+
+        not_consent_btn = new QPushButton(start_page);
+        not_consent_btn->setObjectName(QStringLiteral("not_consent_btn"));
+        not_consent_btn->setGeometry(QRect(W/2 + M, M*8, BUTTON_WIDTH, BUTTON_HEIGHT));
 
         stackedWidget->addWidget(start_page);
 
-        // 
-
-        consent_page = new QWidget();
-        consent_page->setObjectName(QStringLiteral("consent_page"));
-        consent_page->setStyleSheet(QStringLiteral(""));
-        label_2 = new QLabel(consent_page);
-        label_2->setObjectName(QStringLiteral("label_2"));
-        label_2->setGeometry(QRect(210, 81, 67, 17));
-        stackedWidget->addWidget(consent_page);
+        // goodbye page ///////////////////////////////////////////////////////
+        // configPages();
         goodbye_page = new QWidget();
         goodbye_page->setObjectName(QStringLiteral("goodbye_page"));
         stackedWidget->addWidget(goodbye_page);
+
+        goodbye_label = new QLabel(start_page);
+        goodbye_label->setObjectName(QStringLiteral("outline"));
+        goodbye_label->setGeometry(QRect(M, M, LINEWIDTH, M*4));
+        goodbye_label->setAlignment(Qt::AlignJustify|Qt::AlignVCenter);
+        goodbye_label->setWordWrap(true);
+
+        goodbye_btn = new QPushButton(start_page);
+        goodbye_btn->setObjectName(QStringLiteral("goodbye_btn"));
+        goodbye_btn->setGeometry(QRect(W/2 - BUTTON_WIDTH/2, M*8, BUTTON_WIDTH, BUTTON_HEIGHT));
+
+
+        
+
+        // task1 page /////////////////////////////////////////////////////////
+
+        
         task1_page = new QWidget();
         task1_page->setObjectName(QStringLiteral("task1_page"));
         task1_page->setStyleSheet(QStringLiteral("background-color:blue"));
@@ -178,12 +203,11 @@ public:
     void retranslateUi(QMainWindow *MainWindow)
     {
         MainWindow->setWindowTitle(QApplication::translate("MainWindow", "MainWindow", Q_NULLPTR));
-        intro->setText(QApplication::translate("MainWindow", "Thank you for participating in this experiment. This experiment will have you complete a few simple tasks on this computer. This experiment does not track your actions or steal any personal information. There is minimal risk involved in participating in this experiment. This experiment will take about 20 minutes to complete.", Q_NULLPTR));
+        intro_label->setText(QApplication::translate("MainWindow", "Thank you for participating in this experiment. This experiment will have you complete a few simple tasks on this computer. This experiment does not track your actions or steal any personal information. There is minimal risk involved in participating in this experiment. This experiment will take about 20 minutes to complete.", Q_NULLPTR));
         consent_btn->setText(QApplication::translate("MainWindow", "I consent", Q_NULLPTR));
-        outline->setText(QApplication::translate("MainWindow", "This experiment is designed to test how computer users respond to some computer system modifications we are prototyping. We will first have you complete some simple tasks with these modifications turned off. Later, we will turn on these modifications and ask you to complete the same set of tasks.", Q_NULLPTR));
-        consent->setText(QApplication::translate("MainWindow", "Do you consent to participate in this study? You may exit the experiment at any point.", Q_NULLPTR));
+        outline_label->setText(QApplication::translate("MainWindow", "This experiment is designed to test how computer users respond to some computer system modifications we are prototyping. We will first have you complete some simple tasks with these modifications turned off. Later, we will turn on these modifications and ask you to complete the same set of tasks.", Q_NULLPTR));
+        consent_label->setText(QApplication::translate("MainWindow", "Do you consent to participate in this study? You may exit the experiment at any point.", Q_NULLPTR));
         not_consent_btn->setText(QApplication::translate("MainWindow", "I do not consent", Q_NULLPTR));
-        label_2->setText(QApplication::translate("MainWindow", "TextLabel", Q_NULLPTR));
     } // retranslateUi
 
 };

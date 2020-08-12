@@ -51,9 +51,11 @@ OBJECTS_DIR   = ./
 ####### Files
 
 SOURCES       = main.cpp \
-		MainWindow.cpp moc_MainWindow.cpp
+		MainWindow.cpp \
+		Pages.cpp moc_MainWindow.cpp
 OBJECTS       = main.o \
 		MainWindow.o \
+		Pages.o \
 		moc_MainWindow.o
 DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/common/unix.conf \
@@ -128,8 +130,10 @@ DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/exceptions.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/yacc.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/lex.prf \
-		MainWindow.pro MainWindow.h main.cpp \
-		MainWindow.cpp
+		MainWindow.pro MainWindow.h \
+		Pages.h main.cpp \
+		MainWindow.cpp \
+		Pages.cpp
 QMAKE_TARGET  = experiment
 DESTDIR       = 
 TARGET        = experiment
@@ -311,8 +315,8 @@ distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents MainWindow.h $(DISTDIR)/
-	$(COPY_FILE) --parents main.cpp MainWindow.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents MainWindow.h Pages.h $(DISTDIR)/
+	$(COPY_FILE) --parents main.cpp MainWindow.cpp Pages.cpp $(DISTDIR)/
 	$(COPY_FILE) --parents MainWindow.ui $(DISTDIR)/
 
 
@@ -378,6 +382,9 @@ main.o: main.cpp MainWindow.h
 MainWindow.o: MainWindow.cpp MainWindow.h \
 		Ui_MainWindow.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o MainWindow.o MainWindow.cpp
+
+Pages.o: Pages.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o Pages.o Pages.cpp
 
 moc_MainWindow.o: moc_MainWindow.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_MainWindow.o moc_MainWindow.cpp

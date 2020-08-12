@@ -1,3 +1,4 @@
 *.o
 experiment
 .qmake.*
+.vscode/
