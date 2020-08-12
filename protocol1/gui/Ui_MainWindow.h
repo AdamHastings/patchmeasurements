@@ -72,8 +72,10 @@ public:
     QProgressBar *patch_progress_bar;
     QPushButton *patch_continue_btn;
 
-    // QWidget *patch_page;
-    // QWidget *task2_page;
+    QWidget *task2_page;
+    QLabel *task2_label;
+    QPushButton *task2_continue_btn;
+
     // QWidget *q1_page;
     // QWidget *q2_page;
     // QWidget *q3_page;
@@ -177,7 +179,6 @@ public:
         task1_continue_btn->setObjectName(QStringLiteral("task1_continue_btn"));
         task1_continue_btn->setGeometry(QRect(W/2 - BUTTON_WIDTH/2, M*8, BUTTON_WIDTH, BUTTON_HEIGHT));
 
-
         //// patch page ///////////////////////////////////////////////////////
         
         patch_page = new QWidget();
@@ -205,6 +206,26 @@ public:
         patch_continue_btn->setGeometry(QRect(W/2 - BUTTON_WIDTH/2, M*8, BUTTON_WIDTH, BUTTON_HEIGHT));
         patch_continue_btn->setEnabled(false);
         patch_continue_btn->setDisabled(true);
+
+        //// task2 page ///////////////////////////////////////////////////////
+        
+        task2_page = new QWidget();
+        task2_page->setObjectName(QStringLiteral("task2_page"));
+        stackedWidget->addWidget(task2_page);
+
+        task2_label = new QLabel(task2_page);
+        task2_label->setObjectName(QStringLiteral("task1_label"));
+        task2_label->setGeometry(QRect(M, M, LINEWIDTH, M*6));
+        task2_label->setAlignment(Qt::AlignLeft|Qt::AlignTop);
+        task2_label->setWordWrap(true);
+        task2_label->setText("You will now do some more simple tasks, similar to what you did before. You must:\n\n    1) Open a web browser.\n    2) Login to your LionMail account.\n    3) Compose and email containing:\n        a) The distance (in miles) between Central Park and Wall Street\n        b) A picture of Butler Library\n        c) Any TED talk you like (just copy and paste the URL into the video)\n    4) Send the email to hastings@cs.columbia.edu.\n    5) Click \"Continue\" below only once the above tasks are completed.");
+
+        task2_continue_btn = new QPushButton(task2_page);
+        task2_continue_btn->setObjectName(QStringLiteral("task1_continue_btn"));
+        task2_continue_btn->setGeometry(QRect(W/2 - BUTTON_WIDTH/2, M*8, BUTTON_WIDTH, BUTTON_HEIGHT));
+        task2_continue_btn->setText("Continue");
+
+
     
 
 
@@ -265,6 +286,9 @@ public:
 
         patch_label->setText(QApplication::translate("MainWindow", "We will now make some modifications to your computer. These modifications are only temporary and will end once this experiment concludes.", Q_NULLPTR));
         patch_continue_btn->setText(QApplication::translate("MainWindow", "Continue", Q_NULLPTR));
+
+        task1_label->setText(QApplication::translate("MainWindow", "You will now do some simple tasks. You must:\n\n    1) Open a web browser.\n    2) Login to your LionMail account.\n    3) Compose and email containing:\n        a) The distance (in miles) between Columbia University and\n             the Empire State Building\n        b) A picture of Low Library\n        c) Any music video you like (just copy and paste the URL into the video)\n    4) Send the email to hastings@cs.columbia.edu.\n    5) Click \"Continue\" below only once the above tasks are completed.", Q_NULLPTR));
+        task1_continue_btn->setText(QApplication::translate("MainWindow", "Continue", Q_NULLPTR));
 
 
     } // retranslateUi

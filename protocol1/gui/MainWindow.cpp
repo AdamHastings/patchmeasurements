@@ -42,7 +42,7 @@ void MainWindow::showPatch(bool b) {
 }
 
 void MainWindow::showTask2(bool b) {
-    return;
+    ui->stackedWidget->setCurrentWidget(ui->task2_page);
 }
 
 void MainWindow::showQ1(bool b) {
@@ -96,6 +96,7 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->goodbye_btn, SIGNAL(clicked(bool)), this, SLOT(close(bool)));
     connect(ui->consent_btn, SIGNAL(clicked(bool)), this, SLOT(showTask1(bool)));
     connect(ui->task1_continue_btn, SIGNAL(clicked(bool)), this, SLOT(showPatch(bool)));
+    connect(ui->patch_continue_btn, SIGNAL(clicked(bool)), this, SLOT(showTask2(bool)));
 
 
     // connect(ui->horizontalSlider, SIGNAL(valueChanged(int)),
