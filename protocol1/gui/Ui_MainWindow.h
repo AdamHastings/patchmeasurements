@@ -62,8 +62,8 @@ public:
         // QRect rec = QApplication::desktop()->screenGeometry();
         //QRect rec = QScreen::geometry();
         QRect rec = QApplication::desktop()->screenGeometry();
-        const int H = rec.height();
-        const int W = rec.width();
+        const int H = rec.height()/3;
+        const int W = rec.width()/3;
 
         const int MARGIN = H/10;
         const int M = MARGIN;
@@ -73,19 +73,22 @@ public:
         const int BUTTON_HEIGHT = H/16;
 
 
-        /// Main setup ////////////////////////////////////////////////////////
+        /// main setup ////////////////////////////////////////////////////////
         
-        MainWindow->setMinimumSize(QSize(600, 400));
-        MainWindow->setMaximumSize(QSize(600, 400));
-        centralwidget = new QWidget(MainWindow);
+        MainWindow->setMinimumSize(QSize(W, H));
+        MainWindow->setMaximumSize(QSize(W, H));
+        QWidget* centralwidget = new QWidget(MainWindow);
         centralwidget->setObjectName(QStringLiteral("centralwidget"));
-        centralwidget->setMinimumSize(QSize(600, 400));
-        centralwidget->setMaximumSize(QSize(600, 400));
-        stackedWidget = new QStackedWidget(centralwidget);
+        centralwidget->setMinimumSize(QSize(W, H));
+        centralwidget->setMaximumSize(QSize(W, H));
+        QStackedWidget* stackedWidget = new QStackedWidget(centralwidget);
         stackedWidget->setObjectName(QStringLiteral("stackedWidget"));
-        stackedWidget->setGeometry(QRect(0, 0, 600, 400));
-        stackedWidget->setMinimumSize(QSize(600, 400));
-        stackedWidget->setMaximumSize(QSize(600, 400));
+        stackedWidget->setGeometry(QRect(0, 0, W, H));
+        stackedWidget->setMinimumSize(QSize(W, H));
+        stackedWidget->setMaximumSize(QSize(W, H));
+        
+        /// start page ////////////////////////////////////////////////////////
+        
         start_page = new QWidget();
         start_page->setObjectName(QStringLiteral("start_page"));
         intro = new QLabel(start_page);
