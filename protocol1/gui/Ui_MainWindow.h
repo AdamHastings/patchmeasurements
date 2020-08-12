@@ -21,6 +21,7 @@
 #include <QtWidgets/QStackedWidget>
 #include <QtWidgets/QStatusBar>
 #include <QtWidgets/QWidget>
+#include <QtWidgets/QProgressBar>
 #include <QScreen>
 #include <QApplication>
 #include <QDesktopWidget>
@@ -65,6 +66,11 @@ public:
     QLabel *task1_label;
     QPushButton *task1_continue_btn;
 
+    QWidget *patch_page;
+    QLabel *patch_label;
+    QLabel *patch_done_label;
+    QProgressBar *patch_progress_bar;
+    QPushButton *patch_continue_btn;
 
     // QWidget *patch_page;
     // QWidget *task2_page;
@@ -91,7 +97,7 @@ public:
             MainWindow->setObjectName(QStringLiteral("MainWindow"));
 
 
-        /// main setup ////////////////////////////////////////////////////////
+        //// main setup ///////////////////////////////////////////////////////
         
         MainWindow->setMinimumSize(QSize(W, H));
         MainWindow->setMaximumSize(QSize(W, H));
@@ -105,7 +111,7 @@ public:
         stackedWidget->setMinimumSize(QSize(W, H));
         stackedWidget->setMaximumSize(QSize(W, H));
         
-        /// start page ////////////////////////////////////////////////////////
+        //// start page ///////////////////////////////////////////////////////
         
         start_page = new QWidget();
         start_page->setObjectName(QStringLiteral("start_page"));
@@ -138,8 +144,7 @@ public:
 
         stackedWidget->addWidget(start_page);
 
-        // goodbye page ///////////////////////////////////////////////////////
-        // configPages();
+        //// goodbye page /////////////////////////////////////////////////////
 
         goodbye_page = new QWidget();
         goodbye_page->setObjectName(QStringLiteral("goodbye_page"));
@@ -156,9 +161,11 @@ public:
 
         stackedWidget->addWidget(goodbye_page);
 
-        // task1 page /////////////////////////////////////////////////////////
+        //// task1 page ///////////////////////////////////////////////////////
+        
         task1_page = new QWidget();
         task1_page->setObjectName(QStringLiteral("task1_page"));
+        stackedWidget->addWidget(task1_page);
 
         task1_label = new QLabel(task1_page);
         task1_label->setObjectName(QStringLiteral("task1_label"));
@@ -170,13 +177,38 @@ public:
         task1_continue_btn->setObjectName(QStringLiteral("task1_continue_btn"));
         task1_continue_btn->setGeometry(QRect(W/2 - BUTTON_WIDTH/2, M*8, BUTTON_WIDTH, BUTTON_HEIGHT));
 
-        stackedWidget->addWidget(task1_page);
+
+        //// patch page ///////////////////////////////////////////////////////
+        
+        patch_page = new QWidget();
+        patch_page->setObjectName(QStringLiteral("patch_page"));
+        stackedWidget->addWidget(patch_page);
+
+        patch_label = new QLabel(patch_page);
+        patch_label->setObjectName(QStringLiteral("patch_label"));
+        patch_label->setGeometry(QRect(M, M, LINEWIDTH, M*5));
+        patch_label->setAlignment(Qt::AlignHCenter|Qt::AlignVCenter);
+        patch_label->setWordWrap(true);
+
+        patch_progress_bar = new QProgressBar(patch_page);
+        patch_progress_bar->setGeometry(QRect(W/2 - 4*M, M*5, 8*M, M));
+        patch_progress_bar->setMinimum(0);
+        patch_progress_bar->setMaximum(100);
+        patch_progress_bar->setValue(0);
+
+        patch_done_label = new QLabel(patch_page);
+        patch_done_label->setGeometry(QRect((W-BUTTON_WIDTH)/2, M*6, BUTTON_WIDTH, BUTTON_HEIGHT));
+        patch_done_label->setAlignment(Qt::AlignHCenter|Qt::AlignVCenter);
+
+        patch_continue_btn = new QPushButton(patch_page);
+        patch_continue_btn->setObjectName(QStringLiteral("patch_continue_btn"));
+        patch_continue_btn->setGeometry(QRect(W/2 - BUTTON_WIDTH/2, M*8, BUTTON_WIDTH, BUTTON_HEIGHT));
+        patch_continue_btn->setEnabled(false);
+        patch_continue_btn->setDisabled(true);
+    
 
 
-        // task1_page = new QWidget();
-        // task1_page->setObjectName(QStringLiteral("task1_page"));
-        // task1_page->setStyleSheet(QStringLiteral("background-color:blue"));
-        // stackedWidget->addWidget(task1_page);
+        
         // patch_page = new QWidget();
         // patch_page->setObjectName(QStringLiteral("patch_page"));
         // patch_page->setStyleSheet(QStringLiteral("background-color:red"));
@@ -230,6 +262,9 @@ public:
 
         task1_label->setText(QApplication::translate("MainWindow", "You will now do some simple tasks. You must:\n\n    1) Open a web browser.\n    2) Login to your LionMail account.\n    3) Compose and email containing:\n        a) The distance (in miles) between Columbia University and\n             the Empire State Building\n        b) A picture of Low Library\n        c) Any music video you like (just copy and paste the URL into the video)\n    4) Send the email to hastings@cs.columbia.edu.\n    5) Click \"Continue\" below only once the above tasks are completed.", Q_NULLPTR));
         task1_continue_btn->setText(QApplication::translate("MainWindow", "Continue", Q_NULLPTR));
+
+        patch_label->setText(QApplication::translate("MainWindow", "We will now make some modifications to your computer. These modifications are only temporary and will end once this experiment concludes.", Q_NULLPTR));
+        patch_continue_btn->setText(QApplication::translate("MainWindow", "Continue", Q_NULLPTR));
 
 
     } // retranslateUi
