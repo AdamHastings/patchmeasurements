@@ -19,6 +19,7 @@ public slots:
     void setBluePage(bool b);
     void setRedPage(bool b);
     void setYellowPage(bool b);
+    void setGoodbyePage(bool b);
 
 private:
     Ui::MainWindow *ui;
