@@ -21,6 +21,10 @@
 #include <QtWidgets/QStackedWidget>
 #include <QtWidgets/QStatusBar>
 #include <QtWidgets/QWidget>
+#include <QScreen>
+#include <QApplication>
+#include <QDesktopWidget>
+
 
 QT_BEGIN_NAMESPACE
 
@@ -53,6 +57,17 @@ public:
     {
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName(QStringLiteral("MainWindow"));
+        
+        // H = MainWindow->
+        // QRect rec = QApplication::desktop()->screenGeometry();
+        //QRect rec = QScreen::geometry();
+        QRect rec = QApplication::desktop()->screenGeometry();
+        H = rec.height();
+        W = rec.width();
+
+
+        /// Main setup ////////////////////////////////////////////////////////
+        
         MainWindow->setMinimumSize(QSize(600, 400));
         MainWindow->setMaximumSize(QSize(600, 400));
         centralwidget = new QWidget(MainWindow);
