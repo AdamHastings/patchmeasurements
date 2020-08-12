@@ -91,28 +91,37 @@ public:
         
         start_page = new QWidget();
         start_page->setObjectName(QStringLiteral("start_page"));
+        
         intro = new QLabel(start_page);
         intro->setObjectName(QStringLiteral("intro"));
-        intro->setGeometry(QRect(40, 10, 511, 121));
+        intro->setGeometry(QRect(MARGIN, MARGIN, LINEWIDTH, MARGIN*3));
         intro->setAlignment(Qt::AlignJustify|Qt::AlignVCenter);
         intro->setWordWrap(true);
+              
+        outline = new QLabel(start_page);
+        outline->setObjectName(QStringLiteral("outline"));
+        outline->setGeometry(QRect(MARGIN, MARGIN*4, LINEWIDTH, MARGIN*3));
+        outline->setAlignment(Qt::AlignJustify|Qt::AlignVCenter);
+        outline->setWordWrap(true);
+        
+        consent = new QLabel(start_page);
+        consent->setObjectName(QStringLiteral("consent"));
+        consent->setGeometry(QRect(MARGIN, MARGIN*7, LINEWIDTH, MARGIN));
+        consent->setAlignment(Qt::AlignJustify|Qt::AlignVCenter);
+        consent->setWordWrap(true);
+
         consent_btn = new QPushButton(start_page);
         consent_btn->setObjectName(QStringLiteral("consent_btn"));
         consent_btn->setGeometry(QRect(120, 290, 131, 25));
-        outline = new QLabel(start_page);
-        outline->setObjectName(QStringLiteral("outline"));
-        outline->setGeometry(QRect(40, 120, 511, 101));
-        outline->setAlignment(Qt::AlignJustify|Qt::AlignVCenter);
-        outline->setWordWrap(true);
-        consent = new QLabel(start_page);
-        consent->setObjectName(QStringLiteral("consent"));
-        consent->setGeometry(QRect(40, 220, 511, 41));
-        consent->setAlignment(Qt::AlignJustify|Qt::AlignVCenter);
-        consent->setWordWrap(true);
+
         not_consent_btn = new QPushButton(start_page);
         not_consent_btn->setObjectName(QStringLiteral("not_consent_btn"));
         not_consent_btn->setGeometry(QRect(320, 290, 141, 25));
+
         stackedWidget->addWidget(start_page);
+
+        // 
+
         consent_page = new QWidget();
         consent_page->setObjectName(QStringLiteral("consent_page"));
         consent_page->setStyleSheet(QStringLiteral(""));
