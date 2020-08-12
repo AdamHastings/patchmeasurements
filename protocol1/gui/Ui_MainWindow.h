@@ -62,8 +62,15 @@ public:
         // QRect rec = QApplication::desktop()->screenGeometry();
         //QRect rec = QScreen::geometry();
         QRect rec = QApplication::desktop()->screenGeometry();
-        H = rec.height();
-        W = rec.width();
+        const int H = rec.height();
+        const int W = rec.width();
+
+        const int MARGIN = H/10;
+        const int M = MARGIN;
+        const int LINEWIDTH = W - (2*MARGIN);
+
+        const int BUTTON_WIDTH = W/4;
+        const int BUTTON_HEIGHT = H/16;
 
 
         /// Main setup ////////////////////////////////////////////////////////
@@ -150,7 +157,7 @@ public:
 
         retranslateUi(MainWindow);
 
-        stackedWidget->setCurrentIndex(2);
+        stackedWidget->setCurrentIndex(0);
 
 
         QMetaObject::connectSlotsByName(MainWindow);
