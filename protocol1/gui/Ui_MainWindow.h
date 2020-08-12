@@ -110,13 +110,13 @@ public:
         consent->setAlignment(Qt::AlignJustify|Qt::AlignVCenter);
         consent->setWordWrap(true);
 
-        consent_btn = new QPushButton(start_page);
-        consent_btn->setObjectName(QStringLiteral("consent_btn"));
-        consent_btn->setGeometry(QRect(120, 290, 131, 25));
-
         not_consent_btn = new QPushButton(start_page);
         not_consent_btn->setObjectName(QStringLiteral("not_consent_btn"));
-        not_consent_btn->setGeometry(QRect(320, 290, 141, 25));
+        not_consent_btn->setGeometry(QRect(W/2 + MARGIN, M*8, BUTTON_WIDTH, BUTTON_HEIGHT));
+        
+        consent_btn = new QPushButton(start_page);
+        consent_btn->setObjectName(QStringLiteral("consent_btn"));
+        consent_btn->setGeometry(QRect(W/2 - BUTTON_WIDTH - MARGIN, MARGIN*8, BUTTON_WIDTH, BUTTON_HEIGHT));
 
         stackedWidget->addWidget(start_page);
 
