@@ -72,8 +72,14 @@ public:
         const int BUTTON_WIDTH = W/4;
         const int BUTTON_HEIGHT = H/16;
 
+        const int MARGIN = H/10;
+        const int LINEWIDTH = W - (2*MARGIN);
 
-        /// Main setup ////////////////////////////////////////////////////////
+        const int BUTTON_HEIGHT = H/16;
+        const int BUTTON_WIDTH = W/4;
+
+
+        /// main setup ////////////////////////////////////////////////////////
         
         MainWindow->setMinimumSize(QSize(W, H));
         MainWindow->setMaximumSize(QSize(W, H));
@@ -87,7 +93,7 @@ public:
         stackedWidget->setMinimumSize(QSize(W, H));
         stackedWidget->setMaximumSize(QSize(W, H));
         
-        // start page /////////////////////////////////////////////////////////
+        /// start page ////////////////////////////////////////////////////////
         
         start_page = new QWidget();
         start_page->setObjectName(QStringLiteral("start_page"));
@@ -119,16 +125,18 @@ public:
         consent_btn->setGeometry(QRect(W/2 - BUTTON_WIDTH - MARGIN, MARGIN*8, BUTTON_WIDTH, BUTTON_HEIGHT));
 
         stackedWidget->addWidget(start_page);
-       
-       // goodbye page ////////////////////////////////////////////////////////
-       
-        consent_page = new QWidget();
-        consent_page->setObjectName(QStringLiteral("consent_page"));
-        consent_page->setStyleSheet(QStringLiteral(""));
-        label_2 = new QLabel(consent_page);
-        label_2->setObjectName(QStringLiteral("label_2"));
-        label_2->setGeometry(QRect(210, 81, 67, 17));
-        stackedWidget->addWidget(consent_page);
+        
+        
+        // consent_page = new QWidget();
+        // consent_page->setObjectName(QStringLiteral("consent_page"));
+        // consent_page->setStyleSheet(QStringLiteral(""));
+        // label_2 = new QLabel(consent_page);
+        // label_2->setObjectName(QStringLiteral("label_2"));
+        // label_2->setGeometry(QRect(210, 81, 67, 17));
+        // stackedWidget->addWidget(consent_page);
+        
+        /// goodbye page //////////////////////////////////////////////////////
+        
         goodbye_page = new QWidget();
         goodbye_page->setObjectName(QStringLiteral("goodbye_page"));
         stackedWidget->addWidget(goodbye_page);
