@@ -32,6 +32,19 @@ QT_BEGIN_NAMESPACE
 
 class Ui_MainWindow
 {
+
+private:
+    QRect rec = QApplication::desktop()->screenGeometry();
+    const int H = rec.height()/3;
+    const int W = rec.width()/3;
+
+    const int MARGIN = H/10;
+    const int M = MARGIN;
+    const int LINEWIDTH = W - (2*MARGIN);
+
+    const int BUTTON_WIDTH = W/4;
+    const int BUTTON_HEIGHT = H/16;
+
 public:
     QWidget *centralwidget;
     QStackedWidget *stackedWidget;
@@ -48,16 +61,16 @@ public:
     QLabel *goodbye_label;
     QPushButton *goodbye_btn;
     
-    QWidget *task1_page;
-    QWidget *patch_page;
-    QWidget *task2_page;
-    QWidget *q1_page;
-    QWidget *q2_page;
-    QWidget *q3_page;
-    QWidget *q4_page;
-    QWidget *wta_page;
-    QMenuBar *menubar;
-    QStatusBar *statusbar;
+    // QWidget *task1_page;
+    // QWidget *patch_page;
+    // QWidget *task2_page;
+    // QWidget *q1_page;
+    // QWidget *q2_page;
+    // QWidget *q3_page;
+    // QWidget *q4_page;
+    // QWidget *wta_page;
+    // QMenuBar *menubar;
+    // QStatusBar *statusbar;
 
     void config_goodbye_page() {
 
@@ -72,31 +85,17 @@ public:
     {
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName(QStringLiteral("MainWindow"));
-        
-        // H = MainWindow->
-        // QRect rec = QApplication::desktop()->screenGeometry();
-        //QRect rec = QScreen::geometry();
-        QRect rec = QApplication::desktop()->screenGeometry();
-        const int H = rec.height()/3;
-        const int W = rec.width()/3;
-
-        const int MARGIN = H/10;
-        const int M = MARGIN;
-        const int LINEWIDTH = W - (2*MARGIN);
-
-        const int BUTTON_WIDTH = W/4;
-        const int BUTTON_HEIGHT = H/16;
 
 
         /// main setup ////////////////////////////////////////////////////////
         
         MainWindow->setMinimumSize(QSize(W, H));
         MainWindow->setMaximumSize(QSize(W, H));
-        QWidget* centralwidget = new QWidget(MainWindow);
+        centralwidget = new QWidget(MainWindow);
         centralwidget->setObjectName(QStringLiteral("centralwidget"));
         centralwidget->setMinimumSize(QSize(W, H));
         centralwidget->setMaximumSize(QSize(W, H));
-        QStackedWidget* stackedWidget = new QStackedWidget(centralwidget);
+        stackedWidget = new QStackedWidget(centralwidget);
         stackedWidget->setObjectName(QStringLiteral("stackedWidget"));
         stackedWidget->setGeometry(QRect(0, 0, W, H));
         stackedWidget->setMinimumSize(QSize(W, H));
@@ -137,19 +136,21 @@ public:
 
         // goodbye page ///////////////////////////////////////////////////////
         // configPages();
+
         goodbye_page = new QWidget();
         goodbye_page->setObjectName(QStringLiteral("goodbye_page"));
-        stackedWidget->addWidget(goodbye_page);
 
-        goodbye_label = new QLabel(start_page);
+        goodbye_label = new QLabel(goodbye_page);
         goodbye_label->setObjectName(QStringLiteral("outline"));
         goodbye_label->setGeometry(QRect(M, M, LINEWIDTH, M*4));
         goodbye_label->setAlignment(Qt::AlignJustify|Qt::AlignVCenter);
         goodbye_label->setWordWrap(true);
 
-        goodbye_btn = new QPushButton(start_page);
+        goodbye_btn = new QPushButton(goodbye_page);
         goodbye_btn->setObjectName(QStringLiteral("goodbye_btn"));
         goodbye_btn->setGeometry(QRect(W/2 - BUTTON_WIDTH/2, M*8, BUTTON_WIDTH, BUTTON_HEIGHT));
+
+        stackedWidget->addWidget(goodbye_page);
 
 
         
@@ -157,40 +158,40 @@ public:
         // task1 page /////////////////////////////////////////////////////////
 
         
-        task1_page = new QWidget();
-        task1_page->setObjectName(QStringLiteral("task1_page"));
-        task1_page->setStyleSheet(QStringLiteral("background-color:blue"));
-        stackedWidget->addWidget(task1_page);
-        patch_page = new QWidget();
-        patch_page->setObjectName(QStringLiteral("patch_page"));
-        patch_page->setStyleSheet(QStringLiteral("background-color:red"));
-        stackedWidget->addWidget(patch_page);
-        task2_page = new QWidget();
-        task2_page->setObjectName(QStringLiteral("task2_page"));
-        stackedWidget->addWidget(task2_page);
-        q1_page = new QWidget();
-        q1_page->setObjectName(QStringLiteral("q1_page"));
-        stackedWidget->addWidget(q1_page);
-        q2_page = new QWidget();
-        q2_page->setObjectName(QStringLiteral("q2_page"));
-        stackedWidget->addWidget(q2_page);
-        q3_page = new QWidget();
-        q3_page->setObjectName(QStringLiteral("q3_page"));
-        stackedWidget->addWidget(q3_page);
-        q4_page = new QWidget();
-        q4_page->setObjectName(QStringLiteral("q4_page"));
-        stackedWidget->addWidget(q4_page);
-        wta_page = new QWidget();
-        wta_page->setObjectName(QStringLiteral("wta_page"));
-        stackedWidget->addWidget(wta_page);
-        MainWindow->setCentralWidget(centralwidget);
-        menubar = new QMenuBar(MainWindow);
-        menubar->setObjectName(QStringLiteral("menubar"));
-        menubar->setGeometry(QRect(0, 0, 600, 22));
-        MainWindow->setMenuBar(menubar);
-        statusbar = new QStatusBar(MainWindow);
-        statusbar->setObjectName(QStringLiteral("statusbar"));
-        MainWindow->setStatusBar(statusbar);
+        // task1_page = new QWidget();
+        // task1_page->setObjectName(QStringLiteral("task1_page"));
+        // task1_page->setStyleSheet(QStringLiteral("background-color:blue"));
+        // stackedWidget->addWidget(task1_page);
+        // patch_page = new QWidget();
+        // patch_page->setObjectName(QStringLiteral("patch_page"));
+        // patch_page->setStyleSheet(QStringLiteral("background-color:red"));
+        // stackedWidget->addWidget(patch_page);
+        // task2_page = new QWidget();
+        // task2_page->setObjectName(QStringLiteral("task2_page"));
+        // stackedWidget->addWidget(task2_page);
+        // q1_page = new QWidget();
+        // q1_page->setObjectName(QStringLiteral("q1_page"));
+        // stackedWidget->addWidget(q1_page);
+        // q2_page = new QWidget();
+        // q2_page->setObjectName(QStringLiteral("q2_page"));
+        // stackedWidget->addWidget(q2_page);
+        // q3_page = new QWidget();
+        // q3_page->setObjectName(QStringLiteral("q3_page"));
+        // stackedWidget->addWidget(q3_page);
+        // q4_page = new QWidget();
+        // q4_page->setObjectName(QStringLiteral("q4_page"));
+        // stackedWidget->addWidget(q4_page);
+        // wta_page = new QWidget();
+        // wta_page->setObjectName(QStringLiteral("wta_page"));
+        // stackedWidget->addWidget(wta_page);
+        // MainWindow->setCentralWidget(centralwidget);
+        // menubar = new QMenuBar(MainWindow);
+        // menubar->setObjectName(QStringLiteral("menubar"));
+        // menubar->setGeometry(QRect(0, 0, 600, 22));
+        // MainWindow->setMenuBar(menubar);
+        // statusbar = new QStatusBar(MainWindow);
+        // statusbar->setObjectName(QStringLiteral("statusbar"));
+        // MainWindow->setStatusBar(statusbar);
 
         retranslateUi(MainWindow);
 

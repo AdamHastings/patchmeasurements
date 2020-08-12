@@ -8,9 +8,7 @@ TEMPLATE = app
 
 SOURCES += main.cpp\
         MainWindow.cpp\
-        Pages.cpp
 
-HEADERS  += MainWindow.h\
-         Pages.h
+HEADERS  += MainWindow.h
 
 FORMS    += MainWindow.ui
