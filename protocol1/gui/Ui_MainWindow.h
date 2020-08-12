@@ -143,7 +143,7 @@ public:
         goodbye_label = new QLabel(goodbye_page);
         goodbye_label->setObjectName(QStringLiteral("outline"));
         goodbye_label->setGeometry(QRect(M, M, LINEWIDTH, M*4));
-        goodbye_label->setAlignment(Qt::AlignJustify|Qt::AlignVCenter);
+        goodbye_label->setAlignment(Qt::AlignHCenter|Qt::AlignVCenter);
         goodbye_label->setWordWrap(true);
 
         goodbye_btn = new QPushButton(goodbye_page);
@@ -209,6 +209,9 @@ public:
         outline_label->setText(QApplication::translate("MainWindow", "This experiment is designed to test how computer users respond to some computer system modifications we are prototyping. We will first have you complete some simple tasks with these modifications turned off. Later, we will turn on these modifications and ask you to complete the same set of tasks.", Q_NULLPTR));
         consent_label->setText(QApplication::translate("MainWindow", "Do you consent to participate in this study? You may exit the experiment at any point.", Q_NULLPTR));
         not_consent_btn->setText(QApplication::translate("MainWindow", "I do not consent", Q_NULLPTR));
+        goodbye_label->setText(QApplication::translate("MainWindow", "Thank you for your participation. You may now exit this window.", Q_NULLPTR));
+        goodbye_btn->setText(QApplication::translate("MainWindow", "Close", Q_NULLPTR));
+
     } // retranslateUi
 
 };
