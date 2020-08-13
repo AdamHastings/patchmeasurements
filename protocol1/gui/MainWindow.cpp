@@ -1,5 +1,7 @@
 #include "MainWindow.h"
 #include "Ui_MainWindow.h"
+// #include <windows.h>
+// #pragma comment(lib, "user32.lib")
 #include <thread>
 #include <chrono>
 #include <string>
