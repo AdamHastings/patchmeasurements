@@ -25,6 +25,7 @@
 #include <QtWidgets/QTextEdit>
 #include <QtWidgets/QLineEdit>
 #include <QtWidgets/QRadioButton>
+#include <QFont>
 #include <QScreen>
 #include <QApplication>
 #include <QDesktopWidget>
@@ -106,7 +107,7 @@ public:
     QWidget *wta_page;
     QLabel *wta_label;
     QLabel *wta_offer;
-    QLabel *wta_disclaimer;
+    QLabel *wta_disclaimer_label;
     QPushButton *wta_yes_btn;
     QPushButton *wta_no_btn;
 
@@ -280,6 +281,110 @@ public:
         q1_continue_btn->setEnabled(false);
         q1_continue_btn->setGeometry(QRect(W/2 - BUTTON_WIDTH/2, M*8, BUTTON_WIDTH, BUTTON_HEIGHT));
         q1_continue_btn->setText("Continue");
+
+        //// q2 page //////////////////////////////////////////////////////////
+
+        q2_page = new QWidget();
+        q2_page->setObjectName(QStringLiteral("q2_page"));
+        stackedWidget->addWidget(q2_page);
+        
+        q2_label = new QLabel(q2_page);
+        q2_label->setObjectName(QStringLiteral("q1_label"));
+        q2_label->setGeometry(QRect(M, M, LINEWIDTH, M*2));
+        q2_label->setAlignment(Qt::AlignLeft|Qt::AlignVCenter);
+        q2_label->setWordWrap(true);
+        q2_label->setText("How were things different after the modifications were made? Please be descriptive.");
+
+        q2_input = new QTextEdit(q2_page);
+        q2_input->setGeometry(QRect(M, M*4, LINEWIDTH, M*3));
+        
+        q2_continue_btn = new QPushButton(q2_page);
+        q2_continue_btn->setEnabled(false);
+        q2_continue_btn->setGeometry(QRect(W/2 - BUTTON_WIDTH/2, M*8, BUTTON_WIDTH, BUTTON_HEIGHT));
+        q2_continue_btn->setText("Continue");
+
+        //// q3 page //////////////////////////////////////////////////////////
+
+        q3_page = new QWidget();
+        q3_page->setObjectName(QStringLiteral("q3_page"));
+        stackedWidget->addWidget(q3_page);
+
+        q3_label = new QLabel(q3_page);
+        q3_label->setObjectName(QStringLiteral("q3_label"));
+        q3_label->setGeometry(QRect(M, M, LINEWIDTH, M*5));
+        q3_label->setAlignment(Qt::AlignLeft|Qt::AlignVCenter);
+        q3_label->setWordWrap(true);
+        q3_label->setText("The modifications made to the system after the first round of tasks slowed down this computer. Did you notice that this computer was running slower after the modifications were applied?");
+
+        q3_button_group = new QButtonGroup(q3_page);
+        q3_yes_btn = new QRadioButton(q3_page);
+        q3_yes_btn->setGeometry(QRect(W/2 - BUTTON_WIDTH/2, M*5, BUTTON_WIDTH, BUTTON_HEIGHT));
+        q3_yes_btn->setText("Yes");
+        q3_no_btn = new QRadioButton(q3_page);
+        q3_no_btn->setGeometry(QRect(W/2 - BUTTON_WIDTH/2, M*6, BUTTON_WIDTH, BUTTON_HEIGHT));
+        q3_no_btn->setText("No");
+        q3_button_group->addButton(q3_yes_btn);
+        q3_button_group->addButton(q3_no_btn);
+
+        q3_continue_btn = new QPushButton(q3_page);
+        q3_continue_btn->setEnabled(false);
+        q3_continue_btn->setGeometry(QRect(W/2 - BUTTON_WIDTH/2, M*8, BUTTON_WIDTH, BUTTON_HEIGHT));
+        q3_continue_btn->setText("Continue");
+
+        //// q4 page //////////////////////////////////////////////////////////
+
+        q4_page = new QWidget();
+        q4_page->setObjectName(QStringLiteral("q4_page"));
+        stackedWidget->addWidget(q4_page);
+        
+        q4_label = new QLabel(q4_page);
+        q4_label->setObjectName(QStringLiteral("q1_label"));
+        q4_label->setGeometry(QRect(M, M, LINEWIDTH, M*3));
+        q4_label->setAlignment(Qt::AlignJustify|Qt::AlignVCenter);
+        q4_label->setWordWrap(true);
+        q4_label->setText("If you had to guess by what percentage this computer was made slower in the second set of tasks, what would your guess be? For example, if a computer could normally open a web browser in 1 second and was slowed down by 50%, the slowed-down computer could open a web browser in 1.5 seconds. By what percentage do you think this computer was slowed down?.");
+
+        q4_input = new QLineEdit(q4_page);
+        q4_input->setGeometry(QRect((W-BUTTON_WIDTH)/2, M*5, BUTTON_WIDTH, BUTTON_HEIGHT));
+        
+        q4_continue_btn = new QPushButton(q4_page);
+        q4_continue_btn->setEnabled(false);
+        q4_continue_btn->setGeometry(QRect(W/2 - BUTTON_WIDTH/2, M*8, BUTTON_WIDTH, BUTTON_HEIGHT));
+        q4_continue_btn->setText("Continue");
+
+        //// wta page /////////////////////////////////////////////////////////
+
+        wta_page = new QWidget();
+        stackedWidget->addWidget(wta_page);
+
+        wta_label = new QLabel(wta_page);
+        wta_label->setObjectName(QStringLiteral("q1_label"));
+        wta_label->setGeometry(QRect(M, M, LINEWIDTH, M*3));
+        wta_label->setAlignment(Qt::AlignJustify|Qt::AlignVCenter);
+        wta_label->setWordWrap(true);
+        wta_label->setText("Would you be willing to accept a permanent 30% slowdown on your own computer in exchange for:");
+
+        wta_offer = new QLabel(wta_page);
+        wta_offer->setGeometry(QRect(0, M*3, W, M*2));
+        wta_offer->setAlignment(Qt::AlignCenter|Qt::AlignVCenter);
+        QFont font = QFont();
+        font.setBold(true);
+        font.setPointSize(30);
+        wta_offer->setFont(font);
+
+        wta_disclaimer_label = new QLabel(wta_page);
+        wta_disclaimer_label->setGeometry(QRect(M, M*5, W-(2*M), M*3));
+        wta_disclaimer_label->setAlignment(Qt::AlignCenter|Qt::AlignVCenter);
+        wta_disclaimer_label->setWordWrap(true);
+        wta_disclaimer_label->setText("This is for your current computer only and does not apply to any future computers you may buy.");
+
+        wta_yes_btn = new QPushButton(wta_page);
+        wta_yes_btn->setGeometry(QRect(W/2 - BUTTON_WIDTH - M, M*8, BUTTON_WIDTH, BUTTON_HEIGHT));
+        wta_yes_btn->setText("Yes");
+        
+        wta_no_btn = new QPushButton(wta_page);
+        wta_no_btn->setGeometry(QRect(W/2 + M, M*8, BUTTON_WIDTH, BUTTON_HEIGHT));
+        wta_no_btn->setText("No");
 
         ///////////////////////////////////////////////////////////////////////
 
