@@ -5,23 +5,23 @@
 #include <string>
 #include <iostream>
 
-void MainWindow::setFreq(bool b) {
+void MainWindow::setFreq() {
     return;
 }
 
-void MainWindow::showGoodbye(bool b) {
+void MainWindow::showGoodbye() {
     ui->stackedWidget->setCurrentWidget(ui->goodbye_page);
 }
 
-void MainWindow::close(bool b) {
+void MainWindow::close() {
     QApplication::quit();
 }
 
-void MainWindow::showTask1(bool b) {
+void MainWindow::showTask1() {
     ui->stackedWidget->setCurrentWidget(ui->task1_page);
 }
 
-void MainWindow::showPatch(bool b) {
+void MainWindow::showPatch() {
     ui->stackedWidget->setCurrentWidget(ui->patch_page);
 
     int MAGIC_THRES = 24;
@@ -42,19 +42,19 @@ void MainWindow::showPatch(bool b) {
     ui->patch_done_label->setText(QApplication::translate("MainWindow", "Done!", Q_NULLPTR));
 }
 
-void MainWindow::showTask2(bool b) {
+void MainWindow::showTask2() {
     ui->stackedWidget->setCurrentWidget(ui->task2_page);
 }
 
-void MainWindow::showQ1(bool b) {
+void MainWindow::showQ1() {
     ui->stackedWidget->setCurrentWidget(ui->q1_page);
 }
 
-void MainWindow::q1Response(bool b) {
+void MainWindow::q1Response() {
     ui->q1_continue_btn->setEnabled(true);
 }
 
-void MainWindow::showQ1Next(bool b) {
+void MainWindow::showQ1Next() {
     if (ui->q1_yes_btn->isChecked()) {
         ui->stackedWidget->setCurrentWidget(ui->q2_page);
     } else{
@@ -62,11 +62,11 @@ void MainWindow::showQ1Next(bool b) {
     }
 }
 
-void MainWindow::showQ3(bool b) {
+void MainWindow::showQ3() {
     ui->stackedWidget->setCurrentWidget(ui->q3_page);
 }
 
-void MainWindow::showQ4(bool b) {
+void MainWindow::showQ4() {
     ui->stackedWidget->setCurrentWidget(ui->q4_page);
 }
 
@@ -78,7 +78,7 @@ void MainWindow::showWTA() {
     ui->stackedWidget->setCurrentWidget(ui->wta_page);
 }
 
-void MainWindow::updateOffer_yes(bool b) {
+void MainWindow::updateOffer_yes() {
     if (offer < 4) {
         conclude();
     } else if (!first_accept) {
@@ -98,7 +98,7 @@ void MainWindow::updateOffer_yes(bool b) {
     }
 }
 
-void MainWindow::updateOffer_no(bool b) {
+void MainWindow::updateOffer_no() {
     if (!first_accept) {
         offer *= 2;
         showWTA();
@@ -124,12 +124,12 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    connect(ui->not_consent_btn, SIGNAL(clicked(bool)), this, SLOT(showGoodbye(bool)));
-    connect(ui->goodbye_btn, SIGNAL(clicked(bool)), this, SLOT(close(bool)));
-    connect(ui->consent_btn, SIGNAL(clicked(bool)), this, SLOT(showTask1(bool)));
-    connect(ui->task1_continue_btn, SIGNAL(clicked(bool)), this, SLOT(showPatch(bool)));
-    connect(ui->patch_continue_btn, SIGNAL(clicked(bool)), this, SLOT(showTask2(bool)));
-    connect(ui->task2_continue_btn, SIGNAL(clicked(bool)), this, SLOT(showQ1(bool)));
+    connect(ui->not_consent_btn, &QPushButton::clicked, this, &MainWindow::showGoodbye);
+    connect(ui->goodbye_btn, &QPushButton::clicked, this, &MainWindow::close);
+    connect(ui->consent_btn, &QPushButton::clicked, this, &MainWindow::showTask1);
+    connect(ui->task1_continue_btn, &QPushButton::clicked, this, &MainWindow::showPatch);
+    connect(ui->patch_continue_btn, &QPushButton::clicked, this, &MainWindow::showTask2);
+    connect(ui->task2_continue_btn, &QPushButton::clicked, this, &MainWindow::showQ1);
     connect(ui->q1_yes_btn, &QPushButton::clicked, ui->q1_continue_btn, &QPushButton::setEnabled);
     connect(ui->q1_no_btn, &QPushButton::clicked, ui->q1_continue_btn, &QPushButton::setEnabled);
     connect(ui->q1_continue_btn, &QPushButton::clicked, this, &MainWindow::showQ1Next);
@@ -141,12 +141,6 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->wta_yes_btn, &QPushButton::clicked, this, &MainWindow::updateOffer_yes);
     connect(ui->wta_no_btn, &QPushButton::clicked, this, &MainWindow::updateOffer_no);
 
-
-    // connect(ui->horizontalSlider, SIGNAL(valueChanged(int)),
-            // ui->progressBar_2, SLOT(setValue(int)));
-
-//    disconnect(ui->horizontalSlider, SIGNAL(valueChanged(int)),
-//            ui->progressBar_2, SLOT(setValue(int)));
 
 }
 

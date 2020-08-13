@@ -15,29 +15,28 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
 
-public slots:
-    void setFreq(bool b);
-    void showGoodbye(bool b);
-    void close(bool b);
-    void showTask1(bool b);
-    void showPatch(bool b);
-    void showTask2(bool b);
-    void showQ1(bool b);
-    void q1Response(bool b);
-    void showQ1Next(bool b);
-    void showQ3(bool b);
-    void showQ4(bool b);
-    void updateOffer_yes(bool b);
-    void updateOffer_no(bool b);
-    void showWTA();
-    void conclude();
-
 private:
     Ui::MainWindow *ui;
     int offer = 1;
     int upper = -1;
     int lower = -1;
     bool first_accept = false;
+
+    void setFreq();
+    void showGoodbye();
+    void close();
+    void showTask1();
+    void showPatch();
+    void showTask2();
+    void showQ1();
+    void q1Response();
+    void showQ1Next();
+    void showQ3();
+    void showQ4();
+    void updateOffer_no();
+    void updateOffer_yes();
+    void showWTA();
+    void conclude();
 };
 
 #endif // MAINWINDOW_H
