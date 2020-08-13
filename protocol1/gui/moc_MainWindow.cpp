@@ -21,8 +21,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_MainWindow_t {
-    QByteArrayData data[19];
-    char stringdata0[172];
+    QByteArrayData data[18];
+    char stringdata0[161];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -44,19 +44,18 @@ QT_MOC_LITERAL(9, 70, 6), // "showQ1"
 QT_MOC_LITERAL(10, 77, 10), // "q1Response"
 QT_MOC_LITERAL(11, 88, 10), // "showQ1Next"
 QT_MOC_LITERAL(12, 99, 6), // "showQ3"
-QT_MOC_LITERAL(13, 106, 10), // "q3Response"
-QT_MOC_LITERAL(14, 117, 6), // "showQ4"
-QT_MOC_LITERAL(15, 124, 7), // "showWTA"
-QT_MOC_LITERAL(16, 132, 15), // "updateOffer_yes"
-QT_MOC_LITERAL(17, 148, 14), // "updateOffer_no"
-QT_MOC_LITERAL(18, 163, 8) // "conclude"
+QT_MOC_LITERAL(13, 106, 6), // "showQ4"
+QT_MOC_LITERAL(14, 113, 15), // "updateOffer_yes"
+QT_MOC_LITERAL(15, 129, 14), // "updateOffer_no"
+QT_MOC_LITERAL(16, 144, 7), // "showWTA"
+QT_MOC_LITERAL(17, 152, 8) // "conclude"
 
     },
     "MainWindow\0setFreq\0\0b\0showGoodbye\0"
     "close\0showTask1\0showPatch\0showTask2\0"
     "showQ1\0q1Response\0showQ1Next\0showQ3\0"
-    "q3Response\0showQ4\0showWTA\0updateOffer_yes\0"
-    "updateOffer_no\0conclude"
+    "showQ4\0updateOffer_yes\0updateOffer_no\0"
+    "showWTA\0conclude"
 };
 #undef QT_MOC_LITERAL
 
@@ -66,7 +65,7 @@ static const uint qt_meta_data_MainWindow[] = {
        7,       // revision
        0,       // classname
        0,    0, // classinfo
-      16,   14, // methods
+      15,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -74,22 +73,21 @@ static const uint qt_meta_data_MainWindow[] = {
        0,       // signalCount
 
  // slots: name, argc, parameters, tag, flags
-       1,    1,   94,    2, 0x0a /* Public */,
-       4,    1,   97,    2, 0x0a /* Public */,
-       5,    1,  100,    2, 0x0a /* Public */,
-       6,    1,  103,    2, 0x0a /* Public */,
-       7,    1,  106,    2, 0x0a /* Public */,
-       8,    1,  109,    2, 0x0a /* Public */,
-       9,    1,  112,    2, 0x0a /* Public */,
-      10,    1,  115,    2, 0x0a /* Public */,
-      11,    1,  118,    2, 0x0a /* Public */,
-      12,    1,  121,    2, 0x0a /* Public */,
-      13,    1,  124,    2, 0x0a /* Public */,
-      14,    1,  127,    2, 0x0a /* Public */,
-      15,    1,  130,    2, 0x0a /* Public */,
-      16,    1,  133,    2, 0x0a /* Public */,
-      17,    1,  136,    2, 0x0a /* Public */,
-      18,    1,  139,    2, 0x0a /* Public */,
+       1,    1,   89,    2, 0x0a /* Public */,
+       4,    1,   92,    2, 0x0a /* Public */,
+       5,    1,   95,    2, 0x0a /* Public */,
+       6,    1,   98,    2, 0x0a /* Public */,
+       7,    1,  101,    2, 0x0a /* Public */,
+       8,    1,  104,    2, 0x0a /* Public */,
+       9,    1,  107,    2, 0x0a /* Public */,
+      10,    1,  110,    2, 0x0a /* Public */,
+      11,    1,  113,    2, 0x0a /* Public */,
+      12,    1,  116,    2, 0x0a /* Public */,
+      13,    1,  119,    2, 0x0a /* Public */,
+      14,    1,  122,    2, 0x0a /* Public */,
+      15,    1,  125,    2, 0x0a /* Public */,
+      16,    0,  128,    2, 0x0a /* Public */,
+      17,    0,  129,    2, 0x0a /* Public */,
 
  // slots: parameters
     QMetaType::Void, QMetaType::Bool,    3,
@@ -105,9 +103,8 @@ static const uint qt_meta_data_MainWindow[] = {
     QMetaType::Void, QMetaType::Bool,    3,
     QMetaType::Void, QMetaType::Bool,    3,
     QMetaType::Void, QMetaType::Bool,    3,
-    QMetaType::Void, QMetaType::Bool,    3,
-    QMetaType::Void, QMetaType::Bool,    3,
-    QMetaType::Void, QMetaType::Bool,    3,
+    QMetaType::Void,
+    QMetaType::Void,
 
        0        // eod
 };
@@ -128,12 +125,11 @@ void MainWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
         case 7: _t->q1Response((*reinterpret_cast< bool(*)>(_a[1]))); break;
         case 8: _t->showQ1Next((*reinterpret_cast< bool(*)>(_a[1]))); break;
         case 9: _t->showQ3((*reinterpret_cast< bool(*)>(_a[1]))); break;
-        case 10: _t->q3Response((*reinterpret_cast< bool(*)>(_a[1]))); break;
-        case 11: _t->showQ4((*reinterpret_cast< bool(*)>(_a[1]))); break;
-        case 12: _t->showWTA((*reinterpret_cast< bool(*)>(_a[1]))); break;
-        case 13: _t->updateOffer_yes((*reinterpret_cast< bool(*)>(_a[1]))); break;
-        case 14: _t->updateOffer_no((*reinterpret_cast< bool(*)>(_a[1]))); break;
-        case 15: _t->conclude((*reinterpret_cast< bool(*)>(_a[1]))); break;
+        case 10: _t->showQ4((*reinterpret_cast< bool(*)>(_a[1]))); break;
+        case 11: _t->updateOffer_yes((*reinterpret_cast< bool(*)>(_a[1]))); break;
+        case 12: _t->updateOffer_no((*reinterpret_cast< bool(*)>(_a[1]))); break;
+        case 13: _t->showWTA(); break;
+        case 14: _t->conclude(); break;
         default: ;
         }
     }
@@ -164,13 +160,13 @@ int MainWindow::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 16)
+        if (_id < 15)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 16;
+        _id -= 15;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 16)
+        if (_id < 15)
             *reinterpret_cast<int*>(_a[0]) = -1;
-        _id -= 16;
+        _id -= 15;
     }
     return _id;
 }

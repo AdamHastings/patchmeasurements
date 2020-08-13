@@ -26,15 +26,18 @@ public slots:
     void q1Response(bool b);
     void showQ1Next(bool b);
     void showQ3(bool b);
-    void q3Response(bool b);
     void showQ4(bool b);
-    void showWTA(bool b);
     void updateOffer_yes(bool b);
     void updateOffer_no(bool b);
-    void conclude(bool b);
+    void showWTA();
+    void conclude();
 
 private:
     Ui::MainWindow *ui;
+    int offer = 1;
+    int upper = -1;
+    int lower = -1;
+    bool first_accept = false;
 };
 
 #endif // MAINWINDOW_H

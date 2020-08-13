@@ -299,7 +299,6 @@ public:
         q2_input->setGeometry(QRect(M, M*4, LINEWIDTH, M*3));
         
         q2_continue_btn = new QPushButton(q2_page);
-        q2_continue_btn->setEnabled(false);
         q2_continue_btn->setGeometry(QRect(W/2 - BUTTON_WIDTH/2, M*8, BUTTON_WIDTH, BUTTON_HEIGHT));
         q2_continue_btn->setText("Continue");
 
@@ -348,7 +347,7 @@ public:
         q4_input->setGeometry(QRect((W-BUTTON_WIDTH)/2, M*5, BUTTON_WIDTH, BUTTON_HEIGHT));
         
         q4_continue_btn = new QPushButton(q4_page);
-        q4_continue_btn->setEnabled(false);
+        // q4_continue_btn->setEnabled(false);
         q4_continue_btn->setGeometry(QRect(W/2 - BUTTON_WIDTH/2, M*8, BUTTON_WIDTH, BUTTON_HEIGHT));
         q4_continue_btn->setText("Continue");
 
@@ -376,7 +375,7 @@ public:
         wta_disclaimer_label->setGeometry(QRect(M, M*5, W-(2*M), M*3));
         wta_disclaimer_label->setAlignment(Qt::AlignCenter|Qt::AlignVCenter);
         wta_disclaimer_label->setWordWrap(true);
-        wta_disclaimer_label->setText("This is for your current computer only and does not apply to any future computers you may buy.");
+        wta_disclaimer_label->setText("(This is for your current computer only and does not apply to any future computers you may buy.)");
 
         wta_yes_btn = new QPushButton(wta_page);
         wta_yes_btn->setGeometry(QRect(W/2 - BUTTON_WIDTH - M, M*8, BUTTON_WIDTH, BUTTON_HEIGHT));
