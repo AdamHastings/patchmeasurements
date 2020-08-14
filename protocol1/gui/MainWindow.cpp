@@ -36,12 +36,12 @@ void MainWindow::showPatch() {
 
     for (int i=0; i<MAGIC_THRES; i++) {
         ui->patch_progress_bar->setValue(i);
-        // std::this_thread::sleep_for(std::chrono::milliseconds(100));
+        std::this_thread::sleep_for(std::chrono::milliseconds(100));
     }
 
     for (int i=MAGIC_THRES; i<=100; i++) {
         ui->patch_progress_bar->setValue(i);
-        // std::this_thread::sleep_for(std::chrono::milliseconds(10));
+        std::this_thread::sleep_for(std::chrono::milliseconds(10));
     }
 
     ui->patch_continue_btn->setEnabled(true);
@@ -138,6 +138,19 @@ void MainWindow::task1Continue() {
     }
 }
 
+void MainWindow::task2Continue() {
+    if (ui->task2a->isChecked() && 
+        ui->task2b->isChecked() && 
+        ui->task2c->isChecked() && 
+        ui->task2d->isChecked() && 
+        ui->task2e->isChecked() && 
+        ui->task2f->isChecked() && 
+        ui->task2g->isChecked()) 
+    {
+        ui->task2_continue_btn->setDisabled(false);
+    }
+}
+
 
 #ifdef _WIN32
 
@@ -194,6 +207,13 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->task1f, &QPushButton::clicked, this, &MainWindow::task1Continue);
     connect(ui->task1g, &QPushButton::clicked, this, &MainWindow::task1Continue);
 
+    connect(ui->task2a, &QPushButton::clicked, this, &MainWindow::task2Continue);
+    connect(ui->task2b, &QPushButton::clicked, this, &MainWindow::task2Continue);
+    connect(ui->task2c, &QPushButton::clicked, this, &MainWindow::task2Continue);
+    connect(ui->task2d, &QPushButton::clicked, this, &MainWindow::task2Continue);
+    connect(ui->task2e, &QPushButton::clicked, this, &MainWindow::task2Continue);
+    connect(ui->task2f, &QPushButton::clicked, this, &MainWindow::task2Continue);
+    connect(ui->task2g, &QPushButton::clicked, this, &MainWindow::task2Continue);
 
 
 }

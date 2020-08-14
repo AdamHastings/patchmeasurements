@@ -38,6 +38,7 @@ private:
     void showWTA();
     void conclude();
     void task1Continue();
+    void task2Continue();
 };
 
 #endif // MAINWINDOW_H

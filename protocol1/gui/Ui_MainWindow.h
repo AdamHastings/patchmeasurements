@@ -86,6 +86,13 @@ public:
 
     QWidget *task2_page;
     QLabel *task2_label;
+    QCheckBox *task2a;
+    QCheckBox *task2b;
+    QCheckBox *task2c;
+    QCheckBox *task2d;
+    QCheckBox *task2e;
+    QCheckBox *task2f;
+    QCheckBox *task2g;
     QPushButton *task2_continue_btn;
 
     QWidget *q1_page;
@@ -284,10 +291,39 @@ public:
         task2_label->setGeometry(QRect(M, M, LINEWIDTH, M*6));
         task2_label->setAlignment(Qt::AlignLeft|Qt::AlignTop);
         task2_label->setWordWrap(true);
-        task2_label->setText("You will now do some more simple tasks, similar to what you did before. You must:\n\n    1) Open a web browser.\n    2) Login to your LionMail account.\n    3) Compose and email containing:\n        a) The distance (in miles) between Central Park and Wall Street\n        b) A picture of Butler Library\n        c) Any TED talk you like (just copy and paste the URL into the video)\n    4) Send the email to hastings@cs.columbia.edu.\n    5) Click \"Continue\" below only once the above tasks are completed.");
+        task2_label->setText("You will now do some more simple tasks, similar to what you did before. Check off each box below as you complete the following tasks: ");
+
+        task2a = new QCheckBox(task2_page);
+        task2a->setGeometry(QRect(M, BUTTON_HEIGHT*5, LINEWIDTH, BUTTON_HEIGHT));
+        task2a->setText("Open up a web browser");
+
+        task2b = new QCheckBox(task2_page);
+        task2b->setGeometry(QRect(M, BUTTON_HEIGHT*6, LINEWIDTH, BUTTON_HEIGHT));
+        task2b->setText("Create a new Google Doc containing the following:");
+
+        task2c = new QCheckBox(task2_page);
+        task2c->setGeometry(QRect(M*2, BUTTON_HEIGHT*7, LINEWIDTH, BUTTON_HEIGHT));
+        task2c->setText("The distance between Central Park and the Wall Street");
+
+        task2d = new QCheckBox(task2_page);
+        task2d->setGeometry(QRect(M*2, BUTTON_HEIGHT*8, LINEWIDTH, BUTTON_HEIGHT));
+        task2d->setText("A picture of Butler Library");
+
+        task2e = new QCheckBox(task2_page);
+        task2e->setGeometry(QRect(M*2, BUTTON_HEIGHT*9, LINEWIDTH, BUTTON_HEIGHT));
+        task2e->setText("The URL of any TED talk");
+
+        task2f = new QCheckBox(task2_page);
+        task2f->setGeometry(QRect(M, BUTTON_HEIGHT*10, LINEWIDTH, BUTTON_HEIGHT));
+        task2f->setText("Share the Google Doc with hastings@cs.columbia.edu");
+
+        task2g = new QCheckBox(task2_page);
+        task2g->setGeometry(QRect(M, BUTTON_HEIGHT*11, LINEWIDTH, BUTTON_HEIGHT));
+        task2g->setText("Exit the web browser");
 
         task2_continue_btn = new QPushButton(task2_page);
         task2_continue_btn->setObjectName(QStringLiteral("task1_continue_btn"));
+        task2_continue_btn->setDisabled(true);
         task2_continue_btn->setGeometry(QRect(W/2 - BUTTON_WIDTH/2, M*8, BUTTON_WIDTH, BUTTON_HEIGHT));
         task2_continue_btn->setText("Continue");
 
