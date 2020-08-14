@@ -21,11 +21,8 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
 
-
-    #ifdef _WIN32
     static void addNewTimestamp(int m);
     static std::vector<int> click_timestamps;
-    #endif
 
 
 private:
