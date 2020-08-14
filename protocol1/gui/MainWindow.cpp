@@ -125,6 +125,19 @@ void MainWindow::conclude() {
     ui->stackedWidget->setCurrentWidget(ui->goodbye_page);
 }
 
+void MainWindow::task1Continue() {
+    if (ui->task1a->isChecked() && 
+        ui->task1b->isChecked() && 
+        ui->task1c->isChecked() && 
+        ui->task1d->isChecked() && 
+        ui->task1e->isChecked() && 
+        ui->task1f->isChecked() && 
+        ui->task1g->isChecked()) 
+    {
+        ui->task1_continue_btn->setDisabled(false);
+    }
+}
+
 
 #ifdef _WIN32
 
@@ -172,6 +185,15 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->q4_continue_btn, &QPushButton::clicked, this, &MainWindow::showWTA);
     connect(ui->wta_yes_btn, &QPushButton::clicked, this, &MainWindow::updateOffer_yes);
     connect(ui->wta_no_btn, &QPushButton::clicked, this, &MainWindow::updateOffer_no);
+
+    connect(ui->task1a, &QPushButton::clicked, this, &MainWindow::task1Continue);
+    connect(ui->task1b, &QPushButton::clicked, this, &MainWindow::task1Continue);
+    connect(ui->task1c, &QPushButton::clicked, this, &MainWindow::task1Continue);
+    connect(ui->task1d, &QPushButton::clicked, this, &MainWindow::task1Continue);
+    connect(ui->task1e, &QPushButton::clicked, this, &MainWindow::task1Continue);
+    connect(ui->task1f, &QPushButton::clicked, this, &MainWindow::task1Continue);
+    connect(ui->task1g, &QPushButton::clicked, this, &MainWindow::task1Continue);
+
 
 
 }

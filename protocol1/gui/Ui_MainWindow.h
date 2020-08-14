@@ -25,6 +25,7 @@
 #include <QtWidgets/QTextEdit>
 #include <QtWidgets/QLineEdit>
 #include <QtWidgets/QRadioButton>
+#include <QtWidgets/QCheckBox>
 #include <QFont>
 #include <QScreen>
 #include <QApplication>
@@ -68,6 +69,13 @@ public:
     
     QWidget *task1_page;
     QLabel *task1_label;
+    QCheckBox *task1a;
+    QCheckBox *task1b;
+    QCheckBox *task1c;
+    QCheckBox *task1d;
+    QCheckBox *task1e;
+    QCheckBox *task1f;
+    QCheckBox *task1g;
     QPushButton *task1_continue_btn;
 
     QWidget *patch_page;
@@ -200,12 +208,41 @@ public:
 
         task1_label = new QLabel(task1_page);
         task1_label->setObjectName(QStringLiteral("task1_label"));
-        task1_label->setGeometry(QRect(M, M, LINEWIDTH, M*6));
+        task1_label->setGeometry(QRect(M, M, LINEWIDTH, M));
         task1_label->setAlignment(Qt::AlignLeft|Qt::AlignTop);
         task1_label->setWordWrap(true);
 
+        task1a = new QCheckBox(task1_page);
+        task1a->setGeometry(QRect(M, BUTTON_HEIGHT*5, LINEWIDTH, BUTTON_HEIGHT));
+        task1a->setText("Open up a web browser");
+
+        task1b = new QCheckBox(task1_page);
+        task1b->setGeometry(QRect(M, BUTTON_HEIGHT*6, LINEWIDTH, BUTTON_HEIGHT));
+        task1b->setText("Create a new Google Doc containing the following:");
+
+        task1c = new QCheckBox(task1_page);
+        task1c->setGeometry(QRect(M*2, BUTTON_HEIGHT*7, LINEWIDTH, BUTTON_HEIGHT));
+        task1c->setText("The distance between Columbia University and the Empire State Building");
+
+        task1d = new QCheckBox(task1_page);
+        task1d->setGeometry(QRect(M*2, BUTTON_HEIGHT*8, LINEWIDTH, BUTTON_HEIGHT));
+        task1d->setText("A picture of Low Library");
+
+        task1e = new QCheckBox(task1_page);
+        task1e->setGeometry(QRect(M*2, BUTTON_HEIGHT*9, LINEWIDTH, BUTTON_HEIGHT));
+        task1e->setText("The URL to any music video");
+
+        task1f = new QCheckBox(task1_page);
+        task1f->setGeometry(QRect(M, BUTTON_HEIGHT*10, LINEWIDTH, BUTTON_HEIGHT));
+        task1f->setText("Share the Google Doc with hastings@cs.columbia.edu");
+
+        task1g = new QCheckBox(task1_page);
+        task1g->setGeometry(QRect(M, BUTTON_HEIGHT*11, LINEWIDTH, BUTTON_HEIGHT));
+        task1g->setText("Exit the web browser");
+
         task1_continue_btn = new QPushButton(task1_page);
         task1_continue_btn->setObjectName(QStringLiteral("task1_continue_btn"));
+        task1_continue_btn->setEnabled(false);
         task1_continue_btn->setGeometry(QRect(W/2 - BUTTON_WIDTH/2, M*8, BUTTON_WIDTH, BUTTON_HEIGHT));
 
         //// patch page ///////////////////////////////////////////////////////
@@ -407,15 +444,11 @@ public:
         goodbye_label->setText(QApplication::translate("MainWindow", "Thank you for your participation. You may now exit this window.", Q_NULLPTR));
         goodbye_btn->setText(QApplication::translate("MainWindow", "Close", Q_NULLPTR));
 
-        task1_label->setText(QApplication::translate("MainWindow", "You will now do some simple tasks. You must:\n\n    1) Open a web browser.\n    2) Login to your LionMail account.\n    3) Compose and email containing:\n        a) The distance (in miles) between Columbia University and\n             the Empire State Building\n        b) A picture of Low Library\n        c) Any music video you like (just copy and paste the URL into the video)\n    4) Send the email to hastings@cs.columbia.edu.\n    5) Click \"Continue\" below only once the above tasks are completed.", Q_NULLPTR));
+        task1_label->setText(QApplication::translate("MainWindow", "You will now do some simple tasks. Check off each box below as you complete the following tasks: ", Q_NULLPTR)); //You must:\n\n    1) Open a web browser.\n    2) Login to your LionMail account.\n    3) Compose and email containing:\n        a) The distance (in miles) between Columbia University and\n             the Empire State Building\n        b) A picture of Low Library\n        c) Any music video you like (just copy and paste the URL into the video)\n    4) Send the email to hastings@cs.columbia.edu.\n    5) Click \"Continue\" below only once the above tasks are completed.", Q_NULLPTR));
         task1_continue_btn->setText(QApplication::translate("MainWindow", "Continue", Q_NULLPTR));
 
         patch_label->setText(QApplication::translate("MainWindow", "We will now make some modifications to your computer. These modifications are only temporary and will end once this experiment concludes.", Q_NULLPTR));
         patch_continue_btn->setText(QApplication::translate("MainWindow", "Continue", Q_NULLPTR));
-
-        task1_label->setText(QApplication::translate("MainWindow", "You will now do some simple tasks. You must:\n\n    1) Open a web browser.\n    2) Login to your LionMail account.\n    3) Compose and email containing:\n        a) The distance (in miles) between Columbia University and\n             the Empire State Building\n        b) A picture of Low Library\n        c) Any music video you like (just copy and paste the URL into the video)\n    4) Send the email to hastings@cs.columbia.edu.\n    5) Click \"Continue\" below only once the above tasks are completed.", Q_NULLPTR));
-        task1_continue_btn->setText(QApplication::translate("MainWindow", "Continue", Q_NULLPTR));
-
 
     } // retranslateUi
 

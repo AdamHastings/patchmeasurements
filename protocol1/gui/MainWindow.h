@@ -37,6 +37,7 @@ private:
     void updateOffer_yes();
     void showWTA();
     void conclude();
+    void task1Continue();
 };
 
 #endif // MAINWINDOW_H
