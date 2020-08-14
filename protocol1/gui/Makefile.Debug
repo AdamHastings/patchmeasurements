@@ -525,6 +525,8 @@ debug/MainWindow.o: MainWindow.cpp MainWindow.h \
 		../../../mxe/usr/i686-w64-mingw32.static/qt5/include/QtWidgets/qlineedit.h \
 		../../../mxe/usr/i686-w64-mingw32.static/qt5/include/QtWidgets/QRadioButton \
 		../../../mxe/usr/i686-w64-mingw32.static/qt5/include/QtWidgets/qradiobutton.h \
+		../../../mxe/usr/i686-w64-mingw32.static/qt5/include/QtWidgets/QCheckBox \
+		../../../mxe/usr/i686-w64-mingw32.static/qt5/include/QtWidgets/qcheckbox.h \
 		../../../mxe/usr/i686-w64-mingw32.static/qt5/include/QtGui/QFont \
 		../../../mxe/usr/i686-w64-mingw32.static/qt5/include/QtGui/QScreen \
 		../../../mxe/usr/i686-w64-mingw32.static/qt5/include/QtGui/qscreen.h \

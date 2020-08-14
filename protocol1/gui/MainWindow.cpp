@@ -3,12 +3,10 @@
 #include <thread>
 #include <chrono>
 #include <string>
+#include <chrono>
 #include <iostream>
 
-#ifdef _WIN32
-    #include <windows.h>
-    #pragma comment(lib, "user32.lib")
-#endif
+
 
 
 using namespace std;
@@ -121,8 +119,25 @@ void MainWindow::updateOffer_no() {
     }
 }
 
+#ifdef _WIN32
+vector<int> MainWindow::click_timestamps;
+#endif
+
 void MainWindow::conclude() {
     ui->stackedWidget->setCurrentWidget(ui->goodbye_page);
+
+    #ifdef _WIN32
+    for (auto i: MainWindow::click_timestamps) {
+        cout << i << " ";
+    }
+    cout << endl;
+    // cout << click_timestamps. << endl;
+    // for (int i=0; i < click_timestamps.size(); i++) {
+    //     cout << i;
+    // }
+
+
+    #endif
 }
 
 void MainWindow::task1Continue() {
@@ -151,16 +166,26 @@ void MainWindow::task2Continue() {
     }
 }
 
-
 #ifdef _WIN32
+
+void MainWindow::addNewTimestamp(int m) {
+    click_timestamps.push_back(m);
+    return;
+}
 
 HHOOK hHook = NULL;
 
 LRESULT CALLBACK MouseProc(int nCode, WPARAM wParam, LPARAM lParam) {   
-    
-    switch( wParam )
-    {
-      case WM_LBUTTONDOWN:  cout << "Left click" << endl; // Left click
+
+
+    switch( wParam ) {
+        case WM_LBUTTONDOWN:  
+            const auto p1 = std::chrono::system_clock::now();
+            // const auto m std::chrono::duration_cast<std::chrono::milliseconds>(
+                //    p1.time_since_epoch()).count() << '\n';
+            // click_timestamps.push_back(std::chrono::duration_cast<std::chrono::milliseconds>(p1.time_since_epoch()).count());
+            MainWindow::addNewTimestamp(chrono::duration_cast<chrono::milliseconds>(p1.time_since_epoch()).count());
+
     }
     return CallNextHookEx(hHook, nCode, wParam, lParam);
 }
@@ -174,10 +199,10 @@ MainWindow::MainWindow(QWidget *parent) :
 {
 
     #ifdef _WIN32
-    hHook = SetWindowsHookEx(WH_MOUSE_LL, MouseProc, NULL, 0);
-    if (hHook == NULL) {
-        cout << "Hook failed" << endl;
-    }
+    // hHook = SetWindowsHookEx(WH_MOUSE_LL, MouseProc, NULL, 0);
+    // if (hHook == NULL) {
+    //     cout << "Hook failed" << endl;
+    // }
     #endif
 
     ui->setupUi(this);

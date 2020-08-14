@@ -2,6 +2,12 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <vector>
+
+#ifdef _WIN32
+    #include <windows.h>
+    #pragma comment(lib, "user32.lib")
+#endif
 
 namespace Ui {
 class MainWindow;
@@ -15,12 +21,21 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
 
+
+    #ifdef _WIN32
+    static void addNewTimestamp(int m);
+    static std::vector<int> click_timestamps;
+    #endif
+
+
 private:
     Ui::MainWindow *ui;
     int offer = 1;
     int upper = -1;
     int lower = -1;
     bool first_accept = false;
+
+    
 
     void setFreq();
     void showGoodbye();
@@ -39,6 +54,7 @@ private:
     void conclude();
     void task1Continue();
     void task2Continue();
+    // LRESULT MouseProc(int nCode, WPARAM wParam, LPARAM lParam);
 };
 
 #endif // MAINWINDOW_H
