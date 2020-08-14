@@ -1,11 +1,17 @@
 #include "MainWindow.h"
 #include "Ui_MainWindow.h"
-// #include <windows.h>
-// #pragma comment(lib, "user32.lib")
 #include <thread>
 #include <chrono>
 #include <string>
 #include <iostream>
+
+#ifdef _WIN32
+    #include <windows.h>
+    #pragma comment(lib, "user32.lib")
+#endif
+
+
+using namespace std;
 
 void MainWindow::setFreq() {
     return;
@@ -120,10 +126,34 @@ void MainWindow::conclude() {
 }
 
 
+#ifdef _WIN32
+
+HHOOK hHook = NULL;
+
+LRESULT CALLBACK MouseProc(int nCode, WPARAM wParam, LPARAM lParam) {   
+    
+    switch( wParam )
+    {
+      case WM_LBUTTONDOWN:  cout << "Left click" << endl; // Left click
+    }
+    return CallNextHookEx(hHook, nCode, wParam, lParam);
+}
+
+#endif
+
+
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
+
+    #ifdef _WIN32
+    hHook = SetWindowsHookEx(WH_MOUSE_LL, MouseProc, NULL, 0);
+    if (hHook == NULL) {
+        cout << "Hook failed" << endl;
+    }
+    #endif
+
     ui->setupUi(this);
 
     connect(ui->not_consent_btn, &QPushButton::clicked, this, &MainWindow::showGoodbye);
