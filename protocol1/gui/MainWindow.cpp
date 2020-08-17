@@ -12,11 +12,15 @@
 using namespace std;
 
 void MainWindow::setFreq(int p) {
-    string ac_str = "powercfg -setacvalueindex SCHEME_CURRENT SUB_PROCESSOR PROCTHROTTLEMIN " + to_string(p);
-    string dc_str = "powercfg -setacvalueindex SCHEME_CURRENT SUB_PROCESSOR PROCTHROTTLEMAX " + to_string(p);
+    string min_ac_str = "powercfg -setacvalueindex SCHEME_CURRENT SUB_PROCESSOR PROCTHROTTLEMIN " + to_string(p);
+    string min_dc_str = "powercfg -setdcvalueindex SCHEME_CURRENT SUB_PROCESSOR PROCTHROTTLEMIN " + to_string(p);
+    string max_ac_str = "powercfg -setacvalueindex SCHEME_CURRENT SUB_PROCESSOR PROCTHROTTLEMAX " + to_string(p);
+    string max_dc_str = "powercfg -setdcvalueindex SCHEME_CURRENT SUB_PROCESSOR PROCTHROTTLEMAX " + to_string(p);
 
-    system(ac_str.c_str());
-    system(dc_str.c_str());
+    WinExec(min_ac_str.c_str(), SW_HIDE);
+    WinExec(min_dc_str.c_str(), SW_HIDE);
+    WinExec(max_ac_str.c_str(), SW_HIDE);
+    WinExec(max_dc_str.c_str(), SW_HIDE);
 
     return;
 }
