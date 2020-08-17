@@ -34,7 +34,7 @@ private:
 
     
 
-    void setFreq();
+    void setFreq(int p);
     void showGoodbye();
     void close();
     void showTask1();

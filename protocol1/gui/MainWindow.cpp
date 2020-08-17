@@ -3,7 +3,7 @@
 #include <thread>
 #include <chrono>
 #include <string>
-#include <chrono>
+#include <stdlib.h>
 #include <iostream>
 
 
@@ -11,7 +11,13 @@
 
 using namespace std;
 
-void MainWindow::setFreq() {
+void MainWindow::setFreq(int p) {
+    string ac_str = "powercfg -setacvalueindex SCHEME_CURRENT SUB_PROCESSOR PROCTHROTTLEMIN " + to_string(p);
+    string dc_str = "powercfg -setacvalueindex SCHEME_CURRENT SUB_PROCESSOR PROCTHROTTLEMAX " + to_string(p);
+
+    system(ac_str.c_str());
+    system(dc_str.c_str());
+
     return;
 }
 
@@ -32,10 +38,12 @@ void MainWindow::close() {
 }
 
 void MainWindow::showTask1() {
+    setFreq(100);
     ui->stackedWidget->setCurrentWidget(ui->task1_page);
 }
 
 void MainWindow::showPatch() {
+    setFreq(50);
     ui->stackedWidget->setCurrentWidget(ui->patch_page);
 
     int MAGIC_THRES = 24;
@@ -61,6 +69,7 @@ void MainWindow::showTask2() {
 }
 
 void MainWindow::showQ1() {
+    setFreq(100);
     ui->stackedWidget->setCurrentWidget(ui->q1_page);
 }
 
@@ -182,6 +191,7 @@ LRESULT CALLBACK MouseProc(int nCode, WPARAM wParam, LPARAM lParam) {
                 //    p1.time_since_epoch()).count() << '\n';
             // click_timestamps.push_back(std::chrono::duration_cast<std::chrono::milliseconds>(p1.time_since_epoch()).count());
             int m = chrono::duration_cast<chrono::milliseconds>(p1.time_since_epoch()).count();
+            cout << m << endl;
             MainWindow::addNewTimestamp(m);
 
     }
