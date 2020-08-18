@@ -32,6 +32,10 @@ private:
     int lower = -1;
     bool first_accept = false;
 
+    int slowdown = 30;
+    int throttled_task = -1;
+    int unthrottled_task = -1;
+
     
 
     void setFreq(int p);
@@ -48,11 +52,13 @@ private:
     void showQ4();
     void updateOffer_no();
     void updateOffer_yes();
+    void showPreWTA();
     void showWTA();
     void conclude();
     void task1Continue();
     void task2Continue();
     void task3Continue();
+    void pickThrottledTask();
     // LRESULT MouseProc(int nCode, WPARAM wParam, LPARAM lParam);
 };
 

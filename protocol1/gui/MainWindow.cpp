@@ -5,8 +5,7 @@
 #include <string>
 #include <stdlib.h>
 #include <iostream>
-
-
+#include <time.h>
 
 
 using namespace std;
@@ -76,11 +75,28 @@ void MainWindow::showPatch() {
 
 }
 
+void MainWindow::pickThrottledTask() {
+    srand( (unsigned)time(NULL) );
+    throttled_task = rand() % 2 + 2;
+    unthrottled_task = (throttled_task == 2)? 3 : 2;
+}
+
 void MainWindow::showTask2() {
+    pickThrottledTask();
+    if (throttled_task == 2) {
+        setFreq(100 - slowdown);
+    } else {
+        setFreq(100);
+    }
     ui->stackedWidget->setCurrentWidget(ui->task2_page);
 }
 
 void MainWindow::showTask3() {
+    if (throttled_task == 3) {
+        setFreq(100 - slowdown);
+    } else {
+        setFreq(100);
+    }
     ui->stackedWidget->setCurrentWidget(ui->task3_page);
 }
 
@@ -95,29 +111,27 @@ void MainWindow::q1Response() {
 
 void MainWindow::showQ1Next() {
     if (ui->q1_t2faster_btn->isChecked()) {
-        ui->q2_label->setText("How much faster did your computer feel in Task 2?");
+        ui->q2_label->setText("How much faster did your computer feel in Task 2 compared to Task 3?");
         ui->stackedWidget->setCurrentWidget(ui->q2_page);
     } else if (ui->q1_t3faster_btn->isChecked()) {
-        ui->q2_label->setText("How much faster did your computer feel in Task 3?");
+        ui->q2_label->setText("How much faster did your computer feel in Task 3 compared to Task 2?");
         ui->stackedWidget->setCurrentWidget(ui->q2_page);
     } else{
-        showWTA();
+        showPreWTA();
     }
 }
 
-// void MainWindow::showQ3() {
-//     ui->stackedWidget->setCurrentWidget(ui->q3_page);
-// }
-
-// void MainWindow::showQ4() {
-//     ui->stackedWidget->setCurrentWidget(ui->q4_page);
-// }
+void MainWindow::showPreWTA() {
+    std::string pre_wta_text = "In this experiment, we slowed down Task "  + to_string(throttled_task) + " by " + to_string(slowdown) + "%. In the next section, you will be asked a series of yes/no questions that aim to estimate how much you value a performance loss of " + to_string(slowdown) + "%.";
+    ui->pre_wta_label->setText(pre_wta_text.c_str());
+    ui->stackedWidget->setCurrentWidget(ui->pre_wta_page);
+}
 
 void MainWindow::showWTA() {
     std::string offerstring = "$" + std::to_string(offer) + "?";
-    // char chrarr[offerstring.length() + 1];
-    // strcpy(chrarr, offerstring.c_str());
     ui->wta_offer->setText(offerstring.c_str());
+    std::string offer_text = "Would you be willing to accept a permanent " + to_string(slowdown) + "% on your own computer in exchange for:";
+    ui->wta_label->setText(offer_text.c_str());
     ui->stackedWidget->setCurrentWidget(ui->wta_page);
 }
 
@@ -163,9 +177,7 @@ void MainWindow::updateOffer_no() {
 vector<int> MainWindow::click_timestamps;
 
 void MainWindow::conclude() {
- 
-
-    ui->stackedWidget->setCurrentWidget(ui->goodbye_page);
+     ui->stackedWidget->setCurrentWidget(ui->goodbye_page);
 }
 
 void MainWindow::task1Continue() {
@@ -268,27 +280,21 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
 
     connect(ui->not_consent_btn, &QPushButton::clicked, this, &MainWindow::showGoodbye);
-    connect(ui->goodbye_btn, &QPushButton::clicked, this, &MainWindow::close);
+    // connect(ui->goodbye_btn, &QPushButton::clicked, this, &MainWindow::close);
     connect(ui->consent_btn, &QPushButton::clicked, this, &MainWindow::showTask1);
     connect(ui->task1_continue_btn, &QPushButton::clicked, this, &MainWindow::showPatch);
     connect(ui->patch_continue_btn, &QPushButton::clicked, this, &MainWindow::showTask2);
     connect(ui->task2_continue_btn, &QPushButton::clicked, this, &MainWindow::showTask3);
     connect(ui->task3_continue_btn, &QPushButton::clicked, this, &MainWindow::showQ1);
+
     
     connect(ui->q1_t2faster_btn, &QPushButton::clicked, ui->q1_continue_btn, &QPushButton::setEnabled);
     connect(ui->q1_t3faster_btn, &QPushButton::clicked, ui->q1_continue_btn, &QPushButton::setEnabled);
     connect(ui->q1_same_btn, &QPushButton::clicked, ui->q1_continue_btn, &QPushButton::setEnabled);
     connect(ui->q1_continue_btn, &QPushButton::clicked, this, &MainWindow::showQ1Next);
-
     connect(ui->q2_input, QOverload<int>::of(&QSpinBox::valueChanged), ui->q2_continue_btn, &QPushButton::setEnabled);
-    
-    connect(ui->q2_continue_btn, &QPushButton::clicked, this, &MainWindow::showWTA);
-    
-    // connect(ui->q3_yes_btn, &QPushButton::clicked, ui->q3_continue_btn, &QPushButton::setEnabled);
-    // connect(ui->q3_no_btn, &QPushButton::clicked, ui->q3_continue_btn, &QPushButton::setEnabled);
-    // connect(ui->q3_continue_btn, &QPushButton::clicked, this, &MainWindow::showQ4);
-    // connect(ui->q4_continue_btn, &QPushButton::clicked, this, &MainWindow::showWTA);
-    
+    connect(ui->q2_continue_btn, &QPushButton::clicked, this, &MainWindow::showPreWTA);
+    connect(ui->pre_wta_continue_btn, &QPushButton::clicked, this, &MainWindow::showWTA);
     connect(ui->wta_yes_btn, &QPushButton::clicked, this, &MainWindow::updateOffer_yes);
     connect(ui->wta_no_btn, &QPushButton::clicked, this, &MainWindow::updateOffer_no);
 

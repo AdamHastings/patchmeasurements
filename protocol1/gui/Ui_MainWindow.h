@@ -125,6 +125,10 @@ public:
     QSpinBox *q2_input;
     QPushButton *q2_continue_btn;
 
+    QWidget *pre_wta_page;
+    QLabel *pre_wta_label;
+    QPushButton *pre_wta_continue_btn;
+
     QWidget *wta_page;
     QLabel *wta_label;
     QLabel *wta_offer;
@@ -471,8 +475,25 @@ public:
         
         q2_continue_btn = new QPushButton(q2_page);
         q2_continue_btn->setGeometry(QRect(W/2 - BUTTON_WIDTH/2, M*8, BUTTON_WIDTH, BUTTON_HEIGHT));
-        q2_continue_btn->setEnabled(false);
         q2_continue_btn->setText("Continue");
+
+        #if QT_NO_DEBUG
+        q2_continue_btn->setEnabled(false);
+        #endif
+
+        //// pre wta page /////////////////////////////////////////////////////
+
+        pre_wta_page = new QWidget();
+        stackedWidget->addWidget(pre_wta_page);
+
+        pre_wta_label = new QLabel(pre_wta_page);
+        pre_wta_label->setGeometry(QRect(M, M, LINEWIDTH, M*6));
+        pre_wta_label->setAlignment(Qt::AlignJustify|Qt::AlignVCenter);
+        pre_wta_label->setWordWrap(true);
+
+        pre_wta_continue_btn = new QPushButton(pre_wta_page);
+        pre_wta_continue_btn->setGeometry(QRect(W/2 - BUTTON_WIDTH/2, M*8, BUTTON_WIDTH, BUTTON_HEIGHT));
+        pre_wta_continue_btn->setText("Continue");
 
         //// wta page /////////////////////////////////////////////////////////
 
@@ -484,7 +505,7 @@ public:
         wta_label->setGeometry(QRect(M, M, LINEWIDTH, M*3));
         wta_label->setAlignment(Qt::AlignJustify|Qt::AlignVCenter);
         wta_label->setWordWrap(true);
-        wta_label->setText("Would you be willing to accept a permanent 30% slowdown on your own computer in exchange for:");
+        
 
         wta_offer = new QLabel(wta_page);
         wta_offer->setGeometry(QRect(0, M*3, W, M*2));
