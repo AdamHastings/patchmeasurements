@@ -40,6 +40,7 @@ private:
     void showTask1();
     void showPatch();
     void showTask2();
+    void showTask3();
     void showQ1();
     void q1Response();
     void showQ1Next();
@@ -51,6 +52,7 @@ private:
     void conclude();
     void task1Continue();
     void task2Continue();
+    void task3Continue();
     // LRESULT MouseProc(int nCode, WPARAM wParam, LPARAM lParam);
 };
 

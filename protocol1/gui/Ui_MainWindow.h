@@ -33,6 +33,8 @@
 
 #include "Pages.h"
 
+#define DEBUG 1
+
 
 QT_BEGIN_NAMESPACE
 
@@ -94,6 +96,17 @@ public:
     QCheckBox *task2f;
     QCheckBox *task2g;
     QPushButton *task2_continue_btn;
+
+    QWidget *task3_page;
+    QLabel *task3_label;
+    QCheckBox *task3a;
+    QCheckBox *task3b;
+    QCheckBox *task3c;
+    QCheckBox *task3d;
+    QCheckBox *task3e;
+    QCheckBox *task3f;
+    QCheckBox *task3g;
+    QPushButton *task3_continue_btn;
 
     QWidget *q1_page;
     QLabel *q1_label;
@@ -200,10 +213,13 @@ public:
         goodbye_label->setGeometry(QRect(M, M, LINEWIDTH, M*4));
         goodbye_label->setAlignment(Qt::AlignHCenter|Qt::AlignVCenter);
         goodbye_label->setWordWrap(true);
+        goodbye_label->setText("Thank you for your participation. You may now exit this window.");
 
-        goodbye_btn = new QPushButton(goodbye_page);
-        goodbye_btn->setObjectName(QStringLiteral("goodbye_btn"));
-        goodbye_btn->setGeometry(QRect(W/2 - BUTTON_WIDTH/2, M*8, BUTTON_WIDTH, BUTTON_HEIGHT));
+
+        // goodbye_btn = new QPushButton(goodbye_page);
+        // goodbye_btn->setObjectName(QStringLiteral("goodbye_btn"));
+        // goodbye_btn->setGeometry(QRect(W/2 - BUTTON_WIDTH/2, M*8, BUTTON_WIDTH, BUTTON_HEIGHT));
+        // goodbye_btn->setText("Close");
 
         stackedWidget->addWidget(goodbye_page);
 
@@ -225,11 +241,11 @@ public:
 
         task1b = new QCheckBox(task1_page);
         task1b->setGeometry(QRect(M, BUTTON_HEIGHT*6, LINEWIDTH, BUTTON_HEIGHT));
-        task1b->setText("Create a new Google Doc containing the following:");
+        task1b->setText("Create a new Google Doc. Add the following information to the Google Doc:");
 
         task1c = new QCheckBox(task1_page);
         task1c->setGeometry(QRect(M*2, BUTTON_HEIGHT*7, LINEWIDTH, BUTTON_HEIGHT));
-        task1c->setText("The distance between Columbia University and the Empire State Building");
+        task1c->setText("The distance (in miles) between New York City and Los Angeles");
 
         task1d = new QCheckBox(task1_page);
         task1d->setGeometry(QRect(M*2, BUTTON_HEIGHT*8, LINEWIDTH, BUTTON_HEIGHT));
@@ -249,8 +265,12 @@ public:
 
         task1_continue_btn = new QPushButton(task1_page);
         task1_continue_btn->setObjectName(QStringLiteral("task1_continue_btn"));
-        task1_continue_btn->setEnabled(false);
         task1_continue_btn->setGeometry(QRect(W/2 - BUTTON_WIDTH/2, M*8, BUTTON_WIDTH, BUTTON_HEIGHT));
+        
+        #if QT_NO_DEBUG
+        task1_continue_btn->setEnabled(false);
+        #endif
+
 
         //// patch page ///////////////////////////////////////////////////////
         
@@ -277,8 +297,10 @@ public:
         patch_continue_btn = new QPushButton(patch_page);
         patch_continue_btn->setObjectName(QStringLiteral("patch_continue_btn"));
         patch_continue_btn->setGeometry(QRect(W/2 - BUTTON_WIDTH/2, M*8, BUTTON_WIDTH, BUTTON_HEIGHT));
+
+        #if QT_NO_DEBUG
         patch_continue_btn->setEnabled(false);
-        patch_continue_btn->setDisabled(true);
+        #endif
 
         //// task2 page ///////////////////////////////////////////////////////
         
@@ -299,11 +321,11 @@ public:
 
         task2b = new QCheckBox(task2_page);
         task2b->setGeometry(QRect(M, BUTTON_HEIGHT*6, LINEWIDTH, BUTTON_HEIGHT));
-        task2b->setText("Create a new Google Doc containing the following:");
+        task2b->setText("Create a new Google Doc. Add the following information to the Google Doc:");
 
         task2c = new QCheckBox(task2_page);
         task2c->setGeometry(QRect(M*2, BUTTON_HEIGHT*7, LINEWIDTH, BUTTON_HEIGHT));
-        task2c->setText("The distance between Central Park and the Wall Street");
+        task2c->setText("The distance (in miles) between Casablanca, Morocco and Cairo, Egypt");
 
         task2d = new QCheckBox(task2_page);
         task2d->setGeometry(QRect(M*2, BUTTON_HEIGHT*8, LINEWIDTH, BUTTON_HEIGHT));
@@ -323,9 +345,62 @@ public:
 
         task2_continue_btn = new QPushButton(task2_page);
         task2_continue_btn->setObjectName(QStringLiteral("task1_continue_btn"));
-        task2_continue_btn->setDisabled(true);
         task2_continue_btn->setGeometry(QRect(W/2 - BUTTON_WIDTH/2, M*8, BUTTON_WIDTH, BUTTON_HEIGHT));
         task2_continue_btn->setText("Continue");
+
+        #if QT_NO_DEBUG
+        task2_continue_btn->setDisabled(true);
+        #endif
+
+        //// task3 page ///////////////////////////////////////////////////////
+        
+        task3_page = new QWidget();
+        task3_page->setObjectName(QStringLiteral("task3_page"));
+        stackedWidget->addWidget(task3_page);
+
+        task3_label = new QLabel(task3_page);
+        task3_label->setObjectName(QStringLiteral("task3_label"));
+        task3_label->setGeometry(QRect(M, M, LINEWIDTH, M));
+        task3_label->setAlignment(Qt::AlignLeft|Qt::AlignTop);
+        task3_label->setWordWrap(true);
+        task3_label->setText("You will now do some more simple tasks, similar to what you did before. Check off each box below as you complete the following tasks: ");
+
+        task3a = new QCheckBox(task3_page);
+        task3a->setGeometry(QRect(M, BUTTON_HEIGHT*5, LINEWIDTH, BUTTON_HEIGHT));
+        task3a->setText("Open up a web browser");
+
+        task3b = new QCheckBox(task3_page);
+        task3b->setGeometry(QRect(M, BUTTON_HEIGHT*6, LINEWIDTH, BUTTON_HEIGHT));
+        task3b->setText("Create a new Google Doc. Add the following information to the Google Doc:");
+
+        task3c = new QCheckBox(task3_page);
+        task3c->setGeometry(QRect(M*2, BUTTON_HEIGHT*7, LINEWIDTH, BUTTON_HEIGHT));
+        task3c->setText("The distance (in miles) between Lima, Peru and Rio de Janeiro, Brazil");
+
+        task3d = new QCheckBox(task3_page);
+        task3d->setGeometry(QRect(M*2, BUTTON_HEIGHT*8, LINEWIDTH, BUTTON_HEIGHT));
+        task3d->setText("A picture of Roaree the Lion (Columbia's mascot)");
+
+        task3e = new QCheckBox(task3_page);
+        task3e->setGeometry(QRect(M*2, BUTTON_HEIGHT*9, LINEWIDTH, BUTTON_HEIGHT));
+        task3e->setText("The URL to any news clip");
+
+        task3f = new QCheckBox(task3_page);
+        task3f->setGeometry(QRect(M, BUTTON_HEIGHT*10, LINEWIDTH, BUTTON_HEIGHT));
+        task3f->setText("Share the Google Doc with hastings@cs.columbia.edu");
+
+        task3g = new QCheckBox(task3_page);
+        task3g->setGeometry(QRect(M, BUTTON_HEIGHT*11, LINEWIDTH, BUTTON_HEIGHT));
+        task3g->setText("Exit the web browser");
+
+        task3_continue_btn = new QPushButton(task3_page);
+        task3_continue_btn->setObjectName(QStringLiteral("task3_continue_btn"));
+        task3_continue_btn->setGeometry(QRect(W/2 - BUTTON_WIDTH/2, M*8, BUTTON_WIDTH, BUTTON_HEIGHT));
+        task3_continue_btn->setText("Continue");
+
+        #if QT_NO_DEBUG
+        task3_continue_btn->setEnabled(false);
+        #endif
 
         //// q1 page //////////////////////////////////////////////////////////
 
@@ -477,9 +552,7 @@ public:
         consent_label->setText(QApplication::translate("MainWindow", "Do you consent to participate in this study? You may exit the experiment at any point.", Q_NULLPTR));
         not_consent_btn->setText(QApplication::translate("MainWindow", "I do not consent", Q_NULLPTR));
         
-        goodbye_label->setText(QApplication::translate("MainWindow", "Thank you for your participation. You may now exit this window.", Q_NULLPTR));
-        goodbye_btn->setText(QApplication::translate("MainWindow", "Close", Q_NULLPTR));
-
+        
         task1_label->setText(QApplication::translate("MainWindow", "You will now do some simple tasks. Check off each box below as you complete the following tasks: ", Q_NULLPTR)); //You must:\n\n    1) Open a web browser.\n    2) Login to your LionMail account.\n    3) Compose and email containing:\n        a) The distance (in miles) between Columbia University and\n             the Empire State Building\n        b) A picture of Low Library\n        c) Any music video you like (just copy and paste the URL into the video)\n    4) Send the email to hastings@cs.columbia.edu.\n    5) Click \"Continue\" below only once the above tasks are completed.", Q_NULLPTR));
         task1_continue_btn->setText(QApplication::translate("MainWindow", "Continue", Q_NULLPTR));
 

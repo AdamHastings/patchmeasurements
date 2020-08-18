@@ -55,6 +55,8 @@ void MainWindow::showPatch() {
     setFreq(50);
     ui->stackedWidget->setCurrentWidget(ui->patch_page);
 
+
+    #if QT_NO_DEBUG
     int MAGIC_THRES = 24;
 
     for (int i=0; i<MAGIC_THRES; i++) {
@@ -66,15 +68,20 @@ void MainWindow::showPatch() {
         ui->patch_progress_bar->setValue(i);
         std::this_thread::sleep_for(std::chrono::milliseconds(10));
     }
-
-    ui->patch_continue_btn->setEnabled(true);
-    ui->patch_continue_btn->setDisabled(false);
+    #endif
 
     ui->patch_done_label->setText(QApplication::translate("MainWindow", "Done!", Q_NULLPTR));
+
+    ui->patch_continue_btn->setEnabled(true);
+
 }
 
 void MainWindow::showTask2() {
     ui->stackedWidget->setCurrentWidget(ui->task2_page);
+}
+
+void MainWindow::showTask3() {
+    ui->stackedWidget->setCurrentWidget(ui->task3_page);
 }
 
 void MainWindow::showQ1() {
@@ -154,6 +161,9 @@ void MainWindow::conclude() {
 }
 
 void MainWindow::task1Continue() {
+
+    #if QT_NO_DEBUG
+
     if (ui->task1a->isChecked() && 
         ui->task1b->isChecked() && 
         ui->task1c->isChecked() && 
@@ -163,10 +173,15 @@ void MainWindow::task1Continue() {
         ui->task1g->isChecked()) 
     {
         ui->task1_continue_btn->setDisabled(false);
+    } else {
+        ui->task1_continue_btn->setDisabled(true);
     }
+
+    #endif
 }
 
 void MainWindow::task2Continue() {
+    #if QT_NO_DEBUG
     if (ui->task2a->isChecked() && 
         ui->task2b->isChecked() && 
         ui->task2c->isChecked() && 
@@ -176,7 +191,27 @@ void MainWindow::task2Continue() {
         ui->task2g->isChecked()) 
     {
         ui->task2_continue_btn->setDisabled(false);
+    } else {
+        ui->task3_continue_btn->setDisabled(true);
     }
+    #endif
+}
+
+void MainWindow::task3Continue() {
+    #if QT_NO_DEBUG
+    if (ui->task3a->isChecked() && 
+        ui->task3b->isChecked() && 
+        ui->task3c->isChecked() && 
+        ui->task3d->isChecked() && 
+        ui->task3e->isChecked() && 
+        ui->task3f->isChecked() && 
+        ui->task3g->isChecked()) 
+    {
+        ui->task3_continue_btn->setDisabled(false);
+    } else {
+        ui->task3_continue_btn->setDisabled(true);
+    }
+    #endif
 }
 
 
@@ -229,7 +264,8 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->consent_btn, &QPushButton::clicked, this, &MainWindow::showTask1);
     connect(ui->task1_continue_btn, &QPushButton::clicked, this, &MainWindow::showPatch);
     connect(ui->patch_continue_btn, &QPushButton::clicked, this, &MainWindow::showTask2);
-    connect(ui->task2_continue_btn, &QPushButton::clicked, this, &MainWindow::showQ1);
+    connect(ui->task2_continue_btn, &QPushButton::clicked, this, &MainWindow::showTask3);
+    connect(ui->task3_continue_btn, &QPushButton::clicked, this, &MainWindow::showQ1);
     connect(ui->q1_yes_btn, &QPushButton::clicked, ui->q1_continue_btn, &QPushButton::setEnabled);
     connect(ui->q1_no_btn, &QPushButton::clicked, ui->q1_continue_btn, &QPushButton::setEnabled);
     connect(ui->q1_continue_btn, &QPushButton::clicked, this, &MainWindow::showQ1Next);
@@ -256,6 +292,14 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->task2e, &QPushButton::clicked, this, &MainWindow::task2Continue);
     connect(ui->task2f, &QPushButton::clicked, this, &MainWindow::task2Continue);
     connect(ui->task2g, &QPushButton::clicked, this, &MainWindow::task2Continue);
+
+    connect(ui->task3a, &QPushButton::clicked, this, &MainWindow::task3Continue);
+    connect(ui->task3b, &QPushButton::clicked, this, &MainWindow::task3Continue);
+    connect(ui->task3c, &QPushButton::clicked, this, &MainWindow::task3Continue);
+    connect(ui->task3d, &QPushButton::clicked, this, &MainWindow::task3Continue);
+    connect(ui->task3e, &QPushButton::clicked, this, &MainWindow::task3Continue);
+    connect(ui->task3f, &QPushButton::clicked, this, &MainWindow::task3Continue);
+    connect(ui->task3g, &QPushButton::clicked, this, &MainWindow::task3Continue);
 
 
 }
