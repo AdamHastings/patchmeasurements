@@ -125,18 +125,6 @@ public:
     QSpinBox *q2_input;
     QPushButton *q2_continue_btn;
 
-    QWidget *q3_page;
-    QLabel *q3_label;
-    QButtonGroup *q3_button_group;
-    QRadioButton *q3_yes_btn;
-    QRadioButton *q3_no_btn;
-    QPushButton *q3_continue_btn;
-
-    QWidget *q4_page;
-    QLabel *q4_label;
-    QLineEdit *q4_input;
-    QPushButton *q4_continue_btn;
-
     QWidget *wta_page;
     QLabel *wta_label;
     QLabel *wta_offer;
@@ -485,55 +473,6 @@ public:
         q2_continue_btn->setGeometry(QRect(W/2 - BUTTON_WIDTH/2, M*8, BUTTON_WIDTH, BUTTON_HEIGHT));
         q2_continue_btn->setEnabled(false);
         q2_continue_btn->setText("Continue");
-
-        // //// q3 page //////////////////////////////////////////////////////////
-
-        // q3_page = new QWidget();
-        // q3_page->setObjectName(QStringLiteral("q3_page"));
-        // stackedWidget->addWidget(q3_page);
-
-        // q3_label = new QLabel(q3_page);
-        // q3_label->setObjectName(QStringLiteral("q3_label"));
-        // q3_label->setGeometry(QRect(M, M, LINEWIDTH, M*5));
-        // q3_label->setAlignment(Qt::AlignLeft|Qt::AlignVCenter);
-        // q3_label->setWordWrap(true);
-        // q3_label->setText("The modifications made to the system after the first round of tasks slowed down this computer. Did you notice that this computer was running slower after the modifications were applied?");
-
-        // q3_button_group = new QButtonGroup(q3_page);
-        // q3_yes_btn = new QRadioButton(q3_page);
-        // q3_yes_btn->setGeometry(QRect(W/2 - BUTTON_WIDTH/2, M*5, BUTTON_WIDTH, BUTTON_HEIGHT));
-        // q3_yes_btn->setText("Yes");
-        // q3_no_btn = new QRadioButton(q3_page);
-        // q3_no_btn->setGeometry(QRect(W/2 - BUTTON_WIDTH/2, M*6, BUTTON_WIDTH, BUTTON_HEIGHT));
-        // q3_no_btn->setText("No");
-        // q3_button_group->addButton(q3_yes_btn);
-        // q3_button_group->addButton(q3_no_btn);
-
-        // q3_continue_btn = new QPushButton(q3_page);
-        // q3_continue_btn->setEnabled(false);
-        // q3_continue_btn->setGeometry(QRect(W/2 - BUTTON_WIDTH/2, M*8, BUTTON_WIDTH, BUTTON_HEIGHT));
-        // q3_continue_btn->setText("Continue");
-
-        // //// q4 page //////////////////////////////////////////////////////////
-
-        // q4_page = new QWidget();
-        // q4_page->setObjectName(QStringLiteral("q4_page"));
-        // stackedWidget->addWidget(q4_page);
-        
-        // q4_label = new QLabel(q4_page);
-        // q4_label->setObjectName(QStringLiteral("q1_label"));
-        // q4_label->setGeometry(QRect(M, M, LINEWIDTH, M*3));
-        // q4_label->setAlignment(Qt::AlignJustify|Qt::AlignVCenter);
-        // q4_label->setWordWrap(true);
-        // q4_label->setText("If you had to guess by what percentage this computer was made slower in the second set of tasks, what would your guess be? For example, if a computer could normally open a web browser in 1 second and was slowed down by 50%, the slowed-down computer could open a web browser in 1.5 seconds. By what percentage do you think this computer was slowed down?.");
-
-        // q4_input = new QLineEdit(q4_page);
-        // q4_input->setGeometry(QRect((W-BUTTON_WIDTH)/2, M*5, BUTTON_WIDTH, BUTTON_HEIGHT));
-        
-        // q4_continue_btn = new QPushButton(q4_page);
-        // // q4_continue_btn->setEnabled(false);
-        // q4_continue_btn->setGeometry(QRect(W/2 - BUTTON_WIDTH/2, M*8, BUTTON_WIDTH, BUTTON_HEIGHT));
-        // q4_continue_btn->setText("Continue");
 
         //// wta page /////////////////////////////////////////////////////////
 

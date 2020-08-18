@@ -101,7 +101,7 @@ void MainWindow::showQ1Next() {
         ui->q2_label->setText("How much faster did your computer feel in Task 3?");
         ui->stackedWidget->setCurrentWidget(ui->q2_page);
     } else{
-        ui->stackedWidget->setCurrentWidget(ui->wta_page);
+        showWTA();
     }
 }
 
@@ -115,9 +115,9 @@ void MainWindow::showQ1Next() {
 
 void MainWindow::showWTA() {
     std::string offerstring = "$" + std::to_string(offer) + "?";
-    char chrarr[offerstring.length() + 1];
-    strcpy(chrarr, offerstring.c_str());
-    ui->wta_offer->setText(chrarr);
+    // char chrarr[offerstring.length() + 1];
+    // strcpy(chrarr, offerstring.c_str());
+    ui->wta_offer->setText(offerstring.c_str());
     ui->stackedWidget->setCurrentWidget(ui->wta_page);
 }
 
@@ -143,7 +143,11 @@ void MainWindow::updateOffer_yes() {
 
 void MainWindow::updateOffer_no() {
     if (!first_accept) {
-        offer *= 2;
+        if (offer == 0) {
+            offer = 1;
+        } else {
+            offer *= 2;
+        }
         showWTA();
     } else {
         lower = offer;
