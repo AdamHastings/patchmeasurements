@@ -26,6 +26,7 @@
 #include <QtWidgets/QLineEdit>
 #include <QtWidgets/QRadioButton>
 #include <QtWidgets/QCheckBox>
+#include <QtWidgets/QSpinBox>
 #include <QFont>
 #include <QScreen>
 #include <QApplication>
@@ -118,7 +119,7 @@ public:
 
     QWidget *q2_page;
     QLabel *q2_label;
-    QTextEdit *q2_input;
+    QSpinBox *q2_input;
     QPushButton *q2_continue_btn;
 
     QWidget *q3_page;
@@ -448,13 +449,16 @@ public:
         q2_label->setGeometry(QRect(M, M, LINEWIDTH, M*2));
         q2_label->setAlignment(Qt::AlignLeft|Qt::AlignVCenter);
         q2_label->setWordWrap(true);
-        q2_label->setText("How were things different after the modifications were made? Please be descriptive.");
 
-        q2_input = new QTextEdit(q2_page);
-        q2_input->setGeometry(QRect(M, M*4, LINEWIDTH, M*3));
+        q2_input = new QSpinBox(q2_page);
+        q2_input->setMinimum(0);
+        q2_input->setMaximum(9999);
+        q2_input->setSuffix(" %");
+        q2_input->setGeometry(QRect((W-BUTTON_WIDTH)/2, M*5, BUTTON_WIDTH, BUTTON_HEIGHT));
         
         q2_continue_btn = new QPushButton(q2_page);
         q2_continue_btn->setGeometry(QRect(W/2 - BUTTON_WIDTH/2, M*8, BUTTON_WIDTH, BUTTON_HEIGHT));
+        q2_continue_btn->setEnabled(false);
         q2_continue_btn->setText("Continue");
 
         //// q3 page //////////////////////////////////////////////////////////
