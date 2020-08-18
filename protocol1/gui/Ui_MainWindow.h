@@ -72,6 +72,7 @@ public:
     
     QWidget *task1_page;
     QLabel *task1_label;
+    QLabel *task1_title;
     QCheckBox *task1a;
     QCheckBox *task1b;
     QCheckBox *task1c;
@@ -89,6 +90,7 @@ public:
 
     QWidget *task2_page;
     QLabel *task2_label;
+    QLabel *task2_title;
     QCheckBox *task2a;
     QCheckBox *task2b;
     QCheckBox *task2c;
@@ -100,6 +102,7 @@ public:
 
     QWidget *task3_page;
     QLabel *task3_label;
+    QLabel *task3_title;
     QCheckBox *task3a;
     QCheckBox *task3b;
     QCheckBox *task3c;
@@ -231,10 +234,20 @@ public:
         task1_page->setObjectName(QStringLiteral("task1_page"));
         stackedWidget->addWidget(task1_page);
 
+        QFont titlefont = QFont();
+        titlefont.setBold(true);
+        titlefont.setPointSize(20);
+
+        task1_title = new QLabel(task1_page);
+        task1_title->setGeometry(QRect(M, M/2, LINEWIDTH, M));
+        task1_title->setAlignment(Qt::AlignHCenter|Qt::AlignTop);
+        task1_title->setText("Task 1");
+        task1_title->setFont(titlefont);
+
         task1_label = new QLabel(task1_page);
         task1_label->setObjectName(QStringLiteral("task1_label"));
-        task1_label->setGeometry(QRect(M, M, LINEWIDTH, M));
-        task1_label->setAlignment(Qt::AlignLeft|Qt::AlignTop);
+        task1_label->setGeometry(QRect(M, M*2, LINEWIDTH, M));
+        task1_label->setAlignment(Qt::AlignLeft|Qt::AlignBottom);
         task1_label->setWordWrap(true);
 
         task1a = new QCheckBox(task1_page);
@@ -310,10 +323,16 @@ public:
         task2_page->setObjectName(QStringLiteral("task2_page"));
         stackedWidget->addWidget(task2_page);
 
+        task2_title = new QLabel(task2_page);
+        task2_title->setGeometry(QRect(M, M/2, LINEWIDTH, M));
+        task2_title->setAlignment(Qt::AlignHCenter|Qt::AlignTop);
+        task2_title->setText("Task 2");
+        task2_title->setFont(titlefont);
+
         task2_label = new QLabel(task2_page);
         task2_label->setObjectName(QStringLiteral("task1_label"));
-        task2_label->setGeometry(QRect(M, M, LINEWIDTH, M*6));
-        task2_label->setAlignment(Qt::AlignLeft|Qt::AlignTop);
+        task2_label->setGeometry(QRect(M, M*2, LINEWIDTH, M));
+        task2_label->setAlignment(Qt::AlignLeft|Qt::AlignVCenter);
         task2_label->setWordWrap(true);
         task2_label->setText("You will now do some more simple tasks, similar to what you did before. Check off each box below as you complete the following tasks: ");
 
@@ -360,10 +379,16 @@ public:
         task3_page->setObjectName(QStringLiteral("task3_page"));
         stackedWidget->addWidget(task3_page);
 
+        task3_title = new QLabel(task3_page);
+        task3_title->setGeometry(QRect(M, M/2, LINEWIDTH, M));
+        task3_title->setAlignment(Qt::AlignHCenter|Qt::AlignTop);
+        task3_title->setText("Task 3");
+        task3_title->setFont(titlefont);
+
         task3_label = new QLabel(task3_page);
         task3_label->setObjectName(QStringLiteral("task3_label"));
-        task3_label->setGeometry(QRect(M, M, LINEWIDTH, M));
-        task3_label->setAlignment(Qt::AlignLeft|Qt::AlignTop);
+        task3_label->setGeometry(QRect(M, M*2, LINEWIDTH, M));
+        task3_label->setAlignment(Qt::AlignLeft|Qt::AlignVCenter);
         task3_label->setWordWrap(true);
         task3_label->setText("You will now do some more simple tasks, similar to what you did before. Check off each box below as you complete the following tasks: ");
 
@@ -461,54 +486,54 @@ public:
         q2_continue_btn->setEnabled(false);
         q2_continue_btn->setText("Continue");
 
-        //// q3 page //////////////////////////////////////////////////////////
+        // //// q3 page //////////////////////////////////////////////////////////
 
-        q3_page = new QWidget();
-        q3_page->setObjectName(QStringLiteral("q3_page"));
-        stackedWidget->addWidget(q3_page);
+        // q3_page = new QWidget();
+        // q3_page->setObjectName(QStringLiteral("q3_page"));
+        // stackedWidget->addWidget(q3_page);
 
-        q3_label = new QLabel(q3_page);
-        q3_label->setObjectName(QStringLiteral("q3_label"));
-        q3_label->setGeometry(QRect(M, M, LINEWIDTH, M*5));
-        q3_label->setAlignment(Qt::AlignLeft|Qt::AlignVCenter);
-        q3_label->setWordWrap(true);
-        q3_label->setText("The modifications made to the system after the first round of tasks slowed down this computer. Did you notice that this computer was running slower after the modifications were applied?");
+        // q3_label = new QLabel(q3_page);
+        // q3_label->setObjectName(QStringLiteral("q3_label"));
+        // q3_label->setGeometry(QRect(M, M, LINEWIDTH, M*5));
+        // q3_label->setAlignment(Qt::AlignLeft|Qt::AlignVCenter);
+        // q3_label->setWordWrap(true);
+        // q3_label->setText("The modifications made to the system after the first round of tasks slowed down this computer. Did you notice that this computer was running slower after the modifications were applied?");
 
-        q3_button_group = new QButtonGroup(q3_page);
-        q3_yes_btn = new QRadioButton(q3_page);
-        q3_yes_btn->setGeometry(QRect(W/2 - BUTTON_WIDTH/2, M*5, BUTTON_WIDTH, BUTTON_HEIGHT));
-        q3_yes_btn->setText("Yes");
-        q3_no_btn = new QRadioButton(q3_page);
-        q3_no_btn->setGeometry(QRect(W/2 - BUTTON_WIDTH/2, M*6, BUTTON_WIDTH, BUTTON_HEIGHT));
-        q3_no_btn->setText("No");
-        q3_button_group->addButton(q3_yes_btn);
-        q3_button_group->addButton(q3_no_btn);
+        // q3_button_group = new QButtonGroup(q3_page);
+        // q3_yes_btn = new QRadioButton(q3_page);
+        // q3_yes_btn->setGeometry(QRect(W/2 - BUTTON_WIDTH/2, M*5, BUTTON_WIDTH, BUTTON_HEIGHT));
+        // q3_yes_btn->setText("Yes");
+        // q3_no_btn = new QRadioButton(q3_page);
+        // q3_no_btn->setGeometry(QRect(W/2 - BUTTON_WIDTH/2, M*6, BUTTON_WIDTH, BUTTON_HEIGHT));
+        // q3_no_btn->setText("No");
+        // q3_button_group->addButton(q3_yes_btn);
+        // q3_button_group->addButton(q3_no_btn);
 
-        q3_continue_btn = new QPushButton(q3_page);
-        q3_continue_btn->setEnabled(false);
-        q3_continue_btn->setGeometry(QRect(W/2 - BUTTON_WIDTH/2, M*8, BUTTON_WIDTH, BUTTON_HEIGHT));
-        q3_continue_btn->setText("Continue");
+        // q3_continue_btn = new QPushButton(q3_page);
+        // q3_continue_btn->setEnabled(false);
+        // q3_continue_btn->setGeometry(QRect(W/2 - BUTTON_WIDTH/2, M*8, BUTTON_WIDTH, BUTTON_HEIGHT));
+        // q3_continue_btn->setText("Continue");
 
-        //// q4 page //////////////////////////////////////////////////////////
+        // //// q4 page //////////////////////////////////////////////////////////
 
-        q4_page = new QWidget();
-        q4_page->setObjectName(QStringLiteral("q4_page"));
-        stackedWidget->addWidget(q4_page);
+        // q4_page = new QWidget();
+        // q4_page->setObjectName(QStringLiteral("q4_page"));
+        // stackedWidget->addWidget(q4_page);
         
-        q4_label = new QLabel(q4_page);
-        q4_label->setObjectName(QStringLiteral("q1_label"));
-        q4_label->setGeometry(QRect(M, M, LINEWIDTH, M*3));
-        q4_label->setAlignment(Qt::AlignJustify|Qt::AlignVCenter);
-        q4_label->setWordWrap(true);
-        q4_label->setText("If you had to guess by what percentage this computer was made slower in the second set of tasks, what would your guess be? For example, if a computer could normally open a web browser in 1 second and was slowed down by 50%, the slowed-down computer could open a web browser in 1.5 seconds. By what percentage do you think this computer was slowed down?.");
+        // q4_label = new QLabel(q4_page);
+        // q4_label->setObjectName(QStringLiteral("q1_label"));
+        // q4_label->setGeometry(QRect(M, M, LINEWIDTH, M*3));
+        // q4_label->setAlignment(Qt::AlignJustify|Qt::AlignVCenter);
+        // q4_label->setWordWrap(true);
+        // q4_label->setText("If you had to guess by what percentage this computer was made slower in the second set of tasks, what would your guess be? For example, if a computer could normally open a web browser in 1 second and was slowed down by 50%, the slowed-down computer could open a web browser in 1.5 seconds. By what percentage do you think this computer was slowed down?.");
 
-        q4_input = new QLineEdit(q4_page);
-        q4_input->setGeometry(QRect((W-BUTTON_WIDTH)/2, M*5, BUTTON_WIDTH, BUTTON_HEIGHT));
+        // q4_input = new QLineEdit(q4_page);
+        // q4_input->setGeometry(QRect((W-BUTTON_WIDTH)/2, M*5, BUTTON_WIDTH, BUTTON_HEIGHT));
         
-        q4_continue_btn = new QPushButton(q4_page);
-        // q4_continue_btn->setEnabled(false);
-        q4_continue_btn->setGeometry(QRect(W/2 - BUTTON_WIDTH/2, M*8, BUTTON_WIDTH, BUTTON_HEIGHT));
-        q4_continue_btn->setText("Continue");
+        // q4_continue_btn = new QPushButton(q4_page);
+        // // q4_continue_btn->setEnabled(false);
+        // q4_continue_btn->setGeometry(QRect(W/2 - BUTTON_WIDTH/2, M*8, BUTTON_WIDTH, BUTTON_HEIGHT));
+        // q4_continue_btn->setText("Continue");
 
         //// wta page /////////////////////////////////////////////////////////
 

@@ -105,13 +105,13 @@ void MainWindow::showQ1Next() {
     }
 }
 
-void MainWindow::showQ3() {
-    ui->stackedWidget->setCurrentWidget(ui->q3_page);
-}
+// void MainWindow::showQ3() {
+//     ui->stackedWidget->setCurrentWidget(ui->q3_page);
+// }
 
-void MainWindow::showQ4() {
-    ui->stackedWidget->setCurrentWidget(ui->q4_page);
-}
+// void MainWindow::showQ4() {
+//     ui->stackedWidget->setCurrentWidget(ui->q4_page);
+// }
 
 void MainWindow::showWTA() {
     std::string offerstring = "$" + std::to_string(offer) + "?";
@@ -280,10 +280,11 @@ MainWindow::MainWindow(QWidget *parent) :
     
     connect(ui->q2_continue_btn, &QPushButton::clicked, this, &MainWindow::showWTA);
     
-    connect(ui->q3_yes_btn, &QPushButton::clicked, ui->q3_continue_btn, &QPushButton::setEnabled);
-    connect(ui->q3_no_btn, &QPushButton::clicked, ui->q3_continue_btn, &QPushButton::setEnabled);
-    connect(ui->q3_continue_btn, &QPushButton::clicked, this, &MainWindow::showQ4);
-    connect(ui->q4_continue_btn, &QPushButton::clicked, this, &MainWindow::showWTA);
+    // connect(ui->q3_yes_btn, &QPushButton::clicked, ui->q3_continue_btn, &QPushButton::setEnabled);
+    // connect(ui->q3_no_btn, &QPushButton::clicked, ui->q3_continue_btn, &QPushButton::setEnabled);
+    // connect(ui->q3_continue_btn, &QPushButton::clicked, this, &MainWindow::showQ4);
+    // connect(ui->q4_continue_btn, &QPushButton::clicked, this, &MainWindow::showWTA);
+    
     connect(ui->wta_yes_btn, &QPushButton::clicked, this, &MainWindow::updateOffer_yes);
     connect(ui->wta_no_btn, &QPushButton::clicked, this, &MainWindow::updateOffer_no);
 
