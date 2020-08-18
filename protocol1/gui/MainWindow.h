@@ -27,6 +27,9 @@ public:
 
 private:
     Ui::MainWindow *ui;
+
+    int faster= -1;
+    
     int offer = 1;
     int upper = -1;
     int lower = -1;

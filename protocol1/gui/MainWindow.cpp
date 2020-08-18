@@ -94,10 +94,14 @@ void MainWindow::q1Response() {
 }
 
 void MainWindow::showQ1Next() {
-    if (ui->q1_yes_btn->isChecked()) {
+    if (ui->q1_t2faster_btn->isChecked()) {
+        faster = 2;
+        ui->stackedWidget->setCurrentWidget(ui->q2_page);
+    } else if (ui->q1_t3faster_btn->isChecked()) {
+        faster= 3;
         ui->stackedWidget->setCurrentWidget(ui->q2_page);
     } else{
-        ui->stackedWidget->setCurrentWidget(ui->q3_page);
+        ui->stackedWidget->setCurrentWidget(ui->wta_page);
     }
 }
 
@@ -266,9 +270,12 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->patch_continue_btn, &QPushButton::clicked, this, &MainWindow::showTask2);
     connect(ui->task2_continue_btn, &QPushButton::clicked, this, &MainWindow::showTask3);
     connect(ui->task3_continue_btn, &QPushButton::clicked, this, &MainWindow::showQ1);
-    connect(ui->q1_yes_btn, &QPushButton::clicked, ui->q1_continue_btn, &QPushButton::setEnabled);
-    connect(ui->q1_no_btn, &QPushButton::clicked, ui->q1_continue_btn, &QPushButton::setEnabled);
+    
+    connect(ui->q1_t2faster_btn, &QPushButton::clicked, ui->q1_continue_btn, &QPushButton::setEnabled);
+    connect(ui->q1_t3faster_btn, &QPushButton::clicked, ui->q1_continue_btn, &QPushButton::setEnabled);
+    connect(ui->q1_same_btn, &QPushButton::clicked, ui->q1_continue_btn, &QPushButton::setEnabled);
     connect(ui->q1_continue_btn, &QPushButton::clicked, this, &MainWindow::showQ1Next);
+    
     connect(ui->q2_continue_btn, &QPushButton::clicked, this, &MainWindow::showQ3);
     connect(ui->q3_yes_btn, &QPushButton::clicked, ui->q3_continue_btn, &QPushButton::setEnabled);
     connect(ui->q3_no_btn, &QPushButton::clicked, ui->q3_continue_btn, &QPushButton::setEnabled);

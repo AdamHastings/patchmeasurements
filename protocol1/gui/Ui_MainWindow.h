@@ -111,8 +111,9 @@ public:
     QWidget *q1_page;
     QLabel *q1_label;
     QButtonGroup *q1_button_group;
-    QRadioButton *q1_yes_btn;
-    QRadioButton *q1_no_btn;
+    QRadioButton *q1_t2faster_btn;
+    QRadioButton *q1_t3faster_btn;
+    QRadioButton *q1_same_btn;
     QPushButton *q1_continue_btn;
 
     QWidget *q2_page;
@@ -410,20 +411,26 @@ public:
 
         q1_label = new QLabel(q1_page);
         q1_label->setObjectName(QStringLiteral("q1_label"));
-        q1_label->setGeometry(QRect(M, M, LINEWIDTH, M*5));
+        q1_label->setGeometry(QRect(M, M, LINEWIDTH, M*2));
         q1_label->setAlignment(Qt::AlignLeft|Qt::AlignVCenter);
         q1_label->setWordWrap(true);
-        q1_label->setText("Did you notice any differences before and after the modifications? Do not consider differences in questions asked in the web browsing task.");
+        q1_label->setText("Which of the following best matches your experiences in Tasks 2 and 3? Note that \"performance\" can include things like how long it took for applications to open, how long it took for webpages to load and render, how responsive the keyboard and mouse were to input events, how much screen lag you experienced, etc.");
 
         q1_button_group = new QButtonGroup(q1_page);
-        q1_yes_btn = new QRadioButton(q1_page);
-        q1_yes_btn->setGeometry(QRect(W/2 - BUTTON_WIDTH/2, M*5, BUTTON_WIDTH, BUTTON_HEIGHT));
-        q1_yes_btn->setText("Yes");
-        q1_no_btn = new QRadioButton(q1_page);
-        q1_no_btn->setGeometry(QRect(W/2 - BUTTON_WIDTH/2, M*6, BUTTON_WIDTH, BUTTON_HEIGHT));
-        q1_no_btn->setText("No");
-        q1_button_group->addButton(q1_yes_btn);
-        q1_button_group->addButton(q1_no_btn);
+        q1_t2faster_btn = new QRadioButton(q1_page);
+        q1_t2faster_btn->setGeometry(QRect(2*M, M*4, LINEWIDTH, BUTTON_HEIGHT));
+        q1_t2faster_btn->setText("My computer seemed to have better performance during Task 2");
+        q1_button_group->addButton(q1_t2faster_btn);
+
+        q1_t3faster_btn = new QRadioButton(q1_page);
+        q1_t3faster_btn->setGeometry(QRect(2*M, M*4+BUTTON_HEIGHT, LINEWIDTH, BUTTON_HEIGHT));
+        q1_t3faster_btn->setText("My computer seemed to have better performance during Task 3");
+        q1_button_group->addButton(q1_t3faster_btn);
+
+        q1_same_btn = new QRadioButton(q1_page);
+        q1_same_btn->setGeometry(QRect(2*M, M*4+2*BUTTON_HEIGHT, LINEWIDTH, BUTTON_HEIGHT));
+        q1_same_btn->setText("The performance felt about the same during Tasks 2 and 3");
+        q1_button_group->addButton(q1_same_btn);
 
         q1_continue_btn = new QPushButton(q1_page);
         q1_continue_btn->setEnabled(false);
