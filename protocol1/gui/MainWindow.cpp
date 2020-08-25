@@ -33,10 +33,12 @@ void MainWindow::showGoodbye() {
    cout << "---\n";
 
 
+    #ifdef _WIN23
     for (auto i: MainWindow::click_timestamps) {
         cout << i << " ";
     }
     cout << endl;
+    #endif
 
     ui->stackedWidget->setCurrentWidget(ui->goodbye_page);
 }
@@ -174,8 +176,6 @@ void MainWindow::updateOffer_no() {
     }
 }
 
-vector<int> MainWindow::click_timestamps;
-
 void MainWindow::conclude() {
      ui->stackedWidget->setCurrentWidget(ui->goodbye_page);
 }
@@ -234,19 +234,28 @@ void MainWindow::task3Continue() {
     #endif
 }
 
+#ifdef _WIN32
+
+vector<int> MainWindow::click_timestamps;
+int MainWindow::keystrokes = 0;
+
 
 void MainWindow::addNewTimestamp(int m) {
-    cout << "adding " + to_string(m) << endl;
     click_timestamps.push_back(m);
-    return;
+    cout << m << endl;
 }
 
-#ifdef _WIN32
+void MainWindow::incKeystrokes() {
+    keystrokes++;
+    cout << keystrokes << endl;
+}
 
 
 HHOOK hHook = NULL;
+HHOOK kHook = NULL;
 
-LRESULT CALLBACK MouseProc(int nCode, WPARAM wParam, LPARAM lParam) {   
+LRESULT CALLBACK llmouse(int nCode, WPARAM wParam, LPARAM lParam) {   
+    cout << rand() << endl;
     
     switch( wParam ) {
         case WM_LBUTTONDOWN:  
@@ -255,11 +264,18 @@ LRESULT CALLBACK MouseProc(int nCode, WPARAM wParam, LPARAM lParam) {
                 //    p1.time_since_epoch()).count() << '\n';
             // click_timestamps.push_back(std::chrono::duration_cast<std::chrono::milliseconds>(p1.time_since_epoch()).count());
             int m = chrono::duration_cast<chrono::milliseconds>(p1.time_since_epoch()).count();
-            cout << m << endl;
             MainWindow::addNewTimestamp(m);
-
     }
     return CallNextHookEx(hHook, nCode, wParam, lParam);
+}
+
+LRESULT CALLBACK KBProc(int nCode, WPARAM wParam, LPARAM lParam) {   
+    cout << "key pressed" << endl;
+    switch( wParam ) {
+        case WM_KEYDOWN:
+            MainWindow::incKeystrokes();
+    }
+    return CallNextHookEx(kHook, nCode, wParam, lParam);
 }
 
 #endif
@@ -271,9 +287,13 @@ MainWindow::MainWindow(QWidget *parent) :
 {
 
     #ifdef _WIN32
-    hHook = SetWindowsHookEx(WH_MOUSE_LL, MouseProc, NULL, 0);
+    hHook = SetWindowsHookExA(WH_MOUSE_LL, llmouse, NULL, 0);
+    kHook = SetWindowsHookExW(WH_KEYBOARD_LL, KBProc, NULL, 0);
     if (hHook == NULL) {
         cout << "Hook failed" << endl;
+    }
+    if (kHook == NULL) {
+        cout << "kHook failed" << endl;
     }
     #endif
 

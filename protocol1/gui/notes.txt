@@ -1,0 +1,47 @@
+Wouldn't say there's minimal risk
+Does actually track
+Don't worry about stealing.
+
+"Create a new Google Doc that contains the following information"
+Wording is ambiguous
+
+"THE Wall Street"
+
+Do three times
+
+Randomize slowdown between tries 2 and 3
+
+Lydia: Don't ask Q1
+
+Q3: Make the question "Did you notice any differences between the performance of your computer (speed, etc, lag, responsiveness, jitter) between Tasks 2 and 3?"
+
+Maybe make them open word
+Nuke the cache so that Windows doesn't load Word faster the second, third times
+
+Do some calculations in Excel
+
+Screen participants for Word
+
+Q4: this computer -> your computer
+Q4: Ask slower/faster/about the same
+If they answer slower or faster, ask them to estimate
+Q4: Use radio buttons to record Q4 response.
+
+WTA: Start with $0. 
+
+
+Add extra page: Undoing modifications. 
+
+Application exit handler: undo changes
+Does rebooting change CPU limit parameters
+
+Get rid of "close" button on conclusion page
+
+------------------------------
+
+
+POST (HTTPS) file to server
+
+Make program listening for POST
+Just plain HTML
+Make sure files are Read Only (Call script from HTML)
