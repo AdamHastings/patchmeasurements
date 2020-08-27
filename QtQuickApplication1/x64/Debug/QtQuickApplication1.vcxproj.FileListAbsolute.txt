@@ -1,2 +1,0 @@
-C:\Users\Administrator\patchmeasurements\QtQuickApplication1\x64\Debug\QtQuickApplication1.exe
-C:\Users\Administrator\patchmeasurements\QtQuickApplication1\x64\Debug\QtQuickApplication1.pdb
