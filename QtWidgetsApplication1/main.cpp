@@ -9,6 +9,7 @@
 
 
 #include "QtWidgetsApplication1.h"
+#include "MainWindow.h"
 #include <QtWidgets/QApplication>
 #include <Windows.h>
 #include <iostream>
@@ -75,8 +76,8 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
     char* argv[] = { NULL };
 
     QApplication a(argc, argv);
-    QtWidgetsApplication1 w;
-    w.show();
+    MainWindow mw;
+    mw.show();
 
     while (GetMessage(&msg, NULL, 0, 0))
     {
