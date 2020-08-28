@@ -1,28 +1,15 @@
-//int main(int argc, char* argv[])
-//{
-//    QApplication a(argc, argv);
-//    QtWidgetsApplication1 w;
-//    w.show();
-//    return a.exec();
-//}
-
-
-
 #include "QtWidgetsApplication1.h"
 #include "MainWindow.h"
 #include <QtWidgets/QApplication>
 #include <Windows.h>
 #include <iostream>
 #include <fstream>
-//#include "MainWindow.h"
 #include <QApplication>
-
-
-
 
 using namespace std;
 
 HHOOK mouseHook;
+HHOOK keyboardHook;
 
 LRESULT __stdcall MouseHookCallback(int nCode, WPARAM wParam, LPARAM lParam)
 {
@@ -42,17 +29,36 @@ LRESULT __stdcall MouseHookCallback(int nCode, WPARAM wParam, LPARAM lParam)
     return CallNextHookEx(mouseHook, nCode, wParam, lParam);
 }
 
-void SetHook()
+LRESULT __stdcall KeyboardHookCallback(int nCode, WPARAM wParam, LPARAM lParam)
 {
-    if (!(mouseHook = SetWindowsHookEx(WH_MOUSE_LL, MouseHookCallback, NULL, 0)))
+    if (nCode >= 0)
     {
+        switch (wParam)
+        {
+        case WM_KEYDOWN:
+            cout << "Key Down" << endl;
+            break;
+
+        //case WM_KEYUP:
+        //    cout << "Left Button Up" << endl;
+        //    break;
+        }
+    }
+    return CallNextHookEx(mouseHook, nCode, wParam, lParam);
+}
+
+void SetHook() {
+    if (!(mouseHook = SetWindowsHookEx(WH_MOUSE_LL, MouseHookCallback, NULL, 0))) {
         cout << "Failed to install mouse hook!" << endl;
+    }
+    if (!(keyboardHook = SetWindowsHookEx(WH_KEYBOARD_LL, KeyboardHookCallback, NULL, 0))) {
+        cout << "Failed to install keyboard hook!" << endl;
     }
 }
 
-void ReleaseHook()
-{
+void ReleaseHook() {
     UnhookWindowsHookEx(mouseHook);
+    UnhookWindowsHookEx(keyboardHook);
 }
 
 
@@ -68,10 +74,6 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
     SetHook();
     MSG msg;
 
- /*   QApplication app(argc, argv);
-    MainWindow mw;
-    mw.show();*/
-
     int argc = 0;
     char* argv[] = { NULL };
 
@@ -86,5 +88,4 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
     }
 
     return a.exec();
-    //return app.exec();
 }

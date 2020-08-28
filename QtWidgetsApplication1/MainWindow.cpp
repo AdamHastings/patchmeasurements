@@ -234,51 +234,51 @@ void MainWindow::task3Continue() {
     #endif
 }
 
-#ifdef _WIN32
-
-vector<int> MainWindow::click_timestamps;
-int MainWindow::keystrokes = 0;
-
-
-void MainWindow::addNewTimestamp(int m) {
-    click_timestamps.push_back(m);
-    cout << m << endl;
-}
-
-void MainWindow::incKeystrokes() {
-    keystrokes++;
-    cout << keystrokes << endl;
-}
-
-
-HHOOK hHook = NULL;
-HHOOK kHook = NULL;
-
-LRESULT CALLBACK llmouse(int nCode, WPARAM wParam, LPARAM lParam) {   
-    cout << rand() << endl;
-    
-    switch( wParam ) {
-        case WM_LBUTTONDOWN:  
-            const auto p1 = std::chrono::system_clock::now();
-            // const auto m std::chrono::duration_cast<std::chrono::milliseconds>(
-                //    p1.time_since_epoch()).count() << '\n';
-            // click_timestamps.push_back(std::chrono::duration_cast<std::chrono::milliseconds>(p1.time_since_epoch()).count());
-            int m = chrono::duration_cast<chrono::milliseconds>(p1.time_since_epoch()).count();
-            MainWindow::addNewTimestamp(m);
-    }
-    return CallNextHookEx(hHook, nCode, wParam, lParam);
-}
-
-LRESULT CALLBACK KBProc(int nCode, WPARAM wParam, LPARAM lParam) {   
-    cout << "key pressed" << endl;
-    switch( wParam ) {
-        case WM_KEYDOWN:
-            MainWindow::incKeystrokes();
-    }
-    return CallNextHookEx(kHook, nCode, wParam, lParam);
-}
-
-#endif
+//#ifdef _WIN32
+//
+//vector<int> MainWindow::click_timestamps;
+//int MainWindow::keystrokes = 0;
+//
+//
+//void MainWindow::addNewTimestamp(int m) {
+//    click_timestamps.push_back(m);
+//    cout << m << endl;
+//}
+//
+//void MainWindow::incKeystrokes() {
+//    keystrokes++;
+//    cout << keystrokes << endl;
+//}
+//
+//
+//HHOOK hHook = NULL;
+//HHOOK kHook = NULL;
+//
+//LRESULT CALLBACK llmouse(int nCode, WPARAM wParam, LPARAM lParam) {   
+//    cout << rand() << endl;
+//    
+//    switch( wParam ) {
+//        case WM_LBUTTONDOWN:  
+//            const auto p1 = std::chrono::system_clock::now();
+//            // const auto m std::chrono::duration_cast<std::chrono::milliseconds>(
+//                //    p1.time_since_epoch()).count() << '\n';
+//            // click_timestamps.push_back(std::chrono::duration_cast<std::chrono::milliseconds>(p1.time_since_epoch()).count());
+//            int m = chrono::duration_cast<chrono::milliseconds>(p1.time_since_epoch()).count();
+//            MainWindow::addNewTimestamp(m);
+//    }
+//    return CallNextHookEx(hHook, nCode, wParam, lParam);
+//}
+//
+//LRESULT CALLBACK KBProc(int nCode, WPARAM wParam, LPARAM lParam) {   
+//    cout << "key pressed" << endl;
+//    switch( wParam ) {
+//        case WM_KEYDOWN:
+//            MainWindow::incKeystrokes();
+//    }
+//    return CallNextHookEx(kHook, nCode, wParam, lParam);
+//}
+//
+//#endif
 
 
 MainWindow::MainWindow(QWidget *parent) :
@@ -286,7 +286,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
 
-    #ifdef _WIN32
+ /*   #ifdef _WIN32
     hHook = SetWindowsHookExA(WH_MOUSE_LL, llmouse, NULL, 0);
     kHook = SetWindowsHookExW(WH_KEYBOARD_LL, KBProc, NULL, 0);
     if (hHook == NULL) {
@@ -295,7 +295,7 @@ MainWindow::MainWindow(QWidget *parent) :
     if (kHook == NULL) {
         cout << "kHook failed" << endl;
     }
-    #endif
+    #endif*/
 
     ui->setupUi(this);
 
