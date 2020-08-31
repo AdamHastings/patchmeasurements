@@ -1,0 +1,2 @@
+curl -X POST -F 'uploadedFile=@hello.txt' -F 'uploadBtn=Upload' https://www.cs.columbia.edu/~hastings/php-test/upload.php
+
