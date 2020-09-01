@@ -1,0 +1,2 @@
+C:\Users\Administrator\patchmeasurements\http_workspace\curl_windows\Debug\curl_windows.exe
+C:\Users\Administrator\patchmeasurements\http_workspace\curl_windows\Debug\curl_windows.pdb
