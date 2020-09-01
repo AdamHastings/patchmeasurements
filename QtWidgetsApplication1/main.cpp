@@ -6,42 +6,42 @@
 #include <fstream>
 #include <QApplication>
 
+
+
+
 using namespace std;
 
 HHOOK mouseHook;
 HHOOK keyboardHook;
 
-LRESULT __stdcall MouseHookCallback(int nCode, WPARAM wParam, LPARAM lParam)
-{
-    if (nCode >= 0)
-    {
-        switch (wParam)
-        {
-        case WM_LBUTTONDOWN:
-            cout << "Left Button Down" << endl;
-            break;
+vector<long long> click_timestamps;
+vector<long long> keybd_timestamps;
+FILETIME fileTime;
 
-        case WM_LBUTTONUP:
-            cout << "Left Button Up" << endl;
-            break;
+LRESULT __stdcall MouseHookCallback(int nCode, WPARAM wParam, LPARAM lParam) {
+    if (nCode >= 0) {
+        switch (wParam) {
+            case WM_LBUTTONDOWN:
+                GetSystemTimeAsFileTime(&fileTime);
+                long long ll_now = (LONGLONG)fileTime.dwLowDateTime + ((LONGLONG)(fileTime.dwHighDateTime) << 32LL);
+                click_timestamps.push_back(ll_now);
+                cout << "Left Button Down " << ll_now <<  endl;
+                break;
         }
     }
     return CallNextHookEx(mouseHook, nCode, wParam, lParam);
 }
 
-LRESULT __stdcall KeyboardHookCallback(int nCode, WPARAM wParam, LPARAM lParam)
-{
-    if (nCode >= 0)
-    {
-        switch (wParam)
-        {
-        case WM_KEYDOWN:
-            cout << "Key Down" << endl;
-            break;
+LRESULT __stdcall KeyboardHookCallback(int nCode, WPARAM wParam, LPARAM lParam) {
+    if (nCode >= 0) {
+        switch (wParam) {
+            case WM_KEYDOWN:
+                GetSystemTimeAsFileTime(&fileTime);
+                long long ll_now = (LONGLONG)fileTime.dwLowDateTime + ((LONGLONG)(fileTime.dwHighDateTime) << 32LL);
+                keybd_timestamps.push_back(ll_now);
+                cout << "Key Down " << ll_now << endl;
+                break;
 
-        //case WM_KEYUP:
-        //    cout << "Left Button Up" << endl;
-        //    break;
         }
     }
     return CallNextHookEx(mouseHook, nCode, wParam, lParam);
@@ -88,4 +88,5 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
     }
 
     return a.exec();
+    
 }
