@@ -32,6 +32,8 @@
 #include <QApplication>
 #include <QDesktopWidget>
 
+#include <algorithm>
+
 #define DEBUG 1
 
 
@@ -42,8 +44,8 @@ class Ui_MainWindow
 
 private:
     QRect rec = QApplication::desktop()->screenGeometry();
-    const int H = rec.height()/3;
-    const int W = rec.width()/3;
+    const int H = min(rec.height() / 3, rec.width() / 3);
+    const int W = max(rec.height() / 3, rec.width() / 3);
 
     const int MARGIN = H/10;
     const int M = MARGIN;
@@ -226,7 +228,7 @@ public:
 
         QFont titlefont = QFont();
         titlefont.setBold(true);
-        titlefont.setPointSize(20);
+        titlefont.setPointSize(16);
 
         task1_title = new QLabel(task1_page);
         task1_title->setGeometry(QRect(M, M/2, LINEWIDTH, M));
