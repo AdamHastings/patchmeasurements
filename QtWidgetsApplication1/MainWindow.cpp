@@ -52,29 +52,45 @@ void MainWindow::showTask1() {
     ui->stackedWidget->setCurrentWidget(ui->task1_page);
 }
 
-void MainWindow::showPatch() {
-    setFreq(50);
-    ui->stackedWidget->setCurrentWidget(ui->patch_page);
+void fillBar(QProgressBar *pb) {
+#if QT_NO_DEBUG
+    int MAGIC_THRES = 45;
 
-
-    #if QT_NO_DEBUG
-    int MAGIC_THRES = 24;
-
-    for (int i=0; i<MAGIC_THRES; i++) {
-        ui->patch_progress_bar->setValue(i);
+    for (int i = 0; i < MAGIC_THRES; i++) {
+        pb->setValue(i);
         std::this_thread::sleep_for(std::chrono::milliseconds(100));
     }
 
-    for (int i=MAGIC_THRES; i<=100; i++) {
-        ui->patch_progress_bar->setValue(i);
+    for (int i = MAGIC_THRES; i <= 100; i++) {
+        pb->setValue(i);
         std::this_thread::sleep_for(std::chrono::milliseconds(10));
     }
-    #endif
+#endif
+}
 
+void MainWindow::showPatch() {
+    setFreq(50);
+    ui->stackedWidget->setCurrentWidget(ui->patch_page);
+    fillBar(ui->patch_progress_bar);
     ui->patch_done_label->setText(QApplication::translate("MainWindow", "Done!", Q_NULLPTR));
-
     ui->patch_continue_btn->setEnabled(true);
+}
 
+void MainWindow::showPatch2() {
+    ui->stackedWidget->setCurrentWidget(ui->patch2_page);
+    // TODO apply or de-apply throttling
+    fillBar(ui->patch2_progress_bar);
+    ui->patch2_done_label->setText("Done!");
+    ui->patch2_continue_btn->setEnabled(true);
+}
+
+void MainWindow::showPatch3() {
+    ui->stackedWidget->setCurrentWidget(ui->patch3_page);
+    // Undo all patches
+    // TODO
+    fillBar(ui->patch3_progress_bar);
+    ui->patch3_done_label->setText("Done! All temporary modifications made to your computer have been undone.");
+    ui->patch3_continue_btn->setEnabled(true);
 }
 
 void MainWindow::pickThrottledTask() {
@@ -109,6 +125,15 @@ void MainWindow::showQ1() {
 
 void MainWindow::q1Response() {
     ui->q1_continue_btn->setEnabled(true);
+    if (ui->q1_same_btn->isCheckable()) {
+        faster = "same";
+    }
+    else if (ui->q1_t2faster_btn->isCheckable()) {
+        faster = "task2";
+    }
+    else if (ui->q1_t3faster_btn->isCheckable()) {
+        faster = "task3";
+    }
 }
 
 void MainWindow::showQ1Next() {
@@ -124,6 +149,9 @@ void MainWindow::showQ1Next() {
 }
 
 void MainWindow::showPreWTA() {
+
+    speedup_guess = ui->q2_input->value();
+
     std::string pre_wta_text = "In this experiment, we slowed down Task "  + to_string(throttled_task) + " by " + to_string(slowdown) + "%. In the next section, you will be asked a series of yes/no questions that aim to estimate how much you value a performance loss of " + to_string(slowdown) + "%.";
     ui->pre_wta_label->setText(pre_wta_text.c_str());
     ui->stackedWidget->setCurrentWidget(ui->pre_wta_page);
@@ -234,68 +262,11 @@ void MainWindow::task3Continue() {
     #endif
 }
 
-//#ifdef _WIN32
-//
-//vector<int> MainWindow::click_timestamps;
-//int MainWindow::keystrokes = 0;
-//
-//
-//void MainWindow::addNewTimestamp(int m) {
-//    click_timestamps.push_back(m);
-//    cout << m << endl;
-//}
-//
-//void MainWindow::incKeystrokes() {
-//    keystrokes++;
-//    cout << keystrokes << endl;
-//}
-//
-//
-//HHOOK hHook = NULL;
-//HHOOK kHook = NULL;
-//
-//LRESULT CALLBACK llmouse(int nCode, WPARAM wParam, LPARAM lParam) {   
-//    cout << rand() << endl;
-//    
-//    switch( wParam ) {
-//        case WM_LBUTTONDOWN:  
-//            const auto p1 = std::chrono::system_clock::now();
-//            // const auto m std::chrono::duration_cast<std::chrono::milliseconds>(
-//                //    p1.time_since_epoch()).count() << '\n';
-//            // click_timestamps.push_back(std::chrono::duration_cast<std::chrono::milliseconds>(p1.time_since_epoch()).count());
-//            int m = chrono::duration_cast<chrono::milliseconds>(p1.time_since_epoch()).count();
-//            MainWindow::addNewTimestamp(m);
-//    }
-//    return CallNextHookEx(hHook, nCode, wParam, lParam);
-//}
-//
-//LRESULT CALLBACK KBProc(int nCode, WPARAM wParam, LPARAM lParam) {   
-//    cout << "key pressed" << endl;
-//    switch( wParam ) {
-//        case WM_KEYDOWN:
-//            MainWindow::incKeystrokes();
-//    }
-//    return CallNextHookEx(kHook, nCode, wParam, lParam);
-//}
-//
-//#endif
-
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
-
- /*   #ifdef _WIN32
-    hHook = SetWindowsHookExA(WH_MOUSE_LL, llmouse, NULL, 0);
-    kHook = SetWindowsHookExW(WH_KEYBOARD_LL, KBProc, NULL, 0);
-    if (hHook == NULL) {
-        cout << "Hook failed" << endl;
-    }
-    if (kHook == NULL) {
-        cout << "kHook failed" << endl;
-    }
-    #endif*/
 
     ui->setupUi(this);
 
@@ -304,8 +275,11 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->consent_btn, &QPushButton::clicked, this, &MainWindow::showTask1);
     connect(ui->task1_continue_btn, &QPushButton::clicked, this, &MainWindow::showPatch);
     connect(ui->patch_continue_btn, &QPushButton::clicked, this, &MainWindow::showTask2);
-    connect(ui->task2_continue_btn, &QPushButton::clicked, this, &MainWindow::showTask3);
-    connect(ui->task3_continue_btn, &QPushButton::clicked, this, &MainWindow::showQ1);
+    connect(ui->task2_continue_btn, &QPushButton::clicked, this, &MainWindow::showPatch2);
+    connect(ui->patch2_continue_btn, &QPushButton::clicked, this, &MainWindow::showTask3);
+    connect(ui->task3_continue_btn, &QPushButton::clicked, this, &MainWindow::showPatch3);
+    connect(ui->patch3_continue_btn, &QPushButton::clicked, this, &MainWindow::showQ1);
+
 
     
     connect(ui->q1_t2faster_btn, &QPushButton::clicked, ui->q1_continue_btn, &QPushButton::setEnabled);

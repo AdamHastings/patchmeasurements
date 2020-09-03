@@ -3,6 +3,7 @@
 
 #include <QMainWindow>
 #include <vector>
+#include <string>
 
 #ifdef _WIN32
     #include <windows.h>
@@ -24,9 +25,18 @@ public:
     #ifdef _WIN32
     static void addNewTimestamp(int m);
     static void incKeystrokes();
-    static std::vector<int> click_timestamps;
+    static std::vector<long long> click_timestamps;
     static int keystrokes;
     #endif
+
+    int WTA;
+    /* Encoding 
+    *   0 = The speeds of Tasks 2 and 3 felt the same
+    *   2 = Task 2 felt faster
+    *   3 = Task 3 felt faster
+    */
+    std::string faster;
+    int speedup_guess;
 
 
 private:
@@ -46,7 +56,10 @@ private:
     void showGoodbye();
     void close();
     void showTask1();
+    //void fillBar(QProgressBar *pb);
     void showPatch();
+    void showPatch2();
+    void showPatch3();
     void showTask2();
     void showTask3();
     void showQ1();
