@@ -17,8 +17,8 @@ int main(void)
 
     curl_mime* form = NULL;
     curl_mimepart* field = NULL;
-    struct curl_slist* headerlist = NULL;
-    static const char buf[] = "Expect:";
+    //struct curl_slist* headerlist = NULL;
+    //static const char buf[] = "Expect:";
 
     curl_global_init(CURL_GLOBAL_ALL);
      
