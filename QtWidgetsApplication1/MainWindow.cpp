@@ -6,6 +6,7 @@
 #include <stdlib.h>
 #include <iostream>
 #include <time.h>
+#include <qsettings.h>
 
 
 using namespace std;
@@ -44,24 +45,8 @@ void MainWindow::showGoodbye() {
 }
 
 bool isCsEnabled() {
-    HKEY hKey = HKEY_CURRENT_USER;
-    LPCWSTR subKey = L"SYSTEM\\CurrentControlSet\\Control\\Power";
-    DWORD options = 0;
-    REGSAM samDesired = KEY_READ;// | KEY_WRITE - need ?;
-
-    HKEY OpenResult;
-
-    LPCWSTR pValue = L"CsEnabled";
-    DWORD flags = RRF_RT_ANY;
-
-    //Allocationg memory for a DWORD value.
-    DWORD dataType;
-
-    DWORD datalength = 255;
-    unique_ptr<char[]> buffer;
-
-    bool CsEnabled = RegGetValue(hKey, subKey, pValue, 0, nullptr, buffer.get(), &datalength);
-    return CsEnabled;
+    QSettings reg("HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Control\\Power", QSettings::NativeFormat);
+    return (bool)reg.value("CsEnabled").toInt();
 }
 
 void MainWindow::showStartNext() {
@@ -73,6 +58,12 @@ void MainWindow::showStartNext() {
 }
 
 void MainWindow::showRestartLabel() {
+
+    QSettings reg("HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Control\\Power", QSettings::NativeFormat);
+    reg.setValue("CsEnabled", 0);
+    cout << reg.value("CsEnabled").toInt() << endl;
+
+    // Update app
     ui->reg_ok_btn->setDisabled(true);
     ui->reg_notok_btn->setDisabled(true);
     ui->reg_done_label->setText("Your computer's configuration has been changed. You will need to restart your computer for the changes to take place. Please restart your computer now.");
@@ -266,7 +257,7 @@ void MainWindow::task1Continue() {
 }
 
 void MainWindow::task2Continue() {
-    #if QT_NO_DEBUG
+#if QT_NO_DEBUG
     if (ui->task2a->isChecked() && 
         ui->task2b->isChecked() && 
         ui->task2c->isChecked() && 
@@ -279,11 +270,11 @@ void MainWindow::task2Continue() {
     } else {
         ui->task3_continue_btn->setDisabled(true);
     }
-    #endif
+#endif
 }
 
 void MainWindow::task3Continue() {
-    #if QT_NO_DEBUG
+#if QT_NO_DEBUG
     if (ui->task3a->isChecked() && 
         ui->task3b->isChecked() && 
         ui->task3c->isChecked() && 
@@ -296,7 +287,7 @@ void MainWindow::task3Continue() {
     } else {
         ui->task3_continue_btn->setDisabled(true);
     }
-    #endif
+#endif
 }
 
 
@@ -355,13 +346,9 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->task3e, &QPushButton::clicked, this, &MainWindow::task3Continue);
     connect(ui->task3f, &QPushButton::clicked, this, &MainWindow::task3Continue);
     connect(ui->task3g, &QPushButton::clicked, this, &MainWindow::task3Continue);
-
-
 }
 
-MainWindow::~MainWindow()
-{
-    QApplication::quit();
+MainWindow::~MainWindow() {
     delete ui;
 }
 

@@ -124,10 +124,10 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
     MainWindow mw;
     mw.show();
 
-    while (GetMessage(&msg, NULL, 0, 0)) {
-        TranslateMessage(&msg);
-        DispatchMessage(&msg);
-    }
+    //while (GetMessage(&msg, NULL, 0, 0)) {
+    //    TranslateMessage(&msg);
+    //    DispatchMessage(&msg);
+    //}
 
     return a.exec();
     
