@@ -43,14 +43,53 @@ void MainWindow::showGoodbye() {
     ui->stackedWidget->setCurrentWidget(ui->goodbye_page);
 }
 
+bool isCsEnabled() {
+    HKEY hKey = HKEY_CURRENT_USER;
+    LPCWSTR subKey = L"SYSTEM\\CurrentControlSet\\Control\\Power";
+    DWORD options = 0;
+    REGSAM samDesired = KEY_READ;// | KEY_WRITE - need ?;
+
+    HKEY OpenResult;
+
+    LPCWSTR pValue = L"CsEnabled";
+    DWORD flags = RRF_RT_ANY;
+
+    //Allocationg memory for a DWORD value.
+    DWORD dataType;
+
+    DWORD datalength = 255;
+    unique_ptr<char[]> buffer;
+
+    bool CsEnabled = RegGetValue(hKey, subKey, pValue, 0, nullptr, buffer.get(), &datalength);
+    return CsEnabled;
+}
+
+void MainWindow::showStartNext() {
+    if (isCsEnabled()) {
+        ui->stackedWidget->setCurrentWidget(ui->reg_page);
+    } else {
+        ui->stackedWidget->setCurrentWidget(ui->task1_page);
+    }
+}
+
+void MainWindow::showRestartLabel() {
+    ui->reg_ok_btn->setDisabled(true);
+    ui->reg_notok_btn->setDisabled(true);
+    ui->reg_done_label->setText("Your computer's configuration has been changed. You will need to restart your computer for the changes to take place. Please restart your computer now.");
+}
+
+//void MainWindow::showRegPage() {
+//    ui->stackedWidget->setCurrentWidget(ui->reg_page);
+//}
+
 void MainWindow::close() {
     QApplication::quit();
 }
 
-void MainWindow::showTask1() {
-    setFreq(100);
-    ui->stackedWidget->setCurrentWidget(ui->task1_page);
-}
+//void MainWindow::showTask1() {
+//    setFreq(100);
+//    ui->stackedWidget->setCurrentWidget(ui->task1_page);
+//}
 
 void fillBar(QProgressBar *pb) {
 #if QT_NO_DEBUG
@@ -209,8 +248,7 @@ void MainWindow::conclude() {
 }
 
 void MainWindow::task1Continue() {
-
-    #if QT_NO_DEBUG
+#if QT_NO_DEBUG
 
     if (ui->task1a->isChecked() && 
         ui->task1b->isChecked() && 
@@ -224,8 +262,7 @@ void MainWindow::task1Continue() {
     } else {
         ui->task1_continue_btn->setDisabled(true);
     }
-
-    #endif
+#endif
 }
 
 void MainWindow::task2Continue() {
@@ -272,7 +309,10 @@ MainWindow::MainWindow(QWidget *parent) :
 
     connect(ui->not_consent_btn, &QPushButton::clicked, this, &MainWindow::showGoodbye);
     // connect(ui->goodbye_btn, &QPushButton::clicked, this, &MainWindow::close);
-    connect(ui->consent_btn, &QPushButton::clicked, this, &MainWindow::showTask1);
+    //connect(ui->consent_btn, &QPushButton::clicked, this, &MainWindow::showTask1);
+    connect(ui->consent_btn, &QPushButton::clicked, this, &MainWindow::showStartNext);
+    connect(ui->reg_ok_btn, &QPushButton::clicked, this, &MainWindow::showRestartLabel);
+    connect(ui->reg_notok_btn, &QPushButton::clicked, this, &MainWindow::showGoodbye);
     connect(ui->task1_continue_btn, &QPushButton::clicked, this, &MainWindow::showPatch);
     connect(ui->patch_continue_btn, &QPushButton::clicked, this, &MainWindow::showTask2);
     connect(ui->task2_continue_btn, &QPushButton::clicked, this, &MainWindow::showPatch2);
@@ -321,5 +361,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
 MainWindow::~MainWindow()
 {
+    QApplication::quit();
     delete ui;
 }
+

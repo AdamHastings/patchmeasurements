@@ -69,6 +69,13 @@ public:
     QWidget *goodbye_page;
     QLabel *goodbye_label;
     QPushButton *goodbye_btn;
+
+    QWidget *reg_page;
+    QLabel *reg_label;
+    QPushButton *reg_ok_btn;
+    QPushButton* reg_notok_btn;
+    QProgressBar* reg_pb;
+    QLabel* reg_done_label;
     
     QWidget *task1_page;
     QLabel *task1_label;
@@ -216,6 +223,7 @@ public:
 
         goodbye_page = new QWidget();
         goodbye_page->setObjectName(QStringLiteral("goodbye_page"));
+        stackedWidget->addWidget(goodbye_page);
 
         goodbye_label = new QLabel(goodbye_page);
         goodbye_label->setObjectName(QStringLiteral("goodbye_label"));
@@ -224,13 +232,35 @@ public:
         goodbye_label->setWordWrap(true);
         goodbye_label->setText("Thank you for your participation. You may now exit this window.");
 
+        //// registry edit page ///////////////////////////////////////////////
 
-        // goodbye_btn = new QPushButton(goodbye_page);
-        // goodbye_btn->setObjectName(QStringLiteral("goodbye_btn"));
-        // goodbye_btn->setGeometry(QRect(W/2 - BUTTON_WIDTH/2, M*8, BUTTON_WIDTH, BUTTON_HEIGHT));
-        // goodbye_btn->setText("Close");
+        reg_page = new QWidget();
+        stackedWidget->addWidget(reg_page);
 
-        stackedWidget->addWidget(goodbye_page);
+        reg_label = new QLabel(reg_page);
+        reg_label->setGeometry(QRect(M, M, LINEWIDTH, M * 3));
+        reg_label->setAlignment(Qt::AlignJustify | Qt::AlignVCenter);
+        reg_label->setWordWrap(true);
+        reg_label->setText("As part of this experiment, we will make some temporary modifications to your computer. However, your computer's current configuration does not allow us to make these modifications. Please note that all modifications made to your computer are temporary and will be reversed at the end of this experiment. Do you allow us to make temporary, reversible changes to your computer?");
+
+        reg_ok_btn = new QPushButton(reg_page);
+        reg_ok_btn->setGeometry(QRect(M, M * 5, W / 2 - 2 * M, 2*BUTTON_HEIGHT));
+        reg_ok_btn->setText("Make the changes now");
+
+        reg_notok_btn = new QPushButton(reg_page);
+        reg_notok_btn->setGeometry(QRect(M + W / 2, M * 5, W / 2 - 2 * M, 2* BUTTON_HEIGHT));
+        reg_notok_btn->setText("Do not make changes\n to my computer");
+
+        reg_done_label = new QLabel(reg_page);
+        reg_done_label->setWordWrap(true);
+        reg_done_label->setAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
+        reg_done_label->setGeometry(QRect(M, M * 7, LINEWIDTH, M));
+
+        //QWidget* reg_page;
+        //QLabel* reg_label;
+        //QPushButton* reg_ok_btn;
+        //QProgressBar* reg_pb;
+        //QLabel* reg_done_label;
 
         //// task1 page ///////////////////////////////////////////////////////
         

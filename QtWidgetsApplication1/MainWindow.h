@@ -55,6 +55,9 @@ private:
     void setFreq(int p);
     void showGoodbye();
     void close();
+    void showStartNext();
+    void showRegPage();
+    void showRestartLabel();
     void showTask1();
     //void fillBar(QProgressBar *pb);
     void showPatch();
