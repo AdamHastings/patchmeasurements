@@ -8,8 +8,8 @@
 
 //#include "sendfile.h"
 
-#define CURL_STATICLIB
-#include <curl\curl.h>
+//#define CURL_STATICLIB
+//#include <curl\curl.h>
 
 
 

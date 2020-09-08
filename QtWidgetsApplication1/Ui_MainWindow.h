@@ -44,8 +44,8 @@ class Ui_MainWindow
 
 private:
     QRect rec = QApplication::desktop()->screenGeometry();
-    const int H = min(rec.height() / 3, rec.width() / 3);
-    const int W = max(rec.height() / 3, rec.width() / 3);
+    const int H = min(rec.height() / 2, rec.width() / 2);
+    const int W = max(rec.height() / 2, rec.width() / 2);
 
     const int MARGIN = H/10;
     const int M = MARGIN;
@@ -70,6 +70,12 @@ public:
     QLabel *goodbye_label;
     QPushButton *goodbye_btn;
 
+    QWidget* mod_page;
+    QLabel* mod_label;
+    QPushButton* mod_not_consent_btn;
+    QPushButton* mod_consent_btn;
+
+
     QWidget *reg_page;
     QLabel *reg_label;
     QPushButton *reg_ok_btn;
@@ -87,6 +93,9 @@ public:
     QCheckBox *task1e;
     QCheckBox *task1f;
     QCheckBox *task1g;
+    QCheckBox* task1h;
+    QCheckBox* task1i;
+    QCheckBox* task1j;
     QPushButton *task1_continue_btn;
 
     QWidget *patch_page;
@@ -117,6 +126,9 @@ public:
     QCheckBox *task2e;
     QCheckBox *task2f;
     QCheckBox *task2g;
+    QCheckBox* task2h;
+    QCheckBox* task2i;
+    QCheckBox* task2j;
     QPushButton *task2_continue_btn;
 
     QWidget *task3_page;
@@ -129,6 +141,9 @@ public:
     QCheckBox *task3e;
     QCheckBox *task3f;
     QCheckBox *task3g;
+    QCheckBox* task3h;
+    QCheckBox* task3i;
+    QCheckBox* task3j;
     QPushButton *task3_continue_btn;
 
     QWidget *q1_page;
@@ -232,6 +247,26 @@ public:
         goodbye_label->setWordWrap(true);
         goodbye_label->setText("Thank you for your participation. You may now exit this window.");
 
+
+        //// modification consent page
+
+        mod_page = new QWidget();
+        stackedWidget->addWidget(mod_page);
+
+        mod_label = new QLabel(mod_page);
+        mod_label->setGeometry(QRect(M, M, LINEWIDTH, M * 4));
+        mod_label->setAlignment(Qt::AlignJustify | Qt::AlignTop);
+        mod_label->setWordWrap(true);
+        mod_label->setText("As part of this experiment, we will make temporary modifications to you computer. It is important that your computer does not power down during this experiment. If your computer powers down, you will need to re-do this experiment to restore your computer to its original state.");
+
+        mod_consent_btn = new QPushButton(mod_page);
+        mod_consent_btn->setGeometry(QRect(M, M * 5, W / 2 - 2 * M, 2 * BUTTON_HEIGHT));
+        mod_consent_btn->setText("I understand");
+        
+        mod_not_consent_btn = new QPushButton(mod_page);
+        mod_not_consent_btn->setGeometry(QRect(M + W / 2, M * 5, W / 2 - 2 * M, 2 * BUTTON_HEIGHT));
+        mod_not_consent_btn->setText("Do not make changes\n to my computer");
+
         //// registry edit page ///////////////////////////////////////////////
 
         reg_page = new QWidget();
@@ -280,41 +315,66 @@ public:
 
         task1_label = new QLabel(task1_page);
         task1_label->setObjectName(QStringLiteral("task1_label"));
-        task1_label->setGeometry(QRect(M, M*2, LINEWIDTH, M));
-        task1_label->setAlignment(Qt::AlignLeft|Qt::AlignBottom);
+        task1_label->setGeometry(QRect(M, M, LINEWIDTH, M));
+        task1_label->setAlignment(Qt::AlignHCenter|Qt::AlignBottom);
         task1_label->setWordWrap(true);
+        task1_label->setText("You will now do some simple tasks. Check off each box below as you complete the following tasks: ");
 
         task1a = new QCheckBox(task1_page);
-        task1a->setGeometry(QRect(M, BUTTON_HEIGHT*5, LINEWIDTH, BUTTON_HEIGHT));
-        task1a->setText("Open up a web browser");
+        task1a->setGeometry(QRect(M, BUTTON_HEIGHT*4, LINEWIDTH, BUTTON_HEIGHT));
+        task1a->setText("Open up a web browser. Login to your LionMail account. Create a new Google Doc titled \"Task 1\".");
 
         task1b = new QCheckBox(task1_page);
-        task1b->setGeometry(QRect(M, BUTTON_HEIGHT*6, LINEWIDTH, BUTTON_HEIGHT));
-        task1b->setText("Create a new Google Doc. Add the following information to the Google Doc:");
+        task1b->setGeometry(QRect(M, BUTTON_HEIGHT*5, LINEWIDTH, BUTTON_HEIGHT));
+        task1b->setText("Open Google Maps in a new tab. Find the distance (in miles) between New York City and Los Angeles.");
+        task1b->setEnabled(false);
 
         task1c = new QCheckBox(task1_page);
-        task1c->setGeometry(QRect(M*2, BUTTON_HEIGHT*7, LINEWIDTH, BUTTON_HEIGHT));
-        task1c->setText("The distance (in miles) between New York City and Los Angeles");
+        task1c->setGeometry(QRect(M, BUTTON_HEIGHT*6, LINEWIDTH, BUTTON_HEIGHT));
+        task1c->setText("Write down this distance in the Google Doc.");
+        task1c->setEnabled(false);
 
         task1d = new QCheckBox(task1_page);
-        task1d->setGeometry(QRect(M*2, BUTTON_HEIGHT*8, LINEWIDTH, BUTTON_HEIGHT));
-        task1d->setText("A picture of Low Library");
+        task1d->setGeometry(QRect(M, BUTTON_HEIGHT*7, LINEWIDTH, BUTTON_HEIGHT));
+        task1d->setText("Open any search engine in another tab and find any picture of Low Library.");
+        task1d->setEnabled(false);
 
         task1e = new QCheckBox(task1_page);
-        task1e->setGeometry(QRect(M*2, BUTTON_HEIGHT*9, LINEWIDTH, BUTTON_HEIGHT));
-        task1e->setText("The URL to any music video");
+        task1e->setGeometry(QRect(M, BUTTON_HEIGHT*8, LINEWIDTH, BUTTON_HEIGHT));
+        task1e->setText("Copy and paste this picture into the Google Doc.");
+        task1e->setEnabled(false);
 
         task1f = new QCheckBox(task1_page);
-        task1f->setGeometry(QRect(M, BUTTON_HEIGHT*10, LINEWIDTH, BUTTON_HEIGHT));
-        task1f->setText("Share the Google Doc with hastings@cs.columbia.edu");
+        task1f->setGeometry(QRect(M, BUTTON_HEIGHT * 9, LINEWIDTH, BUTTON_HEIGHT));
+        task1f->setText("Open YouTube in another tab. Find a video of jazz trumpeter Miles Davis performing the song \"So What\" live.");
+        task1f->setEnabled(false);
 
         task1g = new QCheckBox(task1_page);
-        task1g->setGeometry(QRect(M, BUTTON_HEIGHT*11, LINEWIDTH, BUTTON_HEIGHT));
-        task1g->setText("Exit the web browser");
+        task1g->setGeometry(QRect(M, BUTTON_HEIGHT * 10, LINEWIDTH, BUTTON_HEIGHT));
+        task1g->setText("Copy and paste this video's URL into the Google Doc.");
+        task1g->setEnabled(false);
+
+        task1h = new QCheckBox(task1_page);
+        task1h->setGeometry(QRect(M, BUTTON_HEIGHT*11, LINEWIDTH, BUTTON_HEIGHT));
+        task1h->setText("Download the Google Doc as a PDF (click on File > Download > PDF Document ).");
+        task1h->setEnabled(false);
+
+        task1i = new QCheckBox(task1_page);
+        task1i->setGeometry(QRect(M, BUTTON_HEIGHT*12, LINEWIDTH, BUTTON_HEIGHT));
+        task1i->setText("Open LionMail in a new tab. Compose a new email titled \"<your uni>-task1\" (where <your uni> is your UNI).\n Attach the downloaded PDF to the email and send to tasks-test-2020@cs.columbia.edu.");
+        task1i->setEnabled(false);
+
+        task1j = new QCheckBox(task1_page);
+        task1j->setGeometry(QRect(M, BUTTON_HEIGHT * 13, LINEWIDTH, BUTTON_HEIGHT));
+        task1j->setText("Close all tabs and delete the previously downloaded PDF from your computer.");
+        task1j->setEnabled(false);
 
         task1_continue_btn = new QPushButton(task1_page);
         task1_continue_btn->setObjectName(QStringLiteral("task1_continue_btn"));
-        task1_continue_btn->setGeometry(QRect(W/2 - BUTTON_WIDTH/2, M*8, BUTTON_WIDTH, BUTTON_HEIGHT));
+        task1_continue_btn->setGeometry(QRect(W/2 - BUTTON_WIDTH/2, M*9, BUTTON_WIDTH, BUTTON_HEIGHT));
+        task1_continue_btn->setText("Continue");
+        task1b->setEnabled(false);
+
         
         #if QT_NO_DEBUG
         task1_continue_btn->setEnabled(false);
@@ -428,13 +488,68 @@ public:
         task2_title->setFont(titlefont);
 
         task2_label = new QLabel(task2_page);
-        task2_label->setObjectName(QStringLiteral("task1_label"));
-        task2_label->setGeometry(QRect(M, M*2, LINEWIDTH, M));
-        task2_label->setAlignment(Qt::AlignLeft|Qt::AlignVCenter);
+        task2_label->setObjectName(QStringLiteral("task2_label"));
+        task2_label->setGeometry(QRect(M, M, LINEWIDTH, M));
+        task2_label->setAlignment(Qt::AlignHCenter | Qt::AlignBottom);
         task2_label->setWordWrap(true);
-        task2_label->setText("You will now do some more simple tasks, similar to what you did before. Check off each box below as you complete the following tasks: ");
+        task2_label->setText("You will now do some more simple tasks, similar to what you did before.\nCheck off each box below as you complete the following tasks:");
 
         task2a = new QCheckBox(task2_page);
+        task2a->setGeometry(QRect(M, BUTTON_HEIGHT * 4, LINEWIDTH, BUTTON_HEIGHT));
+        task2a->setText("Open up a web browser. Login to your LionMail account. Create a new Google Doc titled \"Task 2\".");
+
+        task2b = new QCheckBox(task2_page);
+        task2b->setGeometry(QRect(M, BUTTON_HEIGHT * 5, LINEWIDTH, BUTTON_HEIGHT));
+        task2b->setText("Open Google Maps in a new tab. Find the distance (in miles) between Casablanca, Morocco and Cairo, Egypt.");
+        task2b->setEnabled(false);
+
+        task2c = new QCheckBox(task2_page);
+        task2c->setGeometry(QRect(M, BUTTON_HEIGHT * 6, LINEWIDTH, BUTTON_HEIGHT));
+        task2c->setText("Write down this distance in the Google Doc.");
+        task2c->setEnabled(false);
+
+        task2d = new QCheckBox(task2_page);
+        task2d->setGeometry(QRect(M, BUTTON_HEIGHT * 7, LINEWIDTH, BUTTON_HEIGHT));
+        task2d->setText("Open any search engine in another tab and find any picture of Butler Library.");
+        task2d->setEnabled(false);
+
+        task2e = new QCheckBox(task2_page);
+        task2e->setGeometry(QRect(M, BUTTON_HEIGHT * 8, LINEWIDTH, BUTTON_HEIGHT));
+        task2e->setText("Copy and paste this picture into the Google Doc.");
+        task2e->setEnabled(false);
+
+        task2f = new QCheckBox(task2_page);
+        task2f->setGeometry(QRect(M, BUTTON_HEIGHT * 9, LINEWIDTH, BUTTON_HEIGHT));
+        task2f->setText("Open YouTube in another tab. Find a video of jazz pianist Dave Brubeck performing the song \"Take Five\" live.");
+        task2f->setEnabled(false);
+
+        task2g = new QCheckBox(task2_page);
+        task2g->setGeometry(QRect(M, BUTTON_HEIGHT * 10, LINEWIDTH, BUTTON_HEIGHT));
+        task2g->setText("Copy and paste this video's URL into the Google Doc.");
+        task2g->setEnabled(false);
+
+        task2h = new QCheckBox(task2_page);
+        task2h->setGeometry(QRect(M, BUTTON_HEIGHT * 11, LINEWIDTH, BUTTON_HEIGHT));
+        task2h->setText("Download the Google Doc as a PDF (click on File > Download > PDF Document ).");
+        task2h->setEnabled(false);
+
+        task2i = new QCheckBox(task2_page);
+        task2i->setGeometry(QRect(M, BUTTON_HEIGHT * 12, LINEWIDTH, BUTTON_HEIGHT));
+        task2i->setText("Open LionMail in a new tab. Compose a new email titled \"<your uni>-task2\" (where <your uni> is your UNI).\n Attach the downloaded PDF to the email and send to tasks-test-2020@cs.columbia.edu.");
+        task2i->setEnabled(false);
+
+        task2j = new QCheckBox(task2_page);
+        task2j->setGeometry(QRect(M, BUTTON_HEIGHT * 13, LINEWIDTH, BUTTON_HEIGHT));
+        task2j->setText("Close all tabs and delete the previously downloaded PDF from your computer.");
+        task2j->setEnabled(false);
+
+        task2_continue_btn = new QPushButton(task2_page);
+        task2_continue_btn->setObjectName(QStringLiteral("task2_continue_btn"));
+        task2_continue_btn->setGeometry(QRect(W / 2 - BUTTON_WIDTH / 2, M * 9, BUTTON_WIDTH, BUTTON_HEIGHT));
+        task2_continue_btn->setText("Continue");
+        task2b->setEnabled(false);
+
+        /*task2a = new QCheckBox(task2_page);
         task2a->setGeometry(QRect(M, BUTTON_HEIGHT*5, LINEWIDTH, BUTTON_HEIGHT));
         task2a->setText("Open up a web browser");
 
@@ -465,7 +580,7 @@ public:
         task2_continue_btn = new QPushButton(task2_page);
         task2_continue_btn->setObjectName(QStringLiteral("task1_continue_btn"));
         task2_continue_btn->setGeometry(QRect(W/2 - BUTTON_WIDTH/2, M*8, BUTTON_WIDTH, BUTTON_HEIGHT));
-        task2_continue_btn->setText("Continue");
+        task2_continue_btn->setText("Continue");*/
 
         #if QT_NO_DEBUG
         task2_continue_btn->setDisabled(true);
@@ -484,6 +599,68 @@ public:
         task3_title->setFont(titlefont);
 
         task3_label = new QLabel(task3_page);
+        task3_label->setObjectName(QStringLiteral("task3_label"));
+        task3_label->setGeometry(QRect(M, M, LINEWIDTH, M));
+        task3_label->setAlignment(Qt::AlignHCenter | Qt::AlignBottom);
+        task3_label->setWordWrap(true);
+        task3_label->setText("You will now do some more simple tasks, similar to what you did before.\nCheck off each box below as you complete the following tasks:");
+
+        task3a = new QCheckBox(task3_page);
+        task3a->setGeometry(QRect(M, BUTTON_HEIGHT * 4, LINEWIDTH, BUTTON_HEIGHT));
+        task3a->setText("Open up a web browser. Login to your LionMail account. Create a new Google Doc titled \"Task 3\".");
+
+        task3b = new QCheckBox(task3_page);
+        task3b->setGeometry(QRect(M, BUTTON_HEIGHT * 5, LINEWIDTH, BUTTON_HEIGHT));
+        task3b->setText("Open Google Maps in a new tab. Find the distance (in miles) between Lima, Peru and Rio de Janeiro, Brazil.");
+        task3b->setEnabled(false);
+
+        task3c = new QCheckBox(task3_page);
+        task3c->setGeometry(QRect(M, BUTTON_HEIGHT * 6, LINEWIDTH, BUTTON_HEIGHT));
+        task3c->setText("Write down this distance in the Google Doc.");
+        task3c->setEnabled(false);
+
+        task3d = new QCheckBox(task3_page);
+        task3d->setGeometry(QRect(M, BUTTON_HEIGHT * 7, LINEWIDTH, BUTTON_HEIGHT));
+        task3d->setText("Open any search engine in another tab and find any picture of Roaree the Lion (Columbia's mascot).");
+        task3d->setEnabled(false);
+
+        task3e = new QCheckBox(task3_page);
+        task3e->setGeometry(QRect(M, BUTTON_HEIGHT * 8, LINEWIDTH, BUTTON_HEIGHT));
+        task3e->setText("Copy and paste this picture into the Google Doc.");
+        task3e->setEnabled(false);
+
+        task3f = new QCheckBox(task3_page);
+        task3f->setGeometry(QRect(M, BUTTON_HEIGHT * 9, LINEWIDTH + M, BUTTON_HEIGHT));
+        task3f->setText("Open YouTube in another tab. Find a video of jazz guitarist Wes Montgomery performing the song \"Round Midnight\" live.");
+        task3f->setEnabled(false);
+
+        task3g = new QCheckBox(task3_page);
+        task3g->setGeometry(QRect(M, BUTTON_HEIGHT * 10, LINEWIDTH, BUTTON_HEIGHT));
+        task3g->setText("Copy and paste this video's URL into the Google Doc.");
+        task3g->setEnabled(false);
+
+        task3h = new QCheckBox(task3_page);
+        task3h->setGeometry(QRect(M, BUTTON_HEIGHT * 11, LINEWIDTH, BUTTON_HEIGHT));
+        task3h->setText("Download the Google Doc as a PDF (click on File > Download > PDF Document ).");
+        task3h->setEnabled(false);
+
+        task3i = new QCheckBox(task3_page);
+        task3i->setGeometry(QRect(M, BUTTON_HEIGHT * 12, LINEWIDTH, BUTTON_HEIGHT));
+        task3i->setText("Open LionMail in a new tab. Compose a new email titled \"<your uni>-task3\" (where <your uni> is your UNI).\n Attach the downloaded PDF to the email and send to tasks-test-2020@cs.columbia.edu.");
+        task3i->setEnabled(false);
+
+        task3j = new QCheckBox(task3_page);
+        task3j->setGeometry(QRect(M, BUTTON_HEIGHT * 13, LINEWIDTH, BUTTON_HEIGHT));
+        task3j->setText("Close all tabs and delete the previously downloaded PDF from your computer.");
+        task3j->setEnabled(false);
+
+        task3_continue_btn = new QPushButton(task3_page);
+        task3_continue_btn->setObjectName(QStringLiteral("task3_continue_btn"));
+        task3_continue_btn->setGeometry(QRect(W / 2 - BUTTON_WIDTH / 2, M * 9, BUTTON_WIDTH, BUTTON_HEIGHT));
+        task3_continue_btn->setText("Continue");
+        task3b->setEnabled(false);
+
+        /*task3_label = new QLabel(task3_page);
         task3_label->setObjectName(QStringLiteral("task3_label"));
         task3_label->setGeometry(QRect(M, M*2, LINEWIDTH, M));
         task3_label->setAlignment(Qt::AlignLeft|Qt::AlignVCenter);
@@ -521,7 +698,7 @@ public:
         task3_continue_btn = new QPushButton(task3_page);
         task3_continue_btn->setObjectName(QStringLiteral("task3_continue_btn"));
         task3_continue_btn->setGeometry(QRect(W/2 - BUTTON_WIDTH/2, M*8, BUTTON_WIDTH, BUTTON_HEIGHT));
-        task3_continue_btn->setText("Continue");
+        task3_continue_btn->setText("Continue");*/
 
         #if QT_NO_DEBUG
         task3_continue_btn->setEnabled(false);
@@ -626,6 +803,10 @@ public:
         wta_disclaimer_label->setAlignment(Qt::AlignCenter|Qt::AlignVCenter);
         wta_disclaimer_label->setWordWrap(true);
         wta_disclaimer_label->setText("(This is for your current computer only and does not apply to any future computers you may buy.)");
+        // wta_disclamer_label->setText("Note: ");
+        // Would you be willing to slow down your computer for
+        // Avoid "permanent"
+
 
         wta_yes_btn = new QPushButton(wta_page);
         wta_yes_btn->setGeometry(QRect(W/2 - BUTTON_WIDTH - M, M*8, BUTTON_WIDTH, BUTTON_HEIGHT));
@@ -655,9 +836,7 @@ public:
         not_consent_btn->setText(QApplication::translate("MainWindow", "I do not consent", Q_NULLPTR));
         
         
-        task1_label->setText(QApplication::translate("MainWindow", "You will now do some simple tasks. Check off each box below as you complete the following tasks: ", Q_NULLPTR)); //You must:\n\n    1) Open a web browser.\n    2) Login to your LionMail account.\n    3) Compose and email containing:\n        a) The distance (in miles) between Columbia University and\n             the Empire State Building\n        b) A picture of Low Library\n        c) Any music video you like (just copy and paste the URL into the video)\n    4) Send the email to hastings@cs.columbia.edu.\n    5) Click \"Continue\" below only once the above tasks are completed.", Q_NULLPTR));
-        task1_continue_btn->setText(QApplication::translate("MainWindow", "Continue", Q_NULLPTR));
-
+        
     } // retranslateUi
 
 };

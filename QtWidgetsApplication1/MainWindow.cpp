@@ -7,9 +7,55 @@
 #include <iostream>
 #include <time.h>
 #include <qsettings.h>
+#include <qprocess.h>
+#include <sstream>
 
 
 using namespace std;
+
+
+vector<int> parsePowercfgOutput(string s) {
+    // gets last two valuesand returns in vector
+    vector<string> tokens;
+
+    istringstream ss(s);
+    string tmp;
+    while (ss >> tmp) {
+        tokens.push_back(tmp);
+        cout << tmp << endl;
+    }
+
+    cout << tokens[tokens.size()-1] << endl;
+    cout << tokens[tokens.size()-7] << endl;
+
+    vector<int> retvec{0, 0};
+    return retvec;
+}
+
+void MainWindow::getDefaultPowercfg() {
+    string get_max_default = "powercfg Q SCHEME_CURRENT SUB_PROCESSOR PROCTHROTTLEMAX";
+    string get_min_default = "powercfg Q SCHEME_CURRENT SUB_PROCESSOR PROCTHROTTLEMIN";
+
+    QProcess process;
+    process.start("powercfg Q SCHEME_CURRENT SUB_PROCESSOR PROCTHROTTLEMAX");
+    process.waitForFinished(-1);
+
+    //string output = process.readAllStandardOutput().toStdString();
+    vector<int> maxs = parsePowercfgOutput(process.readAllStandardOutput().toStdString());
+
+    process.start("powercfg Q SCHEME_CURRENT SUB_PROCESSOR PROCTHROTTLEMIN");
+    process.waitForFinished(-1);
+
+    //output = process.readAllStandardOutput().toStdString();
+    vector<int> mins = parsePowercfgOutput(process.readAllStandardOutput().toStdString());
+
+    
+    default_ACProcThrottleMin = mins[0];
+    default_DCProcThrottleMin = mins[1];
+    default_ACProcThrottleMax = maxs[0];
+    default_DCProcThrottleMax = maxs[1];
+
+}
 
 void MainWindow::setFreq(int p) {
 
@@ -44,6 +90,12 @@ void MainWindow::showGoodbye() {
     ui->stackedWidget->setCurrentWidget(ui->goodbye_page);
 }
 
+
+//void MainWindow::showModPage() {
+//
+//}
+
+
 bool isCsEnabled() {
     QSettings reg("HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Control\\Power", QSettings::NativeFormat);
     return (bool)reg.value("CsEnabled").toInt();
@@ -53,7 +105,8 @@ void MainWindow::showStartNext() {
     if (isCsEnabled()) {
         ui->stackedWidget->setCurrentWidget(ui->reg_page);
     } else {
-        ui->stackedWidget->setCurrentWidget(ui->task1_page);
+        getDefaultPowercfg();
+        ui->stackedWidget->setCurrentWidget(ui->mod_page);
     }
 }
 
@@ -66,21 +119,17 @@ void MainWindow::showRestartLabel() {
     // Update app
     ui->reg_ok_btn->setDisabled(true);
     ui->reg_notok_btn->setDisabled(true);
-    ui->reg_done_label->setText("Your computer's configuration has been changed. You will need to restart your computer for the changes to take place. Please restart your computer now.");
+    ui->reg_done_label->setText("Your computer's configuration has been changed. You will need to reboot your computer for the changes to take place. Please restart your computer and re-run this program.");
 }
-
-//void MainWindow::showRegPage() {
-//    ui->stackedWidget->setCurrentWidget(ui->reg_page);
-//}
 
 void MainWindow::close() {
     QApplication::quit();
 }
 
-//void MainWindow::showTask1() {
-//    setFreq(100);
-//    ui->stackedWidget->setCurrentWidget(ui->task1_page);
-//}
+void MainWindow::showTask1() {
+    //setFreq(100);
+    ui->stackedWidget->setCurrentWidget(ui->task1_page);
+}
 
 void fillBar(QProgressBar *pb) {
 #if QT_NO_DEBUG
@@ -148,8 +197,13 @@ void MainWindow::showTask3() {
     ui->stackedWidget->setCurrentWidget(ui->task3_page);
 }
 
+void MainWindow::restoreSettings() {
+
+}
+
 void MainWindow::showQ1() {
-    setFreq(100);
+    //setFreq(100);
+    restoreSettings();
     ui->stackedWidget->setCurrentWidget(ui->q1_page);
 }
 
@@ -301,6 +355,8 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->not_consent_btn, &QPushButton::clicked, this, &MainWindow::showGoodbye);
     // connect(ui->goodbye_btn, &QPushButton::clicked, this, &MainWindow::close);
     //connect(ui->consent_btn, &QPushButton::clicked, this, &MainWindow::showTask1);
+    connect(ui->mod_not_consent_btn, &QPushButton::clicked, this, &MainWindow::showGoodbye);
+    connect(ui->mod_consent_btn, &QPushButton::clicked, this, &MainWindow::showTask1);
     connect(ui->consent_btn, &QPushButton::clicked, this, &MainWindow::showStartNext);
     connect(ui->reg_ok_btn, &QPushButton::clicked, this, &MainWindow::showRestartLabel);
     connect(ui->reg_notok_btn, &QPushButton::clicked, this, &MainWindow::showGoodbye);
@@ -323,29 +379,97 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->wta_yes_btn, &QPushButton::clicked, this, &MainWindow::updateOffer_yes);
     connect(ui->wta_no_btn, &QPushButton::clicked, this, &MainWindow::updateOffer_no);
 
-    connect(ui->task1a, &QPushButton::clicked, this, &MainWindow::task1Continue);
-    connect(ui->task1b, &QPushButton::clicked, this, &MainWindow::task1Continue);
-    connect(ui->task1c, &QPushButton::clicked, this, &MainWindow::task1Continue);
-    connect(ui->task1d, &QPushButton::clicked, this, &MainWindow::task1Continue);
-    connect(ui->task1e, &QPushButton::clicked, this, &MainWindow::task1Continue);
-    connect(ui->task1f, &QPushButton::clicked, this, &MainWindow::task1Continue);
-    connect(ui->task1g, &QPushButton::clicked, this, &MainWindow::task1Continue);
+    //connect(ui->task1a, &QPushButton::clicked, this, &MainWindow::task1Continue);
+    //connect(ui->task1b, &QPushButton::clicked, this, &MainWindow::task1Continue);
+    //connect(ui->task1c, &QPushButton::clicked, this, &MainWindow::task1Continue);
+    //connect(ui->task1d, &QPushButton::clicked, this, &MainWindow::task1Continue);
+    //connect(ui->task1e, &QPushButton::clicked, this, &MainWindow::task1Continue);
+    //connect(ui->task1f, &QPushButton::clicked, this, &MainWindow::task1Continue);
+    //connect(ui->task1g, &QPushButton::clicked, this, &MainWindow::task1Continue);
 
-    connect(ui->task2a, &QPushButton::clicked, this, &MainWindow::task2Continue);
-    connect(ui->task2b, &QPushButton::clicked, this, &MainWindow::task2Continue);
-    connect(ui->task2c, &QPushButton::clicked, this, &MainWindow::task2Continue);
-    connect(ui->task2d, &QPushButton::clicked, this, &MainWindow::task2Continue);
-    connect(ui->task2e, &QPushButton::clicked, this, &MainWindow::task2Continue);
-    connect(ui->task2f, &QPushButton::clicked, this, &MainWindow::task2Continue);
-    connect(ui->task2g, &QPushButton::clicked, this, &MainWindow::task2Continue);
+    connect(ui->task1a, &QPushButton::clicked, ui->task1b, &QCheckBox::setEnabled);
+    connect(ui->task1b, &QPushButton::clicked, ui->task1c, &QCheckBox::setEnabled);
+    connect(ui->task1c, &QPushButton::clicked, ui->task1d, &QCheckBox::setEnabled);
+    connect(ui->task1d, &QPushButton::clicked, ui->task1e, &QCheckBox::setEnabled);
+    connect(ui->task1e, &QPushButton::clicked, ui->task1f, &QCheckBox::setEnabled);
+    connect(ui->task1f, &QPushButton::clicked, ui->task1g, &QCheckBox::setEnabled);
+    connect(ui->task1g, &QPushButton::clicked, ui->task1h, &QCheckBox::setEnabled);
+    connect(ui->task1h, &QPushButton::clicked, ui->task1i, &QCheckBox::setEnabled);
+    connect(ui->task1i, &QPushButton::clicked, ui->task1j, &QCheckBox::setEnabled);
+    connect(ui->task1j, &QPushButton::clicked, ui->task1_continue_btn, &QPushButton::setEnabled);
 
-    connect(ui->task3a, &QPushButton::clicked, this, &MainWindow::task3Continue);
-    connect(ui->task3b, &QPushButton::clicked, this, &MainWindow::task3Continue);
-    connect(ui->task3c, &QPushButton::clicked, this, &MainWindow::task3Continue);
-    connect(ui->task3d, &QPushButton::clicked, this, &MainWindow::task3Continue);
-    connect(ui->task3e, &QPushButton::clicked, this, &MainWindow::task3Continue);
-    connect(ui->task3f, &QPushButton::clicked, this, &MainWindow::task3Continue);
-    connect(ui->task3g, &QPushButton::clicked, this, &MainWindow::task3Continue);
+    connect(ui->task1a, &QPushButton::clicked, ui->task1a, &QCheckBox::setDisabled);
+    connect(ui->task1b, &QPushButton::clicked, ui->task1b, &QCheckBox::setDisabled);
+    connect(ui->task1c, &QPushButton::clicked, ui->task1c, &QCheckBox::setDisabled);
+    connect(ui->task1d, &QPushButton::clicked, ui->task1d, &QCheckBox::setDisabled);
+    connect(ui->task1e, &QPushButton::clicked, ui->task1e, &QCheckBox::setDisabled);
+    connect(ui->task1f, &QPushButton::clicked, ui->task1f, &QCheckBox::setDisabled);
+    connect(ui->task1g, &QPushButton::clicked, ui->task1g, &QCheckBox::setDisabled);
+    connect(ui->task1h, &QPushButton::clicked, ui->task1h, &QCheckBox::setDisabled);
+    connect(ui->task1i, &QPushButton::clicked, ui->task1i, &QCheckBox::setDisabled);
+    connect(ui->task1j, &QPushButton::clicked, ui->task1j, &QCheckBox::setDisabled);
+
+    connect(ui->task2a, &QPushButton::clicked, ui->task2b, &QCheckBox::setEnabled);
+    connect(ui->task2b, &QPushButton::clicked, ui->task2c, &QCheckBox::setEnabled);
+    connect(ui->task2c, &QPushButton::clicked, ui->task2d, &QCheckBox::setEnabled);
+    connect(ui->task2d, &QPushButton::clicked, ui->task2e, &QCheckBox::setEnabled);
+    connect(ui->task2e, &QPushButton::clicked, ui->task2f, &QCheckBox::setEnabled);
+    connect(ui->task2f, &QPushButton::clicked, ui->task2g, &QCheckBox::setEnabled);
+    connect(ui->task2g, &QPushButton::clicked, ui->task2h, &QCheckBox::setEnabled);
+    connect(ui->task2h, &QPushButton::clicked, ui->task2i, &QCheckBox::setEnabled);
+    connect(ui->task2i, &QPushButton::clicked, ui->task2j, &QCheckBox::setEnabled);
+    connect(ui->task2j, &QPushButton::clicked, ui->task2_continue_btn, &QPushButton::setEnabled);
+    
+    connect(ui->task2a, &QPushButton::clicked, ui->task2a, &QCheckBox::setDisabled);
+    connect(ui->task2b, &QPushButton::clicked, ui->task2b, &QCheckBox::setDisabled);
+    connect(ui->task2c, &QPushButton::clicked, ui->task2c, &QCheckBox::setDisabled);
+    connect(ui->task2d, &QPushButton::clicked, ui->task2d, &QCheckBox::setDisabled);
+    connect(ui->task2e, &QPushButton::clicked, ui->task2e, &QCheckBox::setDisabled);
+    connect(ui->task2f, &QPushButton::clicked, ui->task2f, &QCheckBox::setDisabled);
+    connect(ui->task2g, &QPushButton::clicked, ui->task2g, &QCheckBox::setDisabled);
+    connect(ui->task2h, &QPushButton::clicked, ui->task2h, &QCheckBox::setDisabled);
+    connect(ui->task2i, &QPushButton::clicked, ui->task2i, &QCheckBox::setDisabled);
+    connect(ui->task2j, &QPushButton::clicked, ui->task2j, &QCheckBox::setDisabled);
+
+    connect(ui->task3a, &QPushButton::clicked, ui->task3b, &QCheckBox::setEnabled);
+    connect(ui->task3b, &QPushButton::clicked, ui->task3c, &QCheckBox::setEnabled);
+    connect(ui->task3c, &QPushButton::clicked, ui->task3d, &QCheckBox::setEnabled);
+    connect(ui->task3d, &QPushButton::clicked, ui->task3e, &QCheckBox::setEnabled);
+    connect(ui->task3e, &QPushButton::clicked, ui->task3f, &QCheckBox::setEnabled);
+    connect(ui->task3f, &QPushButton::clicked, ui->task3g, &QCheckBox::setEnabled);
+    connect(ui->task3g, &QPushButton::clicked, ui->task3h, &QCheckBox::setEnabled);
+    connect(ui->task3h, &QPushButton::clicked, ui->task3i, &QCheckBox::setEnabled);
+    connect(ui->task3i, &QPushButton::clicked, ui->task3j, &QCheckBox::setEnabled);
+    connect(ui->task3j, &QPushButton::clicked, ui->task3_continue_btn, &QPushButton::setEnabled);
+    
+    connect(ui->task3a, &QPushButton::clicked, ui->task3a, &QCheckBox::setDisabled);
+    connect(ui->task3b, &QPushButton::clicked, ui->task3b, &QCheckBox::setDisabled);
+    connect(ui->task3c, &QPushButton::clicked, ui->task3c, &QCheckBox::setDisabled);
+    connect(ui->task3d, &QPushButton::clicked, ui->task3d, &QCheckBox::setDisabled);
+    connect(ui->task3e, &QPushButton::clicked, ui->task3e, &QCheckBox::setDisabled);
+    connect(ui->task3f, &QPushButton::clicked, ui->task3f, &QCheckBox::setDisabled);
+    connect(ui->task3g, &QPushButton::clicked, ui->task3g, &QCheckBox::setDisabled);
+    connect(ui->task3h, &QPushButton::clicked, ui->task3h, &QCheckBox::setDisabled);
+    connect(ui->task3i, &QPushButton::clicked, ui->task3i, &QCheckBox::setDisabled);
+    connect(ui->task3j, &QPushButton::clicked, ui->task3j, &QCheckBox::setDisabled);
+
+
+
+    //connect(ui->task2a, &QPushButton::clicked, this, &MainWindow::task2Continue);
+    //connect(ui->task2b, &QPushButton::clicked, this, &MainWindow::task2Continue);
+    //connect(ui->task2c, &QPushButton::clicked, this, &MainWindow::task2Continue);
+    //connect(ui->task2d, &QPushButton::clicked, this, &MainWindow::task2Continue);
+    //connect(ui->task2e, &QPushButton::clicked, this, &MainWindow::task2Continue);
+    //connect(ui->task2f, &QPushButton::clicked, this, &MainWindow::task2Continue);
+    //connect(ui->task2g, &QPushButton::clicked, this, &MainWindow::task2Continue);
+
+    //connect(ui->task3a, &QPushButton::clicked, this, &MainWindow::task3Continue);
+    //connect(ui->task3b, &QPushButton::clicked, this, &MainWindow::task3Continue);
+    //connect(ui->task3c, &QPushButton::clicked, this, &MainWindow::task3Continue);
+    //connect(ui->task3d, &QPushButton::clicked, this, &MainWindow::task3Continue);
+    //connect(ui->task3e, &QPushButton::clicked, this, &MainWindow::task3Continue);
+    //connect(ui->task3f, &QPushButton::clicked, this, &MainWindow::task3Continue);
+    //connect(ui->task3g, &QPushButton::clicked, this, &MainWindow::task3Continue);
 }
 
 MainWindow::~MainWindow() {

@@ -50,8 +50,13 @@ private:
     int throttled_task = -1;
     int unthrottled_task = -1;
 
+    int default_CsEnabled;
+    int default_ACProcThrottleMin;
+    int default_ACProcThrottleMax;
+    int default_DCProcThrottleMin;
+    int default_DCProcThrottleMax;
     
-
+    void getDefaultPowercfg();
     void setFreq(int p);
     void showGoodbye();
     void close();
@@ -65,6 +70,7 @@ private:
     void showPatch3();
     void showTask2();
     void showTask3();
+    void restoreSettings();
     void showQ1();
     void q1Response();
     void showQ1Next();
