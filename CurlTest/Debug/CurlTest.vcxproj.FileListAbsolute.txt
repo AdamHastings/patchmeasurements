@@ -1,0 +1,2 @@
+C:\Users\Administrator\patchmeasurements\CurlTest\Debug\CurlTest.exe
+C:\Users\Administrator\patchmeasurements\CurlTest\Debug\CurlTest.pdb
