@@ -1,0 +1,2 @@
+C:\Users\Administrator\patchmeasurements\QtCurlTest\x64\Debug\QtCurlTest.exe
+C:\Users\Administrator\patchmeasurements\QtCurlTest\x64\Debug\QtCurlTest.pdb

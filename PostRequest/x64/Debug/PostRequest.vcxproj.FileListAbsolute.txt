@@ -1,0 +1,2 @@
+C:\Users\Administrator\patchmeasurements\PostRequest\x64\Debug\PostRequest.exe
+C:\Users\Administrator\patchmeasurements\PostRequest\x64\Debug\PostRequest.pdb

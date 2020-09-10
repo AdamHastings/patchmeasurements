@@ -1,0 +1,2 @@
+C:\Users\Administrator\patchmeasurements\QHttpMultiPart\x64\Debug\QHttpMultiPart.exe
+C:\Users\Administrator\patchmeasurements\QHttpMultiPart\x64\Debug\QHttpMultiPart.pdb

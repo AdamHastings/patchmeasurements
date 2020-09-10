@@ -1,0 +1,9 @@
+﻿  uic PostRequest.ui
+  rcc PostRequest.qrc
+  moc PostRequest.h
+   RCC: Warning: No resources in 'C:\Users\Administrator\patchmeasurements\PostRequest\PostRequest.qrc'.
+  PostRequest.cpp
+  main.cpp
+  qrc_PostRequest.cpp
+  moc_PostRequest.cpp
+  PostRequest.vcxproj -> C:\Users\Administrator\patchmeasurements\PostRequest\x64\Debug\PostRequest.exe

@@ -1,0 +1,1 @@
+@LIBS += -llibcurl_a@
