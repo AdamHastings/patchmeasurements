@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <string>
 #include <curl/curl.h>
 
 int main(int argc, char* argv[])
@@ -18,13 +19,15 @@ int main(int argc, char* argv[])
         struct curl_slist* headers = NULL; /* init to NULL is important */
         headers = curl_slist_append(headers, "Authorization: Bearer 1v4q0_X7ptQAAAAAAAAAAXLkDScfpTbZWVk9TXX8Uy3DRsxRttFB34tQ41IGbEjl");
         headers = curl_slist_append(headers, "Content-Type: application/octet-stream");
-        headers = curl_slist_append(headers, "Dropbox-API-Arg: {\"path\":\"/hellooo3.txt\",\"mode\": \"add\",\"autorename\": true,\"mute\": false,\"strict_conflict\": false}");
+        headers = curl_slist_append(headers, "Dropbox-API-Arg: {\"path\":\"/helloworld.txt\",\"mode\": \"add\",\"autorename\": true,\"mute\": false,\"strict_conflict\": false}");
         //headers = curl_slist_append(headers, "Dropbox-API-Arg: {\"path\":\"/test.txt\",\"mode\": \"add\",\"autorename\": true}");
         //headers = curl_slist_append(headers, "Dropbox-API-Arg: {\"C:\\Users\\Administrator\\patchmeasurements\\CurlTest\":\"\\test.txt\"}");
         curl_easy_setopt(curl, CURLOPT_HTTPHEADER, headers);
 
         curl_easy_setopt(curl, CURLOPT_URL, "https://content.dropboxapi.com/2/files/upload");
-        curl_easy_setopt(curl, CURLOPT_POSTFIELDS, "test data for upload!!!!!!");
+        std::string sendstring = "hello world\n";
+
+        curl_easy_setopt(curl, CURLOPT_POSTFIELDS, sendstring.c_str());
 
         /* Perform the request, res will get the return code */
         res = curl_easy_perform(curl);
