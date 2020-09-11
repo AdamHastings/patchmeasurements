@@ -1,5 +1,6 @@
 #include "MainWindow.h"
 #include "Ui_MainWindow.h"
+#include "dropbox.h"
 #include <thread>
 #include <chrono>
 #include <string>
@@ -289,60 +290,62 @@ void MainWindow::updateOffer_no() {
 }
 
 void MainWindow::conclude() {
-     ui->stackedWidget->setCurrentWidget(ui->goodbye_page);
+    std::string s = "done";
+    DropBox::upload(s);
+    ui->stackedWidget->setCurrentWidget(ui->goodbye_page);
 }
 
-void MainWindow::task1Continue() {
-#if QT_NO_DEBUG
-
-    if (ui->task1a->isChecked() && 
-        ui->task1b->isChecked() && 
-        ui->task1c->isChecked() && 
-        ui->task1d->isChecked() && 
-        ui->task1e->isChecked() && 
-        ui->task1f->isChecked() && 
-        ui->task1g->isChecked()) 
-    {
-        ui->task1_continue_btn->setDisabled(false);
-    } else {
-        ui->task1_continue_btn->setDisabled(true);
-    }
-#endif
-}
-
-void MainWindow::task2Continue() {
-#if QT_NO_DEBUG
-    if (ui->task2a->isChecked() && 
-        ui->task2b->isChecked() && 
-        ui->task2c->isChecked() && 
-        ui->task2d->isChecked() && 
-        ui->task2e->isChecked() && 
-        ui->task2f->isChecked() && 
-        ui->task2g->isChecked()) 
-    {
-        ui->task2_continue_btn->setDisabled(false);
-    } else {
-        ui->task3_continue_btn->setDisabled(true);
-    }
-#endif
-}
-
-void MainWindow::task3Continue() {
-#if QT_NO_DEBUG
-    if (ui->task3a->isChecked() && 
-        ui->task3b->isChecked() && 
-        ui->task3c->isChecked() && 
-        ui->task3d->isChecked() && 
-        ui->task3e->isChecked() && 
-        ui->task3f->isChecked() && 
-        ui->task3g->isChecked()) 
-    {
-        ui->task3_continue_btn->setDisabled(false);
-    } else {
-        ui->task3_continue_btn->setDisabled(true);
-    }
-#endif
-}
+//void MainWindow::task1Continue() {
+//#if QT_NO_DEBUG
+//
+//    if (ui->task1a->isChecked() && 
+//        ui->task1b->isChecked() && 
+//        ui->task1c->isChecked() && 
+//        ui->task1d->isChecked() && 
+//        ui->task1e->isChecked() && 
+//        ui->task1f->isChecked() && 
+//        ui->task1g->isChecked()) 
+//    {
+//        ui->task1_continue_btn->setDisabled(false);
+//    } else {
+//        ui->task1_continue_btn->setDisabled(true);
+//    }
+//#endif
+//}
+//
+//void MainWindow::task2Continue() {
+//#if QT_NO_DEBUG
+//    if (ui->task2a->isChecked() && 
+//        ui->task2b->isChecked() && 
+//        ui->task2c->isChecked() && 
+//        ui->task2d->isChecked() && 
+//        ui->task2e->isChecked() && 
+//        ui->task2f->isChecked() && 
+//        ui->task2g->isChecked()) 
+//    {
+//        ui->task2_continue_btn->setDisabled(false);
+//    } else {
+//        ui->task3_continue_btn->setDisabled(true);
+//    }
+//#endif
+//}
+//
+//void MainWindow::task3Continue() {
+//#if QT_NO_DEBUG
+//    if (ui->task3a->isChecked() && 
+//        ui->task3b->isChecked() && 
+//        ui->task3c->isChecked() && 
+//        ui->task3d->isChecked() && 
+//        ui->task3e->isChecked() && 
+//        ui->task3f->isChecked() && 
+//        ui->task3g->isChecked()) 
+//    {
+//        ui->task3_continue_btn->setDisabled(false);
+//    } else {
+//        ui->task3_continue_btn->setDisabled(true);
+//    }
+//#endif
+//}
 
 
 MainWindow::MainWindow(QWidget *parent) :

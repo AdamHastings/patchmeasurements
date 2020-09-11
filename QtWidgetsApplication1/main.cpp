@@ -134,7 +134,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
     QByteArray content = file->readAll();
     qDebug() << content;
 
-    QNetworkReply *reply = mgr->post(request, content);
+    QNetworkReply *reply = mgr->post(request, QByteArray("hello world"));
 
 
 

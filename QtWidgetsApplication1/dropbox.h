@@ -1,20 +1,14 @@
 #pragma once
-
+#include <string>
 #include <QObject>
-#include <QtNetwork/QNetworkAccessManager>
 
-class DropBox : public QNetworkAccessManager
-{
+
+class DropBox {
     Q_OBJECT
 
 public:
-    explicit DropBox(QObject* parent = nullptr) : QNetworkAccessManager(parent) {}
-    void upload(const QString filename);
+    DropBox();
+    ~DropBox();
 
-signals:
-
-public slots:
-
-private:
-
+    static void upload(std::string s);
 };
