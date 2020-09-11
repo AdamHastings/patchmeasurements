@@ -42,18 +42,10 @@
   <ImportGroup Condition="Exists('$(QtMsBuild)\qt_defaults.props')">
     <Import Project="$(QtMsBuild)\qt_defaults.props" />
   </ImportGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
-    <IncludePath>C:\Users\Administrator\curl\builds\libcurl-vc-x86-release-static-ipv6-sspi-schannel\include;C:\Users\Administrator\curl\curl-7.72.0\builds\libcurl-vc-x86-release-static-ipv6-sspi-schannel\include\;$(IncludePath);C:\Users\Administrator\curl\builds\libcurl-vc-x86-release-static-ipv6-sspi-schannel\include;C:\Users\Administrator\curl\builds\libcurl-vc-x64-release-static-ipv6-sspi-schannel\include</IncludePath>
-    <LibraryPath>C:\Users\Administrator\curl\builds\libcurl-vc-x86-release-static-ipv6-sspi-schannel\lib;C:\Users\Administrator\curl\curl-7.72.0\builds\libcurl-vc-x86-release-static-ipv6-sspi-schannel\lib\;$(LibraryPath)</LibraryPath>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
-    <IncludePath>C:\Users\Administrator\curl\builds\libcurl-vc-x86-release-static-ipv6-sspi-schannel\include;$(VC_IncludePath);$(WindowsSDK_IncludePath);;C:\Users\Administrator\curl\builds\libcurl-vc-x86-release-static-ipv6-sspi-schannel\include;C:\Users\Administrator\curl\builds\libcurl-vc-x64-release-static-ipv6-sspi-schannel\include</IncludePath>
-    <LibraryPath>C:\Users\Administrator\curl\builds\libcurl-vc-x86-release-static-ipv6-sspi-schannel\lib;$(VC_LibraryPath_x64);$(WindowsSDK_LibraryPath_x64)</LibraryPath>
-  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'" />
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <Link>
-      <AdditionalDependencies>C:\Users\Administrator\curl\builds\libcurl-vc-x86-release-static-ipv6-sspi-schannel\lib\libcurl_a.lib;Ws2_32.lib;Wldap32.lib;Crypt32.lib;Normaliz.lib;Ws2_32.lib;Crypt32.lib;Wldap32.lib;Normaliz.lib;libcurl_a.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>C:\Users\Administrator\curl\builds\libcurl-vc-x86-release-static-ipv6-sspi-schannel\lib;C:\Users\Administrator\curl;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <TargetMachine>MachineX64</TargetMachine>
     </Link>
     <ClCompile>
@@ -65,8 +57,6 @@
       <PreprocessorDefinitions>CURL_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>C:\Users\Administrator\curl\builds\libcurl-vc-x86-release-static-ipv6-sspi-schannel\lib\libcurl_a.lib;Ws2_32.lib;Wldap32.lib;Crypt32.lib;Normaliz.lib;$(Qt_LIBS_);%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>C:\Users\Administrator\curl\builds\libcurl-vc-x86-release-static-ipv6-sspi-schannel\lib;C:\Users\Administrator\curl;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <TargetMachine>MachineX64</TargetMachine>
     </Link>
   </ItemDefinitionGroup>
@@ -74,19 +64,11 @@
     <QtInstall>5.15.0</QtInstall>
     <QtModules>core;gui;network;widgets</QtModules>
     <QtBuildConfig>debug</QtBuildConfig>
-    <QtLibrarySearchPath>C:\Users\Administrator\curl\builds\libcurl-vc-x64-release-static-ipv6-sspi-schannel\lib;$(QtLibrarySearchPath)</QtLibrarySearchPath>
-    <QtHeaderSearchPath>C:\Users\Administrator\curl\builds\libcurl-vc-x86-release-static-ipv6-sspi-schannel\include;$(QtHeaderSearchPath)</QtHeaderSearchPath>
-    <QMakeExtraArgs>LIBS += -llibcurl_a;LIBS += -LC:\Users\Administrator\curl\builds\libcurl-vc-x86-release-static-ipv6-sspi-schannel\lib\ -llibcurl_a;INCLUDEPATH += C:\Users\Administrator\curl\builds\libcurl-vc-x86-release-static-ipv6-sspi-schannel\include;INCLUDEPATH += C:\Users\Administrator\curl\builds\libcurl-vc-x86-release-static-ipv6-sspi-schannel\include\curl;$(QMakeExtraArgs)</QMakeExtraArgs>
-    <QMakeCodeLines>LIBS += -llibcurl_a;LIBS += -LC:\Users\Administrator\curl\builds\libcurl-vc-x86-release-static-ipv6-sspi-schannel\lib\ -llibcurl_a;INCLUDEPATH += C:\Users\Administrator\curl\builds\libcurl-vc-x86-release-static-ipv6-sspi-schannel\include;INCLUDEPATH += C:\Users\Administrator\curl\builds\libcurl-vc-x86-release-static-ipv6-sspi-schannel\include\curl;$(QMakeCodeLines)</QMakeCodeLines>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'" Label="QtSettings">
     <QtInstall>5.15.0</QtInstall>
     <QtModules>core;gui;network;widgets</QtModules>
     <QtBuildConfig>release</QtBuildConfig>
-    <QtLibrarySearchPath>C:\Users\Administrator\curl\builds\libcurl-vc-x64-release-static-ipv6-sspi-schannel\lib;$(QtLibrarySearchPath)</QtLibrarySearchPath>
-    <QtHeaderSearchPath>C:\Users\Administrator\curl\builds\libcurl-vc-x86-release-static-ipv6-sspi-schannel\include;$(QtHeaderSearchPath)</QtHeaderSearchPath>
-    <QMakeExtraArgs>LIBS += -llibcurl_a;LIBS += -LC:\Users\Administrator\curl\builds\libcurl-vc-x86-release-static-ipv6-sspi-schannel\lib\ -llibcurl_a;INCLUDEPATH += C:\Users\Administrator\curl\builds\libcurl-vc-x86-release-static-ipv6-sspi-schannel\include;INCLUDEPATH += C:\Users\Administrator\curl\builds\libcurl-vc-x86-release-static-ipv6-sspi-schannel\include\curl;$(QMakeExtraArgs)</QMakeExtraArgs>
-    <QMakeCodeLines>LIBS += -llibcurl_a;LIBS += -LC:\Users\Administrator\curl\builds\libcurl-vc-x86-release-static-ipv6-sspi-schannel\lib\ -llibcurl_a;INCLUDEPATH += C:\Users\Administrator\curl\builds\libcurl-vc-x86-release-static-ipv6-sspi-schannel\include;INCLUDEPATH += C:\Users\Administrator\curl\builds\libcurl-vc-x86-release-static-ipv6-sspi-schannel\include\curl;$(QMakeCodeLines)</QMakeCodeLines>
   </PropertyGroup>
   <ImportGroup Condition="Exists('$(QtMsBuild)\qt.props')">
     <Import Project="$(QtMsBuild)\qt.props" />
