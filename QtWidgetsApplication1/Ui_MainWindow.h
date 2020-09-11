@@ -241,24 +241,25 @@ public:
         //// goodbye page /////////////////////////////////////////////////////
 
         /*goodbye_page = new GoodbyePage();*/
-        auto c = new GoodbyePage();
+        //auto c = new GoodbyePage();
 
         //QWidget *gb = new GoodbyePage();
 
         //GoodbyePage gb = new GoodbyePage();
 
-        //goodbye_page->setObjectName(QStringLiteral("goodbye_page"));
-        //stackedWidget->addWidget(goodbye_page);
+        goodbye_page = new QWidget();
+        goodbye_page->setObjectName(QStringLiteral("goodbye_page"));
+        stackedWidget->addWidget(goodbye_page);
 
-        /*goodbye_label = new QLabel(goodbye_page);
+        goodbye_label = new QLabel(goodbye_page);
         goodbye_label->setObjectName(QStringLiteral("goodbye_label"));
         goodbye_label->setGeometry(QRect(M, M, LINEWIDTH, M*4));
         goodbye_label->setAlignment(Qt::AlignHCenter|Qt::AlignVCenter);
         goodbye_label->setWordWrap(true);
-        goodbye_label->setText("Thank you for your participation. You may now exit this window.");*/
+        goodbye_label->setText("Thank you for your participation. You may now exit this window.");
 
-        /*goodbye = new GoodbyePage();
-        stackedWidget->addWidget(goodbye);*/
+        //goodbye = new GoodbyePage();
+        //stackedWidget->addWidget(goodbye);
 
         
 
