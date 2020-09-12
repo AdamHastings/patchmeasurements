@@ -1,0 +1,2 @@
+C:\Users\Administrator\patchmeasurements\Protocol1App\x64\Debug\Protocol1App.exe
+C:\Users\Administrator\patchmeasurements\Protocol1App\x64\Debug\Protocol1App.pdb
