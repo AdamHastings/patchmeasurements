@@ -1,5 +1,6 @@
 #pragma once
 #include <QRect>
+<<<<<<< HEAD
 #include <QtWidgets/QApplication>
 #include <algorithm>
 #include <QDesktopWidget>
@@ -91,3 +92,23 @@ inline int BUTTON_HEIGHT = H / 16;
 //inline const int BUTTON_HEIGHT = H / 16;
 
 //void globals_init(QRect rec)
+=======
+#include <algorithm>
+#include <QApplication>
+#include <QtCore/QVariant>
+#include <QtWidgets/QAction>
+#include <QDesktopWidget>
+
+const QRect r = QApplication::desktop()->screenGeometry();
+
+const int H = std::min(r.height() / 2, r.width() / 2);
+const int W = std::max(r.height() / 2, r.width() / 2);
+
+const int MARGIN = H / 10;
+const int M = MARGIN;
+const int LINEWIDTH = W - (2 * MARGIN);
+
+const int BUTTON_WIDTH = W / 4;
+const int BUTTON_HEIGHT = H / 16;
+
+>>>>>>> 1974797da25ad4cac4ffe5dc6c11ca4f541f6389

@@ -24,6 +24,11 @@
 
 #include "Globals.h"
 #include "GoodbyePage.h"
+<<<<<<< HEAD
+=======
+#include "Globals.h"
+
+>>>>>>> 1974797da25ad4cac4ffe5dc6c11ca4f541f6389
 #include <algorithm>
 
 QT_BEGIN_NAMESPACE
@@ -43,6 +48,7 @@ private:
 
     const int BUTTON_WIDTH = W / 4;
     const int BUTTON_HEIGHT = H / 16;*/
+<<<<<<< HEAD
     /*QRect rec = QApplication::desktop()->screenGeometry();
     int H = std::min(rec.height() / 2, rec.width() / 2);
     int W = std::max(rec.height() / 2, rec.width() / 2);
@@ -53,6 +59,8 @@ private:
 
     int BUTTON_WIDTH = W / 4;
     int BUTTON_HEIGHT = H / 16;*/
+=======
+>>>>>>> 1974797da25ad4cac4ffe5dc6c11ca4f541f6389
 
 public:
     QWidget* centralwidget;
@@ -65,6 +73,7 @@ public:
     QLabel* consent_label;
     QPushButton* not_consent_btn;
 
+    QWidget* start;
     QWidget* goodbye;
 
     void setupUi(QMainWindow* MainWindow)
