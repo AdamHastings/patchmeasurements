@@ -16,8 +16,8 @@ void DropBox::upload(std::string s) {
 
     QObject::connect(mgr, &QNetworkAccessManager::finished,
         [&](QNetworkReply* repl) {
+            qDebug() << "HTTPS Post Response:";
             qDebug() << repl->readAll();
-            qDebug() << "in callback";
         });
 
     QString filename = "qtupload.txt";
