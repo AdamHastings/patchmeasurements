@@ -32,28 +32,6 @@ QT_BEGIN_NAMESPACE
 class Ui_MainWindow
 {
 
-private:
-    /*QRect rec = QApplication::desktop()->screenGeometry();
-    const int H = std::min(rec.height() / 2, rec.width() / 2);
-    const int W = std::max(rec.height() / 2, rec.width() / 2);
-
-    const int MARGIN = H / 10;
-    const int M = MARGIN;
-    const int LINEWIDTH = W - (2 * MARGIN);
-
-    const int BUTTON_WIDTH = W / 4;
-    const int BUTTON_HEIGHT = H / 16;*/
-    /*QRect rec = QApplication::desktop()->screenGeometry();
-    int H = std::min(rec.height() / 2, rec.width() / 2);
-    int W = std::max(rec.height() / 2, rec.width() / 2);
-
-    int MARGIN = H / 10;
-    int M = MARGIN;
-    int LINEWIDTH = W - (2 * MARGIN);
-
-    int BUTTON_WIDTH = W / 4;
-    int BUTTON_HEIGHT = H / 16;*/
-
 public:
     QWidget* centralwidget;
     QStackedWidget* stackedWidget;
@@ -137,21 +115,9 @@ public:
         not_consent_btn->setText("I do not consent");
 
 
-        ///////////////////////////////////////
-        //goodbye_page = new QWidget();
-        //goodbye_page->setObjectName(QStringLiteral("goodbye_page"));
-        //stackedWidget->addWidget(goodbye_page);
 
         goodbye = new GoodbyePage();
         stackedWidget->addWidget(goodbye);
-
-        //
-        //goodbye_label = new QLabel(goodbye_page);
-        //goodbye_label->setObjectName(QStringLiteral("goodbye_label"));
-        //goodbye_label->setGeometry(QRect(M, M, LINEWIDTH, M * 4));
-        //goodbye_label->setAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
-        //goodbye_label->setWordWrap(true);
-        //goodbye_label->setText("Thank you for your participation. You may now exit this window.");
 
 
     } // setupUi
