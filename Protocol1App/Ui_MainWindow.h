@@ -24,6 +24,7 @@
 
 #include "Globals.h"
 #include "GoodbyePage.h"
+#include "StartPage.h"
 #include <algorithm>
 
 QT_BEGIN_NAMESPACE
@@ -44,6 +45,7 @@ public:
     QPushButton* not_consent_btn;
 
     QWidget* goodbye;
+    QWidget* start;
 
     void setupUi(QMainWindow* MainWindow)
     {
@@ -77,7 +79,7 @@ public:
 
         //// start page ///////////////////////////////////////////////////////
 
-        start_page = new QWidget();
+        /*start_page = new QWidget();
         start_page->setObjectName(QStringLiteral("start_page"));
 
         intro_label = new QLabel(start_page);
@@ -111,10 +113,11 @@ public:
         intro_label->setText("Thank you for participating in this experiment. This experiment will have you complete a few simple tasks on this computer. This experiment does not track your actions or steal any personal information. There is minimal risk involved in participating in this experiment. This experiment will take about 20 minutes to complete.");
         consent_btn->setText("I consent");
         outline_label->setText("This experiment is designed to test how computer users respond to some computer system modifications we are prototyping. We will first have you complete some simple tasks with these modifications turned off. Later, we will turn on these modifications and ask you to complete the same set of tasks.");
-        consent_label->setText("Do you consent to participate in this study? You may exit the experiment at any point.");
-        not_consent_btn->setText("I do not consent");
+        consent_label->setText("Do you consent to participate in this study? You may exit the experiment at any point.");*/
+        //not_consent_btn->setText("I do not consent");
 
-
+        start = new StartPage();
+        stackedWidget->addWidget(start);
 
         goodbye = new GoodbyePage();
         stackedWidget->addWidget(goodbye);
