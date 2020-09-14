@@ -44,8 +44,8 @@ public:
     QLabel* consent_label;
     QPushButton* not_consent_btn;
 
-    QWidget* goodbye;
-    QWidget* start;
+    GoodbyePage* goodbye;
+    StartPage* start;
 
     void setupUi(QMainWindow* MainWindow)
     {

@@ -32,6 +32,7 @@ StartPage::StartPage(QWidget *parent)
     not_consent_btn = new QPushButton(this);
     not_consent_btn->setObjectName(QStringLiteral("not_consent_btn"));
     not_consent_btn->setGeometry(QRect(W / 2 + M, M * 8, BUTTON_WIDTH, BUTTON_HEIGHT));
+    not_consent_btn->setText("I do not consent");
 
     //stackedWidget->addWidget(start_page);
 
@@ -39,7 +40,7 @@ StartPage::StartPage(QWidget *parent)
     consent_btn->setText("I consent");
     outline_label->setText("This experiment is designed to test how computer users respond to some computer system modifications we are prototyping. We will first have you complete some simple tasks with these modifications turned off. Later, we will turn on these modifications and ask you to complete the same set of tasks.");
     consent_label->setText("Do you consent to participate in this study? You may exit the experiment at any point.");
-    not_consent_btn->setText("I do not consent");
+
 }
 
 StartPage::~StartPage()

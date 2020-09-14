@@ -12,7 +12,6 @@ public:
 	StartPage(QWidget *parent = Q_NULLPTR);
 	~StartPage();
 
-private:
 	QLabel* intro_label;
 	QLabel* outline_label;
 	QLabel* consent_label;

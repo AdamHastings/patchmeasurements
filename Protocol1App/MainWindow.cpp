@@ -12,6 +12,8 @@ MainWindow::MainWindow(QWidget *parent)
     ui.setupUi(this);
     DropBox::upload("Protocol1App");
 
-    connect(ui.not_consent_btn, &QPushButton::clicked, this, &MainWindow::showGoodbye);
+    /*connect(ui.not_consent_btn, &QPushButton::clicked, this, &MainWindow::showGoodbye);*/
+
+    connect(ui.start->not_consent_btn, &QPushButton::clicked, this, &MainWindow::showGoodbye);
 
 }
