@@ -22,8 +22,8 @@
 #include <QApplication>
 #include <QDesktopWidget>
 
+#include "Globals.h"
 #include "GoodbyePage.h"
-
 #include <algorithm>
 
 QT_BEGIN_NAMESPACE
@@ -33,7 +33,7 @@ class Ui_MainWindow
 {
 
 private:
-    QRect rec = QApplication::desktop()->screenGeometry();
+    /*QRect rec = QApplication::desktop()->screenGeometry();
     const int H = std::min(rec.height() / 2, rec.width() / 2);
     const int W = std::max(rec.height() / 2, rec.width() / 2);
 
@@ -42,7 +42,17 @@ private:
     const int LINEWIDTH = W - (2 * MARGIN);
 
     const int BUTTON_WIDTH = W / 4;
-    const int BUTTON_HEIGHT = H / 16;
+    const int BUTTON_HEIGHT = H / 16;*/
+    /*QRect rec = QApplication::desktop()->screenGeometry();
+    int H = std::min(rec.height() / 2, rec.width() / 2);
+    int W = std::max(rec.height() / 2, rec.width() / 2);
+
+    int MARGIN = H / 10;
+    int M = MARGIN;
+    int LINEWIDTH = W - (2 * MARGIN);
+
+    int BUTTON_WIDTH = W / 4;
+    int BUTTON_HEIGHT = H / 16;*/
 
 public:
     QWidget* centralwidget;
@@ -59,6 +69,17 @@ public:
 
     void setupUi(QMainWindow* MainWindow)
     {
+        rec = QApplication::desktop()->screenGeometry();
+        H = std::min(rec.height() / 2, rec.width() / 2);
+        W = std::max(rec.height() / 2, rec.width() / 2);
+
+        MARGIN = H / 10;
+        M = MARGIN;
+        LINEWIDTH = W - (2 * MARGIN);
+
+        BUTTON_WIDTH = W / 4;
+        BUTTON_HEIGHT = H / 16;
+
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName(QStringLiteral("MainWindow"));
 
