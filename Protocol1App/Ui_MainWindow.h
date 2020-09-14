@@ -91,26 +91,26 @@ public:
         goodbye = new GoodbyePage();
         stackedWidget->addWidget(goodbye);
 
-        task1 = new TaskPage();
-        task1->setTaskNum(1);
+        task1 = new TaskPage("from Los Angeles, USA to New York City, USA", "Low Library", "\"Bolero\" by composer Maurice Ravel");
+        /*task1->setTaskNum(1);
         task1->setCities("Los Angeles", "New York City");
         task1->setPhoto("Low Library");
-        task1->setVideo("\"Bolero\" by Maurice Ravel");
+        task1->setVideo("\"Bolero\" by Maurice Ravel");*/
         stackedWidget->addWidget(task1);
 
-        task2 = new TaskPage();
-        task2->setTaskNum(2);
+        task2 = new TaskPage("from Casablanca, Morocco to Cairo, Egypt", "the Alma Mater statue", "\"Rhapsody in Blue\" by composer George Gershwin");
+        /*task2->setTaskNum(2);
         task2->setCities("Los Angeles", "New York City");
         task2->setPhoto("Low Library");
         task2->setVideo("\"Bolero\" by Maurice Ravel");
-        stackedWidget->addWidget(task2);
+        stackedWidget->addWidget(task2);*/
 
-        task3 = new TaskPage();
-        task3->setTaskNum(1);
+        task3 = new TaskPage("from Sydney, Australia to Perth, Australia", "Low Library", "\"Fantasia on a Theme by Thomas Tallis\" by composer Ralph Vaughan Williams");
+        /*task3->setTaskNum(1);
         task3->setCities("Los Angeles", "New York City");
         task3->setPhoto("Low Library");
         task3->setVideo("\"Bolero\" by Maurice Ravel");
-        stackedWidget->addWidget(task3);
+        stackedWidget->addWidget(task3);*/
 
 
 

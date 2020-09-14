@@ -11,19 +11,16 @@ class TaskPage : public QWidget
 	Q_OBJECT
 
 public:
-	TaskPage(QWidget *parent = Q_NULLPTR);
+	TaskPage(QString cities, QString photo, QString video, QWidget* parent = Q_NULLPTR);
 	~TaskPage();
 
     int task_number;
+    static int taskCount;
+
     QString city1;
     QString city2;
     QString photo;
     QString video;
-
-    void setTaskNum(int n);
-    void setCities(QString s1, QString cs);
-    void setPhoto(QString s);
-    void setVideo(QString s);
 
     QLabel* title;
     QLabel* header;
@@ -40,6 +37,7 @@ public:
     QPushButton* continue_btn;
 
 private:
-    void setupWindow();
+
+    void setupWindow(QString cities, QString photo, QString video);
     void makeConnections();
 };

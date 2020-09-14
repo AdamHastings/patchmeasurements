@@ -2,7 +2,9 @@
 #include "Globals.h"
 
 
-void TaskPage::setupWindow() {
+int TaskPage::taskCount = 1;
+
+void TaskPage::setupWindow(QString cities, QString photo, QString video) {
     QFont titlefont = QFont();
     titlefont.setBold(true);
     titlefont.setPointSize(16);
@@ -21,10 +23,11 @@ void TaskPage::setupWindow() {
 
     subtask_a = new QCheckBox(this);
     subtask_a->setGeometry(QRect(M, BUTTON_HEIGHT * 4, LINEWIDTH, BUTTON_HEIGHT));
+    subtask_a->setText("Open up a web browser. Login to your LionMail account. Create a new Google Doc titled \"Task " + QString::number(task_number) + "\".");
 
     subtask_b = new QCheckBox(this);
     subtask_b->setGeometry(QRect(M, BUTTON_HEIGHT * 5, LINEWIDTH, BUTTON_HEIGHT));
-    //subtask_b->setText("Open Google Maps in a new tab. Find the distance (in miles) between New York City and Los Angeles.");
+    subtask_b->setText("Open Google Maps in a new tab. Find how long it would take (in hours) to drive\n " + cities + ".");
     subtask_b->setEnabled(false);
 
     subtask_c = new QCheckBox(this);
@@ -34,7 +37,7 @@ void TaskPage::setupWindow() {
 
     subtask_d = new QCheckBox(this);
     subtask_d->setGeometry(QRect(M, BUTTON_HEIGHT * 7, LINEWIDTH, BUTTON_HEIGHT));
-    //subtask_d->setText("Open any search engine in another tab and find any picture of Low Library.");
+    subtask_d->setText("Open any search engine in another tab. Find a picture of " + photo + ".");
     subtask_d->setEnabled(false);
 
     subtask_e = new QCheckBox(this);
@@ -44,7 +47,7 @@ void TaskPage::setupWindow() {
 
     subtask_f = new QCheckBox(this);
     subtask_f->setGeometry(QRect(M, BUTTON_HEIGHT * 9, LINEWIDTH, BUTTON_HEIGHT));
-    //subtask_f->setText("Open YouTube in another tab. Find a video of jazz trumpeter Miles Davis performing the song \"So What\" live.");
+    subtask_f->setText("Open YouTube in another tab. Find a video of a live performance of\n " + video + ".");
     subtask_f->setEnabled(false);
 
     subtask_g = new QCheckBox(this);
@@ -59,7 +62,7 @@ void TaskPage::setupWindow() {
 
     subtask_i = new QCheckBox(this);
     subtask_i->setGeometry(QRect(M, BUTTON_HEIGHT * 12, LINEWIDTH, BUTTON_HEIGHT));
-    subtask_i->setText("Open LionMail in a new tab. Compose a new email titled \"<your uni>-subtask_\" (where <your uni> is your UNI).\n Attach the downloaded PDF to the email and send to tasks-test-2020@cs.columbia.edu.");
+    subtask_i->setText("Open LionMail in a new tab. Compose a new email titled \"<your uni>-task" + QString::number(task_number) + "\" (where <your uni> is your UNI).\n Attach the downloaded PDF to the email and send to tasks-test-2020@cs.columbia.edu.");
     subtask_i->setEnabled(false);
 
     subtask_j = new QCheckBox(this);
@@ -97,32 +100,13 @@ void TaskPage::makeConnections() {
     connect(this->subtask_j, &QPushButton::clicked, this->subtask_j, &QCheckBox::setDisabled); 
 }
 
-TaskPage::TaskPage(QWidget *parent)
+TaskPage::TaskPage(QString cities, QString photo, QString video, QWidget *parent)
 	: QWidget(parent)
 {
-    setupWindow();
+    task_number = taskCount;
+    setupWindow(cities, photo, video);
     makeConnections();
-}
-
-void TaskPage::setCities(QString s1, QString s2) {
-    QString text = "Open Google Maps in a new tab. Find the distance (in miles) between " + s1 + " and " + s2 + ".";
-    subtask_b->setText(text);
-}
-
-void TaskPage::setPhoto(QString s) {
-    QString text = "Open any search engine in another tab and find any picture of " + s + ".";
-    subtask_d->setText(text);
-}
-
-void TaskPage::setVideo(QString s) {
-    QString text = "Open YouTube in another tab. Find a video of a live performance of the classical music piece " + s + ".";
-    subtask_f->setText(text);
-}
-
-void TaskPage::setTaskNum(int n) {
-    QString num = QString::number(n);
-    subtask_a->setText("Open up a web browser. Login to your LionMail account. Create a new Google Doc titled \"Task " + num + "\".");
-    subtask_i->setText("Open LionMail in a new tab. Compose a new email titled \"<your uni>-" + num + "\" (where <your uni> is your UNI).\n Attach the downloaded PDF to the email and send to tasks-experiment-2020@cs.columbia.edu.");
+    taskCount++;
 }
 
 TaskPage::~TaskPage()
