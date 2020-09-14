@@ -1,9 +1,8 @@
 #include "TaskPage.h"
 #include "Globals.h"
 
-TaskPage::TaskPage(QWidget *parent)
-	: QWidget(parent)
-{
+
+void TaskPage::setupWindow() {
     QFont titlefont = QFont();
     titlefont.setBold(true);
     titlefont.setPointSize(16);
@@ -72,6 +71,37 @@ TaskPage::TaskPage(QWidget *parent)
     continue_btn->setGeometry(QRect(W / 2 - BUTTON_WIDTH / 2, M * 9, BUTTON_WIDTH, BUTTON_HEIGHT));
     continue_btn->setText("Continue");
     continue_btn->setEnabled(false);
+}
+
+void TaskPage::makeConnections() {
+    connect(this->subtask_a, &QPushButton::clicked, this->subtask_b, &QCheckBox::setEnabled);
+    connect(this->subtask_b, &QPushButton::clicked, this->subtask_c, &QCheckBox::setEnabled);
+    connect(this->subtask_c, &QPushButton::clicked, this->subtask_d, &QCheckBox::setEnabled);
+    connect(this->subtask_d, &QPushButton::clicked, this->subtask_e, &QCheckBox::setEnabled);
+    connect(this->subtask_e, &QPushButton::clicked, this->subtask_f, &QCheckBox::setEnabled);
+    connect(this->subtask_f, &QPushButton::clicked, this->subtask_g, &QCheckBox::setEnabled);
+    connect(this->subtask_g, &QPushButton::clicked, this->subtask_h, &QCheckBox::setEnabled);
+    connect(this->subtask_h, &QPushButton::clicked, this->subtask_i, &QCheckBox::setEnabled);
+    connect(this->subtask_i, &QPushButton::clicked, this->subtask_j, &QCheckBox::setEnabled);
+    connect(this->subtask_j, &QPushButton::clicked, this->continue_btn, &QPushButton::setEnabled);
+    
+    connect(this->subtask_a, &QPushButton::clicked, this->subtask_a, &QCheckBox::setDisabled);
+    connect(this->subtask_b, &QPushButton::clicked, this->subtask_b, &QCheckBox::setDisabled);
+    connect(this->subtask_c, &QPushButton::clicked, this->subtask_c, &QCheckBox::setDisabled);
+    connect(this->subtask_d, &QPushButton::clicked, this->subtask_d, &QCheckBox::setDisabled);
+    connect(this->subtask_e, &QPushButton::clicked, this->subtask_e, &QCheckBox::setDisabled);
+    connect(this->subtask_f, &QPushButton::clicked, this->subtask_f, &QCheckBox::setDisabled);
+    connect(this->subtask_g, &QPushButton::clicked, this->subtask_g, &QCheckBox::setDisabled);
+    connect(this->subtask_h, &QPushButton::clicked, this->subtask_h, &QCheckBox::setDisabled);
+    connect(this->subtask_i, &QPushButton::clicked, this->subtask_i, &QCheckBox::setDisabled);
+    connect(this->subtask_j, &QPushButton::clicked, this->subtask_j, &QCheckBox::setDisabled); 
+}
+
+TaskPage::TaskPage(QWidget *parent)
+	: QWidget(parent)
+{
+    setupWindow();
+    makeConnections();
 }
 
 void TaskPage::setCities(QString s1, QString s2) {

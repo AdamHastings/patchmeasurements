@@ -38,4 +38,8 @@ public:
     QCheckBox* subtask_i;
     QCheckBox* subtask_j;
     QPushButton* continue_btn;
+
+private:
+    void setupWindow();
+    void makeConnections();
 };
