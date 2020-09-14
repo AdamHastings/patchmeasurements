@@ -22,10 +22,13 @@
 #include <QApplication>
 #include <QDesktopWidget>
 
-#include "Globals.h"
-#include "GoodbyePage.h"
-#include "StartPage.h"
 #include <algorithm>
+
+#include "Globals.h"
+#include "StartPage.h"
+#include "GoodbyePage.h"
+#include "TaskPage.h"
+
 
 QT_BEGIN_NAMESPACE
 
@@ -46,6 +49,9 @@ public:
 
     GoodbyePage* goodbye;
     StartPage* start;
+    TaskPage* task1;
+    TaskPage* task2;
+    TaskPage* task3;
 
     void setupUi(QMainWindow* MainWindow)
     {
@@ -77,50 +83,35 @@ public:
         stackedWidget->setMinimumSize(QSize(W, H));
         stackedWidget->setMaximumSize(QSize(W, H));
 
-        //// start page ///////////////////////////////////////////////////////
-
-        /*start_page = new QWidget();
-        start_page->setObjectName(QStringLiteral("start_page"));
-
-        intro_label = new QLabel(start_page);
-        intro_label->setObjectName(QStringLiteral("intro_label"));
-        intro_label->setGeometry(QRect(MARGIN, MARGIN, LINEWIDTH, MARGIN * 3));
-        intro_label->setAlignment(Qt::AlignJustify | Qt::AlignVCenter);
-        intro_label->setWordWrap(true);
-
-        outline_label = new QLabel(start_page);
-        outline_label->setObjectName(QStringLiteral("outline_label"));
-        outline_label->setGeometry(QRect(MARGIN, MARGIN * 4, LINEWIDTH, MARGIN * 3));
-        outline_label->setAlignment(Qt::AlignJustify | Qt::AlignVCenter);
-        outline_label->setWordWrap(true);
-
-        consent_label = new QLabel(start_page);
-        consent_label->setObjectName(QStringLiteral("consent_label"));
-        consent_label->setGeometry(QRect(MARGIN, MARGIN * 7, LINEWIDTH, MARGIN));
-        consent_label->setAlignment(Qt::AlignJustify | Qt::AlignVCenter);
-        consent_label->setWordWrap(true);
-
-        consent_btn = new QPushButton(start_page);
-        consent_btn->setObjectName(QStringLiteral("consent_btn"));
-        consent_btn->setGeometry(QRect(W / 2 - BUTTON_WIDTH - M, M * 8, BUTTON_WIDTH, BUTTON_HEIGHT));
-
-        not_consent_btn = new QPushButton(start_page);
-        not_consent_btn->setObjectName(QStringLiteral("not_consent_btn"));
-        not_consent_btn->setGeometry(QRect(W / 2 + M, M * 8, BUTTON_WIDTH, BUTTON_HEIGHT));
-
-        stackedWidget->addWidget(start_page);
-
-        intro_label->setText("Thank you for participating in this experiment. This experiment will have you complete a few simple tasks on this computer. This experiment does not track your actions or steal any personal information. There is minimal risk involved in participating in this experiment. This experiment will take about 20 minutes to complete.");
-        consent_btn->setText("I consent");
-        outline_label->setText("This experiment is designed to test how computer users respond to some computer system modifications we are prototyping. We will first have you complete some simple tasks with these modifications turned off. Later, we will turn on these modifications and ask you to complete the same set of tasks.");
-        consent_label->setText("Do you consent to participate in this study? You may exit the experiment at any point.");*/
-        //not_consent_btn->setText("I do not consent");
+        ///////////////////////////////////////////////////////////////////////
 
         start = new StartPage();
         stackedWidget->addWidget(start);
 
         goodbye = new GoodbyePage();
         stackedWidget->addWidget(goodbye);
+
+        task1 = new TaskPage();
+        task1->setTaskNum(1);
+        task1->setCities("Los Angeles", "New York City");
+        task1->setPhoto("Low Library");
+        task1->setVideo("\"Bolero\" by Maurice Ravel");
+        stackedWidget->addWidget(task1);
+
+        task2 = new TaskPage();
+        task2->setTaskNum(2);
+        task2->setCities("Los Angeles", "New York City");
+        task2->setPhoto("Low Library");
+        task2->setVideo("\"Bolero\" by Maurice Ravel");
+        stackedWidget->addWidget(task2);
+
+        task3 = new TaskPage();
+        task3->setTaskNum(1);
+        task3->setCities("Los Angeles", "New York City");
+        task3->setPhoto("Low Library");
+        task3->setVideo("\"Bolero\" by Maurice Ravel");
+        stackedWidget->addWidget(task3);
+
 
 
     } // setupUi

@@ -14,5 +14,6 @@ private:
     Ui::MainWindow ui;
 
     void showGoodbye();
+    void showTask1();
 
 };
