@@ -23,6 +23,7 @@
 #include <QDesktopWidget>
 
 #include "GoodbyePage.h"
+#include "Globals.h"
 
 #include <algorithm>
 
@@ -33,7 +34,7 @@ class Ui_MainWindow
 {
 
 private:
-    QRect rec = QApplication::desktop()->screenGeometry();
+    /*QRect rec = QApplication::desktop()->screenGeometry();
     const int H = std::min(rec.height() / 2, rec.width() / 2);
     const int W = std::max(rec.height() / 2, rec.width() / 2);
 
@@ -42,7 +43,7 @@ private:
     const int LINEWIDTH = W - (2 * MARGIN);
 
     const int BUTTON_WIDTH = W / 4;
-    const int BUTTON_HEIGHT = H / 16;
+    const int BUTTON_HEIGHT = H / 16;*/
 
 public:
     QWidget* centralwidget;
@@ -55,6 +56,7 @@ public:
     QLabel* consent_label;
     QPushButton* not_consent_btn;
 
+    QWidget* start;
     QWidget* goodbye;
 
     void setupUi(QMainWindow* MainWindow)

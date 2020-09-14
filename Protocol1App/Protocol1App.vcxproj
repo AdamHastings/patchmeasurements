@@ -86,6 +86,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="StartPage.cpp" />
     <QtRcc Include="MainWindow.qrc" />
     <QtUic Include="GoodbyePage.ui" />
     <QtUic Include="MainWindow.ui" />
@@ -94,10 +95,13 @@
     <ClCompile Include="GoodbyePage.cpp" />
     <ClCompile Include="MainWindow.cpp" />
     <ClCompile Include="main.cpp" />
+    <QtUic Include="StartPage.ui" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DropBox.h" />
     <QtMoc Include="GoodbyePage.h" />
+    <QtMoc Include="StartPage.h" />
+    <ClInclude Include="Globals.h" />
     <ClInclude Include="Ui_MainWindow.h" />
     <ClInclude Include="resource.h" />
   </ItemGroup>

@@ -47,6 +47,9 @@
     <ClCompile Include="GoodbyePage.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="StartPage.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DropBox.h">
@@ -56,6 +59,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Ui_MainWindow.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Globals.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -68,9 +74,15 @@
     <QtMoc Include="GoodbyePage.h">
       <Filter>Header Files</Filter>
     </QtMoc>
+    <QtMoc Include="StartPage.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
   </ItemGroup>
   <ItemGroup>
     <QtUic Include="GoodbyePage.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+    <QtUic Include="StartPage.ui">
       <Filter>Form Files</Filter>
     </QtUic>
   </ItemGroup>
