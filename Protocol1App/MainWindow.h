@@ -23,14 +23,6 @@ private:
     int unthrottled_task = -1;
     int slowdown = 30;
 
-    int default_CsEnabled;
-    int default_ACProcThrottleMin;
-    int default_ACProcThrottleMax;
-    int default_DCProcThrottleMin;
-    int default_DCProcThrottleMax;
-
-    void getDefaultPowercfg();
-
     void showGoodbye();
     void showTask1();
     void showTask2();
