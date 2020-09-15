@@ -17,11 +17,6 @@ public:
     int task_number;
     static int taskCount;
 
-    QString city1;
-    QString city2;
-    QString photo;
-    QString video;
-
     QLabel* title;
     QLabel* header;
     QCheckBox* subtask_a;

@@ -15,5 +15,7 @@ private:
 
     void showGoodbye();
     void showTask1();
+    void showTask2();
+    void showTask3();
 
 };
