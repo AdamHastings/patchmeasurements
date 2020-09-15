@@ -28,6 +28,7 @@
 #include "StartPage.h"
 #include "GoodbyePage.h"
 #include "TaskPage.h"
+#include "PatchPage.h"
 
 
 QT_BEGIN_NAMESPACE
@@ -40,18 +41,21 @@ public:
     QWidget* centralwidget;
     QStackedWidget* stackedWidget;
 
-    QWidget* start_page;
+    /*QWidget* start_page;
     QLabel* intro_label;
     QPushButton* consent_btn;
     QLabel* outline_label;
     QLabel* consent_label;
-    QPushButton* not_consent_btn;
+    QPushButton* not_consent_btn;*/
 
     GoodbyePage* goodbye;
     StartPage* start;
     TaskPage* task1;
     TaskPage* task2;
     TaskPage* task3;
+    PatchPage* patch1;
+    PatchPage* patch2;
+    PatchPage* patch3;
 
     void setupUi(QMainWindow* MainWindow)
     {
@@ -101,7 +105,14 @@ public:
         task3 = new TaskPage("\nfrom Sydney, Australia to Perth, Australia", "Low Library", "\"Fantasia on a Theme by Thomas Tallis\"\nby composer Ralph Vaughan Williams");
         stackedWidget->addWidget(task3);
 
+        patch1 = new PatchPage();
+        stackedWidget->addWidget(patch1);
 
+        patch2 = new PatchPage();
+        stackedWidget->addWidget(patch2);
+
+        patch3 = new PatchPage();
+        stackedWidget->addWidget(patch3);
 
 
     } // setupUi

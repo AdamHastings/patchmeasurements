@@ -1,6 +1,7 @@
 #pragma once
 
 #include <QtWidgets/QMainWindow>
+#include <QProgressBar>
 #include "ui_MainWindow.h"
 
 class MainWindow : public QMainWindow
@@ -17,5 +18,9 @@ private:
     void showTask1();
     void showTask2();
     void showTask3();
+    void fillBar(QProgressBar *qb);
+    void showPatch1();
+    void showPatch2();
+    void showPatch3();
 
 };
