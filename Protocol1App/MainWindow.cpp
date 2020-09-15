@@ -72,7 +72,7 @@ void MainWindow::getDefaultPowercfg() {
 }
 
 void MainWindow::setFreq(int p) {
-
+#if QT_NO_DEBUG
 #ifdef _WIN32
 
     std::string min_ac_str = "powercfg -setacvalueindex SCHEME_CURRENT SUB_PROCESSOR PROCTHROTTLEMIN " + std::to_string(p);
@@ -86,24 +86,7 @@ void MainWindow::setFreq(int p) {
     WinExec(max_dc_str.c_str(), SW_HIDE);
 
 #endif
-
-    return;
-}
-
-void MainWindow::fillBar(QProgressBar* pb) {
-//#if QT_NO_DEBUG
-    int MAGIC_THRES = 45;
-
-    for (int i = 0; i < MAGIC_THRES; i++) {
-        pb->setValue(i);
-        std::this_thread::sleep_for(std::chrono::milliseconds(100));
-    }
-
-    for (int i = MAGIC_THRES; i <= 100; i++) {
-        pb->setValue(i);
-        std::this_thread::sleep_for(std::chrono::milliseconds(10));
-    }
-//#endif
+#endif
 }
 
 void MainWindow::pickThrottledTask() {
@@ -115,8 +98,7 @@ void MainWindow::pickThrottledTask() {
 void MainWindow::showPatch1() {
     ui.stackedWidget->setCurrentWidget(ui.patch1);
     pickThrottledTask();
-    fillBar(ui.patch1->progress_bar);
-    pickThrottledTask();
+    ui.patch1->fillBar();
     if (throttled_task == 2) {
         setFreq(100 - slowdown);
     }
@@ -129,14 +111,14 @@ void MainWindow::showPatch1() {
 
 void MainWindow::showPatch2() {
     ui.stackedWidget->setCurrentWidget(ui.patch2);
-    fillBar(ui.patch2->progress_bar);
+    ui.patch2->fillBar();
     ui.patch2->done_label->setText("Done!");
     ui.patch2->continue_btn->setEnabled(true);
 }
 
 void MainWindow::showPatch3() {
     ui.stackedWidget->setCurrentWidget(ui.patch3);
-    fillBar(ui.patch3->progress_bar);
+    ui.patch3->fillBar();
     ui.patch3->done_label->setText("Done!");
     ui.patch3->continue_btn->setEnabled(true);
 }

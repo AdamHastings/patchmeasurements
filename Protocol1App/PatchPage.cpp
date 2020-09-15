@@ -1,6 +1,11 @@
 #include "PatchPage.h"
 #include "Globals.h"
 
+#include <thread>
+#include <chrono>
+#include <stdlib.h>
+
+
 int PatchPage::patchCount = 0;
 
 PatchPage::PatchPage(QWidget *parent)
@@ -38,6 +43,22 @@ PatchPage::PatchPage(QWidget *parent)
 
 #if QT_NO_DEBUG
     continue_btn->setEnabled(false);
+#endif
+}
+
+void PatchPage::fillBar() {
+#if QT_NO_DEBUG
+    int MAGIC_THRES = 45;
+
+    for (int i = 0; i < MAGIC_THRES; i++) {
+        progress_bar->setValue(i);
+        std::this_thread::sleep_for(std::chrono::milliseconds(100));
+    }
+
+    for (int i = MAGIC_THRES; i <= 100; i++) {
+        progress_bar->setValue(i);
+        std::this_thread::sleep_for(std::chrono::milliseconds(10));
+    }
 #endif
 }
 

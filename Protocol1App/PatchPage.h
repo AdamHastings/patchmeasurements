@@ -19,4 +19,7 @@ public:
     QLabel* done_label;
     QProgressBar* progress_bar;
     QPushButton* continue_btn;
+
+public:
+    void fillBar();
 };

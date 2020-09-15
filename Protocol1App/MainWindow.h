@@ -36,7 +36,6 @@ private:
     void showTask2();
     void showTask3();
     void setFreq(int p);
-    void fillBar(QProgressBar *qb);
     void pickThrottledTask();
     void showPatch1();
     void showPatch2();
