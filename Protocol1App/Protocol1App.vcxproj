@@ -102,12 +102,15 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="ButtonArray.cpp" />
+    <ClCompile Include="ButtonArray_old.cpp" />
     <ClCompile Include="ComparePage.cpp" />
     <ClCompile Include="PatchPage.cpp" />
     <ClCompile Include="PowerMgmt.cpp" />
     <ClCompile Include="StartPage.cpp" />
     <ClCompile Include="TaskPage.cpp" />
     <QtRcc Include="MainWindow.qrc" />
+    <QtUic Include="ButtonArray.ui" />
     <QtUic Include="ComparePage.ui" />
     <QtUic Include="GoodbyePage.ui" />
     <QtUic Include="MainWindow.ui" />
@@ -122,6 +125,8 @@
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="ComparePage.h" />
+    <ClInclude Include="ButtonArray_old.h" />
+    <QtMoc Include="ButtonArray.h" />
     <ClInclude Include="DropBox.h" />
     <QtMoc Include="GoodbyePage.h" />
     <ClInclude Include="Globals.h" />

@@ -62,6 +62,12 @@
     <ClCompile Include="ComparePage.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="ButtonArray_old.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ButtonArray.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DropBox.h">
@@ -77,6 +83,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="PowerMgmt.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ButtonArray_old.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -101,6 +110,9 @@
     <QtMoc Include="ComparePage.h">
       <Filter>Header Files</Filter>
     </QtMoc>
+    <QtMoc Include="ButtonArray.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
   </ItemGroup>
   <ItemGroup>
     <QtUic Include="GoodbyePage.ui">
@@ -116,6 +128,9 @@
       <Filter>Form Files</Filter>
     </QtUic>
     <QtUic Include="ComparePage.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+    <QtUic Include="ButtonArray.ui">
       <Filter>Form Files</Filter>
     </QtUic>
   </ItemGroup>

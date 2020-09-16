@@ -29,6 +29,7 @@
 #include "GoodbyePage.h"
 #include "TaskPage.h"
 #include "PatchPage.h"
+#include "ComparePage.h"
 
 
 QT_BEGIN_NAMESPACE
@@ -56,6 +57,7 @@ public:
     PatchPage* patch1;
     PatchPage* patch2;
     PatchPage* patch3;
+    ComparePage* compare;
 
     void setupUi(QMainWindow* MainWindow)
     {
@@ -113,6 +115,9 @@ public:
 
         patch3 = new PatchPage();
         stackedWidget->addWidget(patch3);
+
+        compare = new ComparePage();
+        stackedWidget->addWidget(compare);
 
 
     } // setupUi

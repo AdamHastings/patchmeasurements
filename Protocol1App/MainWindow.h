@@ -32,5 +32,6 @@ private:
     void showPatch1();
     void showPatch2();
     void showPatch3();
+    void showCompare();
 
 };
