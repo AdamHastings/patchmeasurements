@@ -1,4 +1,5 @@
 #include "ButtonArray.h"
+#include "Globals.h"
 
 ButtonArray::ButtonArray(QWidget *parent)
 	: QGroupBox(parent)
@@ -24,7 +25,7 @@ ButtonArray::ButtonArray(QWidget *parent)
 	hbox->insertWidget(4, slightlyfaster);
 	hbox->insertWidget(5, moderatelyfaster);
 	hbox->insertWidget(6, muchfaster);
-	hbox->setSpacing(50);
+	hbox->setSpacing(M/2);
 	this->setAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
 	this->setLayout(hbox);
 

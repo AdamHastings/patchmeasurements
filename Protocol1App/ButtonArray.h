@@ -16,8 +16,8 @@ public:
 	ButtonArray(QWidget *parent = Q_NULLPTR);
 	~ButtonArray();
 
-	QGroupBox* box;
-	QVBoxLayout* vbox;
+	//QGroupBox* box;
+	//QVBoxLayout* vbox;
 	QHBoxLayout* hbox;
 
 	QRadioButton* muchslower;
