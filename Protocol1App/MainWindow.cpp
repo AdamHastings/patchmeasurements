@@ -66,6 +66,10 @@ void MainWindow::showPatch3() {
     ui.patch3->continue_btn->setEnabled(true);
 }
 
+void MainWindow::showRank() {
+    ui.stackedWidget->setCurrentWidget(ui.rank);
+}
+
 void MainWindow::showCompare() {
     ui.stackedWidget->setCurrentWidget(ui.compare);
 }

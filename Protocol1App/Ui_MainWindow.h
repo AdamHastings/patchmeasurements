@@ -29,6 +29,7 @@
 #include "GoodbyePage.h"
 #include "TaskPage.h"
 #include "PatchPage.h"
+#include "RankPage.h"
 #include "ComparePage.h"
 
 
@@ -42,13 +43,6 @@ public:
     QWidget* centralwidget;
     QStackedWidget* stackedWidget;
 
-    /*QWidget* start_page;
-    QLabel* intro_label;
-    QPushButton* consent_btn;
-    QLabel* outline_label;
-    QLabel* consent_label;
-    QPushButton* not_consent_btn;*/
-
     GoodbyePage* goodbye;
     StartPage* start;
     TaskPage* task1;
@@ -57,6 +51,7 @@ public:
     PatchPage* patch1;
     PatchPage* patch2;
     PatchPage* patch3;
+    RankPage* rank;
     ComparePage* compare;
 
     void setupUi(QMainWindow* MainWindow)
@@ -115,6 +110,9 @@ public:
 
         patch3 = new PatchPage();
         stackedWidget->addWidget(patch3);
+
+        rank = new RankPage();
+        stackedWidget->addWidget(rank);
 
         compare = new ComparePage();
         stackedWidget->addWidget(compare);

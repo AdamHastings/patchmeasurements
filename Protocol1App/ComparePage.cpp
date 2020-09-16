@@ -7,10 +7,16 @@ void ComparePage::setupPage() {
     header->setAlignment(Qt::AlignHCenter | Qt::AlignTop);
     header->setText("You will now answer answer some questions");
 
+    label1 = new QLabel("In your experience, how much faster or slower was your computer during Task 2 compared to Task 1?", this);
+    label1->setGeometry(QRect(M, 1.5 * M, LINEWIDTH, M));
+    label1->setAlignment(Qt::AlignHCenter | Qt::AlignTop);
+
 
     arr1 = new ButtonArray(this);
     arr1->setGeometry(QRect(M, 2 * M, LINEWIDTH, 1.5 * M));
     arr1->setAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
+
+    
 
     arr2 = new ButtonArray(this);
     arr2->setGeometry(QRect(M, 4 * M, LINEWIDTH, 1.5 * M));

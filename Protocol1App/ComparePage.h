@@ -18,6 +18,9 @@ public:
 
 	QLabel* header;
 	QPushButton* continue_btn;
+	QLabel* label1;
+	QLabel* label2;
+	QLabel* label3;
 	ButtonArray* arr1;
 	ButtonArray* arr2;
 	ButtonArray* arr3;

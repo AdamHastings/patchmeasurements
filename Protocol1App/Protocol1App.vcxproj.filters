@@ -68,6 +68,9 @@
     <ClCompile Include="ButtonArray.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="RankPage.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DropBox.h">
@@ -113,6 +116,9 @@
     <QtMoc Include="ButtonArray.h">
       <Filter>Header Files</Filter>
     </QtMoc>
+    <QtMoc Include="RankPage.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
   </ItemGroup>
   <ItemGroup>
     <QtUic Include="GoodbyePage.ui">
@@ -131,6 +137,9 @@
       <Filter>Form Files</Filter>
     </QtUic>
     <QtUic Include="ButtonArray.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+    <QtUic Include="RankPage.ui">
       <Filter>Form Files</Filter>
     </QtUic>
   </ItemGroup>
