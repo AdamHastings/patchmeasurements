@@ -34,5 +34,6 @@ private:
     void showPatch3();
     void showRank();
     void showCompare();
+    void showPreWTA();
 
 };
