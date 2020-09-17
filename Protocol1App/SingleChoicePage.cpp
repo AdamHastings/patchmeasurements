@@ -12,7 +12,7 @@ SingleChoicePage::SingleChoicePage(QWidget* parent)
 
     label = new QLabel(this);
     label->setAlignment(Qt::AlignJustify | Qt::AlignVCenter);
-    label->setGeometry(QRect(M, M, LINEWIDTH, M * 6));
+    label->setGeometry(QRect(2* M, M, LINEWIDTH - 2*M, M * 6));
     label->setWordWrap(true);
     label->setFont(font);
 

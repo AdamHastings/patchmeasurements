@@ -52,6 +52,7 @@ public:
     PatchPage* patch1;
     PatchPage* patch2;
     PatchPage* patch3;
+    PostTasksPage* posttasks;
     RankPage* rank;
     ComparePage* compare;
     PreWTAPage* preWTA;
@@ -112,6 +113,9 @@ public:
 
         patch3 = new PatchPage();
         stackedWidget->addWidget(patch3);
+
+        posttasks = new PostTasksPage();
+        stackedWidget->addWidget(posttasks);
 
         rank = new RankPage();
         stackedWidget->addWidget(rank);

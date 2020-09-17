@@ -80,6 +80,10 @@ void MainWindow::showPreWTA() {
     ui.stackedWidget->setCurrentWidget(ui.preWTA);
 }
 
+void MainWindow::showPostTasks() {
+    ui.stackedWidget->setCurrentWidget(ui.posttasks);
+}
+
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
 {
@@ -96,12 +100,13 @@ MainWindow::MainWindow(QWidget *parent)
     connect(ui.task2->continue_btn, &QPushButton::clicked, this, &MainWindow::showPatch2);
     connect(ui.patch2->continue_btn, &QPushButton::clicked, this, &MainWindow::showTask3);
     connect(ui.task3->continue_btn, &QPushButton::clicked, this, &MainWindow::showPatch3);
-    connect(ui.patch3->continue_btn, &QPushButton::clicked, this, &MainWindow::showRank);
+    connect(ui.patch3->continue_btn, &QPushButton::clicked, this, &MainWindow::showPostTasks);
+    connect(ui.posttasks->continue_btn, &QPushButton::clicked, this, &MainWindow::showRank);
     connect(ui.rank->continue_btn, &QPushButton::clicked, this, &MainWindow::showCompare);
     connect(ui.compare->continue_btn, &QPushButton::clicked, this, &MainWindow::showPreWTA);
 
     // temp
-    connect(ui.start->consent_btn, &QPushButton::clicked, this, &MainWindow::showRank);
+    //connect(ui.start->consent_btn, &QPushButton::clicked, this, &MainWindow::showRank);
 
 
 }

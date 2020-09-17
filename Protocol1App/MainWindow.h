@@ -32,6 +32,7 @@ private:
     void showPatch1();
     void showPatch2();
     void showPatch3();
+    void showPostTasks();
     void showRank();
     void showCompare();
     void showPreWTA();
