@@ -1,0 +1,23 @@
+<UI version="4.0" >
+ <class>SingleChoicePage</class>
+ <widget class="QWidget" name="SingleChoicePage" >
+  <property name="objectName" >
+   <string notr="true">SingleChoicePage</string>
+  </property>
+  <property name="geometry" >
+   <rect>
+	<x>0</x>
+	<y>0</y>
+	<width>400</width>
+	<height>300</height>
+   </rect>
+  </property>
+  <property name="windowTitle" >
+   <string>SingleChoicePage</string>
+  </property>
+ </widget>
+ <layoutDefault spacing="6" margin="11" />
+ <pixmapfunction></pixmapfunction>
+ <resources/>
+ <connections/>
+</UI>

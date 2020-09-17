@@ -31,6 +31,7 @@
 #include "PatchPage.h"
 #include "RankPage.h"
 #include "ComparePage.h"
+#include "SingleChoicePage.h"
 
 
 QT_BEGIN_NAMESPACE
@@ -53,6 +54,7 @@ public:
     PatchPage* patch3;
     RankPage* rank;
     ComparePage* compare;
+    PreWTAPage* preWTA;
 
     void setupUi(QMainWindow* MainWindow)
     {
@@ -116,6 +118,9 @@ public:
 
         compare = new ComparePage();
         stackedWidget->addWidget(compare);
+
+        preWTA = new PreWTAPage();
+        stackedWidget->addWidget(preWTA);
 
 
     } // setupUi

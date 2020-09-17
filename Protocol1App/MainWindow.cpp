@@ -75,6 +75,11 @@ void MainWindow::showCompare() {
     ui.stackedWidget->setCurrentWidget(ui.compare);
 }
 
+void MainWindow::showPreWTA() {
+    ui.preWTA->setLabelText(throttled_task, unthrottled_task, slowdown);
+    ui.stackedWidget->setCurrentWidget(ui.preWTA);
+}
+
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
 {
@@ -82,18 +87,18 @@ MainWindow::MainWindow(QWidget *parent)
     //DropBox::upload("Protocol1App");
 
     connect(ui.start->not_consent_btn, &QPushButton::clicked, this, &MainWindow::showGoodbye);
-    //connect(ui.start->consent_btn, &QPushButton::clicked, this, &MainWindow::showTask1);
+    connect(ui.start->consent_btn, &QPushButton::clicked, this, &MainWindow::showTask1);
     connect(ui.task1->continue_btn, &QPushButton::clicked, this, &MainWindow::showPatch1);
     connect(ui.patch1->continue_btn, &QPushButton::clicked, this, &MainWindow::showTask2);
     connect(ui.task2->continue_btn, &QPushButton::clicked, this, &MainWindow::showPatch2);
     connect(ui.patch2->continue_btn, &QPushButton::clicked, this, &MainWindow::showTask3);
     connect(ui.task3->continue_btn, &QPushButton::clicked, this, &MainWindow::showPatch3);
     connect(ui.patch3->continue_btn, &QPushButton::clicked, this, &MainWindow::showRank);
-
+    connect(ui.rank->continue_btn, &QPushButton::clicked, this, &MainWindow::showCompare);
+    connect(ui.compare->continue_btn, &QPushButton::clicked, this, &MainWindow::showPreWTA);
 
     // temp
     connect(ui.start->consent_btn, &QPushButton::clicked, this, &MainWindow::showRank);
-    connect(ui.rank->continue_btn, &QPushButton::clicked, this, &MainWindow::showCompare);
 
 
 }

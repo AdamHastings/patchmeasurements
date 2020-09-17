@@ -103,11 +103,11 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="ButtonArray.cpp" />
-    <ClCompile Include="ButtonArray_old.cpp" />
     <ClCompile Include="ComparePage.cpp" />
     <ClCompile Include="PatchPage.cpp" />
     <ClCompile Include="PowerMgmt.cpp" />
     <ClCompile Include="RankPage.cpp" />
+    <ClCompile Include="SingleChoicePage.cpp" />
     <ClCompile Include="StartPage.cpp" />
     <ClCompile Include="TaskPage.cpp" />
     <QtRcc Include="MainWindow.qrc" />
@@ -122,12 +122,12 @@
     <ClCompile Include="main.cpp" />
     <QtUic Include="PatchPage.ui" />
     <QtUic Include="RankPage.ui" />
+    <QtUic Include="SingleChoicePage.ui" />
     <QtUic Include="StartPage.ui" />
     <QtUic Include="TaskPage.ui" />
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="ComparePage.h" />
-    <ClInclude Include="ButtonArray_old.h" />
     <QtMoc Include="ButtonArray.h" />
     <ClInclude Include="DropBox.h" />
     <QtMoc Include="GoodbyePage.h" />
@@ -137,6 +137,7 @@
     <QtMoc Include="PatchPage.h" />
     <ClInclude Include="PowerMgmt.h" />
     <QtMoc Include="RankPage.h" />
+    <QtMoc Include="SingleChoicePage.h" />
     <ClInclude Include="Ui_MainWindow.h" />
     <ClInclude Include="resource.h" />
   </ItemGroup>
