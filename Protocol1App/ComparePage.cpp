@@ -3,24 +3,23 @@
 
 
 void ComparePage::setLabels(QListWidget* listWidget) {
-    QString l1text = "In your experience, how much faster was your computer during " + listWidget->item(0)->text() + " compared to " + listWidget->item(1)->text() + "?";
+    QString l1text = "In your experience, how much faster was your computer during <b>" + listWidget->item(0)->text() + "</b> compared to <b>" + listWidget->item(1)->text() + "</b>?";
+    label1->setTextFormat(Qt::RichText);
     label1->setText(l1text);
 
-    QString l2text = "In your experience, how much faster was your computer during " + listWidget->item(1)->text() + " compared to " + listWidget->item(2)->text() + "?";
+    QString l2text = "In your experience, how much faster was your computer during <b>" + listWidget->item(1)->text() + "</b> compared to <b>" + listWidget->item(2)->text() + "</b>?";
+    label2->setTextFormat(Qt::RichText);
     label2->setText(l2text);
 
     // TODO if Tasks 2 & 3 are not explicitly compared, we should compare them directly.
     // NOTE I should just ask all permutations anyway...
-    QString l3text = "In your experience, how much faster was your computer during " + listWidget->item(0)->text() + " compared to " + listWidget->item(2)->text() + "?";
+    QString l3text = "In your experience, how much faster was your computer during <b>" + listWidget->item(0)->text() + "</b> compared to <b>" + listWidget->item(2)->text() + "</b>?";
+    label3->setTextFormat(Qt::RichText);
     label3->setText(l3text);
 
 }
 
 void ComparePage::setupPage() {
-    /*header = new QLabel(this);
-    header->setGeometry(QRect(M, M, LINEWIDTH, M));
-    header->setAlignment(Qt::AlignHCenter | Qt::AlignTop);
-    header->setText("You will now answer answer some questions");*/
 
     label1 = new QLabel(this);
     label1->setGeometry(QRect(M, M, LINEWIDTH, M));
@@ -60,36 +59,35 @@ void ComparePage::setupPage() {
 }
 
 void ComparePage::makeConnections() {
-    connect(this->arr1->speed0,       &QRadioButton::clicked, this->arr2, &ButtonArray::setVisible);
+    connect(this->arr1->speed0, &QRadioButton::clicked, this->arr2, &ButtonArray::setVisible);
     connect(this->arr1->speed1, &QRadioButton::clicked, this->arr2, &ButtonArray::setVisible);
-    connect(this->arr1->speed2,   &QRadioButton::clicked, this->arr2, &ButtonArray::setVisible);
-    connect(this->arr1->speed3,     &QRadioButton::clicked, this->arr2, &ButtonArray::setVisible);
-    connect(this->arr1->speed4,   &QRadioButton::clicked, this->arr2, &ButtonArray::setVisible);
-    
+    connect(this->arr1->speed2, &QRadioButton::clicked, this->arr2, &ButtonArray::setVisible);
+    connect(this->arr1->speed3, &QRadioButton::clicked, this->arr2, &ButtonArray::setVisible);
+    connect(this->arr1->speed4, &QRadioButton::clicked, this->arr2, &ButtonArray::setVisible);
 
-    connect(this->arr1->speed0,       &QRadioButton::clicked, this->label2, &ButtonArray::setVisible);
+    connect(this->arr1->speed0, &QRadioButton::clicked, this->label2, &ButtonArray::setVisible);
     connect(this->arr1->speed1, &QRadioButton::clicked, this->label2, &ButtonArray::setVisible);
-    connect(this->arr1->speed2,   &QRadioButton::clicked, this->label2, &ButtonArray::setVisible);
-    connect(this->arr1->speed3,     &QRadioButton::clicked, this->label2, &ButtonArray::setVisible);
-    connect(this->arr1->speed4,   &QRadioButton::clicked, this->label2, &ButtonArray::setVisible);
+    connect(this->arr1->speed2, &QRadioButton::clicked, this->label2, &ButtonArray::setVisible);
+    connect(this->arr1->speed3, &QRadioButton::clicked, this->label2, &ButtonArray::setVisible);
+    connect(this->arr1->speed4, &QRadioButton::clicked, this->label2, &ButtonArray::setVisible);
     
-    connect(this->arr2->speed0,       &QRadioButton::clicked, this->arr3, &ButtonArray::setVisible);
+    connect(this->arr2->speed0, &QRadioButton::clicked, this->arr3, &ButtonArray::setVisible);
     connect(this->arr2->speed1, &QRadioButton::clicked, this->arr3, &ButtonArray::setVisible);
-    connect(this->arr2->speed2,   &QRadioButton::clicked, this->arr3, &ButtonArray::setVisible);
-    connect(this->arr2->speed3,     &QRadioButton::clicked, this->arr3, &ButtonArray::setVisible);
-    connect(this->arr2->speed4,   &QRadioButton::clicked, this->arr3, &ButtonArray::setVisible);
+    connect(this->arr2->speed2, &QRadioButton::clicked, this->arr3, &ButtonArray::setVisible);
+    connect(this->arr2->speed3, &QRadioButton::clicked, this->arr3, &ButtonArray::setVisible);
+    connect(this->arr2->speed4, &QRadioButton::clicked, this->arr3, &ButtonArray::setVisible);
     
-    connect(this->arr2->speed0,       &QRadioButton::clicked, this->label3, &ButtonArray::setVisible);
+    connect(this->arr2->speed0, &QRadioButton::clicked, this->label3, &ButtonArray::setVisible);
     connect(this->arr2->speed1, &QRadioButton::clicked, this->label3, &ButtonArray::setVisible);
-    connect(this->arr2->speed2,   &QRadioButton::clicked, this->label3, &ButtonArray::setVisible);
-    connect(this->arr2->speed3,     &QRadioButton::clicked, this->label3, &ButtonArray::setVisible);
-    connect(this->arr2->speed4,   &QRadioButton::clicked, this->label3, &ButtonArray::setVisible);
+    connect(this->arr2->speed2, &QRadioButton::clicked, this->label3, &ButtonArray::setVisible);
+    connect(this->arr2->speed3, &QRadioButton::clicked, this->label3, &ButtonArray::setVisible);
+    connect(this->arr2->speed4, &QRadioButton::clicked, this->label3, &ButtonArray::setVisible);
     
-    connect(this->arr3->speed0,       &QRadioButton::clicked, this->continue_btn, &QPushButton::setEnabled);
+    connect(this->arr3->speed0, &QRadioButton::clicked, this->continue_btn, &QPushButton::setEnabled);
     connect(this->arr3->speed1, &QRadioButton::clicked, this->continue_btn, &QPushButton::setEnabled);
-    connect(this->arr3->speed2,   &QRadioButton::clicked, this->continue_btn, &QPushButton::setEnabled);
-    connect(this->arr3->speed3,     &QRadioButton::clicked, this->continue_btn, &QPushButton::setEnabled);
-    connect(this->arr3->speed4,   &QRadioButton::clicked, this->continue_btn, &QPushButton::setEnabled);
+    connect(this->arr3->speed2, &QRadioButton::clicked, this->continue_btn, &QPushButton::setEnabled);
+    connect(this->arr3->speed3, &QRadioButton::clicked, this->continue_btn, &QPushButton::setEnabled);
+    connect(this->arr3->speed4, &QRadioButton::clicked, this->continue_btn, &QPushButton::setEnabled);
 }
 
 ComparePage::ComparePage(QWidget *parent)
