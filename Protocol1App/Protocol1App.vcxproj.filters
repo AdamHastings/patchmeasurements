@@ -71,6 +71,9 @@
     <ClCompile Include="SingleChoicePage.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="WTAPage.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DropBox.h">
@@ -119,6 +122,9 @@
     <QtMoc Include="SingleChoicePage.h">
       <Filter>Header Files</Filter>
     </QtMoc>
+    <QtMoc Include="WTAPage.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
   </ItemGroup>
   <ItemGroup>
     <QtUic Include="GoodbyePage.ui">
@@ -143,6 +149,9 @@
       <Filter>Form Files</Filter>
     </QtUic>
     <QtUic Include="SingleChoicePage.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+    <QtUic Include="WTAPage.ui">
       <Filter>Form Files</Filter>
     </QtUic>
   </ItemGroup>

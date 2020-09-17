@@ -43,7 +43,19 @@ class PostTasksPage : public SingleChoicePage
 
 public:
 	PostTasksPage(QWidget* parent = Q_NULLPTR) : SingleChoicePage(parent) {
-		label->setText("We are now done with the task exercises. We will now ask a few questions based on your experience during the tasks.");
+		label->setText("We are now done with the task exercises. We will now ask a few questions based on your experience during the tasks.\n\nAt this point, you may also delete the previously created Google Docs if you wish.");
+	}
+};
+
+class FinalPage : public SingleChoicePage
+{
+	Q_OBJECT
+
+public:
+	FinalPage(QWidget* parent = Q_NULLPTR) : SingleChoicePage(parent) {
+		label->setText("Thank you for your participation in this experiment. If we received three emails from you demonstrating that you completed the three tasks, you should expect to receive an email containing a link to an Amazon gift card in the next few days.\n\nYou may now exit this window.");
+
+		continue_btn->setVisible(false);
 	}
 };
 

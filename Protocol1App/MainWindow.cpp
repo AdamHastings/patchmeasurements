@@ -105,8 +105,9 @@ MainWindow::MainWindow(QWidget *parent)
     connect(ui.rank->continue_btn, &QPushButton::clicked, this, &MainWindow::showCompare);
     connect(ui.compare->continue_btn, &QPushButton::clicked, this, &MainWindow::showPreWTA);
 
-    // temp
-    //connect(ui.start->consent_btn, &QPushButton::clicked, this, &MainWindow::showRank);
+#ifndef QT_NO_DEBUG
+    connect(ui.start->consent_btn, &QPushButton::clicked, this, &MainWindow::showPreWTA);
+#endif
 
 
 }
