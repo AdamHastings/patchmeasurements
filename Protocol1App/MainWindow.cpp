@@ -84,6 +84,62 @@ void MainWindow::showPostTasks() {
     ui.stackedWidget->setCurrentWidget(ui.posttasks);
 }
 
+void MainWindow::showWTA() {
+    offer = 0;
+    ui.wta->header->setText("Would you be willing to accept a permanent " + QString::number(slowdown) + "% slowdown on this computer in exchange for ");
+    ui.wta->updateOffer(offer);
+    ui.stackedWidget->setCurrentWidget(ui.wta);
+}
+
+void MainWindow::conclude() {
+    ui.stackedWidget->setCurrentWidget(ui.final);
+}
+
+void MainWindow::updateOffer_yes() {
+    if (offer < 4) {
+        conclude();
+    }
+    else if (!first_accept) {
+        first_accept = true;
+        upper = offer;
+        lower = offer / 2;
+        offer = (lower + upper) / 2;
+        ui.wta->updateOffer(offer);
+    }
+    else {
+        upper = offer;
+        offer = (lower + upper) / 2;
+        if (upper - lower <= 2) {
+            conclude();
+        }
+        else {
+            ui.wta->updateOffer(offer);
+        }
+    }
+}
+
+void MainWindow::updateOffer_no() {
+    if (!first_accept) {
+        if (offer == 0) {
+            offer = 1;
+        }
+        else {
+            offer *= 2;
+        }
+        ui.wta->updateOffer(offer);
+    }
+    else {
+        lower = offer;
+        offer = (offer + upper) / 2;
+        if (upper - lower <= 2) {
+            conclude();
+        }
+        else {
+            ui.wta->updateOffer(offer);
+        }
+    }
+}
+
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
 {
@@ -104,6 +160,9 @@ MainWindow::MainWindow(QWidget *parent)
     connect(ui.posttasks->continue_btn, &QPushButton::clicked, this, &MainWindow::showRank);
     connect(ui.rank->continue_btn, &QPushButton::clicked, this, &MainWindow::showCompare);
     connect(ui.compare->continue_btn, &QPushButton::clicked, this, &MainWindow::showPreWTA);
+    connect(ui.preWTA->continue_btn, &QPushButton::clicked, this, &MainWindow::showWTA);
+    connect(ui.wta->yes_btn, &QPushButton::clicked, this, &MainWindow::updateOffer_yes);
+    connect(ui.wta->no_btn, &QPushButton::clicked, this, &MainWindow::updateOffer_no);
 
 #ifndef QT_NO_DEBUG
     connect(ui.start->consent_btn, &QPushButton::clicked, this, &MainWindow::showPreWTA);

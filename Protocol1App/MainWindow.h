@@ -23,6 +23,11 @@ private:
     int unthrottled_task = -1;
     int slowdown = 30;
 
+    int offer = 0;
+    int upper = -1;
+    int lower = -1;
+    bool first_accept = false;
+
     void showGoodbye();
     void showTask1();
     void showTask2();
@@ -36,5 +41,9 @@ private:
     void showRank();
     void showCompare();
     void showPreWTA();
+    void showWTA();
+    void conclude();
+    void updateOffer_no();
+    void updateOffer_yes();
 
 };

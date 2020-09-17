@@ -1,27 +1,6 @@
 #pragma once
-#include <QtCore/QVariant>
-#include <QtWidgets/QAction>
-#include <QtWidgets/QApplication>
-#include <QtWidgets/QButtonGroup>
-#include <QtWidgets/QHeaderView>
-#include <QtWidgets/QLabel>
-#include <QtWidgets/QMainWindow>
-#include <QtWidgets/QMenuBar>
-#include <QtWidgets/QPushButton>
-#include <QtWidgets/QStackedWidget>
-#include <QtWidgets/QStatusBar>
-#include <QtWidgets/QWidget>
-#include <QtWidgets/QProgressBar>
-#include <QtWidgets/QTextEdit>
-#include <QtWidgets/QLineEdit>
-#include <QtWidgets/QRadioButton>
-#include <QtWidgets/QCheckBox>
-#include <QtWidgets/QSpinBox>
-#include <QFont>
-#include <QScreen>
-#include <QApplication>
-#include <QDesktopWidget>
 
+#include <QtWidgets/QStackedWidget>
 #include <algorithm>
 
 #include "Globals.h"
@@ -32,6 +11,7 @@
 #include "RankPage.h"
 #include "ComparePage.h"
 #include "SingleChoicePage.h"
+#include "WTAPage.h"
 
 
 QT_BEGIN_NAMESPACE
@@ -56,6 +36,8 @@ public:
     RankPage* rank;
     ComparePage* compare;
     PreWTAPage* preWTA;
+    WTAPage* wta;
+    FinalPage* final;
 
     void setupUi(QMainWindow* MainWindow)
     {
@@ -126,6 +108,11 @@ public:
         preWTA = new PreWTAPage();
         stackedWidget->addWidget(preWTA);
 
+        wta = new WTAPage();
+        stackedWidget->addWidget(wta);
+
+        final = new FinalPage();
+        stackedWidget->addWidget(final);
 
     } // setupUi
 };
