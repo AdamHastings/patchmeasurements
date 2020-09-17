@@ -17,5 +17,5 @@ public:
 
 
 private:
-	void enableContinue();
+	void enableContinue(QListWidgetItem* item);
 };
