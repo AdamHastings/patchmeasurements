@@ -20,11 +20,17 @@ public:
 	//QVBoxLayout* vbox;
 	QHBoxLayout* hbox;
 
-	QRadioButton* muchslower;
+	/*QRadioButton* muchslower;
 	QRadioButton* moderatelyslower;
 	QRadioButton* slightlyslower;
 	QRadioButton* aboutthesame;
 	QRadioButton* slightlyfaster;
 	QRadioButton* moderatelyfaster;
-	QRadioButton* muchfaster;
+	QRadioButton* muchfaster;*/
+
+	QRadioButton* speed0;
+	QRadioButton* speed1;
+	QRadioButton* speed2;
+	QRadioButton* speed3;
+	QRadioButton* speed4;
 };
