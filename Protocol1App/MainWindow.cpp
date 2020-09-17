@@ -11,6 +11,7 @@
 #include <sstream>
 #include <iostream>
 #include <QProcess>
+#include <QDebug>
 using namespace std;
 
 void MainWindow::showGoodbye() {
@@ -37,7 +38,6 @@ void MainWindow::pickThrottledTask() {
 
 void MainWindow::showPatch1() {
     ui.stackedWidget->setCurrentWidget(ui.patch1);
-    pickThrottledTask();
     ui.patch1->fillBar();
     if (throttled_task == 2)
         PowerMgmt::setFreq(100 - slowdown);
@@ -85,6 +85,9 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui.setupUi(this);
     //DropBox::upload("Protocol1App");
+
+    pickThrottledTask();
+
 
     connect(ui.start->not_consent_btn, &QPushButton::clicked, this, &MainWindow::showGoodbye);
     connect(ui.start->consent_btn, &QPushButton::clicked, this, &MainWindow::showTask1);
