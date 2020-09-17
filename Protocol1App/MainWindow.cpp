@@ -71,6 +71,7 @@ void MainWindow::showRank() {
 }
 
 void MainWindow::showCompare() {
+    ui.compare->setLabels(ui.rank->listWidget);
     ui.stackedWidget->setCurrentWidget(ui.compare);
 }
 

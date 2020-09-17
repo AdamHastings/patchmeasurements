@@ -6,7 +6,9 @@
 #include <QRadioButton>
 #include <QLabel>
 #include <QGroupBox>
+#include <QListWidget>
 #include "ButtonArray.h"
+
 
 class ComparePage : public QWidget
 {
@@ -24,6 +26,8 @@ public:
 	ButtonArray* arr1;
 	ButtonArray* arr2;
 	ButtonArray* arr3;
+
+	void setLabels(QListWidget* listWidget);
 
 private:
 	void setupPage();
