@@ -4,7 +4,6 @@
 #include <QButtonGroup>
 #include <QRadioButton>
 #include <QGroupBox>
-#include <QVBoxLayout>
 #include <QHBoxLayout>
 #include <QRect>
 
@@ -17,6 +16,9 @@ public:
 	~ButtonArray();
 
 	QHBoxLayout* hbox;
+	QButtonGroup* bgroup;
+
+	int getClicked();
 
 	QRadioButton* speed0;
 	QRadioButton* speed1;

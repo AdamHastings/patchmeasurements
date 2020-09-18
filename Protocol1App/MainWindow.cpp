@@ -101,7 +101,9 @@ std::string MainWindow::createResultsString() {
     s += "fastest," + ui.rank->listWidget->item(0)->text().toStdString() + "\n";
     s += "middle," + ui.rank->listWidget->item(1)->text().toStdString() + "\n";
     s += "slowest," + ui.rank->listWidget->item(2)->text().toStdString() + "\n";
-    //s += "fastest_vs_middle," + ui.compare->arr1
+    s += "fastest_vs_middle," + to_string(ui.compare->arr1->getClicked()) + "\n";
+    s += "middle_vs_slowest," + to_string(ui.compare->arr2->getClicked()) + "\n";
+    s += "fastest_vs_slowest," + to_string(ui.compare->arr3->getClicked()) + "\n";
 
     return s;
 }
