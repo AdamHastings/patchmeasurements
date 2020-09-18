@@ -1,6 +1,7 @@
 #pragma once
 #include <string>
 #include <vector>
+#include <stdbool.h>
 
 class PowerMgmt
 {
@@ -17,6 +18,7 @@ public:
 	static void getDefaultPowercfg();
 	static void setFreq(int p);
 	static void restoreDefaults();
+	static bool isCsEnabled();
 
 private:
 	PowerMgmt();

@@ -11,8 +11,20 @@
 #include <sstream>
 #include <iostream>
 #include <QProcess>
+#include <QSettings>
 #include <QDebug>
 using namespace std;
+
+
+void MainWindow::showStartNext() {
+    if (PowerMgmt::isCsEnabled()) {
+        //ui.stackedWidget->setCurrentWidget(ui.reg_page);
+    }
+    else {
+        //getDefaultPowercfg();
+        //ui.stackedWidget->setCurrentWidget(ui.mod_page);
+    }
+}
 
 void MainWindow::showGoodbye() {
     ui.stackedWidget->setCurrentWidget(ui.goodbye);
@@ -182,7 +194,7 @@ MainWindow::MainWindow(QWidget *parent)
     connect(ui.wta->no_btn, &QPushButton::clicked, this, &MainWindow::updateOffer_no);
 
 #ifndef QT_NO_DEBUG
-    connect(ui.start->consent_btn, &QPushButton::clicked, this, &MainWindow::showPostTasks);
+    //connect(ui.start->consent_btn, &QPushButton::clicked, this, &MainWindow::showPostTasks);
 #endif
 
 

@@ -29,6 +29,7 @@ private:
     int lower = -1;
     bool first_accept = false;
 
+    void showStartNext();
     void showGoodbye();
     void showTask1();
     void showTask2();
