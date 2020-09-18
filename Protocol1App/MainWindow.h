@@ -2,6 +2,7 @@
 
 #include <QtWidgets/QMainWindow>
 #include <QProgressBar>
+#include <string>
 #include "ui_MainWindow.h"
 
 #ifdef _WIN32
@@ -45,5 +46,7 @@ private:
     void conclude();
     void updateOffer_no();
     void updateOffer_yes();
+
+    std::string createResultsString();
 
 };

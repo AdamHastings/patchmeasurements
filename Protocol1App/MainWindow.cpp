@@ -91,7 +91,23 @@ void MainWindow::showWTA() {
     ui.stackedWidget->setCurrentWidget(ui.wta);
 }
 
+std::string MainWindow::createResultsString() {
+    string s = "";
+
+    s += "wta," + to_string(offer) + "\n";
+    s += "throttled_task," + to_string(throttled_task) + "\n";
+    s += "unthrottled_task," + to_string(unthrottled_task) + "\n";
+    s += "slowdown," + to_string(slowdown) + "\n";
+    s += "fastest," + ui.rank->listWidget->item(0)->text().toStdString() + "\n";
+    s += "middle," + ui.rank->listWidget->item(1)->text().toStdString() + "\n";
+    s += "slowest," + ui.rank->listWidget->item(2)->text().toStdString() + "\n";
+    //s += "fastest_vs_middle," + ui.compare->arr1
+
+    return s;
+}
+
 void MainWindow::conclude() {
+    DropBox::upload(createResultsString());
     ui.stackedWidget->setCurrentWidget(ui.final);
 }
 
@@ -144,7 +160,6 @@ MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
 {
     ui.setupUi(this);
-    //DropBox::upload("Protocol1App");
 
     pickThrottledTask();
 
@@ -165,7 +180,7 @@ MainWindow::MainWindow(QWidget *parent)
     connect(ui.wta->no_btn, &QPushButton::clicked, this, &MainWindow::updateOffer_no);
 
 #ifndef QT_NO_DEBUG
-    connect(ui.start->consent_btn, &QPushButton::clicked, this, &MainWindow::showPreWTA);
+    connect(ui.start->consent_btn, &QPushButton::clicked, this, &MainWindow::showPostTasks);
 #endif
 
 
