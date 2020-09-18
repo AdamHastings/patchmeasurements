@@ -18,11 +18,14 @@ using namespace std;
 
 void MainWindow::showStartNext() {
     if (PowerMgmt::isCsEnabled()) {
-        //ui.stackedWidget->setCurrentWidget(ui.reg_page);
+        ui.stackedWidget->setCurrentWidget(ui.regedit);
+        QSettings reg("HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Control\\Power", QSettings::NativeFormat);
+        reg.setValue("CsEnabled", 0);
+        qDebug() << "CsEnabled set to " << reg.value("CsEnabled").toInt();
     }
     else {
         //getDefaultPowercfg();
-        //ui.stackedWidget->setCurrentWidget(ui.mod_page);
+        ui.stackedWidget->setCurrentWidget(ui.task1);
     }
 }
 
@@ -179,7 +182,7 @@ MainWindow::MainWindow(QWidget *parent)
 
 
     connect(ui.start->not_consent_btn, &QPushButton::clicked, this, &MainWindow::showGoodbye);
-    connect(ui.start->consent_btn, &QPushButton::clicked, this, &MainWindow::showTask1);
+    connect(ui.start->consent_btn, &QPushButton::clicked, this, &MainWindow::showStartNext);
     connect(ui.task1->continue_btn, &QPushButton::clicked, this, &MainWindow::showPatch1);
     connect(ui.patch1->continue_btn, &QPushButton::clicked, this, &MainWindow::showTask2);
     connect(ui.task2->continue_btn, &QPushButton::clicked, this, &MainWindow::showPatch2);

@@ -107,6 +107,7 @@
     <ClCompile Include="PatchPage.cpp" />
     <ClCompile Include="PowerMgmt.cpp" />
     <ClCompile Include="RankPage.cpp" />
+    <ClCompile Include="RegistryEditPage.cpp" />
     <ClCompile Include="SingleChoicePage.cpp" />
     <ClCompile Include="StartPage.cpp" />
     <ClCompile Include="TaskPage.cpp" />
@@ -123,6 +124,7 @@
     <ClCompile Include="main.cpp" />
     <QtUic Include="PatchPage.ui" />
     <QtUic Include="RankPage.ui" />
+    <QtUic Include="RegistryEditPage.ui" />
     <QtUic Include="SingleChoicePage.ui" />
     <QtUic Include="StartPage.ui" />
     <QtUic Include="TaskPage.ui" />
@@ -141,6 +143,7 @@
     <ClInclude Include="PowerMgmt.h" />
     <QtMoc Include="RankPage.h" />
     <QtMoc Include="SingleChoicePage.h" />
+    <QtMoc Include="RegistryEditPage.h" />
     <ClInclude Include="Ui_MainWindow.h" />
     <ClInclude Include="resource.h" />
   </ItemGroup>

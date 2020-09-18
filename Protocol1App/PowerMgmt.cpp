@@ -3,6 +3,7 @@
 #include <sstream>
 #include <QProcess>
 #include <QSettings>
+#include <QDebug>
 #include <iostream>
 #include <string>
 #include <vector>
@@ -12,6 +13,12 @@ PowerMgmt::PowerMgmt() {
 }
 
 PowerMgmt::~PowerMgmt() {
+}
+
+void PowerMgmt::setCsEnabled(int i) {
+    QSettings reg("HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Control\\Power", QSettings::NativeFormat);
+    reg.setValue("CsEnabled", i);
+    qDebug() << "CsEnabled set to " << reg.value("CsEnabled").toInt();
 }
 
 bool PowerMgmt::isCsEnabled() {

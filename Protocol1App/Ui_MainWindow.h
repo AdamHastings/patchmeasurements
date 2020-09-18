@@ -6,6 +6,7 @@
 #include "Globals.h"
 #include "StartPage.h"
 #include "GoodbyePage.h"
+#include "RegistryEditPage.h"
 #include "TaskPage.h"
 #include "PatchPage.h"
 #include "RankPage.h"
@@ -24,8 +25,9 @@ public:
     QWidget* centralwidget;
     QStackedWidget* stackedWidget;
 
-    GoodbyePage* goodbye;
     StartPage* start;
+    GoodbyePage* goodbye;
+    RegistryEditPage* regedit;
     TaskPage* task1;
     TaskPage* task2;
     TaskPage* task3;
@@ -76,6 +78,9 @@ public:
 
         goodbye = new GoodbyePage();
         stackedWidget->addWidget(goodbye);
+
+        regedit = new RegistryEditPage();
+        stackedWidget->addWidget(regedit);
 
         task1 = new TaskPage("\nfrom Los Angeles, USA to New York City, USA", "Low Library", "\"Bolero\"\nby composer Maurice Ravel");
         stackedWidget->addWidget(task1);

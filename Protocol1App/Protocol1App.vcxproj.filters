@@ -74,6 +74,9 @@
     <ClCompile Include="WTAPage.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="RegistryEditPage.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DropBox.h">
@@ -125,6 +128,9 @@
     <QtMoc Include="WTAPage.h">
       <Filter>Header Files</Filter>
     </QtMoc>
+    <QtMoc Include="RegistryEditPage.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
   </ItemGroup>
   <ItemGroup>
     <QtUic Include="GoodbyePage.ui">
@@ -152,6 +158,9 @@
       <Filter>Form Files</Filter>
     </QtUic>
     <QtUic Include="WTAPage.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+    <QtUic Include="RegistryEditPage.ui">
       <Filter>Form Files</Filter>
     </QtUic>
   </ItemGroup>
