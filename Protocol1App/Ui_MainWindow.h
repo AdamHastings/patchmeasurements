@@ -29,6 +29,7 @@ public:
     GoodbyePage* goodbye;
     NoAdminPage* noadmin;
     RegistryEditPage* regedit;
+    ModPage* mod;
     TaskPage* task1;
     TaskPage* task2;
     TaskPage* task3;
@@ -85,6 +86,9 @@ public:
 
         regedit = new RegistryEditPage();
         stackedWidget->addWidget(regedit);
+
+        mod = new ModPage();
+        stackedWidget->addWidget(mod);
 
         task1 = new TaskPage("\nfrom Los Angeles, USA to New York City, USA", "Low Library", "\"Bolero\"\nby composer Maurice Ravel");
         stackedWidget->addWidget(task1);

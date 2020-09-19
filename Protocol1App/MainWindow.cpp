@@ -21,13 +21,9 @@ void MainWindow::showStartNext() {
         ui.stackedWidget->setCurrentWidget(ui.noadmin);
     } else if (PowerMgmt::isCsEnabled()) {
         ui.stackedWidget->setCurrentWidget(ui.regedit);
-        /*QSettings reg("HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Control\\Power", QSettings::NativeFormat);
-        reg.setValue("CsEnabled", 0);
-        qDebug() << "CsEnabled set to " << reg.value("CsEnabled").toInt();*/
-    }
-    else {
+    } else {
         //getDefaultPowercfg();
-        ui.stackedWidget->setCurrentWidget(ui.task1);
+        ui.stackedWidget->setCurrentWidget(ui.mod);
     }
 }
 
@@ -185,6 +181,8 @@ MainWindow::MainWindow(QWidget *parent)
 
     connect(ui.start->not_consent_btn, &QPushButton::clicked, this, &MainWindow::showGoodbye);
     connect(ui.start->consent_btn, &QPushButton::clicked, this, &MainWindow::showStartNext);
+    connect(ui.mod->consent_btn, &QPushButton::clicked, this, &MainWindow::showTask1);
+    connect(ui.mod->not_consent_btn, &QPushButton::clicked, this, &MainWindow::showGoodbye);
     connect(ui.task1->continue_btn, &QPushButton::clicked, this, &MainWindow::showPatch1);
     connect(ui.patch1->continue_btn, &QPushButton::clicked, this, &MainWindow::showTask2);
     connect(ui.task2->continue_btn, &QPushButton::clicked, this, &MainWindow::showPatch2);
@@ -198,9 +196,9 @@ MainWindow::MainWindow(QWidget *parent)
     connect(ui.wta->yes_btn, &QPushButton::clicked, this, &MainWindow::updateOffer_yes);
     connect(ui.wta->no_btn, &QPushButton::clicked, this, &MainWindow::updateOffer_no);
 
-//#ifndef QT_NO_DEBUG
+#ifndef QT_NO_DEBUG
     connect(ui.start->consent_btn, &QPushButton::clicked, this, &MainWindow::showPostTasks);
-//#endif
+#endif
 
 
 }
