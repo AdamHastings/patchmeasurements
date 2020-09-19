@@ -198,9 +198,9 @@ MainWindow::MainWindow(QWidget *parent)
     connect(ui.wta->yes_btn, &QPushButton::clicked, this, &MainWindow::updateOffer_yes);
     connect(ui.wta->no_btn, &QPushButton::clicked, this, &MainWindow::updateOffer_no);
 
-#ifndef QT_NO_DEBUG
-    //connect(ui.start->consent_btn, &QPushButton::clicked, this, &MainWindow::showPostTasks);
-#endif
+//#ifndef QT_NO_DEBUG
+    connect(ui.start->consent_btn, &QPushButton::clicked, this, &MainWindow::showPostTasks);
+//#endif
 
 
 }

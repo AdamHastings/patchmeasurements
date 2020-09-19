@@ -46,22 +46,9 @@ RankPage::RankPage(QWidget* parent)
 	fastest->setAlignment(Qt::AlignVCenter | Qt::AlignHCenter);
 	fastest->setGeometry(QRect(W/2+M/4, 3 * M, 2*M, M));
 
-	/*QPixmap* fast_pmap = new QPixmap("car.png");
-	*fast_pmap = fast_pmap->scaledToHeight(M);
-	QLabel* fast_pic = new QLabel(this);
-	fast_pic->setPixmap(*fast_pmap);
-	fast_pic->setGeometry(QRect(W / 2 + M / 4 + M, 3 * M, M, M));*/
-
-	/*QHBoxLayout* fastlayout = new QHBoxLayout(this);
-	fastlayout->addWidget(fastest);
-	fastlayout->addWidget(fast_pic);
-	fastlayout->setGeometry(QRect(M, 2 * M, LINEWIDTH, M));*/
-
-
 	QLabel* slowest = new QLabel("(Slowest)", this);
 	slowest->setAlignment(Qt::AlignVCenter | Qt::AlignHCenter);
 	slowest->setGeometry(QRect(W / 2 + M / 4, 5 * M, 2* M, M));
-
 	
 
 	continue_btn = new QPushButton(this);
@@ -73,7 +60,7 @@ RankPage::RankPage(QWidget* parent)
 	continue_btn->setEnabled(false);
 #endif
 
-	connect(listWidget, &QListWidget::itemClicked, this, &RankPage::enableContinue);
+	connect(listWidget, &QListWidget::itemPressed, this, &RankPage::enableContinue);
 }
 
 RankPage::~RankPage()

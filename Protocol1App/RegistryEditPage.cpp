@@ -51,5 +51,5 @@ void RegistryEditPage::acceptOffer() {
 void RegistryEditPage::declineOffer() {
     ok_btn->setEnabled(false);
     notok_btn->setEnabled(false);
-    done_label->setText("Thank you for your participation so far. Unfortunately you are not eligible to participate further and will receive no compensation. You may now close this window.");
+    done_label->setText("Thank you for your participation so far. Unfortunately you are not eligible to participate further and will receive no compensation. You may now close this window and delete this program.");
 }
