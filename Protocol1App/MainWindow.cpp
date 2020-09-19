@@ -17,11 +17,13 @@ using namespace std;
 
 
 void MainWindow::showStartNext() {
-    if (PowerMgmt::isCsEnabled()) {
+    if (!PowerMgmt::runningAsAdmin()) {
+        ui.stackedWidget->setCurrentWidget(ui.noadmin);
+    } else if (PowerMgmt::isCsEnabled()) {
         ui.stackedWidget->setCurrentWidget(ui.regedit);
-        QSettings reg("HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Control\\Power", QSettings::NativeFormat);
+        /*QSettings reg("HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Control\\Power", QSettings::NativeFormat);
         reg.setValue("CsEnabled", 0);
-        qDebug() << "CsEnabled set to " << reg.value("CsEnabled").toInt();
+        qDebug() << "CsEnabled set to " << reg.value("CsEnabled").toInt();*/
     }
     else {
         //getDefaultPowercfg();

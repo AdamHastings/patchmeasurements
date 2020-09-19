@@ -59,3 +59,15 @@ public:
 	}
 };
 
+class NoAdminPage : public SingleChoicePage
+{
+	Q_OBJECT
+
+public:
+	NoAdminPage(QWidget* parent = Q_NULLPTR) : SingleChoicePage(parent) {
+		label->setText("This program is not running in Administrator mode. In order to conduct this experiment, you will need to allow this program to have Administrator privileges. Please exit this program and re-run it as Administrator (right click on program and click \"Run as Administrator\").");
+
+		continue_btn->setVisible(false);
+	}
+};
+

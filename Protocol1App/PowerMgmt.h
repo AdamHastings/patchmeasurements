@@ -20,6 +20,7 @@ public:
 	static void restoreDefaults();
 	static bool isCsEnabled();
 	static void setCsEnabled(int i);
+	static bool runningAsAdmin();
 
 private:
 	PowerMgmt();

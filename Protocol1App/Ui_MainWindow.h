@@ -27,6 +27,7 @@ public:
 
     StartPage* start;
     GoodbyePage* goodbye;
+    NoAdminPage* noadmin;
     RegistryEditPage* regedit;
     TaskPage* task1;
     TaskPage* task2;
@@ -78,6 +79,9 @@ public:
 
         goodbye = new GoodbyePage();
         stackedWidget->addWidget(goodbye);
+
+        noadmin = new NoAdminPage();
+        stackedWidget->addWidget(noadmin);
 
         regedit = new RegistryEditPage();
         stackedWidget->addWidget(regedit);
