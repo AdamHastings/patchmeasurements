@@ -1,0 +1,9 @@
+﻿  uic Protocol2App.ui
+  rcc Protocol2App.qrc
+  moc Protocol2App.h
+   RCC: Warning: No resources in 'C:\Users\Administrator\patchmeasurements\Protocol2App\Protocol2App.qrc'.
+  Protocol2App.cpp
+  main.cpp
+  qrc_Protocol2App.cpp
+  moc_Protocol2App.cpp
+  Protocol2App.vcxproj -> C:\Users\Administrator\patchmeasurements\Protocol2App\x64\Debug\Protocol2App.exe
