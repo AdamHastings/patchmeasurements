@@ -42,5 +42,5 @@ WTAPage::~WTAPage()
 }
 
 void WTAPage::updateOffer(int new_offer) {
-    offer_label->setText(QString::number(new_offer) + "?");
+    offer_label->setText("$" + QString::number(new_offer) + "?");
 }

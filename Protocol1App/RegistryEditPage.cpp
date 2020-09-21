@@ -21,7 +21,7 @@ void RegistryEditPage::setupPage() {
     done_label = new QLabel(this);
     done_label->setWordWrap(true);
     done_label->setAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
-    done_label->setGeometry(QRect(M, M * 7, LINEWIDTH, M));
+    done_label->setGeometry(QRect(M*2, M * 7, LINEWIDTH-2*M, M*3));
 }
 
 void RegistryEditPage::makeConnections() {
@@ -51,5 +51,5 @@ void RegistryEditPage::acceptOffer() {
 void RegistryEditPage::declineOffer() {
     ok_btn->setEnabled(false);
     notok_btn->setEnabled(false);
-    done_label->setText("Thank you for your participation so far. Unfortunately you are not eligible to participate further and will receive no compensation. You may now close this window and delete this program.");
+    done_label->setText("Thank you for your participation so far. Unfortunately you are not eligible to participate further and will receive no compensation. You may now close this window and delete this program.\n\nIf you ended up on this page by mistake but still want to participate in this experiment, you can simply just re-run this application.");
 }
