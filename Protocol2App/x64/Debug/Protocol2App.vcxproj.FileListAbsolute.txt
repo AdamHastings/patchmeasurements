@@ -1,2 +1,0 @@
-C:\Users\Administrator\patchmeasurements\Protocol2App\x64\Debug\Protocol2App.exe
-C:\Users\Administrator\patchmeasurements\Protocol2App\x64\Debug\Protocol2App.pdb
