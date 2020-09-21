@@ -19,7 +19,9 @@ StartPage::StartPage(QWidget *parent)
 
     //stackedWidget->addWidget(start_page);
 
-    label->setText("Thank you for participating in this experiment. This experiment will have you complete a few simple tasks on this computer. This experiment does not track your actions or steal any personal information. There is minimal risk involved in participating in this experiment. This experiment will take about 20 minutes to complete.\n\nThis experiment is designed to test how computer users respond to some computer system modifications we are prototyping. We will first have you complete some simple tasks with these modifications turned off. Later, we will turn on these modifications and ask you to complete the same set of tasks.\n\n\nDo you consent to participate in this study? You may exit the experiment at any point.");
+    label->setText("Thank you for participating in this experiment. This experiment will have you complete a few simple tasks on this computer. This experiment will take about 20 minutes to complete.\n\nThis experiment is designed to test how computer users respond to some computer system modifications we are prototyping. We will have you complete some simple tasks under a variety of different circumstances. After you complete the tasks, we will ask you a few questions about your experience.\n\nDo you consent to participate in this study? You may exit the experiment at any point.");
+
+    // TODO can we tell them they have to finish the experiment?
 }
 
 StartPage::~StartPage()

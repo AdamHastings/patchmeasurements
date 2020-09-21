@@ -53,7 +53,7 @@ class FinalPage : public SingleChoicePage
 
 public:
 	FinalPage(QWidget* parent = Q_NULLPTR) : SingleChoicePage(parent) {
-		label->setText("Thank you for your participation in this experiment. If we received three emails from you demonstrating that you completed the three tasks, you should expect to receive an email containing a link to an Amazon gift card in the next few days.\n\nYou may now exit this window.");
+		label->setText("Thank you for your participation in this experiment. If we received three emails from you demonstrating that you completed the three tasks, you should expect to receive an email containing a link to an Amazon gift card in the next few days.\n\nYou may now exit this window and delete this app.");
 
 		continue_btn->setVisible(false);
 	}
