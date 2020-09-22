@@ -9,7 +9,9 @@ class Protocol2App : public QMainWindow
 
 public:
     Protocol2App(QWidget *parent = Q_NULLPTR);
+    
+    void showWTA();
 
 private:
-    Ui::Protocol2AppClass ui;
+    Ui::MainWindow ui;
 };

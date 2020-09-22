@@ -36,14 +36,40 @@
     <ClCompile Include="Protocol2App.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ResourceCompile Include="$pro_name$.rc">
-    </ResourceCompile>
-    <None Include="$pro_name$.ico">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="$pro_name$.def">
-      <Filter>Resource Files</Filter>
-    </None>
-
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="StartPage.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="WTAPage.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="ui_Protocol2App.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Globals.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <QtMoc Include="StartPage.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="WTAPage.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+  </ItemGroup>
+  <ItemGroup>
+    <QtUic Include="StartPage.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+    <QtUic Include="WTAPage.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
   </ItemGroup>
 </Project>
