@@ -11,6 +11,10 @@ public:
     Protocol2App(QWidget *parent = Q_NULLPTR);
     
     void showWTA();
+    void WTAnext();
+
+    void acceptOffer();
+    void declineOffer();
 
 private:
     Ui::MainWindow ui;

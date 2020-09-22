@@ -9,6 +9,8 @@
 #include "Globals.h"
 #include "StartPage.h"
 #include "WTAPage.h"
+#include "DoubleCheck.h"
+#include "ExitPage.h"
 
 
 QT_BEGIN_NAMESPACE
@@ -24,6 +26,10 @@ public:
 
     StartPage* start;
     WTAPage* wta;
+    DoubleCheckAccept* dc_accept;
+    DoubleCheckDecline* dc_decline;
+    NoMoreDaysPage* nomore;
+    OneMoreDayPage* onemore;
 
 
 
@@ -62,6 +68,18 @@ public:
 
         wta = new WTAPage();
         stackedWidget->addWidget(wta);
+
+        dc_accept = new DoubleCheckAccept();
+        stackedWidget->addWidget(dc_accept);
+
+        dc_decline = new DoubleCheckDecline();
+        stackedWidget->addWidget(dc_decline);
+
+        nomore = new NoMoreDaysPage();
+        stackedWidget->addWidget(nomore);
+
+        onemore = new OneMoreDayPage();
+        stackedWidget->addWidget(onemore);
 
 
     } // setupUi

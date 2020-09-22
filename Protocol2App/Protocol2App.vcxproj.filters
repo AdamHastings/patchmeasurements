@@ -47,6 +47,12 @@
     <ClCompile Include="WTAPage.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="DoubleCheck.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ExitPage.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ui_Protocol2App.h">
@@ -63,12 +69,24 @@
     <QtMoc Include="WTAPage.h">
       <Filter>Header Files</Filter>
     </QtMoc>
+    <QtMoc Include="DoubleCheck.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="ExitPage.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
   </ItemGroup>
   <ItemGroup>
     <QtUic Include="StartPage.ui">
       <Filter>Form Files</Filter>
     </QtUic>
     <QtUic Include="WTAPage.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+    <QtUic Include="DoubleCheck.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+    <QtUic Include="ExitPage.ui">
       <Filter>Form Files</Filter>
     </QtUic>
   </ItemGroup>

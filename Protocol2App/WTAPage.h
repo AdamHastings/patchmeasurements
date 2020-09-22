@@ -15,8 +15,8 @@ public:
 
 	QLabel* header;
 	QLabel* offer_label;
-	QPushButton* yes_btn;
-	QPushButton* no_btn;
+	QPushButton* continue_btn;
+	//QPushButton* no_btn;
 	QRadioButton* accept;
 	QRadioButton* decline;
 
