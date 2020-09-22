@@ -20,10 +20,12 @@ void Protocol2App::WTAnext() {
 }
 
 void Protocol2App::acceptOffer() {
+    qDebug() << "accepting WTA offer";
     ui.stackedWidget->setCurrentWidget(ui.onemore);
 }
 
 void Protocol2App::declineOffer() {
+    qDebug() << "declining WTA offer";
     ui.stackedWidget->setCurrentWidget(ui.nomore);
 }
 

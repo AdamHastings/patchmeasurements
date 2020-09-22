@@ -4,9 +4,9 @@
 ExitPage::ExitPage(QWidget *parent)
 	: QWidget(parent)
 {
-	label = new QLabel();
+	label = new QLabel(this);
 	label->setGeometry(QRect(M, M, LINEWIDTH, M * 8));
-	label->setAlignment(Qt::AlignJustify | Qt::AlignVCenter);
+	label->setAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
 	label->setWordWrap(true);
 }
 
