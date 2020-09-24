@@ -12,7 +12,7 @@ public:
     
     void showWTA();
     void WTAnext();
-
+    void showFormPage();
     void acceptOffer();
     void declineOffer();
 

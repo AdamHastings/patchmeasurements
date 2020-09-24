@@ -11,6 +11,7 @@
 #include "WTAPage.h"
 #include "DoubleCheck.h"
 #include "ExitPage.h"
+#include "FormPage.h"
 
 
 QT_BEGIN_NAMESPACE
@@ -30,6 +31,7 @@ public:
     DoubleCheckDecline* dc_decline;
     NoMoreDaysPage* nomore;
     OneMoreDayPage* onemore;
+    FormPage* form;
 
 
 
@@ -65,6 +67,9 @@ public:
 
         start = new StartPage();
         stackedWidget->addWidget(start);
+
+        form = new FormPage();
+        stackedWidget->addWidget(form);
 
         wta = new WTAPage();
         stackedWidget->addWidget(wta);

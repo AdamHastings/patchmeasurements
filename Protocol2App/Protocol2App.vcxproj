@@ -98,11 +98,13 @@
   <ItemGroup>
     <ClCompile Include="DoubleCheck.cpp" />
     <ClCompile Include="ExitPage.cpp" />
+    <ClCompile Include="FormPage.cpp" />
     <ClCompile Include="StartPage.cpp" />
     <ClCompile Include="WTAPage.cpp" />
     <QtRcc Include="Protocol2App.qrc" />
     <QtUic Include="DoubleCheck.ui" />
     <QtUic Include="ExitPage.ui" />
+    <QtUic Include="FormPage.ui" />
     <QtUic Include="Protocol2App.ui" />
     <QtMoc Include="Protocol2App.h" />
     <ClCompile Include="Protocol2App.cpp" />
@@ -115,6 +117,7 @@
     <QtMoc Include="StartPage.h" />
     <QtMoc Include="DoubleCheck.h" />
     <QtMoc Include="ExitPage.h" />
+    <QtMoc Include="FormPage.h" />
     <ClInclude Include="Globals.h" />
     <ClInclude Include="ui_Protocol2App.h" />
   </ItemGroup>

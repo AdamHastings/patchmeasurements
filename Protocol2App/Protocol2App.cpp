@@ -19,6 +19,10 @@ void Protocol2App::WTAnext() {
     }
 }
 
+void Protocol2App::showFormPage() {
+    ui.stackedWidget->setCurrentWidget(ui.form);
+}
+
 void Protocol2App::acceptOffer() {
     qDebug() << "accepting WTA offer";
     ui.stackedWidget->setCurrentWidget(ui.onemore);
@@ -35,7 +39,9 @@ Protocol2App::Protocol2App(QWidget *parent)
     ui.setupUi(this);
 
 
-    connect(ui.start->consent_btn, &QPushButton::clicked, this, &Protocol2App::showWTA);
+    connect(ui.start->consent_btn, &QPushButton::clicked, this, &Protocol2App::showFormPage);
+
+    connect(ui.form->continue_btn, &QPushButton::clicked, this, &Protocol2App::showWTA);
 
     connect(ui.wta->continue_btn, &QPushButton::clicked, this, &Protocol2App::WTAnext);
 

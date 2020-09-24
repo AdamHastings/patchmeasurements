@@ -53,6 +53,9 @@
     <ClCompile Include="ExitPage.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="FormPage.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ui_Protocol2App.h">
@@ -75,6 +78,9 @@
     <QtMoc Include="ExitPage.h">
       <Filter>Header Files</Filter>
     </QtMoc>
+    <QtMoc Include="FormPage.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
   </ItemGroup>
   <ItemGroup>
     <QtUic Include="StartPage.ui">
@@ -87,6 +93,9 @@
       <Filter>Form Files</Filter>
     </QtUic>
     <QtUic Include="ExitPage.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+    <QtUic Include="FormPage.ui">
       <Filter>Form Files</Filter>
     </QtUic>
   </ItemGroup>
