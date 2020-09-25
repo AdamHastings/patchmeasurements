@@ -99,6 +99,7 @@
     <ClCompile Include="DoubleCheck.cpp" />
     <ClCompile Include="ExitPage.cpp" />
     <ClCompile Include="FormPage.cpp" />
+    <ClCompile Include="RegEdit.cpp" />
     <ClCompile Include="StartPage.cpp" />
     <ClCompile Include="WTAPage.cpp" />
     <QtRcc Include="Protocol2App.qrc" />
@@ -119,6 +120,7 @@
     <QtMoc Include="ExitPage.h" />
     <QtMoc Include="FormPage.h" />
     <ClInclude Include="Globals.h" />
+    <ClInclude Include="RegEdit.h" />
     <ClInclude Include="ui_Protocol2App.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -56,6 +56,9 @@
     <ClCompile Include="FormPage.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="RegEdit.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ui_Protocol2App.h">
@@ -63,6 +66,9 @@
     </ClInclude>
     <ClInclude Include="Globals.h">
       <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="RegEdit.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
