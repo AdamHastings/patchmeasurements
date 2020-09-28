@@ -1,6 +1,7 @@
 #pragma once
 #include <string>
 #include <QString>
+#include <QVariant>
 using namespace std;
 
 class RegEdit
@@ -8,9 +9,7 @@ class RegEdit
 
 public:
 	static void setRegKey(QString registry, QString key, int value);
-	static QString getRegKey(QString registry, QString key);
+	static QVariant getRegKey(QString registry, QString key);
 
-private:
-	static QString prefix;
 };
 

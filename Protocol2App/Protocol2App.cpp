@@ -1,8 +1,10 @@
 #include "Protocol2App.h"
+#include "RegEdit.h"
 
 #include  <QDebug>
 
 void Protocol2App::showWTA() {
+    RegEdit::setRegKey(RegLocation, "testKey", 22);
     ui.stackedWidget->setCurrentWidget(ui.wta);
 }
 
