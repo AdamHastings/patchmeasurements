@@ -122,7 +122,9 @@ std::string MainWindow::createResultsString() {
 }
 
 void MainWindow::conclude() {
+#ifndef QT_NO_DEBUG
     DropBox::upload(createResultsString());
+#endif
     ui.stackedWidget->setCurrentWidget(ui.form);
 }
 
@@ -202,7 +204,7 @@ MainWindow::MainWindow(QWidget *parent)
     connect(ui.form->continue_btn, &QPushButton::clicked, this, &MainWindow::showFinal);
 
 #ifndef QT_NO_DEBUG
-    connect(ui.start->consent_btn, &QPushButton::clicked, this, &MainWindow::showPreWTA);
+    connect(ui.start->consent_btn, &QPushButton::clicked, this, &MainWindow::conclude);
 #endif
 
 

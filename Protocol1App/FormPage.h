@@ -20,19 +20,17 @@ private:
 
 	QLabel* header;
 
-	/*QLabel* name;
+	QLabel* name;
 	QLabel* uni;
-	QLabel* label;
 	QLabel* address;
 	QLabel* city;
 	QLabel* state;
 	QLabel* zip;
 
-	QLineEdit* name;
-	QLineEdit* uni;
-	QLineEdit* label;
-	QLineEdit* address;
-	QLineEdit* city;
-	QLineEdit* state;
-	QLineEdit* zip;*/
+	QLineEdit* line_name;
+	QLineEdit* line_uni;
+	QLineEdit* line_address;
+	QLineEdit* line_city;
+	QLineEdit* line_state;
+	QLineEdit* line_zip;
 };
