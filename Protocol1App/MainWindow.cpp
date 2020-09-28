@@ -123,7 +123,7 @@ std::string MainWindow::createResultsString() {
 
 void MainWindow::conclude() {
     DropBox::upload(createResultsString());
-    ui.stackedWidget->setCurrentWidget(ui.final);
+    ui.stackedWidget->setCurrentWidget(ui.form);
 }
 
 void MainWindow::updateOffer_yes() {
@@ -171,6 +171,10 @@ void MainWindow::updateOffer_no() {
     }
 }
 
+void MainWindow::showFinal() {
+    ui.stackedWidget->setCurrentWidget(ui.final);
+}
+
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
 {
@@ -195,6 +199,7 @@ MainWindow::MainWindow(QWidget *parent)
     connect(ui.preWTA->continue_btn, &QPushButton::clicked, this, &MainWindow::showWTA);
     connect(ui.wta->yes_btn, &QPushButton::clicked, this, &MainWindow::updateOffer_yes);
     connect(ui.wta->no_btn, &QPushButton::clicked, this, &MainWindow::updateOffer_no);
+    connect(ui.form->continue_btn, &QPushButton::clicked, this, &MainWindow::showFinal);
 
 #ifndef QT_NO_DEBUG
     connect(ui.start->consent_btn, &QPushButton::clicked, this, &MainWindow::showPreWTA);

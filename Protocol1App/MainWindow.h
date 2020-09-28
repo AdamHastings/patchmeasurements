@@ -47,6 +47,7 @@ private:
     void conclude();
     void updateOffer_no();
     void updateOffer_yes();
+    void showFinal();
 
     std::string createResultsString();
 

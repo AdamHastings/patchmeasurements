@@ -13,6 +13,7 @@
 #include "ComparePage.h"
 #include "SingleChoicePage.h"
 #include "WTAPage.h"
+#include "FormPage.h"
 
 
 QT_BEGIN_NAMESPACE
@@ -41,6 +42,7 @@ public:
     ComparePage* compare;
     PreWTAPage* preWTA;
     WTAPage* wta;
+    FormPage* form;
     FinalPage* final;
 
     void setupUi(QMainWindow* MainWindow)
@@ -123,6 +125,9 @@ public:
 
         wta = new WTAPage();
         stackedWidget->addWidget(wta);
+
+        form = new FormPage();
+        stackedWidget->addWidget(form);
 
         final = new FinalPage();
         stackedWidget->addWidget(final);
