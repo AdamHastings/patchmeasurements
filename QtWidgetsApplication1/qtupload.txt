@@ -1,5 +1,0 @@
-hello from Qt
-hello
-from 
-Qt
-NEW

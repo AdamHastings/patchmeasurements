@@ -1,2 +1,0 @@
-C:\Users\Administrator\source\repos\QtWidgetsApplication2\x64\Debug\QtWidgetsApplication2.exe
-C:\Users\Administrator\source\repos\QtWidgetsApplication2\x64\Debug\QtWidgetsApplication2.pdb

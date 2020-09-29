@@ -1,3 +1,0 @@
-﻿  QHttpMultiPart.cpp
-C:\Qt\5.15.0\msvc2019_64\include\QtNetwork\qhttpmultipart.h(88,39): error C2011: 'QHttpMultiPart': 'class' type redefinition
-C:\Qt\5.15.0\msvc2019_64\include\QtNetwork\qhttpmultipart.h(55): message : see declaration of 'QHttpMultiPart'

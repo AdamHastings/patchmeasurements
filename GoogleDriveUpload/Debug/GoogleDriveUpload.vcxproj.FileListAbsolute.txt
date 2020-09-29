@@ -1,2 +1,0 @@
-C:\Users\Administrator\patchmeasurements\GoogleDriveUpload\Debug\GoogleDriveUpload.exe
-C:\Users\Administrator\patchmeasurements\GoogleDriveUpload\Debug\GoogleDriveUpload.pdb
