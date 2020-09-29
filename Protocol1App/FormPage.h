@@ -33,4 +33,8 @@ private:
 	QLineEdit* line_city;
 	QLineEdit* line_state;
 	QLineEdit* line_zip;
+
+private:
+	void updateContinueBtn(const QString& text);
+	void makeConnections();
 };

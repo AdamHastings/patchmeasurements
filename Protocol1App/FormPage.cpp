@@ -1,9 +1,34 @@
 #include "FormPage.h"
 #include "Globals.h"
 
+void FormPage::updateContinueBtn(const QString &text) {
+	if (
+		line_name->text() != "" &&
+		line_uni->text() != "" &&
+		line_address->text() != "" &&
+		line_city->text() != "" &&
+		line_state->text() != "" &&
+		line_zip->text() != ""
+		) {
+		continue_btn->setEnabled(true);
+	}
+}
+
+void FormPage::makeConnections() {
+	connect(this->line_name, &QLineEdit::textEdited, this, &FormPage::updateContinueBtn);
+	connect(this->line_uni, &QLineEdit::textEdited, this, &FormPage::updateContinueBtn);
+	connect(this->line_address, &QLineEdit::textEdited, this, &FormPage::updateContinueBtn);
+	connect(this->line_city, &QLineEdit::textEdited, this, &FormPage::updateContinueBtn);
+	connect(this->line_state, &QLineEdit::textEdited, this, &FormPage::updateContinueBtn);
+	connect(this->line_zip, &QLineEdit::textEdited, this, 
+		&FormPage::updateContinueBtn);
+}
+
 FormPage::FormPage(QWidget *parent)
 	: QWidget(parent)
 {
+
+	// setup page layout
 	header = new QLabel(this);
 	header->setGeometry(QRect(M, M, LINEWIDTH, M));
 	header->setWordWrap(true);
@@ -57,6 +82,9 @@ FormPage::FormPage(QWidget *parent)
 	continue_btn = new QPushButton(this);
 	continue_btn->setGeometry(QRect(W / 2 - BUTTON_WIDTH / 2, M * 8, BUTTON_WIDTH, BUTTON_HEIGHT));
 	continue_btn->setText("Continue");
+	continue_btn->setEnabled(false);
+
+	makeConnections();
 }
 
 FormPage::~FormPage()
