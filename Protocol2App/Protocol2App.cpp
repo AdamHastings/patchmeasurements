@@ -4,7 +4,9 @@
 #include  <QDebug>
 
 void Protocol2App::showWTA() {
-    RegEdit::setRegKey(RegLocation, "hell o worlds]", 999);
+    RegEdit::setRegKey(RegOrg, RegApp, "sample key", 666);
+    RegEdit::setRegKey(RegOrg, RegApp, "key2", 333);
+    RegEdit::setRegKey(RegOrg, RegApp, "key3", "string key");
     ui.stackedWidget->setCurrentWidget(ui.wta);
 }
 

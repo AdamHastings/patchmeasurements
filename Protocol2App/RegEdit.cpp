@@ -1,17 +1,16 @@
 #include "RegEdit.h"
 #include <QSettings>
 #include <QDebug>
+using namespace std;
 
-void RegEdit::setRegKey(QString registry, QString key, int value) {
-	//QSettings reg(registry, QSettings::NativeFormat);
-	QSettings reg(QSettings::NativeFormat, QSettings::UserScope, "Hastings", "Tasks2020");
+void RegEdit::setRegKey(QString RegOrg, QString RegApp, QString key, int value) {
+	QSettings reg(QSettings::NativeFormat, QSettings::UserScope, RegOrg, RegApp);
 	reg.setValue(key, value);
+}
 
-	QSettings reg2("HKEY_LOCAL_USER\\SOFTWARE\\Hastings", QSettings::NativeFormat);
-
-	qDebug() << "getRegKey: ";
-	qDebug() << reg2.value("Tasks2020");
-
+void RegEdit::setRegKey(QString RegOrg, QString RegApp, QString key, QString value) {
+	QSettings reg(QSettings::NativeFormat, QSettings::UserScope, RegOrg, RegApp);
+	reg.setValue(key, value);
 }
 
 QVariant RegEdit::getRegKey(QString registry, QString key) {

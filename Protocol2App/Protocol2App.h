@@ -18,5 +18,6 @@ public:
 
 private:
     Ui::MainWindow ui;
-    QString RegLocation = "HKEY_CURRENT_USER\\Software\\HastingsExperiment2020\\";
+    QString RegOrg = "Hastings";
+    QString RegApp = "Settings";
 };

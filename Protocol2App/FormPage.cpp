@@ -18,8 +18,11 @@ FormPage::FormPage(QWidget *parent)
 
 	continue_btn = new QPushButton(this);
 	continue_btn->setText("Continue");
-	continue_btn->setEnabled(false);
 	continue_btn->setGeometry(QRect(W / 2 - BUTTON_WIDTH / 2, M * 8, BUTTON_WIDTH, BUTTON_HEIGHT));
+#ifndef QT_NO_DEBUG
+	continue_btn->setEnabled(false);
+#endif
+
 
 	connect(this->line, &QLineEdit::textChanged, this, &FormPage::enableContinueBtn);
 }

@@ -22,9 +22,9 @@ WTAPage::WTAPage(QWidget* parent)
     continue_btn = new QPushButton(this);
     continue_btn->setGeometry(QRect(W / 2 - BUTTON_WIDTH/2, M * 8, BUTTON_WIDTH, BUTTON_HEIGHT));
     continue_btn->setText("Continue");
-//#if QT_NO_DEBUG
+#ifndef QT_NO_DEBUG
     continue_btn->setEnabled(false);
-//#endif
+#endif
 
     connect(this->accept, &QRadioButton::clicked, this->continue_btn, &QPushButton::setEnabled);
     connect(this->decline, &QRadioButton::clicked, this->continue_btn, &QPushButton::setEnabled);
