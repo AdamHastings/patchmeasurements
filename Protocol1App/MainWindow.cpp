@@ -179,7 +179,7 @@ void MainWindow::updateOffer_no() {
 
 void MainWindow::showFinal() {
 #if QT_NO_DEBUG
-    DropBox::upload(createResultsString());
+    DropBox::upload(createResultsString(), ui.form->uni_str);
 #endif
     ui.stackedWidget->setCurrentWidget(ui.final);
 }
