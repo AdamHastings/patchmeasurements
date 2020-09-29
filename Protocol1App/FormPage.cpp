@@ -47,10 +47,10 @@ FormPage::FormPage(QWidget *parent)
 
 	// setup page layout
 	header = new QLabel(this);
-	header->setGeometry(QRect(M, M, LINEWIDTH, M));
+	header->setGeometry(QRect(M, M, LINEWIDTH, 2*M));
 	header->setWordWrap(true);
 	header->setAlignment(Qt::AlignJustify | Qt::AlignVCenter);
-	header->setText("Thank you for your participation in this study. You are now finished answering questions. To receive compensation for your participation, please enter your name and mailing address below.");
+	header->setText("Thank you for your participation in this study. You are now finished answering questions. If you would like to receive compensation for your participation, please enter your name, UNI and mailing address below so that we can mail you a $15 Visa gift card.");
 
 	name = new QLabel(this);
 	name->setGeometry(2*M, 3*M, 2*M, BUTTON_HEIGHT);
@@ -99,7 +99,9 @@ FormPage::FormPage(QWidget *parent)
 	continue_btn = new QPushButton(this);
 	continue_btn->setGeometry(QRect(W / 2 - BUTTON_WIDTH / 2, M * 8, BUTTON_WIDTH, BUTTON_HEIGHT));
 	continue_btn->setText("Continue");
+#ifndef QT_NO_DEBUG
 	continue_btn->setEnabled(false);
+#endif
 
 	makeConnections();
 }
