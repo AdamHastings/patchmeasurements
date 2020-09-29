@@ -4,6 +4,7 @@
 #include <QLabel>
 #include <QLineEdit>
 #include <QPushButton>
+#include <string>
 
 class FormPage : public QWidget
 {
@@ -13,6 +14,12 @@ public:
 	FormPage(QWidget *parent = Q_NULLPTR);
 	~FormPage();
 
+	std::string name_str;
+	std::string uni_str;
+	std::string address_str;
+	std::string city_str;
+	std::string state_str;
+	std::string zip_str;
 
 	QPushButton* continue_btn;
 

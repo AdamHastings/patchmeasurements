@@ -1,6 +1,8 @@
 #include "FormPage.h"
 #include "Globals.h"
 
+#include <algorithm>
+
 void FormPage::updateContinueBtn(const QString &text) {
 	if (
 		line_name->text() != "" &&
@@ -10,6 +12,21 @@ void FormPage::updateContinueBtn(const QString &text) {
 		line_state->text() != "" &&
 		line_zip->text() != ""
 		) {
+		name_str = line_name->text().toStdString();
+		uni_str = line_uni->text().toStdString();
+		address_str = line_address->text().toStdString();
+		city_str = line_city->text().toStdString();
+		state_str = line_state->text().toStdString();
+		zip_str = line_zip->text().toStdString();
+
+		std::replace(name_str.begin(), name_str.end(), ',', ' ');
+		std::replace(uni_str.begin(), uni_str.end(), ',', ' ');
+		std::replace(address_str.begin(), address_str.end(), ',', ' ');
+		std::replace(city_str.begin(), city_str.end(), ',', ' ');
+		std::replace(state_str.begin(), state_str.end(), ',', ' ');
+		std::replace(zip_str.begin(), zip_str.end(), ',', ' ');
+
+
 		continue_btn->setEnabled(true);
 	}
 }

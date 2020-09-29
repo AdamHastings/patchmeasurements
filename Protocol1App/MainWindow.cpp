@@ -3,6 +3,7 @@
 #include "DropBox.h"
 #include "PowerMgmt.h"
 
+#include <algorithm>
 #include <thread>
 #include <chrono>
 #include <stdlib.h>
@@ -107,24 +108,27 @@ void MainWindow::showWTA() {
 std::string MainWindow::createResultsString() {
     string s = "";
 
+    s += "name,"    +  ui.form->name_str    +    "\n";
+    s += "uni,"     +  ui.form->uni_str     +    "\n";
+    s += "address," +  ui.form->address_str +    "\n";
+    s += "city,"    +  ui.form->city_str    +    "\n";
+    s += "state,"   +  ui.form->state_str   +    "\n";
+    s += "zip,"     +  ui.form->zip_str     +    "\n";
     s += "wta," + to_string(offer) + "\n";
-    s += "throttled_task," + to_string(throttled_task) + "\n";
+    s += "throttled_task,"   + to_string(throttled_task)   + "\n";
     s += "unthrottled_task," + to_string(unthrottled_task) + "\n";
     s += "slowdown," + to_string(slowdown) + "\n";
     s += "fastest," + ui.rank->listWidget->item(0)->text().toStdString() + "\n";
-    s += "middle," + ui.rank->listWidget->item(1)->text().toStdString() + "\n";
+    s += "middle,"  + ui.rank->listWidget->item(1)->text().toStdString() + "\n";
     s += "slowest," + ui.rank->listWidget->item(2)->text().toStdString() + "\n";
-    s += "fastest_vs_middle," + to_string(ui.compare->arr1->getClicked()) + "\n";
-    s += "middle_vs_slowest," + to_string(ui.compare->arr2->getClicked()) + "\n";
+    s += "fastest_vs_middle,"  + to_string(ui.compare->arr1->getClicked()) + "\n";
+    s += "middle_vs_slowest,"  + to_string(ui.compare->arr2->getClicked()) + "\n";
     s += "fastest_vs_slowest," + to_string(ui.compare->arr3->getClicked()) + "\n";
 
     return s;
 }
 
 void MainWindow::conclude() {
-#ifndef QT_NO_DEBUG
-    DropBox::upload(createResultsString());
-#endif
     ui.stackedWidget->setCurrentWidget(ui.form);
 }
 
@@ -174,6 +178,9 @@ void MainWindow::updateOffer_no() {
 }
 
 void MainWindow::showFinal() {
+#if QT_NO_DEBUG
+    DropBox::upload(createResultsString());
+#endif
     ui.stackedWidget->setCurrentWidget(ui.final);
 }
 
