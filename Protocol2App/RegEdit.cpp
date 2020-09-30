@@ -21,3 +21,14 @@ QVariant RegEdit::getRegKey(QString key) {
 	QSettings reg(QSettings::NativeFormat, QSettings::UserScope, RegOrg, RegApp);
 	return reg.value(key);
 }
+
+void RegEdit::setCsEnabled(int i) {
+	QSettings reg("HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Control\\Power", QSettings::NativeFormat);
+	reg.setValue("CsEnabled", i);
+	qDebug() << "CsEnabled set to " << reg.value("CsEnabled").toInt();
+}
+
+bool RegEdit::isCsEnabled() {
+	QSettings reg("HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Control\\Power", QSettings::NativeFormat);
+	return (bool)reg.value("CsEnabled").toInt();
+}

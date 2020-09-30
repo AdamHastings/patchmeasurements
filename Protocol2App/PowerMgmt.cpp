@@ -32,16 +32,6 @@ bool PowerMgmt::runningAsAdmin() {
     return fRet;
 }
 
-void PowerMgmt::setCsEnabled(int i) {
-    QSettings reg("HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Control\\Power", QSettings::NativeFormat);
-    reg.setValue("CsEnabled", i);
-    qDebug() << "CsEnabled set to " << reg.value("CsEnabled").toInt();
-}
-
-bool PowerMgmt::isCsEnabled() {
-    QSettings reg("HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Control\\Power", QSettings::NativeFormat);
-    return (bool)reg.value("CsEnabled").toInt();
-}
 
 vector<int> PowerMgmt::parsePowercfgOutput(string s) {
     // gets last two values and returns in vector

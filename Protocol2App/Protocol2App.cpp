@@ -25,7 +25,7 @@ void Protocol2App::showStartNext() {
     if (!PowerMgmt::runningAsAdmin()) {
         ui.stackedWidget->setCurrentWidget(ui.noadmin);
     }
-    else if (PowerMgmt::isCsEnabled()) {
+    else if (RegEdit::isCsEnabled()) {
         ui.stackedWidget->setCurrentWidget(ui.regedit);
     }
     else {

@@ -18,8 +18,6 @@ public:
 	static void getDefaultPowercfg();
 	static void setFreq(int p);
 	static void restoreDefaults();
-	static bool isCsEnabled();
-	static void setCsEnabled(int i);
 	static bool runningAsAdmin();
 
 	static std::vector<int>getCurrentPowerSettings();

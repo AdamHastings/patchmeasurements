@@ -1,5 +1,6 @@
 #include "RegistryEditPage.h"
 #include "Globals.h"
+#include "RegEdit.h"
 #include "PowerMgmt.h"
 
 
@@ -43,7 +44,7 @@ RegistryEditPage::~RegistryEditPage()
 void RegistryEditPage::acceptOffer() {
     ok_btn->setEnabled(false);
     notok_btn->setEnabled(false);
-    PowerMgmt::setCsEnabled(0);
+    RegEdit::setCsEnabled(0);
     // TODO can we set stuff in the registry and then look at it after reboots?
     done_label->setText("Done! Your computer's configuration has been changed. You will need to reboot your computer for the changes to take place. Please restart your computer and re-run this program.");
 }
