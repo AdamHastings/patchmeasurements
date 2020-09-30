@@ -10,13 +10,18 @@ class Protocol2App : public QMainWindow
 public:
     Protocol2App(QWidget *parent = Q_NULLPTR);
     
-    void showWTA();
-    void WTAnext();
-    void showFormPage();
-    void acceptOffer();
-    void declineOffer();
+   
 
 private:
     Ui::MainWindow ui;
 
+
+private:
+    void showStartNext();
+    void showWTA();
+    void WTAnext();
+    void showFormPage();
+    void showGoodbye();
+    void acceptOffer();
+    void declineOffer();
 };

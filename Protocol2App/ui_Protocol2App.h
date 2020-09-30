@@ -12,6 +12,7 @@
 #include "DoubleCheck.h"
 #include "ExitPage.h"
 #include "FormPage.h"
+#include "RegistryEditPage.h"
 
 
 QT_BEGIN_NAMESPACE
@@ -26,6 +27,10 @@ public:
     QStackedWidget* stackedWidget;
 
     StartPage* start;
+    NoAdminPage* noadmin;
+    RegistryEditPage* regedit;
+    GoodbyePage* goodbye;
+    ModPage* mod;
     WTAPage* wta;
     DoubleCheckAccept* dc_accept;
     DoubleCheckDecline* dc_decline;
@@ -67,6 +72,18 @@ public:
 
         start = new StartPage();
         stackedWidget->addWidget(start);
+
+        noadmin = new NoAdminPage();
+        stackedWidget->addWidget(noadmin);
+
+        regedit = new RegistryEditPage();
+        stackedWidget->addWidget(regedit);
+
+        goodbye = new GoodbyePage();
+        stackedWidget->addWidget(goodbye);
+
+        mod = new ModPage();
+        stackedWidget->addWidget(mod);
 
         form = new FormPage();
         stackedWidget->addWidget(form);

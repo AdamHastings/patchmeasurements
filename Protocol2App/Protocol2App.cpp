@@ -1,5 +1,6 @@
 #include "Protocol2App.h"
 #include "RegEdit.h"
+#include "PowerMgmt.h"
 
 #include  <QDebug>
 
@@ -20,9 +21,27 @@ void Protocol2App::WTAnext() {
     }
 }
 
+void Protocol2App::showStartNext() {
+    if (!PowerMgmt::runningAsAdmin()) {
+        ui.stackedWidget->setCurrentWidget(ui.noadmin);
+    }
+    else if (PowerMgmt::isCsEnabled()) {
+        ui.stackedWidget->setCurrentWidget(ui.regedit);
+    }
+    else {
+        //getDefaultPowercfg();
+        ui.stackedWidget->setCurrentWidget(ui.mod);
+    }
+}
+
 void Protocol2App::showFormPage() {
     ui.stackedWidget->setCurrentWidget(ui.form);
 }
+
+void Protocol2App::showGoodbye() {
+    ui.stackedWidget->setCurrentWidget(ui.goodbye);
+}
+
 
 void Protocol2App::acceptOffer() {
     qDebug() << "accepting WTA offer";
@@ -40,7 +59,11 @@ Protocol2App::Protocol2App(QWidget *parent)
     ui.setupUi(this);
 
 
-    connect(ui.start->consent_btn, &QPushButton::clicked, this, &Protocol2App::showFormPage);
+    connect(ui.start->consent_btn, &QPushButton::clicked, this, &Protocol2App::showStartNext);
+    connect(ui.start->not_consent_btn, &QPushButton::clicked, this, &Protocol2App::showGoodbye);
+
+    connect(ui.mod->consent_btn, &QPushButton::clicked, this, &Protocol2App::showFormPage);
+    connect(ui.mod->not_consent_btn, &QPushButton::clicked, this, &Protocol2App::showGoodbye);
 
     connect(ui.form->continue_btn, &QPushButton::clicked, this, &Protocol2App::showWTA);
 

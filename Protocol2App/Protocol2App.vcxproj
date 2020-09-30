@@ -102,6 +102,7 @@
     <ClCompile Include="FormPage.cpp" />
     <ClCompile Include="PowerMgmt.cpp" />
     <ClCompile Include="RegEdit.cpp" />
+    <ClCompile Include="RegistryEditPage.cpp" />
     <ClCompile Include="StartPage.cpp" />
     <ClCompile Include="WTAPage.cpp" />
     <QtRcc Include="Protocol2App.qrc" />
@@ -112,6 +113,7 @@
     <QtMoc Include="Protocol2App.h" />
     <ClCompile Include="Protocol2App.cpp" />
     <ClCompile Include="main.cpp" />
+    <QtUic Include="RegistryEditPage.ui" />
     <QtUic Include="StartPage.ui" />
     <QtUic Include="WTAPage.ui" />
   </ItemGroup>
@@ -125,6 +127,7 @@
     <ClInclude Include="Globals.h" />
     <ClInclude Include="PowerMgmt.h" />
     <ClInclude Include="RegEdit.h" />
+    <QtMoc Include="RegistryEditPage.h" />
     <ClInclude Include="ui_Protocol2App.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

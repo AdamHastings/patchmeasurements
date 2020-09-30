@@ -1,5 +1,6 @@
 #include "WTAPage.h"
 #include "Globals.h"
+#include "DropBox.h"
 
 WTAPage::WTAPage(QWidget* parent)
     : QWidget(parent)

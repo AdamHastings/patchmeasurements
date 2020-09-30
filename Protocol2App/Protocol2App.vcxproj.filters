@@ -65,6 +65,9 @@
     <ClCompile Include="PowerMgmt.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="RegistryEditPage.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ui_Protocol2App.h">
@@ -99,6 +102,9 @@
     <QtMoc Include="FormPage.h">
       <Filter>Header Files</Filter>
     </QtMoc>
+    <QtMoc Include="RegistryEditPage.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
   </ItemGroup>
   <ItemGroup>
     <QtUic Include="StartPage.ui">
@@ -114,6 +120,9 @@
       <Filter>Form Files</Filter>
     </QtUic>
     <QtUic Include="FormPage.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+    <QtUic Include="RegistryEditPage.ui">
       <Filter>Form Files</Filter>
     </QtUic>
   </ItemGroup>

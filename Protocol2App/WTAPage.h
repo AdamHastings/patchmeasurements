@@ -22,4 +22,7 @@ public:
 
 	void updateOffer(int new_offer);
 
+private:
+	void uploadAnswers();
+
 };
