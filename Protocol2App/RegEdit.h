@@ -10,7 +10,7 @@ class RegEdit
 public:
 	static void setRegKey(QString key, int value);
 	static void setRegKey(QString key, QString value);
-	static QVariant getRegKey(QString registry, QString key);
+	static QVariant getRegKey(QString key);
 
 
 private:

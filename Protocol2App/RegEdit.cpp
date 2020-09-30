@@ -16,7 +16,8 @@ void RegEdit::setRegKey(QString key, QString value) {
 	reg.setValue(key, value);
 }
 
-QVariant RegEdit::getRegKey(QString registry, QString key) {
-	QSettings reg(registry, QSettings::NativeFormat);
+QVariant RegEdit::getRegKey(QString key) {
+	//QSettings reg(registry, QSettings::NativeFormat);
+	QSettings reg(QSettings::NativeFormat, QSettings::UserScope, RegOrg, RegApp);
 	return reg.value(key);
 }

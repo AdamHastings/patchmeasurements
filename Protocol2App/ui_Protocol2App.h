@@ -5,6 +5,7 @@
 #include <QMainWindow>
 #include <QStackedWidget>
 #include <QDesktopWidget>
+#include <QDebug>
 
 #include "Globals.h"
 #include "StartPage.h"
@@ -13,6 +14,8 @@
 #include "ExitPage.h"
 #include "FormPage.h"
 #include "RegistryEditPage.h"
+
+#include "RegEdit.h"
 
 
 QT_BEGIN_NAMESPACE
@@ -102,6 +105,15 @@ public:
 
         onemore = new OneMoreDayPage();
         stackedWidget->addWidget(onemore);
+
+        // If this isn't the first time, skip the first few pages.
+        if (RegEdit::getRegKey("UNI").isValid()) {
+            stackedWidget->setCurrentWidget(wta);
+            qDebug() << "RegEdit::getRegKey(\"UNI\"): " <<  RegEdit::getRegKey("UNI");
+        }
+        else {
+            stackedWidget->setCurrentWidget(start);
+        }
 
 
     } // setupUi
