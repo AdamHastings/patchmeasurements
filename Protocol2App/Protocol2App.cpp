@@ -30,7 +30,7 @@ void Protocol2App::showStartNext() {
     }
     else {
         //getDefaultPowercfg();
-        ui.stackedWidget->setCurrentWidget(ui.mod);
+        ui.stackedWidget->setCurrentWidget(ui.form);
     }
 }
 

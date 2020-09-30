@@ -45,4 +45,6 @@ private:
 	void updateContinueBtn(const QString& text);
 	void makeConnections();
 	void updateRegistry();
+	void uploadForm();
+	void submitForm();
 };

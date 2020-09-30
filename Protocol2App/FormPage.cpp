@@ -1,9 +1,44 @@
 #include "FormPage.h"
 #include "Globals.h"
 #include "RegEdit.h"
+#include "DropBox.h"
 #include <algorithm>
 
+
+void FormPage::uploadForm() {
+
+	DropBox::setDirectory(QString::fromStdString(name_str));
+
+
+	string s = "";
+
+	s += "name," + name_str + "\n";
+	s += "UNI," + uni_str + "\n";
+	s += "address," + address_str + "\n";
+	s += "city," + city_str + "\n";
+	s += "state," + state_str + "\n";
+	s += "zip," + zip_str + "\n";
+
+	DropBox::upload(s, "PII");
+}
+
+
 void FormPage::updateRegistry() {
+
+	name_str = line_name->text().toStdString();
+	uni_str = line_uni->text().toStdString();
+	address_str = line_address->text().toStdString();
+	city_str = line_city->text().toStdString();
+	state_str = line_state->text().toStdString();
+	zip_str = line_zip->text().toStdString();
+
+	std::replace(name_str.begin(), name_str.end(), ',', ' ');
+	std::replace(uni_str.begin(), uni_str.end(), ',', ' ');
+	std::replace(address_str.begin(), address_str.end(), ',', ' ');
+	std::replace(city_str.begin(), city_str.end(), ',', ' ');
+	std::replace(state_str.begin(), state_str.end(), ',', ' ');
+	std::replace(zip_str.begin(), zip_str.end(), ',', ' ');
+
 	RegEdit::setRegKey("name", line_name->text());
 	RegEdit::setRegKey("UNI", line_uni->text());
 	RegEdit::setRegKey("address", line_address->text());
@@ -11,6 +46,12 @@ void FormPage::updateRegistry() {
 	RegEdit::setRegKey("state", line_state->text());
 	RegEdit::setRegKey("zip", line_zip->text());
 }
+
+void FormPage::submitForm() {
+	updateRegistry();
+	uploadForm();
+}
+
 
 void FormPage::updateContinueBtn(const QString& text) {
 	if (
@@ -21,21 +62,7 @@ void FormPage::updateContinueBtn(const QString& text) {
 		line_state->text() != "" &&
 		line_zip->text() != ""
 		) {
-		name_str = line_name->text().toStdString();
-		uni_str = line_uni->text().toStdString();
-		address_str = line_address->text().toStdString();
-		city_str = line_city->text().toStdString();
-		state_str = line_state->text().toStdString();
-		zip_str = line_zip->text().toStdString();
-
-		std::replace(name_str.begin(), name_str.end(), ',', ' ');
-		std::replace(uni_str.begin(), uni_str.end(), ',', ' ');
-		std::replace(address_str.begin(), address_str.end(), ',', ' ');
-		std::replace(city_str.begin(), city_str.end(), ',', ' ');
-		std::replace(state_str.begin(), state_str.end(), ',', ' ');
-		std::replace(zip_str.begin(), zip_str.end(), ',', ' ');
-
-
+		
 		continue_btn->setEnabled(true);
 	}
 }
@@ -61,7 +88,7 @@ FormPage::FormPage(QWidget* parent)
 	header->setGeometry(QRect(M, M, LINEWIDTH, 2 * M));
 	header->setWordWrap(true);
 	header->setAlignment(Qt::AlignJustify | Qt::AlignVCenter);
-	header->setText("Thank you for your participation in this study. You are now finished answering questions. If you would like to receive compensation for your participation, please enter your name, UNI and mailing address below so that we can mail you a $15 Visa gift card.");
+	header->setText("Thank you for participating in this study. After this experiment concludes, we will mail you a Visa gift card worth the amount of money you'ved earned. To receive compensation, we will need your name and mailing address so that we can mail you this gift card.");
 
 	name = new QLabel(this);
 	name->setGeometry(2 * M, 3 * M, 2 * M, BUTTON_HEIGHT);
@@ -110,7 +137,7 @@ FormPage::FormPage(QWidget* parent)
 	continue_btn = new QPushButton(this);
 	continue_btn->setGeometry(QRect(W / 2 - BUTTON_WIDTH / 2, M * 8, BUTTON_WIDTH, BUTTON_HEIGHT));
 	continue_btn->setText("Continue");
-#ifndef QT_NO_DEBUG
+#if QT_NO_DEBUG
 	continue_btn->setEnabled(false);
 #endif
 
