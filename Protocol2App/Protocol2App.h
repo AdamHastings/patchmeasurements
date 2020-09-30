@@ -18,6 +18,5 @@ public:
 
 private:
     Ui::MainWindow ui;
-    QString RegOrg = "Hastings";
-    QString RegApp = "Settings";
+
 };

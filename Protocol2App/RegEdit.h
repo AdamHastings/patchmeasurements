@@ -8,9 +8,14 @@ class RegEdit
 {
 
 public:
-	static void setRegKey(QString RegOrg, QString RegApp, QString key, int value);
-	static void setRegKey(QString RegOrg, QString RegApp, QString key, QString value);
+	static void setRegKey(QString key, int value);
+	static void setRegKey(QString key, QString value);
 	static QVariant getRegKey(QString registry, QString key);
+
+
+private:
+	static QString RegOrg;
+	static QString RegApp;
 
 };
 
