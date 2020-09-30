@@ -22,6 +22,8 @@ public:
 	static void setCsEnabled(int i);
 	static bool runningAsAdmin();
 
+	static std::vector<int>getCurrentPowerSettings();
+
 private:
 	PowerMgmt();
 	~PowerMgmt();

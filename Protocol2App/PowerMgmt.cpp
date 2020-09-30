@@ -7,6 +7,7 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <map>
 using namespace std;
 
 PowerMgmt::PowerMgmt() {
@@ -88,6 +89,27 @@ void PowerMgmt::getDefaultPowercfg() {
 
 #endif
 }
+
+
+//vector<int> PowerMgmt::getCurrentPowerSettings() {
+//    string get_max_default = "powercfg Q SCHEME_CURRENT SUB_PROCESSOR PROCTHROTTLEMAX";
+//    string get_min_default = "powercfg Q SCHEME_CURRENT SUB_PROCESSOR PROCTHROTTLEMIN";
+//
+//    QProcess process;
+//    process.start("powercfg Q SCHEME_CURRENT SUB_PROCESSOR PROCTHROTTLEMAX");
+//    process.waitForFinished(-1);
+//
+//    vector<int> maxs = parsePowercfgOutput(process.readAllStandardOutput().toStdString());
+//
+//    process.start("powercfg Q SCHEME_CURRENT SUB_PROCESSOR PROCTHROTTLEMIN");
+//    process.waitForFinished(-1);
+//
+//    vector<int> mins = parsePowercfgOutput(process.readAllStandardOutput().toStdString());
+//
+//    //vecotr<int> current_power_settings = [mins]
+//    map<std::string, int> current_power_settings;
+//
+//}
 
 void PowerMgmt::setFreq(int p) {
 #if QT_NO_DEBUG
