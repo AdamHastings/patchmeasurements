@@ -37,10 +37,10 @@ void DropBox::upload(QString contents, QString filename) {
  
     request.setRawHeader(QByteArray("Authorization"), QByteArray("Bearer qHsc0jnrT4EAAAAAAAAAAeHJyK46BY6Ayaon3yz_8A4FWkapt_RTku2PZf7vFPUu"));
 
-    QString dropboxArg = QString("{\"path\": \"/ " + directory + "/" + filename + ".txt\",\"mode\": \"add\",\"autorename\": true,\"mute\": false,\"strict_conflict\": false}");
+    QString dropboxArg = QString("{\"path\": \"/ " + directory + "/" + filename + ".txt\",\"mode\": \"add\",\"autorename\": true,\"mute\": true,\"strict_conflict\": false}");
 
 #ifdef QT_DEBUG
-    dropboxArg = QString("{\"path\": \"/ " + directory + "/" + filename + ".txt\",\"mode\": \"add\",\"autorename\": false,\"mute\": false,\"strict_conflict\": false}");
+    dropboxArg = QString("{\"path\": \"/ " + directory + "/" + filename + ".txt\",\"mode\": \"overwrite\",\"autorename\": false,\"mute\": true,\"strict_conflict\": false}");
 #endif
 
 
