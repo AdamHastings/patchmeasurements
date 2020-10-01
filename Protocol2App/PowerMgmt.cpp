@@ -47,6 +47,7 @@ vector<int> PowerMgmt::parsePowercfgOutput(string s) {
     cout << tokens[tokens.size() - 1] << endl;
     cout << tokens[tokens.size() - 7] << endl;
 
+    // TODO returns nothing atm!
     vector<int> retvec{ 0, 0 };
     return retvec;
 }

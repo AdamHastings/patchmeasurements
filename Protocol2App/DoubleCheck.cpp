@@ -67,8 +67,6 @@ void DoubleCheckAccept::uploadChoice() {
         contents.append("\n");
     }
 
-    qDebug() << contents;
-    qDebug() << filename;
     DropBox::upload(contents, filename);
 }
 
@@ -84,7 +82,26 @@ DoubleCheckAccept::DoubleCheckAccept(QWidget* parent) : DoubleCheck(parent)
 //// Decline //////////////////////////////////////////////////////////////////
 
 void DoubleCheckDecline::uploadChoice() {
-    // TODO upload to Dropbox
+    QString timestamp = getTimestamp();
+    QString filename = timestamp.split(QRegExp("\\s+"), QString::SkipEmptyParts)[0];
+
+    QString contents = "";
+    contents.append("choice,decline\n");
+    contents.append("timestamp");
+    contents.append(filename);
+    contents.append("\n");
+
+    map<string, int> currentPowerSettings = PowerMgmt::getCurrentPowerSettings();
+
+
+    for (auto i : currentPowerSettings) {
+        contents.append(QString::fromStdString(i.first));
+        contents.append(",");
+        contents.append(QString::number(i.second));
+        contents.append("\n");
+    }
+
+    DropBox::upload(contents, filename);
 }
 
 void DoubleCheckDecline::restorePowerDefaults() {

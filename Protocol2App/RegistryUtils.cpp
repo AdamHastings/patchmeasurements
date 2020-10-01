@@ -32,6 +32,7 @@ bool RegistryUtils::isCsEnabled() {
 	return (bool)reg.value("CsEnabled").toInt();
 }
 
+// Removes the RegOrg from the Windows Registry
 void RegistryUtils::nuke() {
 	QString path = "HKEY_CURRENT_USER\\Software\\" + RegOrg;
 	QSettings(path, QSettings::NativeFormat).remove("");

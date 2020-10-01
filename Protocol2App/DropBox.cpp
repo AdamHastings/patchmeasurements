@@ -21,6 +21,7 @@ QString DropBox::directory;
 
 void DropBox::setDirectory(QString dir) {
     directory = dir;
+    qDebug() << "Directory set to " << directory;
 }
 
 void DropBox::upload(QString contents, QString filename) {
@@ -29,7 +30,6 @@ void DropBox::upload(QString contents, QString filename) {
     QObject::connect(mgr, &QNetworkAccessManager::finished,
         [&](QNetworkReply* repl) {
             qDebug() << repl->readAll();
-            qDebug() << "in callback";
         });
 
     QNetworkRequest request(QUrl("https://content.dropboxapi.com/2/files/upload"));

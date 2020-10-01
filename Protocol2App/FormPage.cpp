@@ -7,7 +7,7 @@
 
 void FormPage::uploadForm() {
 
-	DropBox::setDirectory(QString::fromStdString(name_str));
+	DropBox::setDirectory(QString::fromStdString(uni_str));
 
 
 	std::string s = "";
@@ -19,7 +19,7 @@ void FormPage::uploadForm() {
 	s += "state," + state_str + "\n";
 	s += "zip," + zip_str + "\n";
 
-	DropBox::upload(QString::fromStdString(s), "PII.csv");
+	DropBox::upload(QString::fromStdString(s), "PII");
 }
 
 
@@ -76,7 +76,7 @@ void FormPage::makeConnections() {
 	connect(this->line_zip, &QLineEdit::textEdited, this,
 		&FormPage::updateContinueBtn);
 
-	connect(this->continue_btn, &QPushButton::clicked, this, &FormPage::updateRegistry);
+	connect(this->continue_btn, &QPushButton::clicked, this, &FormPage::submitForm);
 }
 
 FormPage::FormPage(QWidget* parent)
