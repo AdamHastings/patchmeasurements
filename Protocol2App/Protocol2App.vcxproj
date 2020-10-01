@@ -101,7 +101,7 @@
     <ClCompile Include="ExitPage.cpp" />
     <ClCompile Include="FormPage.cpp" />
     <ClCompile Include="PowerMgmt.cpp" />
-    <ClCompile Include="RegEdit.cpp" />
+    <ClCompile Include="RegistryUtils.cpp" />
     <ClCompile Include="RegistryEditPage.cpp" />
     <ClCompile Include="StartPage.cpp" />
     <ClCompile Include="WTAPage.cpp" />
@@ -126,7 +126,7 @@
     <ClInclude Include="DropBox.h" />
     <ClInclude Include="Globals.h" />
     <ClInclude Include="PowerMgmt.h" />
-    <ClInclude Include="RegEdit.h" />
+    <ClInclude Include="RegistryUtils.h" />
     <QtMoc Include="RegistryEditPage.h" />
     <ClInclude Include="ui_Protocol2App.h" />
   </ItemGroup>

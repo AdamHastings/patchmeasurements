@@ -1,6 +1,6 @@
 #include "DoubleCheck.h"
 #include "Globals.h"
-#include "RegEdit.h"
+#include "RegistryUtils.h"
 #include "DropBox.h"
 #include "PowerMgmt.h"
 

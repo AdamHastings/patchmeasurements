@@ -1,5 +1,5 @@
 #include "Protocol2App.h"
-#include "RegEdit.h"
+#include "RegistryUtils.h"
 #include "PowerMgmt.h"
 
 #include  <QDebug>
@@ -25,7 +25,7 @@ void Protocol2App::showStartNext() {
     if (!PowerMgmt::runningAsAdmin()) {
         ui.stackedWidget->setCurrentWidget(ui.noadmin);
     }
-    else if (RegEdit::isCsEnabled()) {
+    else if (RegistryUtils::isCsEnabled()) {
         ui.stackedWidget->setCurrentWidget(ui.regedit);
     }
     else {

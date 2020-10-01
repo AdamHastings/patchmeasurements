@@ -4,7 +4,7 @@
 #include <QVariant>
 using namespace std;
 
-class RegEdit
+class RegistryUtils
 {
 
 public:

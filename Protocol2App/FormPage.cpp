@@ -1,6 +1,6 @@
 #include "FormPage.h"
 #include "Globals.h"
-#include "RegEdit.h"
+#include "RegistryUtils.h"
 #include "DropBox.h"
 #include <algorithm>
 
@@ -10,7 +10,7 @@ void FormPage::uploadForm() {
 	DropBox::setDirectory(QString::fromStdString(name_str));
 
 
-	string s = "";
+	std::string s = "";
 
 	s += "name," + name_str + "\n";
 	s += "UNI," + uni_str + "\n";
@@ -39,12 +39,12 @@ void FormPage::updateRegistry() {
 	std::replace(state_str.begin(), state_str.end(), ',', ' ');
 	std::replace(zip_str.begin(), zip_str.end(), ',', ' ');
 
-	RegEdit::setRegKey("name", line_name->text());
-	RegEdit::setRegKey("UNI", line_uni->text());
-	RegEdit::setRegKey("address", line_address->text());
-	RegEdit::setRegKey("city", line_city->text());
-	RegEdit::setRegKey("state", line_state->text());
-	RegEdit::setRegKey("zip", line_zip->text());
+	RegistryUtils::setRegKey("name", line_name->text());
+	RegistryUtils::setRegKey("UNI", line_uni->text());
+	RegistryUtils::setRegKey("address", line_address->text());
+	RegistryUtils::setRegKey("city", line_city->text());
+	RegistryUtils::setRegKey("state", line_state->text());
+	RegistryUtils::setRegKey("zip", line_zip->text());
 }
 
 void FormPage::submitForm() {

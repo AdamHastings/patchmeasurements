@@ -15,7 +15,7 @@
 #include "FormPage.h"
 #include "RegistryEditPage.h"
 
-#include "RegEdit.h"
+#include "RegistryUtils.h"
 
 
 QT_BEGIN_NAMESPACE
@@ -107,9 +107,9 @@ public:
         stackedWidget->addWidget(onemore);
 
         // If this isn't the first time, skip the first few pages.
-        if (RegEdit::getRegKey("UNI").isValid()) {
+        if (RegistryUtils::getRegKey("UNI").isValid()) {
             stackedWidget->setCurrentWidget(wta);
-            qDebug() << "RegEdit::getRegKey(\"UNI\"): " <<  RegEdit::getRegKey("UNI");
+            qDebug() << "RegEdit::getRegKey(\"UNI\"): " << RegistryUtils::getRegKey("UNI");
         }
         else {
             stackedWidget->setCurrentWidget(start);
