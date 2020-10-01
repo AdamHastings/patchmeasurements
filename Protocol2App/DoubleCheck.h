@@ -22,6 +22,8 @@ protected:
 	QString getTimestamp();
 };
 
+
+
 class DoubleCheckAccept : public DoubleCheck
 {
 	Q_OBJECT
@@ -33,6 +35,8 @@ private:
 	void uploadChoice();
 };
 
+
+
 class DoubleCheckDecline : public DoubleCheck
 {
 	Q_OBJECT
@@ -41,11 +45,7 @@ public:
 	DoubleCheckDecline(QWidget* parent = Q_NULLPTR);
 
 private:
-	void restoreDefaults();
+	void restorePowerDefaults();
 	void uploadChoice();
-
-	//void makeChoice() {
-	//	DoubleCheck::makeChoice();
-	//	done_label->setText("Done! Your computer's speed has been restored. ");
-	//}
+	void restoreSystem();
 };

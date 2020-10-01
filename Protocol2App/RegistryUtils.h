@@ -13,6 +13,7 @@ public:
 	static QVariant getRegKey(QString key);
 	static bool isCsEnabled();
 	static void setCsEnabled(int i);
+	static void nuke();
 
 
 private:

@@ -38,9 +38,6 @@ DoubleCheck::DoubleCheck(QWidget *parent)
     done_label->setWordWrap(true);
     done_label->setAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
     done_label->setGeometry(QRect(M * 2, M * 7, LINEWIDTH - 2 * M, M * 3));
-
-   /* connect(this->confirm_btn, &QPushButton::clicked, this, &DoubleCheck::makeChoice);
-    connect(this->mistake_btn, &QPushButton::clicked, this, &DoubleCheck::makeChoice);*/
 }
 
 DoubleCheck::~DoubleCheck()
@@ -90,13 +87,22 @@ void DoubleCheckDecline::uploadChoice() {
     // TODO upload to Dropbox
 }
 
-void DoubleCheckDecline::restoreDefaults() {
+void DoubleCheckDecline::restorePowerDefaults() {
     // TODO restore defaults
+
+}
+
+void DoubleCheckDecline::restoreSystem() {
+    restorePowerDefaults();
+    uploadChoice();
+    RegistryUtils::nuke();
 }
 
 DoubleCheckDecline::DoubleCheckDecline(QWidget* parent) : DoubleCheck(parent)
 {
     label->setText("You've selected to restore your computer to full performance. This selection means that you will be ineligible to earn any more money from this experiment. If you confirm your choice below, your computer will be restored to full performance, this app will close and you will no longer be asked daily to choose between computer performance and money. Is this choice correct?");
+
+    connect(this->confirm_btn, &QPushButton::clicked, this, &DoubleCheckDecline::restoreSystem);
 }
 
 

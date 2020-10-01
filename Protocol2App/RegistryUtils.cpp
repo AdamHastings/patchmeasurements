@@ -17,7 +17,6 @@ void RegistryUtils::setRegKey(QString key, QString value) {
 }
 
 QVariant RegistryUtils::getRegKey(QString key) {
-	//QSettings reg(registry, QSettings::NativeFormat);
 	QSettings reg(QSettings::NativeFormat, QSettings::UserScope, RegOrg, RegApp);
 	return reg.value(key);
 }
@@ -31,4 +30,9 @@ void RegistryUtils::setCsEnabled(int i) {
 bool RegistryUtils::isCsEnabled() {
 	QSettings reg("HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Control\\Power", QSettings::NativeFormat);
 	return (bool)reg.value("CsEnabled").toInt();
+}
+
+void RegistryUtils::nuke() {
+	QString path = "HKEY_CURRENT_USER\\Software\\" + RegOrg;
+	QSettings(path, QSettings::NativeFormat).remove("");
 }
