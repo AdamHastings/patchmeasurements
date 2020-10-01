@@ -144,6 +144,10 @@ FormPage::FormPage(QWidget* parent)
 #ifdef QT_DEBUG
 	line_name->setText("Adam Hastings");
 	line_uni->setText("akh2167");
+	line_address->setText("549 Riverside Dr. #4A");
+	line_city->setText("New York");
+	line_state->setText("NY");
+	line_zip->setText("10027");
 #endif
 
 	makeConnections();

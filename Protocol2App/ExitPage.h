@@ -23,6 +23,10 @@ public:
 	OneMoreDayPage(QWidget* parent = Q_NULLPTR) : ExitPage(parent) {
 		label->setText("Your computer will remain slowed down for another 24 hours. After 24 hours have elapsed, you will again be given the choice to either restore your computer's performance or keep your computer slow in exchange for money.\n\n\nYou may now exit this window.");
 	}
+
+	void firstOffer() {
+		label->setText("Your computer will remain slowed down for another 24 hours. After 24 hours have elapsed, you will again be given the choice to either restore your computer's performance or keep your computer slow in exchange for money.\n\n\nYou may now exit this window.");
+	}
 };
 
 class NoMoreDaysPage : public ExitPage
@@ -32,6 +36,10 @@ class NoMoreDaysPage : public ExitPage
 public:
 	NoMoreDaysPage(QWidget* parent = Q_NULLPTR) : ExitPage(parent) {
 		label->setText("Your computer's performance has been restored. This program will remove itself from your active processes and will no longer ask you daily questions.\n\nDuring this experiment, you endured x days of a slowed-down computer and have earned $y. You should expect to receive an Amazon gift card in your email inbox within the next few days. Thank you for your participation!\n\nYou may now exit this window. Afterwards, please delete this program from your computer.");
+	}
+
+	void firstOffer() {
+		label->setText("Your computer's performance will not be modified. You will earn a participation fee of $5 but will not earn any additional compensation. In the next few days, we will mail you a Visa gift card to your provided address. Thank you for your participation!\n\nYou may now exit this window. Afterwards, please delete this program from your computer.");
 	}
 };
 

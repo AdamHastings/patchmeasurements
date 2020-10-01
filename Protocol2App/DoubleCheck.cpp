@@ -47,6 +47,10 @@ DoubleCheck::~DoubleCheck()
 
 //// Accept /////////////////////////////////////////////////////////////////////
 
+void DoubleCheckAccept::firstOffer() {
+    label->setText("You've selected to slow down your computer by " + QString::number(SLOWDOWN) + "% for another 24 hours in exchange for $" + QString::number(OFFER) + ".\nIs this choice correct?");
+}
+
 void DoubleCheckAccept::uploadChoice() {
     QString timestamp = getTimestamp();
     QString filename = timestamp.split(QRegExp("\\s+"), QString::SkipEmptyParts)[0];
@@ -80,6 +84,10 @@ DoubleCheckAccept::DoubleCheckAccept(QWidget* parent) : DoubleCheck(parent)
 
 
 //// Decline //////////////////////////////////////////////////////////////////
+
+void DoubleCheckDecline::firstOffer() {
+    label->setText("You've chosen to not slow down your computer in exchange for money. This selection means that you will be ineligible to earn any more money from this experiment. Is this choice correct?");
+}
 
 void DoubleCheckDecline::uploadChoice() {
     QString timestamp = getTimestamp();

@@ -114,6 +114,12 @@ public:
             DropBox::setDirectory(RegistryUtils::getRegKey("UNI").toString());
         }
         else {
+            //RegistryUtils::setRegKey("FirstOffer", 1);
+            wta->firstOffer();
+            dc_accept->firstOffer();
+            dc_decline->firstOffer();
+            onemore->firstOffer();
+            nomore->firstOffer();
             stackedWidget->setCurrentWidget(start);
         }
 

@@ -31,6 +31,8 @@ class DoubleCheckAccept : public DoubleCheck
 public:
 	DoubleCheckAccept(QWidget* parent = Q_NULLPTR);
 
+	void firstOffer();
+
 private:
 	void uploadChoice();
 };
@@ -43,6 +45,8 @@ class DoubleCheckDecline : public DoubleCheck
 
 public:
 	DoubleCheckDecline(QWidget* parent = Q_NULLPTR);
+
+	void firstOffer();
 
 private:
 	void restorePowerDefaults();

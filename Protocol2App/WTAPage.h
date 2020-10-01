@@ -16,13 +16,9 @@ public:
 	QLabel* header;
 	QLabel* offer_label;
 	QPushButton* continue_btn;
-	//QPushButton* no_btn;
 	QRadioButton* accept;
 	QRadioButton* decline;
 
-	void updateOffer(int new_offer);
-
-private:
-	void uploadAnswers();
+	void firstOffer();
 
 };
