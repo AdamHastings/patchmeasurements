@@ -81,25 +81,31 @@ void PowerMgmt::getDefaultPowercfg() {
 }
 
 
-//vector<int> PowerMgmt::getCurrentPowerSettings() {
-//    string get_max_default = "powercfg Q SCHEME_CURRENT SUB_PROCESSOR PROCTHROTTLEMAX";
-//    string get_min_default = "powercfg Q SCHEME_CURRENT SUB_PROCESSOR PROCTHROTTLEMIN";
-//
-//    QProcess process;
-//    process.start("powercfg Q SCHEME_CURRENT SUB_PROCESSOR PROCTHROTTLEMAX");
-//    process.waitForFinished(-1);
-//
-//    vector<int> maxs = parsePowercfgOutput(process.readAllStandardOutput().toStdString());
-//
-//    process.start("powercfg Q SCHEME_CURRENT SUB_PROCESSOR PROCTHROTTLEMIN");
-//    process.waitForFinished(-1);
-//
-//    vector<int> mins = parsePowercfgOutput(process.readAllStandardOutput().toStdString());
-//
-//    //vecotr<int> current_power_settings = [mins]
-//    map<std::string, int> current_power_settings;
-//
-//}
+map<string, int> PowerMgmt::getCurrentPowerSettings() {
+    string get_max_default = "powercfg Q SCHEME_CURRENT SUB_PROCESSOR PROCTHROTTLEMAX";
+    string get_min_default = "powercfg Q SCHEME_CURRENT SUB_PROCESSOR PROCTHROTTLEMIN";
+
+    QProcess process;
+    process.start("powercfg Q SCHEME_CURRENT SUB_PROCESSOR PROCTHROTTLEMAX");
+    process.waitForFinished(-1);
+
+    vector<int> maxs = parsePowercfgOutput(process.readAllStandardOutput().toStdString());
+
+    process.start("powercfg Q SCHEME_CURRENT SUB_PROCESSOR PROCTHROTTLEMIN");
+    process.waitForFinished(-1);
+
+    vector<int> mins = parsePowercfgOutput(process.readAllStandardOutput().toStdString());
+
+    //vecotr<int> current_power_settings = [mins]
+    map<std::string, int> current_power_settings;
+
+    current_power_settings.insert({ "CurrentMaxAC", maxs[0] });
+    current_power_settings.insert({ "CurrentMaxDC", maxs[1] });
+    current_power_settings.insert({ "CurrentMinAC", mins[0] });
+    current_power_settings.insert({ "CurrentMinDC", mins[1] });
+
+    return current_power_settings;
+}
 
 void PowerMgmt::setFreq(int p) {
 #if QT_NO_DEBUG

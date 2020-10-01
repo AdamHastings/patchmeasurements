@@ -9,7 +9,7 @@ public:
     DropBox();
     ~DropBox();
 
-    static void upload(std::string contents, std::string filename);
+    //static void upload(std::string contents, std::string filename);
     static void upload(QString contents, QString filename);
     static void setDirectory(QString dir);
 

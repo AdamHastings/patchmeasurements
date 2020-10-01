@@ -16,7 +16,7 @@
 #include "RegistryEditPage.h"
 
 #include "RegistryUtils.h"
-
+#include "DropBox.h"
 
 QT_BEGIN_NAMESPACE
 
@@ -109,7 +109,9 @@ public:
         // If this isn't the first time, skip the first few pages.
         if (RegistryUtils::getRegKey("UNI").isValid()) {
             stackedWidget->setCurrentWidget(wta);
-            qDebug() << "RegEdit::getRegKey(\"UNI\"): " << RegistryUtils::getRegKey("UNI");
+            //qDebug() << "RegEdit::getRegKey(\"UNI\"): " << RegistryUtils::getRegKey("UNI");
+            // TODO other initialization stuff here? Maybe will need its own class...
+            DropBox::setDirectory(RegistryUtils::getRegKey("UNI").toString());
         }
         else {
             stackedWidget->setCurrentWidget(start);

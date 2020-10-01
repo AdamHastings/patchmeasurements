@@ -3,16 +3,17 @@
 #include "RegistryUtils.h"
 #include "DropBox.h"
 #include "PowerMgmt.h"
-
+#include <map>
 #include <iomanip>
 #include <ctime>
 #include <sstream>
+#include <QDebug>
 
 QString DoubleCheck::getTimestamp() {
     auto t = std::time(nullptr);
     auto tm = *std::localtime(&t);
     std::ostringstream oss;
-    oss << std::put_time(&tm, "%d-%m-%Y %H-%M-%S");
+    oss << std::put_time(&tm, "%m-%d-%Y %H-%M-%S");
     auto str = oss.str();
     return QString::fromStdString(str);
 }
@@ -50,14 +51,28 @@ DoubleCheck::~DoubleCheck()
 //// Accept /////////////////////////////////////////////////////////////////////
 
 void DoubleCheckAccept::uploadChoice() {
-    QString filename = getTimestamp();
+    QString timestamp = getTimestamp();
+    QString filename = timestamp.split(QRegExp("\\s+"), QString::SkipEmptyParts)[0];
 
     QString contents = "";
     contents.append("choice,accept\n");
+    contents.append("timestamp");
+    contents.append(filename);
+    contents.append("\n");
 
-    /*auto current_ACProcThrottleMin = PowerMgmt::*/
+    map<string, int> currentPowerSettings = PowerMgmt::getCurrentPowerSettings();
 
-    // for i in map, append kv pairs
+
+    for (auto i : currentPowerSettings) {
+        contents.append(QString::fromStdString(i.first));
+        contents.append(",");
+        contents.append(QString::number(i.second));
+        contents.append("\n");
+    }
+
+    qDebug() << contents;
+    qDebug() << filename;
+    DropBox::upload(contents, filename);
 }
 
 DoubleCheckAccept::DoubleCheckAccept(QWidget* parent) : DoubleCheck(parent)

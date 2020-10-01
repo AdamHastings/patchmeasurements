@@ -19,7 +19,7 @@ void FormPage::uploadForm() {
 	s += "state," + state_str + "\n";
 	s += "zip," + zip_str + "\n";
 
-	DropBox::upload(s, "PII");
+	DropBox::upload(QString::fromStdString(s), "PII.csv");
 }
 
 

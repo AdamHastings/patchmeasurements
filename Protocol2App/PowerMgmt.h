@@ -1,6 +1,7 @@
 #pragma once
 #include <string>
 #include <vector>
+#include <map>
 #include <stdbool.h>
 
 class PowerMgmt
@@ -20,7 +21,7 @@ public:
 	static void restoreDefaults();
 	static bool runningAsAdmin();
 
-	static std::vector<int>getCurrentPowerSettings();
+	static std::map<std::string, int> getCurrentPowerSettings();
 
 private:
 	PowerMgmt();
