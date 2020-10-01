@@ -78,18 +78,23 @@ Protocol2App::Protocol2App(QWidget *parent)
 
 
 void Protocol2App::closeEvent(QCloseEvent* event) {
-    event->ignore();
-    this->hide();
 
-    // wait
-    int time_to_sleep = 60 * 60 * 24 * 1000; // one day
+    // If the user has elected to end the experiment, this should be empty..
+    if (RegistryUtils::getRegKey("UNI").isValid()) {
+
+        event->ignore();
+        this->hide();
+
+        // wait
+        int time_to_sleep = 60 * 60 * 24 * 1000; // one day
 
 #ifdef QT_DEBUG
-    time_to_sleep = 10 * 1000;
+        time_to_sleep = 5 * 1000;
 #endif
 
-    _sleep(time_to_sleep);
+        _sleep(time_to_sleep);
 
-    ui.stackedWidget->setCurrentWidget(ui.wta);
-    this->show();
+        ui.stackedWidget->setCurrentWidget(ui.wta);
+        this->show();
+    }
 }
