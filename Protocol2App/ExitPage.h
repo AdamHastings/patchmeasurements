@@ -25,7 +25,7 @@ public:
 	}
 
 	void firstOffer() {
-		label->setText("Your computer will remain slowed down for another 24 hours. After 24 hours have elapsed, you will again be given the choice to either restore your computer's performance or keep your computer slow in exchange for money.\n\n\nYou may now exit this window.");
+		label->setText("Your computer has been slowed down. After 24 hours have elapsed, you will again be given the choice to either restore your computer's performance or keep your computer slow in exchange for money.\n\n\nYou may now exit this window.");
 	}
 };
 
