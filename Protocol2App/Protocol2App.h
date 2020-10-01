@@ -24,4 +24,6 @@ private:
     void showGoodbye();
     void acceptOffer();
     void declineOffer();
+
+    void closeEvent(QCloseEvent* event);
 };

@@ -1,6 +1,8 @@
 #include "Protocol2App.h"
 #include "RegistryUtils.h"
 #include "PowerMgmt.h"
+#include <QCloseEvent>
+#include <time.h>
 
 #include  <QDebug>
 
@@ -72,4 +74,22 @@ Protocol2App::Protocol2App(QWidget *parent)
 
     connect(ui.dc_accept->confirm_btn, &QPushButton::clicked, this, &Protocol2App::acceptOffer);
     connect(ui.dc_decline->confirm_btn, &QPushButton::clicked, this, &Protocol2App::declineOffer);
+}
+
+
+void Protocol2App::closeEvent(QCloseEvent* event) {
+    event->ignore();
+    this->hide();
+
+    // wait
+    int time_to_sleep = 60 * 60 * 24 * 1000; // one day
+
+#ifdef QT_DEBUG
+    time_to_sleep = 10 * 1000;
+#endif
+
+    _sleep(time_to_sleep);
+
+    ui.stackedWidget->setCurrentWidget(ui.wta);
+    this->show();
 }
