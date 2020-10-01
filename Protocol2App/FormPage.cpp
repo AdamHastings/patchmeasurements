@@ -141,6 +141,11 @@ FormPage::FormPage(QWidget* parent)
 	continue_btn->setEnabled(false);
 #endif
 
+#ifdef QT_DEBUG
+	line_name->setText("Adam Hastings");
+	line_uni->setText("akh2167");
+#endif
+
 	makeConnections();
 }
 

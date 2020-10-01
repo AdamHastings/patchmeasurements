@@ -53,7 +53,7 @@ void DoubleCheckAccept::uploadChoice() {
 
     QString contents = "";
     contents.append("choice,accept\n");
-    contents.append("timestamp");
+    contents.append("timestamp,");
     contents.append(filename);
     contents.append("\n");
 
@@ -87,7 +87,7 @@ void DoubleCheckDecline::uploadChoice() {
 
     QString contents = "";
     contents.append("choice,decline\n");
-    contents.append("timestamp");
+    contents.append("timestamp,");
     contents.append(filename);
     contents.append("\n");
 

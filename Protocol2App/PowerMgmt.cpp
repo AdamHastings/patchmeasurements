@@ -37,18 +37,23 @@ vector<int> PowerMgmt::parsePowercfgOutput(string s) {
     // gets last two values and returns in vector
     vector<string> tokens;
 
+    qDebug() << QString::fromStdString(s);
+
     istringstream ss(s);
     string tmp;
     while (ss >> tmp) {
         tokens.push_back(tmp);
-        cout << tmp << endl;
+        qDebug() << QString::fromStdString(tmp);
     }
 
-    cout << tokens[tokens.size() - 1] << endl;
-    cout << tokens[tokens.size() - 7] << endl;
+    // TODO fix
+    int ac = (int) strtol(tokens[tokens.size() - 7].c_str(), NULL, 0);
+    int dc = (int) strtol(tokens[tokens.size() - 1].c_str(), NULL, 0);
 
-    // TODO returns nothing atm!
-    vector<int> retvec{ 0, 0 };
+    qDebug() << ac;
+    qDebug() << dc;
+
+    vector<int> retvec{ ac, dc };
     return retvec;
 }
 
