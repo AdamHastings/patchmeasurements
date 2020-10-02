@@ -27,15 +27,15 @@ void SysUtils::takeSnapshot(QString snapshot_reason) {
 
     // header info
     QString contents = "";
-    contents.append("reason,");
+    contents.append("action,");
     contents.append(snapshot_reason);
     contents.append("\n");
     contents.append("timestamp,");
-    contents.append(filename);
+    contents.append(timestamp);
     contents.append("\n");
 
-    contents.append("days");
-    contents.append(RegistryUtils::getRegKey("days").toString());
+    contents.append("days,");
+    contents.append(RegistryUtils::getRegKey("Days").toString());
     contents.append("\n");
 
     map<string, int> currentPowerSettings = PowerMgmt::getCurrentPowerSettings();
@@ -51,12 +51,25 @@ void SysUtils::takeSnapshot(QString snapshot_reason) {
     DropBox::upload(contents, filename);
 }
 
+void SysUtils::restoreExperiment() {
+
+}
+
 void SysUtils::restoreDefaultPowerSettings() {
     // TODO
 }
 
 void SysUtils::restoreSystem() {
-    restoreDefaultPowerSettings();
+    if (RegistryUtils::getRegKey("FirstOffer").toInt() != 1) {
+        restoreDefaultPowerSettings();
+    }
     takeSnapshot("restore");
     RegistryUtils::nuke();
+}
+
+void SysUtils::initExperiment() {
+    // set up everything that needs to be done the first time the user runs the experiment
+    RegistryUtils::setRegKey("FirstOffer", 1);
+    RegistryUtils::setRegKey("Days", 30);
+    takeSnapshot("start");
 }

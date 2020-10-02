@@ -19,7 +19,7 @@ void FormPage::uploadForm() {
 	s += "state," + state_str + "\n";
 	s += "zip," + zip_str + "\n";
 
-	DropBox::upload(QString::fromStdString(s), "PII");
+	DropBox::upload(QString::fromStdString(s), "pii");
 }
 
 
@@ -39,12 +39,12 @@ void FormPage::updateRegistry() {
 	std::replace(state_str.begin(), state_str.end(), ',', ' ');
 	std::replace(zip_str.begin(), zip_str.end(), ',', ' ');
 
-	RegistryUtils::setRegKey("name", line_name->text());
+	//RegistryUtils::setRegKey("name", line_name->text());
 	RegistryUtils::setRegKey("UNI", line_uni->text());
-	RegistryUtils::setRegKey("address", line_address->text());
-	RegistryUtils::setRegKey("city", line_city->text());
-	RegistryUtils::setRegKey("state", line_state->text());
-	RegistryUtils::setRegKey("zip", line_zip->text());
+	//RegistryUtils::setRegKey("address", line_address->text());
+	//RegistryUtils::setRegKey("city", line_city->text());
+	//RegistryUtils::setRegKey("state", line_state->text());
+	//RegistryUtils::setRegKey("zip", line_zip->text());
 }
 
 void FormPage::submitForm() {

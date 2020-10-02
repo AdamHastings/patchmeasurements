@@ -108,6 +108,7 @@ public:
 
         // If this isn't the first time, skip the first few pages.
         if (RegistryUtils::getRegKey("UNI").isValid()) {
+        //if (RegistryUtils::getRegKey("FirstOffer").toInt() == 0) {
             stackedWidget->setCurrentWidget(wta);
             DropBox::setDirectory(RegistryUtils::getRegKey("UNI").toString());
         }

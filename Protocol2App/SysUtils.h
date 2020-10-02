@@ -17,6 +17,8 @@ public:
 
 	static void takeSnapshot(QString snapshot_reason);
 	static void restoreSystem();
+	static void initExperiment();
+	static void restoreExperiment();
 
 private:
 

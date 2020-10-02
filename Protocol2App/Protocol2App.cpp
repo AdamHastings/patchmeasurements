@@ -7,6 +7,7 @@
 #include  <QDebug>
 
 void Protocol2App::showWTA() {
+    SysUtils::initExperiment();
     ui.stackedWidget->setCurrentWidget(ui.wta);
 }
 
@@ -46,12 +47,15 @@ void Protocol2App::showGoodbye() {
 
 
 void Protocol2App::acceptOffer() {
+    RegistryUtils::setRegKey("firstoffer", 0);
     SysUtils::takeSnapshot("accept");
     ui.stackedWidget->setCurrentWidget(ui.onemore);
 }
 
 void Protocol2App::declineOffer() {
+    RegistryUtils::setRegKey("firstoffer", 0);
     SysUtils::takeSnapshot("decline");
+    SysUtils::restoreSystem();
     ui.stackedWidget->setCurrentWidget(ui.nomore);
 }
 
@@ -98,13 +102,12 @@ void Protocol2App::closeEvent(QCloseEvent* event) {
             int time_to_sleep = 60 * 60 * 24 * 1000; // one day
 
 #ifdef QT_DEBUG
-            time_to_sleep = 3 * 1000;
+            time_to_sleep = 1 * 1000;
             days /= 2;
 #endif
 
             _sleep(time_to_sleep);
 
-            //TODO what to do on last day?
             days--;
 
             // update Registry
