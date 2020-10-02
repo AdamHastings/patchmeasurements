@@ -34,7 +34,7 @@ public:
 	void firstOffer();
 
 private:
-	void uploadChoice();
+	//void uploadChoice();
 };
 
 
@@ -49,7 +49,7 @@ public:
 	void firstOffer();
 
 private:
-	void restorePowerDefaults();
+	/*void restorePowerDefaults();
 	void uploadChoice();
-	void restoreSystem();
+	void restoreSystem();*/
 };

@@ -3,6 +3,8 @@
 #include <QtWidgets/QMainWindow>
 #include "ui_Protocol2App.h"
 
+//enum restoreReason {TIMEOUT, DECLINE};
+
 class Protocol2App : public QMainWindow
 {
     Q_OBJECT
@@ -10,10 +12,14 @@ class Protocol2App : public QMainWindow
 public:
     Protocol2App(QWidget *parent = Q_NULLPTR);
     
+    //static void restoreSystem(restoreReason r);
+    //int getDays();
    
 
 private:
     Ui::MainWindow ui;
+
+    int days = 30;
 
 
 private:

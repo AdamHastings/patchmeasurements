@@ -3,6 +3,7 @@
 #include "RegistryUtils.h"
 #include "DropBox.h"
 #include "PowerMgmt.h"
+#include "Protocol2App.h"
 #include <map>
 #include <iomanip>
 #include <ctime>
@@ -51,35 +52,35 @@ void DoubleCheckAccept::firstOffer() {
     label->setText("You've selected to slow down your computer by " + QString::number(SLOWDOWN) + "% for another 24 hours in exchange for $" + QString::number(OFFER) + ".\nIs this choice correct?");
 }
 
-void DoubleCheckAccept::uploadChoice() {
-    QString timestamp = getTimestamp();
-    QString filename = timestamp.split(QRegExp("\\s+"), QString::SkipEmptyParts)[0];
-
-    QString contents = "";
-    contents.append("choice,accept\n");
-    contents.append("timestamp,");
-    contents.append(filename);
-    contents.append("\n");
-
-    map<string, int> currentPowerSettings = PowerMgmt::getCurrentPowerSettings();
-
-
-    for (auto i : currentPowerSettings) {
-        contents.append(QString::fromStdString(i.first));
-        contents.append(",");
-        contents.append(QString::number(i.second));
-        contents.append("\n");
-    }
-
-    DropBox::upload(contents, filename);
-}
+//void DoubleCheckAccept::uploadChoice() {
+//    QString timestamp = getTimestamp();
+//    QString filename = timestamp.split(QRegExp("\\s+"), QString::SkipEmptyParts)[0];
+//
+//    QString contents = "";
+//    contents.append("choice,accept\n");
+//    contents.append("timestamp,");
+//    contents.append(filename);
+//    contents.append("\n");
+//
+//    map<string, int> currentPowerSettings = PowerMgmt::getCurrentPowerSettings();
+//
+//
+//    for (auto i : currentPowerSettings) {
+//        contents.append(QString::fromStdString(i.first));
+//        contents.append(",");
+//        contents.append(QString::number(i.second));
+//        contents.append("\n");
+//    }
+//
+//    DropBox::upload(contents, filename);
+//}
 
 DoubleCheckAccept::DoubleCheckAccept(QWidget* parent) : DoubleCheck(parent)
 {
     label->setText("You've selected to continue slowing down your computer by " + QString::number(SLOWDOWN) + "% for another 24 hours in exchange for $" + QString::number(OFFER) + ".\nIs this choice correct?");
     // TODO "is this choice correct" sounds weird. But "Are you sure this is what you want to do?" may influence the psychology of the participants. Ask...
 
-    connect(this->confirm_btn, &QPushButton::clicked, this, &DoubleCheckAccept::uploadChoice);
+    //connect(this->confirm_btn, &QPushButton::clicked, this, &DoubleCheckAccept::uploadChoice);
 }
 
 
@@ -89,45 +90,46 @@ void DoubleCheckDecline::firstOffer() {
     label->setText("You've chosen to not slow down your computer in exchange for money. This selection means that you will be ineligible to earn any more money from this experiment. Is this choice correct?");
 }
 
-void DoubleCheckDecline::uploadChoice() {
-    QString timestamp = getTimestamp();
-    QString filename = timestamp.split(QRegExp("\\s+"), QString::SkipEmptyParts)[0];
+//void DoubleCheckDecline::uploadChoice() {
+//    QString timestamp = getTimestamp();
+//    QString filename = timestamp.split(QRegExp("\\s+"), QString::SkipEmptyParts)[0];
+//
+//    QString contents = "";
+//    contents.append("choice,decline\n");
+//    contents.append("timestamp,");
+//    contents.append(filename);
+//    contents.append("\n");
+//
+//    map<string, int> currentPowerSettings = PowerMgmt::getCurrentPowerSettings();
+//
+//
+//    for (auto i : currentPowerSettings) {
+//        contents.append(QString::fromStdString(i.first));
+//        contents.append(",");
+//        contents.append(QString::number(i.second));
+//        contents.append("\n");
+//    }
+//
+//    DropBox::upload(contents, filename);
+//}
 
-    QString contents = "";
-    contents.append("choice,decline\n");
-    contents.append("timestamp,");
-    contents.append(filename);
-    contents.append("\n");
-
-    map<string, int> currentPowerSettings = PowerMgmt::getCurrentPowerSettings();
-
-
-    for (auto i : currentPowerSettings) {
-        contents.append(QString::fromStdString(i.first));
-        contents.append(",");
-        contents.append(QString::number(i.second));
-        contents.append("\n");
-    }
-
-    DropBox::upload(contents, filename);
-}
-
-void DoubleCheckDecline::restorePowerDefaults() {
-    // TODO restore defaults
-
-}
-
-void DoubleCheckDecline::restoreSystem() {
-    restorePowerDefaults();
-    uploadChoice();
-    RegistryUtils::nuke();
-}
+//void DoubleCheckDecline::restorePowerDefaults() {
+//    // TODO restore defaults
+//
+//}
+//
+//void DoubleCheckDecline::restoreSystem() {
+//    //restorePowerDefaults();
+//    //uploadChoice();
+//    //RegistryUtils::nuke();
+//    //Protocol2App::restoreSystem(DECLINE);
+//}
 
 DoubleCheckDecline::DoubleCheckDecline(QWidget* parent) : DoubleCheck(parent)
 {
     label->setText("You've selected to restore your computer to full performance. This selection means that you will be ineligible to earn any more money from this experiment. If you confirm your choice below, your computer will be restored to full performance, this app will close and you will no longer be asked daily to choose between computer performance and money. Is this choice correct?");
 
-    connect(this->confirm_btn, &QPushButton::clicked, this, &DoubleCheckDecline::restoreSystem);
+    //connect(this->confirm_btn, &QPushButton::clicked, this, &DoubleCheckDecline::restoreSystem);
 }
 
 

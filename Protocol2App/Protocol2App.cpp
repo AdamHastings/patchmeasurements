@@ -1,9 +1,9 @@
 #include "Protocol2App.h"
 #include "RegistryUtils.h"
 #include "PowerMgmt.h"
+#include "SysUtils.h"
 #include <QCloseEvent>
 #include <time.h>
-
 #include  <QDebug>
 
 void Protocol2App::showWTA() {
@@ -46,10 +46,12 @@ void Protocol2App::showGoodbye() {
 
 
 void Protocol2App::acceptOffer() {
+    SysUtils::takeSnapshot("accept");
     ui.stackedWidget->setCurrentWidget(ui.onemore);
 }
 
 void Protocol2App::declineOffer() {
+    SysUtils::takeSnapshot("decline");
     ui.stackedWidget->setCurrentWidget(ui.nomore);
 }
 
@@ -76,25 +78,50 @@ Protocol2App::Protocol2App(QWidget *parent)
     connect(ui.dc_decline->confirm_btn, &QPushButton::clicked, this, &Protocol2App::declineOffer);
 }
 
+//void Protocol2App::restoreSystem(restoreReason r) {
+//    // TODO
+//    //restorePowerDefaults();
+//    RegistryUtils::nuke();
+//}
+
 
 void Protocol2App::closeEvent(QCloseEvent* event) {
 
     // If the user has elected to end the experiment, this should be empty..
     if (RegistryUtils::getRegKey("UNI").isValid()) {
+        if (days > 0) {
 
-        event->ignore();
-        this->hide();
+            event->ignore();
+            this->hide();
 
-        // wait
-        int time_to_sleep = 60 * 60 * 24 * 1000; // one day
+            // wait
+            int time_to_sleep = 60 * 60 * 24 * 1000; // one day
 
 #ifdef QT_DEBUG
-        time_to_sleep = 5 * 1000;
+            time_to_sleep = 3 * 1000;
+            days /= 2;
 #endif
 
-        _sleep(time_to_sleep);
+            _sleep(time_to_sleep);
 
-        ui.stackedWidget->setCurrentWidget(ui.wta);
-        this->show();
+            //TODO what to do on last day?
+            days--;
+
+            // update Registry
+            RegistryUtils::setRegKey("Days", days);
+
+            if (days == 0) {
+                //restoreSystem(TIMEOUT);
+                SysUtils::takeSnapshot("timeout");
+                SysUtils::restoreSystem();
+                ui.stackedWidget->setCurrentWidget(ui.nomore);
+            }
+            else {
+                ui.stackedWidget->setCurrentWidget(ui.wta);
+            }
+            this->show();
+
+        }
+
     }
 }

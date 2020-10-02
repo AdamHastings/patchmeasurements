@@ -104,6 +104,7 @@
     <ClCompile Include="RegistryUtils.cpp" />
     <ClCompile Include="RegistryEditPage.cpp" />
     <ClCompile Include="StartPage.cpp" />
+    <ClCompile Include="SysUtils.cpp" />
     <ClCompile Include="WTAPage.cpp" />
     <QtRcc Include="Protocol2App.qrc" />
     <QtUic Include="DoubleCheck.ui" />
@@ -128,6 +129,7 @@
     <ClInclude Include="PowerMgmt.h" />
     <ClInclude Include="RegistryUtils.h" />
     <QtMoc Include="RegistryEditPage.h" />
+    <ClInclude Include="SysUtils.h" />
     <ClInclude Include="ui_Protocol2App.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

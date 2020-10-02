@@ -109,12 +109,9 @@ public:
         // If this isn't the first time, skip the first few pages.
         if (RegistryUtils::getRegKey("UNI").isValid()) {
             stackedWidget->setCurrentWidget(wta);
-            //qDebug() << "RegEdit::getRegKey(\"UNI\"): " << RegistryUtils::getRegKey("UNI");
-            // TODO other initialization stuff here? Maybe will need its own class...
             DropBox::setDirectory(RegistryUtils::getRegKey("UNI").toString());
         }
         else {
-            //RegistryUtils::setRegKey("FirstOffer", 1);
             wta->firstOffer();
             dc_accept->firstOffer();
             dc_decline->firstOffer();
