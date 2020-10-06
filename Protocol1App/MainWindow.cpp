@@ -33,6 +33,7 @@ void MainWindow::showGoodbye() {
 }
 
 void MainWindow::showTask1() {
+    PowerMgmt::removeFreqCap();
     ui.stackedWidget->setCurrentWidget(ui.task1);
 }
 
@@ -54,9 +55,7 @@ void MainWindow::showPatch1() {
     ui.stackedWidget->setCurrentWidget(ui.patch1);
     ui.patch1->fillBar();
     if (throttled_task == 2)
-        PowerMgmt::setFreq(100 - slowdown);
-    else
-        PowerMgmt::setFreq(100);
+        PowerMgmt::setFreqCap(100 - slowdown);
     ui.patch1->done_label->setText("Done!");
     ui.patch1->continue_btn->setEnabled(true);
 }
@@ -65,9 +64,9 @@ void MainWindow::showPatch2() {
     ui.stackedWidget->setCurrentWidget(ui.patch2);
     ui.patch2->fillBar();
     if (throttled_task == 3)
-        PowerMgmt::setFreq(100 - slowdown);
+        PowerMgmt::setFreqCap(100 - slowdown);
     else
-        PowerMgmt::setFreq(100);
+        PowerMgmt::removeFreqCap();
     ui.patch2->done_label->setText("Done!");
     ui.patch2->continue_btn->setEnabled(true);
 }
@@ -75,7 +74,8 @@ void MainWindow::showPatch2() {
 void MainWindow::showPatch3() {
     ui.stackedWidget->setCurrentWidget(ui.patch3);
     ui.patch3->fillBar();
-    PowerMgmt::restoreDefaults();
+    //PowerMgmt::restoreDefaults();
+    PowerMgmt::removeFreqCap();
     ui.patch3->done_label->setText("Done!");
     ui.patch3->continue_btn->setEnabled(true);
 }

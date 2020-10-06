@@ -89,24 +89,47 @@ void PowerMgmt::getDefaultPowercfg() {
 #endif
 }
 
-void PowerMgmt::setFreq(int p) {
-#if QT_NO_DEBUG
-#ifdef _WIN32
+void PowerMgmt::setFreqCap(int p) {
+    //std::string min_ac_str = "powercfg -setacvalueindex SCHEME_CURRENT SUB_PROCESSOR PROCTHROTTLEMIN " + std::to_string(p);
+    //std::string min_dc_str = "powercfg -setdcvalueindex SCHEME_CURRENT SUB_PROCESSOR PROCTHROTTLEMIN " + std::to_string(p);
+    //std::string max_ac_str = "powercfg -setacvalueindex SCHEME_CURRENT SUB_PROCESSOR PROCTHROTTLEMAX " + std::to_string(p);
+    //std::string max_dc_str = "powercfg -setdcvalueindex SCHEME_CURRENT SUB_PROCESSOR PROCTHROTTLEMAX " + std::to_string(p);
 
-    std::string min_ac_str = "powercfg -setacvalueindex SCHEME_CURRENT SUB_PROCESSOR PROCTHROTTLEMIN " + std::to_string(p);
-    std::string min_dc_str = "powercfg -setdcvalueindex SCHEME_CURRENT SUB_PROCESSOR PROCTHROTTLEMIN " + std::to_string(p);
-    std::string max_ac_str = "powercfg -setacvalueindex SCHEME_CURRENT SUB_PROCESSOR PROCTHROTTLEMAX " + std::to_string(p);
-    std::string max_dc_str = "powercfg -setdcvalueindex SCHEME_CURRENT SUB_PROCESSOR PROCTHROTTLEMAX " + std::to_string(p);
-
-    WinExec(min_ac_str.c_str(), SW_HIDE);
-    WinExec(min_dc_str.c_str(), SW_HIDE);
-    WinExec(max_ac_str.c_str(), SW_HIDE);
-    WinExec(max_dc_str.c_str(), SW_HIDE);
+    //WinExec(min_ac_str.c_str(), SW_HIDE);
+    //WinExec(min_dc_str.c_str(), SW_HIDE);
+    //WinExec(max_ac_str.c_str(), SW_HIDE);
+    //WinExec(max_dc_str.c_str(), SW_HIDE);
 
     // TODO maybe switch to QProcess?
+    QProcess proc;
 
-#endif
-#endif
+    proc.start("powercfg -setacvalueindex SCHEME_CURRENT SUB_PROCESSOR PROCTHROTTLEMIN 5 ");
+    proc.waitForFinished();
+
+    proc.start("powercfg -setdcvalueindex SCHEME_CURRENT SUB_PROCESSOR PROCTHROTTLEMIN 5 ");
+    proc.waitForFinished();
+
+    proc.start("powercfg -setacvalueindex SCHEME_CURRENT SUB_PROCESSOR PROCTHROTTLEMAX " + QString::number(p));
+    proc.waitForFinished();
+
+    proc.start("powercfg -setdcvalueindex SCHEME_CURRENT SUB_PROCESSOR PROCTHROTTLEMAX " + QString::number(p));
+    proc.waitForFinished();
+}
+
+void PowerMgmt::removeFreqCap() {
+    QProcess proc;
+
+    proc.start("powercfg -setacvalueindex SCHEME_CURRENT SUB_PROCESSOR PROCTHROTTLEMIN 5 ");
+    proc.waitForFinished();
+
+    proc.start("powercfg -setdcvalueindex SCHEME_CURRENT SUB_PROCESSOR PROCTHROTTLEMIN 5 ");
+    proc.waitForFinished();
+
+    proc.start("powercfg -setacvalueindex SCHEME_CURRENT SUB_PROCESSOR PROCTHROTTLEMAX 100");
+    proc.waitForFinished();
+
+    proc.start("powercfg -setdcvalueindex SCHEME_CURRENT SUB_PROCESSOR PROCTHROTTLEMAX 100");
+    proc.waitForFinished();
 }
 
 void PowerMgmt::restoreDefaults() {

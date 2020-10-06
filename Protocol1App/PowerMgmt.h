@@ -16,7 +16,8 @@ public:
 
 	static std::vector<int> parsePowercfgOutput(std::string s);
 	static void getDefaultPowercfg();
-	static void setFreq(int p);
+	static void setFreqCap(int p);
+	static void removeFreqCap();
 	static void restoreDefaults();
 	static bool isCsEnabled();
 	static void setCsEnabled(int i);
