@@ -1,5 +1,6 @@
 #pragma once
 #include <string>
+#include <QString>
 #include <vector>
 #include <stdbool.h>
 
@@ -14,6 +15,10 @@ public:
 	static int default_DCProcThrottleMin;
 	static int default_DCProcThrottleMax;
 
+	static QString customPowerPlanGUID;
+	static QString defaultPowerPlan;
+
+
 	static std::vector<int> parsePowercfgOutput(std::string s);
 	static void getDefaultPowercfg();
 	static void setFreqCap(int p);
@@ -22,9 +27,16 @@ public:
 	static bool isCsEnabled();
 	static void setCsEnabled(int i);
 	static bool runningAsAdmin();
+	static void createCustomPowerPlan();
+	
 
 private:
 	PowerMgmt();
 	~PowerMgmt();
+
+
+
+	static void deleteCustomPowerPlan();
+	static void restoreDefaultPowerPlan();
 };
 

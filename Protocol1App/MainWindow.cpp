@@ -33,6 +33,7 @@ void MainWindow::showGoodbye() {
 }
 
 void MainWindow::showTask1() {
+    PowerMgmt::createCustomPowerPlan();
     PowerMgmt::removeFreqCap();
     ui.stackedWidget->setCurrentWidget(ui.task1);
 }
@@ -74,7 +75,7 @@ void MainWindow::showPatch2() {
 void MainWindow::showPatch3() {
     ui.stackedWidget->setCurrentWidget(ui.patch3);
     ui.patch3->fillBar();
-    //PowerMgmt::restoreDefaults();
+    PowerMgmt::restoreDefaults();
     PowerMgmt::removeFreqCap();
     ui.patch3->done_label->setText("Done!");
     ui.patch3->continue_btn->setEnabled(true);
@@ -211,7 +212,7 @@ MainWindow::MainWindow(QWidget *parent)
     connect(ui.form->continue_btn, &QPushButton::clicked, this, &MainWindow::showFinal);
 
 #ifndef QT_NO_DEBUG
-    connect(ui.start->consent_btn, &QPushButton::clicked, this, &MainWindow::conclude);
+    connect(ui.start->consent_btn, &QPushButton::clicked, this, &MainWindow::showStartNext);
 #endif
 
 

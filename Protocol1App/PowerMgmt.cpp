@@ -4,6 +4,7 @@
 #include <QProcess>
 #include <QSettings>
 #include <QDebug>
+#include <QString>
 #include <iostream>
 #include <string>
 #include <vector>
@@ -140,16 +141,54 @@ void PowerMgmt::removeFreqCap() {
 
 void PowerMgmt::restoreDefaults() {
     
-    // TODO what if program quits halfway through app?
+    //// TODO what if program quits halfway through app?
+    //QProcess proc;
+
+    //string def_min_ac = "powercfg -setacvalueindex SCHEME_CURRENT SUB_PROCESSOR PROCTHROTTLEMIN " + std::to_string(default_ACProcThrottleMin);
+    //string def_max_ac = "powercfg -setacvalueindex SCHEME_CURRENT SUB_PROCESSOR PROCTHROTTLEMIN " + std::to_string(default_ACProcThrottleMax);
+    //string def_min_dc = "powercfg -setdcvalueindex SCHEME_CURRENT SUB_PROCESSOR PROCTHROTTLEMIN " + std::to_string(default_ACProcThrottleMin);
+    //string def_max_dc = "powercfg -setdcvalueindex SCHEME_CURRENT SUB_PROCESSOR PROCTHROTTLEMAX " + std::to_string(default_ACProcThrottleMin);
+
+    //proc.start(def_min_ac.c_str());
+    //proc.start(def_max_ac.c_str());
+    //proc.start(def_max_dc.c_str());
+    //proc.start(def_max_dc.c_str());
+    restoreDefaultPowerPlan();
+    deleteCustomPowerPlan();
+}
+
+void PowerMgmt::createCustomPowerPlan() {
     QProcess proc;
 
-    string def_min_ac = "powercfg -setacvalueindex SCHEME_CURRENT SUB_PROCESSOR PROCTHROTTLEMIN " + std::to_string(default_ACProcThrottleMin);
-    string def_max_ac = "powercfg -setacvalueindex SCHEME_CURRENT SUB_PROCESSOR PROCTHROTTLEMIN " + std::to_string(default_ACProcThrottleMax);
-    string def_min_dc = "powercfg -setdcvalueindex SCHEME_CURRENT SUB_PROCESSOR PROCTHROTTLEMIN " + std::to_string(default_ACProcThrottleMin);
-    string def_max_dc = "powercfg -setdcvalueindex SCHEME_CURRENT SUB_PROCESSOR PROCTHROTTLEMAX " + std::to_string(default_ACProcThrottleMin);
+    // Create new power plan
+    proc.start("powercfg -duplicatescheme 8c5e7fda-e8bf-4a96-9a85-a6e23a8c635c");
+    proc.waitForFinished(-1);
 
-    proc.start(def_min_ac.c_str());
-    proc.start(def_max_ac.c_str());
-    proc.start(def_max_dc.c_str());
-    proc.start(def_max_dc.c_str());
+    string out = proc.readAllStandardOutput().toStdString();
+    istringstream iss(out);
+    vector<string> tokens(istream_iterator<string>{iss}, istream_iterator<string>());
+    customPowerPlanGUID = QString().fromStdString(tokens[3]);
+    qDebug() << customPowerPlanGUID;
+
+    proc.start("powercfg -setactive " + customPowerPlanGUID);
+    proc.waitForFinished(-1);
 }
+
+QString PowerMgmt::customPowerPlanGUID;
+
+void PowerMgmt::deleteCustomPowerPlan() {
+    QProcess proc;
+
+    proc.start("powercfg -d " + customPowerPlanGUID);
+    proc.waitForFinished(-1);
+
+}
+
+QString PowerMgmt::defaultPowerPlan;
+
+void PowerMgmt::restoreDefaultPowerPlan() {
+    QProcess proc;
+    proc.start("powercfg -setactive 381b4222-f694-41f0-9685-ff5bb260df2e");
+    proc.waitForFinished(-1);
+}
+
