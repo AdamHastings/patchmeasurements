@@ -1,6 +1,7 @@
 #include "PowerMgmt.h"
 #include "Windows.h"
 #include "RegistryUtils.h"
+#include "Globals.h"
 #include <sstream>
 #include <QProcess>
 #include <QSettings>
@@ -94,6 +95,7 @@ void PowerMgmt::restoreDefaults() {
     if (qv.isValid()) {
         RegistryUtils::setCsEnabled(1);
         qDebug() << "Restoring CsEnabled to 1";
+        REBOOT_AT_END = true;
     }
     RegistryUtils::nuke();
 }

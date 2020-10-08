@@ -181,6 +181,7 @@ void MainWindow::showFinal() {
 #if QT_NO_DEBUG
     DropBox::upload(createResultsString(), ui.form->uni_str);
 #endif
+    ui.final->updateText();
     ui.stackedWidget->setCurrentWidget(ui.final);
 }
 
