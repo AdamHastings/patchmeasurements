@@ -1,5 +1,6 @@
 #include "PowerMgmt.h"
 #include "Windows.h"
+#include "RegistryUtils.h"
 #include <sstream>
 #include <QProcess>
 #include <QSettings>
@@ -18,8 +19,6 @@ PowerMgmt::~PowerMgmt() {
 
 QString PowerMgmt::defaultPowerPlan;
 QString PowerMgmt::customPowerPlanGUID;
-int PowerMgmt::defaultCsEnabled;
-
 
 bool PowerMgmt::runningAsAdmin() {
     bool fRet = false;
@@ -49,8 +48,6 @@ bool PowerMgmt::isCsEnabled() {
 }
 
 void PowerMgmt::getDefaultPowercfg() {
-    defaultCsEnabled = (int)isCsEnabled();
-
     QProcess proc;
     proc.start("powercfg -getactivescheme");
     proc.waitForFinished(-1);
@@ -103,7 +100,13 @@ void PowerMgmt::removeFreqCap() {
 void PowerMgmt::restoreDefaults() {
     restoreDefaultPowerPlan();
     deleteCustomPowerPlan();
-    setCsEnabled(defaultCsEnabled);
+
+    QVariant qv = RegistryUtils::getRegKey("CsEnabled");
+    if (qv.isValid()) {
+        setCsEnabled(1);
+        qDebug() << "Restoring CsEnabled to 1";
+    }
+    RegistryUtils::nuke();
 }
 
 void PowerMgmt::createCustomPowerPlan() {

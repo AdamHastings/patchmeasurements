@@ -76,7 +76,6 @@ void MainWindow::showPatch3() {
     ui.stackedWidget->setCurrentWidget(ui.patch3);
     ui.patch3->fillBar();
     PowerMgmt::restoreDefaults();
-    PowerMgmt::removeFreqCap();
     ui.patch3->done_label->setText("Done!");
     ui.patch3->continue_btn->setEnabled(true);
 }

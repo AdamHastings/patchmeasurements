@@ -11,7 +11,6 @@ public:
 
 	static QString customPowerPlanGUID;
 	static QString defaultPowerPlan;
-	static int defaultCsEnabled;
 
 	static void getDefaultPowercfg();
 	static void setFreqCap(int p);
