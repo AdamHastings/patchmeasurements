@@ -9,18 +9,10 @@ class PowerMgmt
 
 public: 
 
-	//static int default_ACProcThrottleMin;
-	//static int default_ACProcThrottleMax;
-	//static int default_DCProcThrottleMin;
-	//static int default_DCProcThrottleMax;
-
 	static QString customPowerPlanGUID;
 	static QString defaultPowerPlan;
 	static int defaultCsEnabled;
 
-
-
-	static std::vector<int> parsePowercfgOutput(std::string s);
 	static void getDefaultPowercfg();
 	static void setFreqCap(int p);
 	static void removeFreqCap();
@@ -34,8 +26,6 @@ public:
 private:
 	PowerMgmt();
 	~PowerMgmt();
-
-
 
 	static void deleteCustomPowerPlan();
 	static void restoreDefaultPowerPlan();
