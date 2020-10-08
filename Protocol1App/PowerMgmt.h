@@ -16,8 +16,6 @@ public:
 	static void setFreqCap(int p);
 	static void removeFreqCap();
 	static void restoreDefaults();
-	static bool isCsEnabled();
-	static void setCsEnabled(int i);
 	static bool runningAsAdmin();
 	static void createCustomPowerPlan();
 	

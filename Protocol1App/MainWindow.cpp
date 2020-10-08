@@ -2,7 +2,7 @@
 #include "Ui_MainWindow.h"
 #include "DropBox.h"
 #include "PowerMgmt.h"
-
+#include "RegistryUtils.h"
 #include <algorithm>
 #include <thread>
 #include <chrono>
@@ -20,7 +20,7 @@ using namespace std;
 void MainWindow::showStartNext() {
     if (!PowerMgmt::runningAsAdmin()) {
         ui.stackedWidget->setCurrentWidget(ui.noadmin);
-    } else if (PowerMgmt::isCsEnabled()) {
+    } else if (RegistryUtils::isCsEnabled()) {
         ui.stackedWidget->setCurrentWidget(ui.regedit);
     } else {
         ui.stackedWidget->setCurrentWidget(ui.mod);

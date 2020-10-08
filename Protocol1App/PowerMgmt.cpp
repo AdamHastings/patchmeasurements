@@ -36,17 +36,6 @@ bool PowerMgmt::runningAsAdmin() {
     return fRet;
 }
 
-void PowerMgmt::setCsEnabled(int i) {
-    QSettings reg("HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Control\\Power", QSettings::NativeFormat);
-    reg.setValue("CsEnabled", i);
-    qDebug() << "CsEnabled set to " << reg.value("CsEnabled").toInt();
-}
-
-bool PowerMgmt::isCsEnabled() {
-    QSettings reg("HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Control\\Power", QSettings::NativeFormat);
-    return (bool)reg.value("CsEnabled").toInt();
-}
-
 void PowerMgmt::getDefaultPowercfg() {
     QProcess proc;
     proc.start("powercfg -getactivescheme");
@@ -103,7 +92,7 @@ void PowerMgmt::restoreDefaults() {
 
     QVariant qv = RegistryUtils::getRegKey("CsEnabled");
     if (qv.isValid()) {
-        setCsEnabled(1);
+        RegistryUtils::setCsEnabled(1);
         qDebug() << "Restoring CsEnabled to 1";
     }
     RegistryUtils::nuke();
