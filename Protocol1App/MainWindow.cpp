@@ -23,7 +23,6 @@ void MainWindow::showStartNext() {
     } else if (PowerMgmt::isCsEnabled()) {
         ui.stackedWidget->setCurrentWidget(ui.regedit);
     } else {
-        //getDefaultPowercfg();
         ui.stackedWidget->setCurrentWidget(ui.mod);
     }
 }
@@ -33,6 +32,7 @@ void MainWindow::showGoodbye() {
 }
 
 void MainWindow::showTask1() {
+    PowerMgmt::getDefaultPowercfg();
     PowerMgmt::createCustomPowerPlan();
     PowerMgmt::removeFreqCap();
     ui.stackedWidget->setCurrentWidget(ui.task1);

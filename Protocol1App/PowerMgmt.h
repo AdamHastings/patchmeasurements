@@ -9,14 +9,15 @@ class PowerMgmt
 
 public: 
 
-	static int default_CsEnabled;
-	static int default_ACProcThrottleMin;
-	static int default_ACProcThrottleMax;
-	static int default_DCProcThrottleMin;
-	static int default_DCProcThrottleMax;
+	//static int default_ACProcThrottleMin;
+	//static int default_ACProcThrottleMax;
+	//static int default_DCProcThrottleMin;
+	//static int default_DCProcThrottleMax;
 
 	static QString customPowerPlanGUID;
 	static QString defaultPowerPlan;
+	static int defaultCsEnabled;
+
 
 
 	static std::vector<int> parsePowercfgOutput(std::string s);
