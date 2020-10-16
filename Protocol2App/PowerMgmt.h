@@ -4,6 +4,7 @@
 #include <map>
 #include <stdbool.h>
 
+
 class PowerMgmt
 {
 
@@ -20,6 +21,7 @@ public:
 	static void setFreq(int p);
 	static void restoreDefaults();
 	static bool runningAsAdmin();
+	static void setPowerMode();
 
 	static std::map<std::string, int> getCurrentPowerSettings();
 

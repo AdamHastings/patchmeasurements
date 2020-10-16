@@ -59,6 +59,8 @@ public:
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName(QStringLiteral("MainWindow"));
 
+
+
         //// main setup ///////////////////////////////////////////////////////
 
         MainWindow->setMinimumSize(QSize(W, H));

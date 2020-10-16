@@ -50,6 +50,7 @@ void Protocol2App::acceptOffer() {
     RegistryUtils::setRegKey("firstoffer", 0);
     SysUtils::takeSnapshot("accept");
     ui.stackedWidget->setCurrentWidget(ui.onemore);
+    setWindowFlags(Qt::Window | Qt::WindowCloseButtonHint);
 }
 
 void Protocol2App::declineOffer() {
@@ -57,6 +58,7 @@ void Protocol2App::declineOffer() {
     SysUtils::takeSnapshot("decline");
     SysUtils::restoreSystem();
     ui.stackedWidget->setCurrentWidget(ui.nomore);
+    setWindowFlags(Qt::Window | Qt::WindowCloseButtonHint);
 }
 
 Protocol2App::Protocol2App(QWidget *parent)
@@ -64,6 +66,7 @@ Protocol2App::Protocol2App(QWidget *parent)
 {
     ui.setupUi(this);
 
+    setWindowFlags(Qt::Window);
 
     connect(ui.start->consent_btn, &QPushButton::clicked, this, &Protocol2App::showStartNext);
     connect(ui.start->not_consent_btn, &QPushButton::clicked, this, &Protocol2App::showGoodbye);
