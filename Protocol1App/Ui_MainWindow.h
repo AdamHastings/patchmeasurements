@@ -14,6 +14,7 @@
 #include "SingleChoicePage.h"
 #include "WTAPage.h"
 #include "FormPage.h"
+#include "DebriefPage.h"
 
 
 QT_BEGIN_NAMESPACE
@@ -42,6 +43,7 @@ public:
     ComparePage* compare;
     PreWTAPage* preWTA;
     WTAPage* wta;
+    DebriefPage* debrief;
     FormPage* form;
     FinalPage* final;
 
@@ -127,6 +129,9 @@ public:
 
         wta = new WTAPage();
         stackedWidget->addWidget(wta);
+
+        debrief = new DebriefPage();
+        stackedWidget->addWidget(debrief);
 
         form = new FormPage();
         stackedWidget->addWidget(form);

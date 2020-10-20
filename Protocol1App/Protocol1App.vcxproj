@@ -104,6 +104,7 @@
   <ItemGroup>
     <ClCompile Include="ButtonArray.cpp" />
     <ClCompile Include="ComparePage.cpp" />
+    <ClCompile Include="DebriefPage.cpp" />
     <ClCompile Include="FormPage.cpp" />
     <ClCompile Include="PatchPage.cpp" />
     <ClCompile Include="PowerMgmt.cpp" />
@@ -117,6 +118,7 @@
     <QtRcc Include="MainWindow.qrc" />
     <QtUic Include="ButtonArray.ui" />
     <QtUic Include="ComparePage.ui" />
+    <QtUic Include="DebriefPage.ui" />
     <QtUic Include="FormPage.ui" />
     <QtUic Include="GoodbyePage.ui" />
     <QtUic Include="MainWindow.ui" />
@@ -137,6 +139,7 @@
     <QtMoc Include="WTAPage.h" />
     <QtMoc Include="ComparePage.h" />
     <QtMoc Include="ButtonArray.h" />
+    <QtMoc Include="DebriefPage.h" />
     <ClInclude Include="DropBox.h" />
     <QtMoc Include="GoodbyePage.h" />
     <QtMoc Include="FormPage.h" />

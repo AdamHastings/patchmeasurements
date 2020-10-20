@@ -86,3 +86,14 @@ public:
 	}
 };
 
+/*
+class DebriefPage : public SingleChoicePage
+{
+	Q_OBJECT
+
+public:
+	DebriefPage(QWidget* parent = Q_NULLPTR) : SingleChoicePage(parent) {
+		label->setText("As previously stated, this computer was slowed down by 30% during <Task 2 or Task 3, depending on coin toss result>. You were not informed of this because part of what this experiment aimed to discover was whether or not this slowdown is perceptible to computer users. The reason for this deception was so that you would not pay extra attention to your device's performance; this was important to the integrity of this experiment because it mimics how computer hardware companies currently fix security issues in their products. Namely, computer hardware companies have recently been issuing fixes to security problems by issuing updates to their customers which can degrade performance by up to 30% in some reported cases. This experiment was designed to find out if such a slowdown makes a noticeable difference to everyday computer users.\n\nIn addition, this experiment was designed to elicit how much you value this amount of performance in terms of US dollars.\n\nIf you have additional questions about this deception, you may contact the researchers at hastings - experiment@cs.columbia.edu or the Human Resource Protection Office at  212 - 305 - 5883 or askirb@columbia.eduBecause this experiment involved deception, you have the right as a research participant to withdraw from the study.You will not be compensated if you withdraw from this experiment.Do you wish to withdraw ? ");
+	}
+};
+*/
