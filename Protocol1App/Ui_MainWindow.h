@@ -15,6 +15,7 @@
 #include "WTAPage.h"
 #include "FormPage.h"
 #include "DebriefPage.h"
+#include "WithdrawPage.h"
 
 
 QT_BEGIN_NAMESPACE
@@ -44,6 +45,7 @@ public:
     PreWTAPage* preWTA;
     WTAPage* wta;
     DebriefPage* debrief;
+    WithdrawPage* withdraw;
     FormPage* form;
     FinalPage* final;
 
@@ -132,6 +134,9 @@ public:
 
         debrief = new DebriefPage();
         stackedWidget->addWidget(debrief);
+
+        withdraw = new WithdrawPage();
+        stackedWidget->addWidget(withdraw);
 
         form = new FormPage();
         stackedWidget->addWidget(form);

@@ -114,6 +114,7 @@
     <ClCompile Include="SingleChoicePage.cpp" />
     <ClCompile Include="StartPage.cpp" />
     <ClCompile Include="TaskPage.cpp" />
+    <ClCompile Include="WithdrawPage.cpp" />
     <ClCompile Include="WTAPage.cpp" />
     <QtRcc Include="MainWindow.qrc" />
     <QtUic Include="ButtonArray.ui" />
@@ -133,9 +134,11 @@
     <QtUic Include="SingleChoicePage.ui" />
     <QtUic Include="StartPage.ui" />
     <QtUic Include="TaskPage.ui" />
+    <QtUic Include="WithdrawPage.ui" />
     <QtUic Include="WTAPage.ui" />
   </ItemGroup>
   <ItemGroup>
+    <QtMoc Include="WithdrawPage.h" />
     <QtMoc Include="WTAPage.h" />
     <QtMoc Include="ComparePage.h" />
     <QtMoc Include="ButtonArray.h" />

@@ -44,9 +44,12 @@ private:
     void showCompare();
     void showPreWTA();
     void showWTA();
-    void conclude();
     void updateOffer_no();
     void updateOffer_yes();
+    void showForm();
+    void showDebrief();
+    void showWithdraw();
+    void showWithdrawNext();
     void showFinal();
 
     std::string createResultsString();

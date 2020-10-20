@@ -1,0 +1,23 @@
+<UI version="4.0" >
+ <class>WithdrawPage</class>
+ <widget class="QWidget" name="WithdrawPage" >
+  <property name="objectName" >
+   <string notr="true">WithdrawPage</string>
+  </property>
+  <property name="geometry" >
+   <rect>
+	<x>0</x>
+	<y>0</y>
+	<width>400</width>
+	<height>300</height>
+   </rect>
+  </property>
+  <property name="windowTitle" >
+   <string>WithdrawPage</string>
+  </property>
+ </widget>
+ <layoutDefault spacing="6" margin="11" />
+ <pixmapfunction></pixmapfunction>
+ <resources/>
+ <connections/>
+</UI>

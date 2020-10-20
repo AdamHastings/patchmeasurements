@@ -128,13 +128,17 @@ std::string MainWindow::createResultsString() {
     return s;
 }
 
-void MainWindow::conclude() {
+void MainWindow::showForm() {
     ui.stackedWidget->setCurrentWidget(ui.form);
+}
+
+void MainWindow::showDebrief() {
+    ui.stackedWidget->setCurrentWidget(ui.debrief);
 }
 
 void MainWindow::updateOffer_yes() {
     if (offer < 4) {
-        conclude();
+        showForm();
     }
     else if (!first_accept) {
         first_accept = true;
@@ -147,7 +151,7 @@ void MainWindow::updateOffer_yes() {
         upper = offer;
         offer = (lower + upper) / 2;
         if (upper - lower <= 2) {
-            conclude();
+            showForm();
         }
         else {
             ui.wta->updateOffer(offer);
@@ -169,12 +173,16 @@ void MainWindow::updateOffer_no() {
         lower = offer;
         offer = (offer + upper) / 2;
         if (upper - lower <= 2) {
-            conclude();
+            showForm();
         }
         else {
             ui.wta->updateOffer(offer);
         }
     }
+}
+
+void MainWindow::showWithdraw() {
+    ui.stackedWidget->setCurrentWidget(ui.withdraw);
 }
 
 void MainWindow::showFinal() {
@@ -183,6 +191,15 @@ void MainWindow::showFinal() {
 #endif
     ui.final->updateText();
     ui.stackedWidget->setCurrentWidget(ui.final);
+}
+
+void MainWindow::showWithdrawNext() {
+    if (ui.withdraw->withdraw_btn->isChecked()) {
+        ui.withdraw->Withdraw();
+    }
+    else {
+        showDebrief();
+    }
 }
 
 MainWindow::MainWindow(QWidget *parent)
@@ -209,10 +226,14 @@ MainWindow::MainWindow(QWidget *parent)
     connect(ui.preWTA->continue_btn, &QPushButton::clicked, this, &MainWindow::showWTA);
     connect(ui.wta->yes_btn, &QPushButton::clicked, this, &MainWindow::updateOffer_yes);
     connect(ui.wta->no_btn, &QPushButton::clicked, this, &MainWindow::updateOffer_no);
-    connect(ui.form->continue_btn, &QPushButton::clicked, this, &MainWindow::showFinal);
+    connect(ui.form->continue_btn, &QPushButton::clicked, this, &MainWindow::showDebrief);
+    connect(ui.debrief->yes_btn, &QPushButton::clicked, this, &MainWindow::showWithdraw);
+    connect(ui.debrief->no_btn, &QPushButton::clicked, this, &MainWindow::showFinal);
+    connect(ui.withdraw->continue_btn, &QPushButton::clicked, this, &MainWindow::showWithdrawNext);
+    
 
 #ifndef QT_NO_DEBUG
-    connect(ui.start->consent_btn, &QPushButton::clicked, this, &MainWindow::showStartNext);
+    connect(ui.start->consent_btn, &QPushButton::clicked, this, &MainWindow::showDebrief);
 #endif
 
 
