@@ -5,6 +5,7 @@
 #include <QCheckBox>
 #include <QPushButton>
 #include <QSpinBox>
+#include <QTextEdit>
 
 class SurveyPage : public QWidget
 {
@@ -24,10 +25,13 @@ private:
 
 	QCheckBox* not_enough_money;
 	QCheckBox* mistrust;
+	QCheckBox* privacy;
 	QCheckBox* other;
 
 	QLabel* offerq;
 	QSpinBox* wta_input;
+	QTextEdit* other_reason;
+	//QLabel* other_specify;
 
 	void setupPage();
 	void makeConnections();
@@ -35,5 +39,6 @@ private:
 
 	void not_enough_money_clicked();
 	void mistrust_clicked();
+	void privacy_clicked();
 	void other_clicked();
 };
