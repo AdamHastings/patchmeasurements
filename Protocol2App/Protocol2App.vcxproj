@@ -104,6 +104,7 @@
     <ClCompile Include="RegistryUtils.cpp" />
     <ClCompile Include="RegistryEditPage.cpp" />
     <ClCompile Include="StartPage.cpp" />
+    <ClCompile Include="SurveyPage.cpp" />
     <ClCompile Include="SysUtils.cpp" />
     <ClCompile Include="WTAPage.cpp" />
     <QtRcc Include="Protocol2App.qrc" />
@@ -116,6 +117,7 @@
     <ClCompile Include="main.cpp" />
     <QtUic Include="RegistryEditPage.ui" />
     <QtUic Include="StartPage.ui" />
+    <QtUic Include="SurveyPage.ui" />
     <QtUic Include="WTAPage.ui" />
   </ItemGroup>
   <ItemGroup>
@@ -129,6 +131,7 @@
     <ClInclude Include="PowerMgmt.h" />
     <ClInclude Include="RegistryUtils.h" />
     <QtMoc Include="RegistryEditPage.h" />
+    <QtMoc Include="SurveyPage.h" />
     <ClInclude Include="SysUtils.h" />
     <ClInclude Include="ui_Protocol2App.h" />
   </ItemGroup>

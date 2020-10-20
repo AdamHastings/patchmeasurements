@@ -45,7 +45,6 @@ void Protocol2App::showGoodbye() {
     ui.stackedWidget->setCurrentWidget(ui.goodbye);
 }
 
-
 void Protocol2App::acceptOffer() {
     RegistryUtils::setRegKey("firstoffer", 0);
     SysUtils::takeSnapshot("accept");
@@ -57,6 +56,10 @@ void Protocol2App::declineOffer() {
     SysUtils::takeSnapshot("decline");
     SysUtils::restoreSystem();
     ui.stackedWidget->setCurrentWidget(ui.nomore);
+}
+
+void Protocol2App::showSurvey() {
+    ui.stackedWidget->setCurrentWidget(ui.survey);
 }
 
 Protocol2App::Protocol2App(QWidget *parent)
@@ -79,7 +82,13 @@ Protocol2App::Protocol2App(QWidget *parent)
     connect(ui.dc_decline->mistake_btn, &QPushButton::clicked, this, &Protocol2App::showWTA);
 
     connect(ui.dc_accept->confirm_btn, &QPushButton::clicked, this, &Protocol2App::acceptOffer);
-    connect(ui.dc_decline->confirm_btn, &QPushButton::clicked, this, &Protocol2App::declineOffer);
+    connect(ui.dc_decline->confirm_btn, &QPushButton::clicked, this, &Protocol2App::showSurvey);
+
+    connect(ui.survey->continue_btn, &QPushButton::clicked, this, &Protocol2App::declineOffer);
+
+#ifdef QT_DEBUG
+    connect(ui.start->consent_btn, &QPushButton::clicked, this, &Protocol2App::showSurvey);
+#endif
 }
 
 //void Protocol2App::restoreSystem(restoreReason r) {

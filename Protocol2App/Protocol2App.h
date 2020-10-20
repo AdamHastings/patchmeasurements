@@ -30,6 +30,7 @@ private:
     void showGoodbye();
     void acceptOffer();
     void declineOffer();
+    void showSurvey();
 
     void closeEvent(QCloseEvent* event);
 };

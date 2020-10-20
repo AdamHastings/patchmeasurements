@@ -1,0 +1,23 @@
+<UI version="4.0" >
+ <class>SurveyPage</class>
+ <widget class="QWidget" name="SurveyPage" >
+  <property name="objectName" >
+   <string notr="true">SurveyPage</string>
+  </property>
+  <property name="geometry" >
+   <rect>
+	<x>0</x>
+	<y>0</y>
+	<width>400</width>
+	<height>300</height>
+   </rect>
+  </property>
+  <property name="windowTitle" >
+   <string>SurveyPage</string>
+  </property>
+ </widget>
+ <layoutDefault spacing="6" margin="11" />
+ <pixmapfunction></pixmapfunction>
+ <resources/>
+ <connections/>
+</UI>

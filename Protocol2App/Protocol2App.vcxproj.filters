@@ -71,6 +71,9 @@
     <ClCompile Include="SysUtils.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="SurveyPage.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ui_Protocol2App.h">
@@ -111,6 +114,9 @@
     <QtMoc Include="RegistryEditPage.h">
       <Filter>Header Files</Filter>
     </QtMoc>
+    <QtMoc Include="SurveyPage.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
   </ItemGroup>
   <ItemGroup>
     <QtUic Include="StartPage.ui">
@@ -129,6 +135,9 @@
       <Filter>Form Files</Filter>
     </QtUic>
     <QtUic Include="RegistryEditPage.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+    <QtUic Include="SurveyPage.ui">
       <Filter>Form Files</Filter>
     </QtUic>
   </ItemGroup>

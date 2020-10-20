@@ -14,6 +14,7 @@
 #include "ExitPage.h"
 #include "FormPage.h"
 #include "RegistryEditPage.h"
+#include "SurveyPage.h"
 
 #include "RegistryUtils.h"
 #include "DropBox.h"
@@ -40,6 +41,7 @@ public:
     NoMoreDaysPage* nomore;
     OneMoreDayPage* onemore;
     FormPage* form;
+    SurveyPage* survey;
 
 
 
@@ -106,6 +108,9 @@ public:
         onemore = new OneMoreDayPage();
         stackedWidget->addWidget(onemore);
 
+        survey = new SurveyPage();
+        stackedWidget->addWidget(survey);
+
         // If this isn't the first time, skip the first few pages.
         if (RegistryUtils::getRegKey("UNI").isValid()) {
         //if (RegistryUtils::getRegKey("FirstOffer").toInt() == 0) {
@@ -113,11 +118,15 @@ public:
             DropBox::setDirectory(RegistryUtils::getRegKey("UNI").toString());
         }
         else {
+
+            // TODO maybe it makes more sense to do this in reverse? E.g. first offer is the default, and only change the wording if it's not the first time...
+            // TODO really need to re-evaluate this design issue here...
             wta->firstOffer();
             dc_accept->firstOffer();
             dc_decline->firstOffer();
             onemore->firstOffer();
             nomore->firstOffer();
+            survey->firstOffer();
             stackedWidget->setCurrentWidget(start);
         }
 
