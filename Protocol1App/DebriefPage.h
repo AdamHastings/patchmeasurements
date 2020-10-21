@@ -16,10 +16,7 @@ public:
 	QPushButton* yes_btn;
 	QPushButton* no_btn;
 
-	//QPushButton* yes2_btn;
-	//QPushButton* no2_btn;
-
-
+	void setLabelText(int throttled, int slowdown);
 
 private:
 	QLabel* label;

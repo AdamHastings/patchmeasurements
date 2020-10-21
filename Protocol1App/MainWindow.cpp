@@ -133,6 +133,7 @@ void MainWindow::showForm() {
 }
 
 void MainWindow::showDebrief() {
+    ui.debrief->setLabelText(throttled_task, slowdown);
     ui.stackedWidget->setCurrentWidget(ui.debrief);
 }
 

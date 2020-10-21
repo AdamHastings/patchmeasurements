@@ -63,11 +63,8 @@ public:
 		QString text = "Thank you for your participation in this experiment. If we received three emails from you demonstrating that you completed the three tasks, we will send a Visa gift card worth $15 to the provided mailing address within the next few days.\n\nYou may now exit this window and delete this app from your computer.";
 
 		if (REBOOT_AT_END) {
-			qDebug() << "adding text at end";
 			text += "\n\nTo completely undo all changes made during this experiment, please reboot your computer now.";
 		}
-		qDebug() << "done adding text if at all";
-		qDebug() << REBOOT_AT_END;
 
 		label->setGeometry(2 * M, M, LINEWIDTH - 2 * M, M * 8);
 		label->setText(text);
