@@ -17,6 +17,25 @@
 using namespace std;
 
 
+void MainWindow::enableExitButton() {
+    Qt::WindowFlags flags = windowFlags();
+    Qt::WindowFlags closeFlag = Qt::WindowCloseButtonHint;
+    flags = flags & (closeFlag);
+    setWindowFlags(flags);
+    this->show();
+}
+
+void MainWindow::disableExitButton() {
+    Qt::WindowFlags flags = windowFlags();
+    Qt::WindowFlags closeFlag = Qt::WindowCloseButtonHint;
+    flags = flags & (~closeFlag);
+    setWindowFlags(flags);
+    this->show();
+
+    //this->setWindowFlags(Qt::Window | Qt::WindowTitleHint | Qt::CustomizeWindowHint);
+}
+
+
 void MainWindow::showStartNext() {
     if (!PowerMgmt::runningAsAdmin()) {
         ui.stackedWidget->setCurrentWidget(ui.noadmin);
@@ -28,10 +47,12 @@ void MainWindow::showStartNext() {
 }
 
 void MainWindow::showGoodbye() {
+    enableExitButton();
     ui.stackedWidget->setCurrentWidget(ui.goodbye);
 }
 
 void MainWindow::showTask1() {
+    disableExitButton();
     PowerMgmt::getDefaultPowercfg();
     PowerMgmt::createCustomPowerPlan();
     PowerMgmt::removeFreqCap();
@@ -134,6 +155,7 @@ void MainWindow::showForm() {
 }
 
 void MainWindow::showDebrief() {
+    enableExitButton();
     ui.debrief->setLabelText(throttled_task, slowdown);
     ui.stackedWidget->setCurrentWidget(ui.debrief);
 }
@@ -210,9 +232,11 @@ void MainWindow::showWithdrawNext() {
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
 {
-    ui.setupUi(this);
+    ui.setupUi(this);    
+
 
     pickThrottledTask();
+
 
 
     connect(ui.start->not_consent_btn, &QPushButton::clicked, this, &MainWindow::showGoodbye);

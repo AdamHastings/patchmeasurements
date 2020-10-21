@@ -29,6 +29,8 @@ private:
     int lower = -1;
     bool first_accept = false;
 
+    Qt::WindowFlags flags;
+
     void showStartNext();
     void showGoodbye();
     void showTask1();
@@ -53,5 +55,8 @@ private:
     void showFinal();
 
     std::string createResultsString();
+
+    void disableExitButton();
+    void enableExitButton();
 
 };
