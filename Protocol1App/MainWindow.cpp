@@ -129,6 +129,7 @@ std::string MainWindow::createResultsString() {
 }
 
 void MainWindow::showForm() {
+    qDebug() << offer;
     ui.stackedWidget->setCurrentWidget(ui.form);
 }
 
@@ -138,7 +139,10 @@ void MainWindow::showDebrief() {
 }
 
 void MainWindow::updateOffer_yes() {
-    if (offer < 4) {
+    if (offer <= 4) {
+        if (offer == 4) {
+            offer = 3;
+        }
         showForm();
     }
     else if (!first_accept) {
@@ -234,7 +238,7 @@ MainWindow::MainWindow(QWidget *parent)
     
 
 #ifndef QT_NO_DEBUG
-    connect(ui.start->consent_btn, &QPushButton::clicked, this, &MainWindow::showDebrief);
+    connect(ui.start->consent_btn, &QPushButton::clicked, this, &MainWindow::showPreWTA);
 #endif
 
 
