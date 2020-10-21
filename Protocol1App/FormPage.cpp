@@ -50,7 +50,7 @@ FormPage::FormPage(QWidget *parent)
 	header->setGeometry(QRect(M, M, LINEWIDTH, 2*M));
 	header->setWordWrap(true);
 	header->setAlignment(Qt::AlignJustify | Qt::AlignVCenter);
-	header->setText("Thank you for your participation in this study. You are now finished answering questions. If you would like to receive compensation for your participation, please enter your name, UNI and mailing address below so that we can mail you a $15 Visa gift card.");
+	header->setText("Thank you for your participation in this study. You are now finished answering questions. If you would like to receive compensation for your participation, please enter your name, UNI and mailing address below so that we can mail you a $15 prepaid debit card.");
 
 	name = new QLabel(this);
 	name->setGeometry(2*M, 3*M, 2*M, BUTTON_HEIGHT);
