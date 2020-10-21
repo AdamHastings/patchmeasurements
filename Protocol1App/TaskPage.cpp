@@ -47,7 +47,7 @@ void TaskPage::setupWindow(QString cities, QString photo, QString video) {
 
     subtask_f = new QCheckBox(this);
     subtask_f->setGeometry(QRect(M, M * 7, LINEWIDTH, M));
-    subtask_f->setText("Open LionMail in a new tab. Compose a new email titled \"Task " + QString::number(task_number) + "\".\nAttach the downloaded PDF to the email and send to tasks-test-2020@cs.columbia.edu.");
+    subtask_f->setText("Open LionMail in a new tab. Compose a new email titled \"Task " + QString::number(task_number) + "\".\nAttach the downloaded PDF to the email and send to hastings-experiment@cs.columbia.edu.");
     subtask_f->setEnabled(false);
 
     subtask_g = new QCheckBox(this);
