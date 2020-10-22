@@ -53,9 +53,6 @@ void MainWindow::showGoodbye() {
 
 void MainWindow::showTask1() {
     disableExitButton();
-    PowerMgmt::getDefaultPowercfg();
-    PowerMgmt::createCustomPowerPlan();
-    PowerMgmt::removeFreqCap();
     ui.stackedWidget->setCurrentWidget(ui.task1);
 }
 
@@ -81,6 +78,10 @@ void MainWindow::showPatch0() {
     PowerMgmt::getCurrentClockFreqStart(proc);
     ui.patch0->fillBar();
     preTasksFreq = PowerMgmt::getCurrentClockFreqRead(proc);
+
+    PowerMgmt::getDefaultPowercfg();
+    PowerMgmt::createCustomPowerPlan();
+    PowerMgmt::removeFreqCap();
     
     // Take another reading
     PowerMgmt::getCurrentClockFreqStart(proc);
@@ -153,7 +154,6 @@ void MainWindow::showPreWTA() {
 
 void MainWindow::showPostTasks() {
     ui.stackedWidget->setCurrentWidget(ui.posttasks);
-    postTasksFreq = PowerMgmt::getCurrentClockFreq();
 }
 
 void MainWindow::showWTA() {
