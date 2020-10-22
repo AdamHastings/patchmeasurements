@@ -52,23 +52,19 @@ void MainWindow::showGoodbye() {
 }
 
 void MainWindow::showTask1() {
-    preTasksFreq = PowerMgmt::getCurrentClockFreq();
     disableExitButton();
     PowerMgmt::getDefaultPowercfg();
     PowerMgmt::createCustomPowerPlan();
     PowerMgmt::removeFreqCap();
     ui.stackedWidget->setCurrentWidget(ui.task1);
-    task1Freq = PowerMgmt::getCurrentClockFreq();
 }
 
 void MainWindow::showTask2() {
     ui.stackedWidget->setCurrentWidget(ui.task2);
-    task2Freq = PowerMgmt::getCurrentClockFreq();
 }
 
 void MainWindow::showTask3() {
     ui.stackedWidget->setCurrentWidget(ui.task3);
-    task3Freq = PowerMgmt::getCurrentClockFreq();
 }
 
 void MainWindow::pickThrottledTask() {
@@ -77,30 +73,66 @@ void MainWindow::pickThrottledTask() {
     unthrottled_task = (throttled_task == 2) ? 3 : 2;
 }
 
+void MainWindow::showPatch0() {
+    ui.stackedWidget->setCurrentWidget(ui.patch0);
+
+    // Take a reading
+    QProcess proc;
+    PowerMgmt::getCurrentClockFreqStart(proc);
+    ui.patch0->fillBar();
+    preTasksFreq = PowerMgmt::getCurrentClockFreqRead(proc);
+    
+    // Take another reading
+    PowerMgmt::getCurrentClockFreqStart(proc);
+    ui.patch0->fillBar();
+    task1Freq = PowerMgmt::getCurrentClockFreqRead(proc);
+
+    ui.patch0->done_label->setText("Done!");
+    ui.patch0->continue_btn->setEnabled(true);
+}
+
 void MainWindow::showPatch1() {
     ui.stackedWidget->setCurrentWidget(ui.patch1);
-    ui.patch1->fillBar();
     if (throttled_task == 2)
         PowerMgmt::setFreqCap(100 - slowdown);
+
+    // Take a reading
+    QProcess proc;
+    PowerMgmt::getCurrentClockFreqStart(proc);
+    ui.patch1->fillBar();
+    task2Freq = PowerMgmt::getCurrentClockFreqRead(proc);
+
     ui.patch1->done_label->setText("Done!");
     ui.patch1->continue_btn->setEnabled(true);
 }
 
 void MainWindow::showPatch2() {
     ui.stackedWidget->setCurrentWidget(ui.patch2);
-    ui.patch2->fillBar();
     if (throttled_task == 3)
         PowerMgmt::setFreqCap(100 - slowdown);
     else
         PowerMgmt::removeFreqCap();
+
+    // Take a reading
+    QProcess proc;
+    PowerMgmt::getCurrentClockFreqStart(proc);
+    ui.patch2->fillBar();
+    task3Freq = PowerMgmt::getCurrentClockFreqRead(proc);
+
     ui.patch2->done_label->setText("Done!");
     ui.patch2->continue_btn->setEnabled(true);
 }
 
 void MainWindow::showPatch3() {
     ui.stackedWidget->setCurrentWidget(ui.patch3);
-    ui.patch3->fillBar();
     PowerMgmt::restoreDefaults();
+
+    // Take a reading
+    QProcess proc;
+    PowerMgmt::getCurrentClockFreqStart(proc);
+    ui.patch3->fillBar();
+    postTasksFreq = PowerMgmt::getCurrentClockFreqRead(proc);
+
     ui.patch3->done_label->setText("Done!");
     ui.patch3->continue_btn->setEnabled(true);
 }
@@ -251,8 +283,9 @@ MainWindow::MainWindow(QWidget *parent)
 
     connect(ui.start->not_consent_btn, &QPushButton::clicked, this, &MainWindow::showGoodbye);
     connect(ui.start->consent_btn, &QPushButton::clicked, this, &MainWindow::showStartNext);
-    connect(ui.mod->consent_btn, &QPushButton::clicked, this, &MainWindow::showTask1);
+    connect(ui.mod->consent_btn, &QPushButton::clicked, this, &MainWindow::showPatch0);
     connect(ui.mod->not_consent_btn, &QPushButton::clicked, this, &MainWindow::showGoodbye);
+    connect(ui.patch0->continue_btn, &QPushButton::clicked, this, &MainWindow::showTask1);
     connect(ui.task1->continue_btn, &QPushButton::clicked, this, &MainWindow::showPatch1);
     connect(ui.patch1->continue_btn, &QPushButton::clicked, this, &MainWindow::showTask2);
     connect(ui.task2->continue_btn, &QPushButton::clicked, this, &MainWindow::showPatch2);
@@ -274,6 +307,5 @@ MainWindow::MainWindow(QWidget *parent)
 #ifndef QT_NO_DEBUG
     //connect(ui.start->consent_btn, &QPushButton::clicked, this, &MainWindow::showPreWTA);
 #endif
-
 
 }

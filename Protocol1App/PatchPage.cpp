@@ -18,7 +18,7 @@ PatchPage::PatchPage(QWidget *parent)
     label->setWordWrap(true);
     if (patchCount == 0)
         label->setText("We will now make some modifications to your computer. These modifications are only temporary and will end once this experiment concludes.");
-    else if (patchCount == 1)
+    else if (patchCount == 1 || patchCount == 2)
         label->setText("We will now undo the previous modifications to your computer and apply some new ones. These modifications are only temporary and will end once this experiment concludes.");
     else
         label->setText("We will now undo all modifications made to your computer.");

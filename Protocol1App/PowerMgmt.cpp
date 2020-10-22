@@ -133,12 +133,7 @@ void PowerMgmt::restoreDefaultPowerPlan() {
     proc.waitForFinished(-1);
 }
 
-int PowerMgmt::getCurrentClockFreq() {
-    //QProcess proc;
-    //proc.start("get-wmiobject Win32_Processor -Property CurrentClockSpeed");
-   // proc.start("(Get-CimInstance CIM_Processor).MaxClockSpeed * ((Get-Counter -Counter \"\\Processor Information(_Total)\\ % Processor Performance\").CounterSamples.CookedValue/100)");
-    //proc.waitForFinished(-1);
-
+double PowerMgmt::getCurrentClockFreq() {
     QString path = "C:/Windows/system32/WindowsPowerShell/v1.0/powershell.exe";
     QStringList commands;
     commands.append("-Command");
@@ -148,37 +143,37 @@ int PowerMgmt::getCurrentClockFreq() {
     proc.waitForFinished(-1);
 
     QString output(proc.readAllStandardOutput());
-    qDebug() << output;
 
+    if (output.length() > 2) {
+        output = output.left(output.length() - 2);
+        return output.toDouble();
+    }
+    else {
+        return -1;
+    }
+}
 
-    //string out = proc.readAllStandardOutput().toStdString();
-    //istringstream iss(out);
-    //vector<string> tokens(istream_iterator<string>{iss}, istream_iterator<string>());
+void PowerMgmt::getCurrentClockFreqStart(QProcess &proc) {
+    QStringList commands;
+    commands.append("-Command");
+    commands.append("(Get-CimInstance CIM_Processor).MaxClockSpeed * ((Get-Counter -Counter \"\\Processor Information(_Total)\\% Processor Performance\").CounterSamples.CookedValue/100)");
+    proc.start("powershell", commands);
+    
+}
 
-    //qDebug() << QString::fromStdString(out);
+double PowerMgmt::getCurrentClockFreqRead(QProcess &proc) {
+    // Blocking 
+    proc.waitForFinished(-1);
 
-    //int i = 0;
-    //for (string s : tokens) {
-    //    qDebug() << QString::fromStdString(s);
-    //    if (s == "CurrentClockSpeed") {
-    //        break;
-    //    }
-    //    i++;
-    //}
-    qDebug() << "============";
+    QString output(proc.readAllStandardOutput());
 
-    //int speed_idx = i + 2;
-
-    //// Check if location is valid
-    //if (speed_idx < tokens.size()) {
-    //    qDebug() << stoi(tokens[speed_idx]);
-    //    return stoi(tokens[speed_idx]);
-    //}
-    //else {
-    //    qDebug() << -1;
-    //    return -1;
-    //}
-
-    return 0;
+    if (output.length() > 2) {
+        output = output.left(output.length() - 2);
+        qDebug() << output;
+        return output.toDouble();
+    }
+    else {
+        return -1;
+    }
 }
 

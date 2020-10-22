@@ -99,7 +99,9 @@ FormPage::FormPage(QWidget *parent)
 	continue_btn = new QPushButton(this);
 	continue_btn->setGeometry(QRect(W / 2 - BUTTON_WIDTH / 2, M * 8, BUTTON_WIDTH, BUTTON_HEIGHT));
 	continue_btn->setText("Continue");
+#ifdef QT_NO_DEBUG
 	continue_btn->setEnabled(false);
+#endif
 
 	makeConnections();
 }

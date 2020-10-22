@@ -36,6 +36,7 @@ public:
     TaskPage* task1;
     TaskPage* task2;
     TaskPage* task3;
+    PatchPage* patch0;
     PatchPage* patch1;
     PatchPage* patch2;
     PatchPage* patch3;
@@ -107,6 +108,9 @@ public:
 
         task3 = new TaskPage("\nfrom Sydney, Australia to Perth, Australia", "Low Library", "\"Fantasia on a Theme by Thomas Tallis\"\nby composer Ralph Vaughan Williams");
         stackedWidget->addWidget(task3);
+
+        patch0 = new PatchPage();
+        stackedWidget->addWidget(patch0);
 
         patch1 = new PatchPage();
         stackedWidget->addWidget(patch1);

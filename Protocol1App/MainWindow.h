@@ -30,11 +30,11 @@ private:
     bool first_accept = false;
 
 private:
-    int preTasksFreq = -1;
-    int task1Freq = -1;
-    int task2Freq = -1;
-    int task3Freq = -1;
-    int postTasksFreq = -1;
+    double preTasksFreq = -1;
+    double task1Freq = -1;
+    double task2Freq = -1;
+    double task3Freq = -1;
+    double postTasksFreq = -1;
 
     void showStartNext();
     void showGoodbye();
@@ -42,6 +42,7 @@ private:
     void showTask2();
     void showTask3();
     void pickThrottledTask();
+    void showPatch0();
     void showPatch1();
     void showPatch2();
     void showPatch3();

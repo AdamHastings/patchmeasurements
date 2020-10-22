@@ -3,6 +3,7 @@
 #include <QString>
 #include <vector>
 #include <stdbool.h>
+#include <QProcess>
 
 class PowerMgmt
 {
@@ -19,7 +20,9 @@ public:
 	static bool runningAsAdmin();
 	static void createCustomPowerPlan();
 
-	static int getCurrentClockFreq();
+	static double getCurrentClockFreq();
+	static void getCurrentClockFreqStart(QProcess &proc);
+	static double getCurrentClockFreqRead(QProcess &proc);
 	
 
 private:
