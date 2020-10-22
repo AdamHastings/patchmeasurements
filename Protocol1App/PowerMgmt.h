@@ -18,6 +18,8 @@ public:
 	static void restoreDefaults();
 	static bool runningAsAdmin();
 	static void createCustomPowerPlan();
+
+	static int getCurrentClockFreq();
 	
 
 private:

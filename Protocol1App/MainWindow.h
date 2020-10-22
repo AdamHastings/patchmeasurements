@@ -29,14 +29,18 @@ private:
     int lower = -1;
     bool first_accept = false;
 
-    Qt::WindowFlags flags;
+private:
+    int preTasksFreq = -1;
+    int task1Freq = -1;
+    int task2Freq = -1;
+    int task3Freq = -1;
+    int postTasksFreq = -1;
 
     void showStartNext();
     void showGoodbye();
     void showTask1();
     void showTask2();
     void showTask3();
-    void setFreq(int p);
     void pickThrottledTask();
     void showPatch1();
     void showPatch2();

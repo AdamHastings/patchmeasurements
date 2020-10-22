@@ -26,13 +26,13 @@ void MainWindow::enableExitButton() {
 }
 
 void MainWindow::disableExitButton() {
+#ifdef QT_NO_DEBUG
     Qt::WindowFlags flags = windowFlags();
     Qt::WindowFlags closeFlag = Qt::WindowCloseButtonHint;
     flags = flags & (~closeFlag);
     setWindowFlags(flags);
     this->show();
-
-    //this->setWindowFlags(Qt::Window | Qt::WindowTitleHint | Qt::CustomizeWindowHint);
+#endif
 }
 
 
@@ -52,19 +52,23 @@ void MainWindow::showGoodbye() {
 }
 
 void MainWindow::showTask1() {
+    preTasksFreq = PowerMgmt::getCurrentClockFreq();
     disableExitButton();
     PowerMgmt::getDefaultPowercfg();
     PowerMgmt::createCustomPowerPlan();
     PowerMgmt::removeFreqCap();
     ui.stackedWidget->setCurrentWidget(ui.task1);
+    task1Freq = PowerMgmt::getCurrentClockFreq();
 }
 
 void MainWindow::showTask2() {
     ui.stackedWidget->setCurrentWidget(ui.task2);
+    task2Freq = PowerMgmt::getCurrentClockFreq();
 }
 
 void MainWindow::showTask3() {
     ui.stackedWidget->setCurrentWidget(ui.task3);
+    task3Freq = PowerMgmt::getCurrentClockFreq();
 }
 
 void MainWindow::pickThrottledTask() {
@@ -117,6 +121,7 @@ void MainWindow::showPreWTA() {
 
 void MainWindow::showPostTasks() {
     ui.stackedWidget->setCurrentWidget(ui.posttasks);
+    postTasksFreq = PowerMgmt::getCurrentClockFreq();
 }
 
 void MainWindow::showWTA() {
@@ -145,6 +150,11 @@ std::string MainWindow::createResultsString() {
     s += "fastest_vs_middle,"  + to_string(ui.compare->arr1->getClicked()) + "\n";
     s += "middle_vs_slowest,"  + to_string(ui.compare->arr2->getClicked()) + "\n";
     s += "fastest_vs_slowest," + to_string(ui.compare->arr3->getClicked()) + "\n";
+    s += "pre_task_freq," + to_string(preTasksFreq) + "\n";
+    s += "task1_freq," + to_string(task1Freq) + "\n";
+    s += "task2_freq," + to_string(task2Freq) + "\n";
+    s += "task3_freq," + to_string(task3Freq) + "\n";
+    s += "post_task_freq," + to_string(postTasksFreq) + "\n";
 
     return s;
 }
@@ -262,7 +272,7 @@ MainWindow::MainWindow(QWidget *parent)
     
 
 #ifndef QT_NO_DEBUG
-    connect(ui.start->consent_btn, &QPushButton::clicked, this, &MainWindow::showPreWTA);
+    //connect(ui.start->consent_btn, &QPushButton::clicked, this, &MainWindow::showPreWTA);
 #endif
 
 

@@ -43,6 +43,7 @@ void PowerMgmt::getDefaultPowercfg() {
     proc.waitForFinished(-1);
 
     string out = proc.readAllStandardOutput().toStdString();
+
     istringstream iss(out);
     vector<string> tokens(istream_iterator<string>{iss}, istream_iterator<string>());
     defaultPowerPlan = QString().fromStdString(tokens[3]);
@@ -113,7 +114,6 @@ void PowerMgmt::createCustomPowerPlan() {
     istringstream iss(out);
     vector<string> tokens(istream_iterator<string>{iss}, istream_iterator<string>());
     customPowerPlanGUID = QString().fromStdString(tokens[3]);
-    qDebug() << customPowerPlanGUID;
 
     proc.start("powercfg -setactive " + customPowerPlanGUID);
     proc.waitForFinished(-1);
@@ -131,5 +131,54 @@ void PowerMgmt::restoreDefaultPowerPlan() {
     QProcess proc;
     proc.start("powercfg -setactive " + defaultPowerPlan);
     proc.waitForFinished(-1);
+}
+
+int PowerMgmt::getCurrentClockFreq() {
+    //QProcess proc;
+    //proc.start("get-wmiobject Win32_Processor -Property CurrentClockSpeed");
+   // proc.start("(Get-CimInstance CIM_Processor).MaxClockSpeed * ((Get-Counter -Counter \"\\Processor Information(_Total)\\ % Processor Performance\").CounterSamples.CookedValue/100)");
+    //proc.waitForFinished(-1);
+
+    QString path = "C:/Windows/system32/WindowsPowerShell/v1.0/powershell.exe";
+    QStringList commands;
+    commands.append("-Command");
+    commands.append("(Get-CimInstance CIM_Processor).MaxClockSpeed * ((Get-Counter -Counter \"\\Processor Information(_Total)\\% Processor Performance\").CounterSamples.CookedValue/100)");
+    QProcess proc;
+    proc.start("powershell", commands);
+    proc.waitForFinished(-1);
+
+    QString output(proc.readAllStandardOutput());
+    qDebug() << output;
+
+
+    //string out = proc.readAllStandardOutput().toStdString();
+    //istringstream iss(out);
+    //vector<string> tokens(istream_iterator<string>{iss}, istream_iterator<string>());
+
+    //qDebug() << QString::fromStdString(out);
+
+    //int i = 0;
+    //for (string s : tokens) {
+    //    qDebug() << QString::fromStdString(s);
+    //    if (s == "CurrentClockSpeed") {
+    //        break;
+    //    }
+    //    i++;
+    //}
+    qDebug() << "============";
+
+    //int speed_idx = i + 2;
+
+    //// Check if location is valid
+    //if (speed_idx < tokens.size()) {
+    //    qDebug() << stoi(tokens[speed_idx]);
+    //    return stoi(tokens[speed_idx]);
+    //}
+    //else {
+    //    qDebug() << -1;
+    //    return -1;
+    //}
+
+    return 0;
 }
 
