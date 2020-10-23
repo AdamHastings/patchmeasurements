@@ -187,6 +187,7 @@ std::string MainWindow::createResultsString() {
     s += "task2_freq," + to_string(task2Freq) + "\n";
     s += "task3_freq," + to_string(task3Freq) + "\n";
     s += "post_task_freq," + to_string(postTasksFreq) + "\n";
+    s += "CsEnabled_default," + to_string(REBOOT_AT_END);
 
     return s;
 }
@@ -230,7 +231,9 @@ void MainWindow::updateOffer_yes() {
 
 void MainWindow::updateOffer_no() {
     if (!first_accept) {
-        if (offer == 0) {
+        if (offer > (2147483647 - 1)/2) {
+            showForm();
+        } else if (offer == 0) {
             offer = 1;
         }
         else {
@@ -305,7 +308,7 @@ MainWindow::MainWindow(QWidget *parent)
     
 
 #ifndef QT_NO_DEBUG
-    //connect(ui.start->consent_btn, &QPushButton::clicked, this, &MainWindow::showPreWTA);
+    connect(ui.start->consent_btn, &QPushButton::clicked, this, &MainWindow::showPreWTA);
 #endif
 
 }
