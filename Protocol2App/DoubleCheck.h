@@ -53,3 +53,13 @@ private:
 	void uploadChoice();
 	void restoreSystem();*/
 };
+
+//class Check4Cheating : public DoubleCheck
+//{
+//	Q_OBJECT
+//
+//public:
+//	Check4Cheating(QWidget* parent = Q_NULLPTR);
+//
+//
+//};

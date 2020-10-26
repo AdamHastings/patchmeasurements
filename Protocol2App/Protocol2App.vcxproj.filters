@@ -74,6 +74,9 @@
     <ClCompile Include="SurveyPage.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Check4Cheating.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ui_Protocol2App.h">
@@ -117,6 +120,9 @@
     <QtMoc Include="SurveyPage.h">
       <Filter>Header Files</Filter>
     </QtMoc>
+    <QtMoc Include="Check4Cheating.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
   </ItemGroup>
   <ItemGroup>
     <QtUic Include="StartPage.ui">
@@ -138,6 +144,9 @@
       <Filter>Form Files</Filter>
     </QtUic>
     <QtUic Include="SurveyPage.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+    <QtUic Include="Check4Cheating.ui">
       <Filter>Form Files</Filter>
     </QtUic>
   </ItemGroup>

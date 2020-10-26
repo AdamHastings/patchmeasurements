@@ -65,9 +65,10 @@ void SurveyPage::setupPage() {
     not_enough_money->setText("Not enough money was offered");
 
     offerq = new QLabel(this);
-    offerq->setGeometry(3 * M, M * 3, 10*M, M);
+    offerq->setGeometry(3 * M, M * 3, 10*M, M*1.5);
     offerq->setWordWrap(true);
-    offerq->setText("How much money would you have to be offered for you                                                               to accept a " + QString::number(SLOWDOWN) + "% slowdown? Please enter the lowest dollar amount you would accept.");
+    offerq->setAlignment(Qt::AlignTop);
+    offerq->setText("How much money would you have to be offered for you to accept a " + QString::number(SLOWDOWN) + "% slowdown for 24 hours? Please enter the lowest dollar amount you would accept.");
     offerq->setVisible(false);
 
     wta_input = new QSpinBox(this);
@@ -80,9 +81,9 @@ void SurveyPage::setupPage() {
     mistrust->setGeometry(2 * M, M * 4, LINEWIDTH - 2 * M, M);
     mistrust->setText("I'm worried about lasting damage to my computer");
 
-    privacy = new QCheckBox(this);
-    privacy->setGeometry(2 * M, M * 5, LINEWIDTH - 2 * M, M);
-    privacy->setText("I'm no longer comfortable with the data being collected during this experiment");
+    //privacy = new QCheckBox(this);
+    //privacy->setGeometry(2 * M, M * 5, LINEWIDTH - 2 * M, M);
+    //privacy->setText("I'm no longer comfortable with the data being collected during this experiment");
 
     other = new QCheckBox(this);
     other->setGeometry(2 * M, M * 6, LINEWIDTH - 2 * M, M);
@@ -108,7 +109,7 @@ void SurveyPage::setupPage() {
 void SurveyPage::makeConnections() {
     connect(not_enough_money, &QPushButton::clicked, this, &SurveyPage::not_enough_money_clicked);
     connect(mistrust, &QPushButton::clicked, this, &SurveyPage::mistrust_clicked);
-    connect(privacy, &QPushButton::clicked, this, &SurveyPage::privacy_clicked);
+    //connect(privacy, &QPushButton::clicked, this, &SurveyPage::privacy_clicked);
     connect(other, &QPushButton::clicked, this, &SurveyPage::other_clicked);
 }
 

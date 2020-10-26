@@ -132,4 +132,11 @@ DoubleCheckDecline::DoubleCheckDecline(QWidget* parent) : DoubleCheck(parent)
     //connect(this->confirm_btn, &QPushButton::clicked, this, &DoubleCheckDecline::restoreSystem);
 }
 
+//Check4Cheating::Check4Cheating(QWidget* parent) : DoubleCheck(parent) {
+//    label->setText("During this experiment, your computer's speed was monitored to ensure that you were not cheating the experiment by manually reversing the speed changes made to your computer. Our anti-cheating measures were robust, but it is possible that a motivated participant could have found a way around our anti-cheat mechanisms. If such a participant's daily responses were used for research purposes, it could undermine any conclusions made by the researchers and could harm the scientific community and society at large. For these reasons, we are asking you to truthfully report if you cheated during this experiment by deliberately undoing the slowdowns made to your computer. Please note that your response will NOT affect any money you may have earned during this experiment, and you will not get in trouble, so there is no incentive to be dishonest.");
+//}
+
+
+
+
 

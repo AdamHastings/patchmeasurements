@@ -86,9 +86,9 @@ Protocol2App::Protocol2App(QWidget *parent)
 
     connect(ui.survey->continue_btn, &QPushButton::clicked, this, &Protocol2App::declineOffer);
 
-#ifdef QT_DEBUG
-    connect(ui.start->consent_btn, &QPushButton::clicked, this, &Protocol2App::showSurvey);
-#endif
+//#ifdef QT_DEBUG
+//    connect(ui.start->consent_btn, &QPushButton::clicked, this, &Protocol2App::showSurvey);
+//#endif
 }
 
 //void Protocol2App::restoreSystem(restoreReason r) {
