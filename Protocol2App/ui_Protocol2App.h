@@ -15,6 +15,7 @@
 #include "FormPage.h"
 #include "RegistryEditPage.h"
 #include "SurveyPage.h"
+#include "Check4Cheating.h"
 
 #include "RegistryUtils.h"
 #include "DropBox.h"
@@ -42,6 +43,7 @@ public:
     OneMoreDayPage* onemore;
     FormPage* form;
     SurveyPage* survey;
+    Check4Cheating* cheat;
 
 
 
@@ -110,6 +112,9 @@ public:
 
         survey = new SurveyPage();
         stackedWidget->addWidget(survey);
+
+        cheat = new Check4Cheating();
+        stackedWidget->addWidget(cheat);
 
         // If this isn't the first time, skip the first few pages.
         if (RegistryUtils::getRegKey("UNI").isValid()) {

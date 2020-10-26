@@ -31,6 +31,7 @@ private:
     void acceptOffer();
     void declineOffer();
     void showSurvey();
+    void showCheat();
 
     void closeEvent(QCloseEvent* event);
 };

@@ -62,6 +62,10 @@ void Protocol2App::showSurvey() {
     ui.stackedWidget->setCurrentWidget(ui.survey);
 }
 
+void Protocol2App::showCheat() {
+    ui.stackedWidget->setCurrentWidget(ui.cheat);
+}
+
 Protocol2App::Protocol2App(QWidget *parent)
     : QMainWindow(parent)
 {
@@ -84,11 +88,12 @@ Protocol2App::Protocol2App(QWidget *parent)
     connect(ui.dc_accept->confirm_btn, &QPushButton::clicked, this, &Protocol2App::acceptOffer);
     connect(ui.dc_decline->confirm_btn, &QPushButton::clicked, this, &Protocol2App::showSurvey);
 
-    connect(ui.survey->continue_btn, &QPushButton::clicked, this, &Protocol2App::declineOffer);
+    connect(ui.survey->continue_btn, &QPushButton::clicked, this, &Protocol2App::showCheat);
+    connect(ui.cheat->continue_btn, &QPushButton::clicked, this, &Protocol2App::declineOffer);
 
-//#ifdef QT_DEBUG
-//    connect(ui.start->consent_btn, &QPushButton::clicked, this, &Protocol2App::showSurvey);
-//#endif
+#ifdef QT_DEBUG
+    connect(ui.start->consent_btn, &QPushButton::clicked, this, &Protocol2App::showCheat);
+#endif
 }
 
 //void Protocol2App::restoreSystem(restoreReason r) {
