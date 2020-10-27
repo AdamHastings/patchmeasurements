@@ -18,7 +18,8 @@ public:
 	QPushButton* continue_btn;
 	
 
-	void firstOffer();
+	//void firstOffer();
+	void resetPage(int days);
 
 private:
 	QLabel* label;

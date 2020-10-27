@@ -32,6 +32,8 @@ private:
     void declineOffer();
     void showSurvey();
     void showCheat();
+    void showNoMore();
+    void showSurveyNext();
 
     void closeEvent(QCloseEvent* event);
     void resetProgram();

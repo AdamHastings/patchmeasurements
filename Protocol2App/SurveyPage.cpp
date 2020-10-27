@@ -58,7 +58,7 @@ void SurveyPage::setupPage() {
     label->setGeometry(QRect(M, M, LINEWIDTH, M * 2));
     label->setAlignment(Qt::AlignHCenter | Qt::AlignTop);
     label->setWordWrap(true);
-    label->setText("Your computer's performance has been restored. This program will remove itself from your active processes and will no longer ask you daily questions. Before you are finished with this experiment, we would like to know why you declined the offer to slow your computer by " + QString::number(SLOWDOWN) + "% for 24 hours in exchange for $" + QString::number(OFFER) + ". Please select all that apply.");
+    //label->setText("Your computer's performance has been restored. This program will remove itself from your active processes and will no longer ask you daily questions. Before you are finished with this experiment, we would like to know why you declined the offer to slow your computer by " + QString::number(SLOWDOWN) + "% for 24 hours in exchange for $" + QString::number(OFFER) + ". Please select all that apply.");
 
     not_enough_money = new QCheckBox(this);
     not_enough_money->setGeometry(2 * M, M * 2, LINEWIDTH - 2 * M, M);
@@ -120,8 +120,17 @@ SurveyPage::SurveyPage(QWidget *parent)
     makeConnections();
 }
 
-void SurveyPage::firstOffer() {
-    label->setText("Your computer's performance will not be modified. Before you are finished with this experiment, we would like to know why you declined the offer to slow your computer by " + QString::number(SLOWDOWN) + "% for 24 hours in exchange for $" + QString::number(OFFER) + "? Please select all that apply.");
+//void SurveyPage::firstOffer() {
+//    label->setText("Your computer's performance will not be modified. Before you are finished with this experiment, we would like to know why you declined the offer to slow your computer by " + QString::number(SLOWDOWN) + "% for 24 hours in exchange for $" + QString::number(OFFER) + "? Please select all that apply.");
+//}
+
+void SurveyPage::resetPage(int days) {
+    if (days == TOTAL_DAYS) {
+        label->setText("Your computer's performance will not be modified. Before you are finished, please let us know why you declined to slow your computer by " + QString::number(SLOWDOWN) + "% for 24 hours in exchange for $" + QString::number(OFFER) + ". Please select all that apply.");
+    }
+    else {
+        label->setText("Your computer's performance has been restored. Before you are finished, please let us know why you declined to slow your computer by " + QString::number(SLOWDOWN) + "% for 24 hours in exchange for $" + QString::number(OFFER) + ". Please select all that apply.");
+    }
 }
 
 SurveyPage::~SurveyPage()

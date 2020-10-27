@@ -23,7 +23,7 @@ void Protocol2App::WTAnext() {
     }
     else if (ui.wta->decline->isChecked()) {
         //ui.stackedWidget->setCurrentWidget(ui.dc_decline);
-        showSurvey();
+        declineOffer();
     }
     else {
         qDebug() << "ERROR: Nothing selected in WTA page";
@@ -52,19 +52,27 @@ void Protocol2App::showGoodbye() {
 }
 
 void Protocol2App::acceptOffer() {
-    RegistryUtils::setRegKey("firstoffer", 0);
+    //RegistryUtils::setRegKey("firstoffer", 0);
     SysUtils::takeSnapshot("accept");
+    ui.onemore->resetPage(days);
     ui.stackedWidget->setCurrentWidget(ui.onemore);
 }
 
-void Protocol2App::declineOffer() {
-    RegistryUtils::setRegKey("firstoffer", 0);
-    SysUtils::takeSnapshot("decline");
-    SysUtils::restoreSystem();
+void Protocol2App::showNoMore() {
+    ui.nomore->resetPage(days);
     ui.stackedWidget->setCurrentWidget(ui.nomore);
 }
 
+void Protocol2App::declineOffer() {
+    //RegistryUtils::setRegKey("firstoffer", 0);
+    SysUtils::takeSnapshot("decline");
+    SysUtils::restoreSystem();
+    showSurvey();
+    //showNoMore();
+}
+
 void Protocol2App::showSurvey() {
+    ui.survey->resetPage(days);
     ui.stackedWidget->setCurrentWidget(ui.survey);
 }
 
@@ -72,12 +80,22 @@ void Protocol2App::showCheat() {
     ui.stackedWidget->setCurrentWidget(ui.cheat);
 }
 
+void Protocol2App::showSurveyNext() {
+    if (days == TOTAL_DAYS) {
+        // This is the first time
+        showNoMore();
+    }
+    else {
+        showCheat();
+    }
+}
+
 Protocol2App::Protocol2App(QWidget *parent)
     : QMainWindow(parent)
 {
     ui.setupUi(this);
 
-    // If this isn't the first time, skip the first few pages.
+    // If this isn't the first time, load values from the registry
     if (RegistryUtils::getRegKey("days").isValid()) {
         days = RegistryUtils::getRegKey("days").toInt();
     }
@@ -112,14 +130,14 @@ Protocol2App::Protocol2App(QWidget *parent)
 
     connect(ui.wta->continue_btn, &QPushButton::clicked, this, &Protocol2App::WTAnext);
 
-    connect(ui.dc_accept->mistake_btn, &QPushButton::clicked, this, &Protocol2App::showWTA);
+    /*connect(ui.dc_accept->mistake_btn, &QPushButton::clicked, this, &Protocol2App::showWTA);
     connect(ui.dc_decline->mistake_btn, &QPushButton::clicked, this, &Protocol2App::showWTA);
 
     connect(ui.dc_accept->confirm_btn, &QPushButton::clicked, this, &Protocol2App::acceptOffer);
-    connect(ui.dc_decline->confirm_btn, &QPushButton::clicked, this, &Protocol2App::showSurvey);
+    connect(ui.dc_decline->confirm_btn, &QPushButton::clicked, this, &Protocol2App::showSurvey);*/
 
-    connect(ui.survey->continue_btn, &QPushButton::clicked, this, &Protocol2App::showCheat);
-    connect(ui.cheat->continue_btn, &QPushButton::clicked, this, &Protocol2App::declineOffer);
+    connect(ui.survey->continue_btn, &QPushButton::clicked, this, &Protocol2App::showSurveyNext);
+    connect(ui.cheat->continue_btn, &QPushButton::clicked, this, &Protocol2App::showNoMore);
 
 #ifdef QT_DEBUG
     // connect(ui.start->consent_btn, &QPushButton::clicked, this, &Protocol2App::showCheat);
@@ -157,6 +175,7 @@ void Protocol2App::closeEvent(QCloseEvent* event) {
             _sleep(time_to_sleep);
 
             days--;
+            qDebug() << "days is now set to " << days;
 
             // update Registry
             RegistryUtils::setRegKey("Days", days);
@@ -168,7 +187,7 @@ void Protocol2App::closeEvent(QCloseEvent* event) {
                 ui.stackedWidget->setCurrentWidget(ui.nomore);
             }
             else {
-                resetProgram();
+                showWTA();
             }
             this->show();
 
@@ -177,7 +196,7 @@ void Protocol2App::closeEvent(QCloseEvent* event) {
     }
 }
 
-void Protocol2App::resetProgram() {
-    ui.wta->resetPage(days);
-    ui.stackedWidget->setCurrentWidget(ui.wta);
-}
+//void Protocol2App::resetProgram() {
+//    ui.wta->resetPage(days);
+//    ui.stackedWidget->setCurrentWidget(ui.wta);
+//}

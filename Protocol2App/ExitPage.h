@@ -2,6 +2,8 @@
 
 #include <QWidget>
 #include <QLabel>
+#include "Globals.h"
+#include <QDebug>
 
 class ExitPage : public QWidget
 {
@@ -15,18 +17,40 @@ public:
 
 };
 
+class EarningsPage : public ExitPage
+{
+	Q_OBJECT
+
+public:
+	EarningsPage(QWidget* parent = Q_NULLPTR) : ExitPage(parent) {
+		label->setAlignment(Qt::AlignJustify | Qt::AlignVCenter);
+	}
+
+
+};
+
 class OneMoreDayPage : public ExitPage
 {
 	Q_OBJECT
 
 public:
 	OneMoreDayPage(QWidget* parent = Q_NULLPTR) : ExitPage(parent) {
-		label->setText("Your computer will remain slowed down for another 24 hours. After 24 hours have elapsed, you will again be given the choice to either restore your computer's performance or keep your computer slow in exchange for money.\n\n\nYou may now exit this window.");
+		label->setAlignment(Qt::AlignJustify | Qt::AlignVCenter);
+		//label->setText("Your computer will remain slowed down for another 24 hours. After 24 hours have elapsed, you will again be given the choice to either restore your computer's performance or keep your computer slow in exchange for money.\n\n\nYou may now exit this window.");
 	}
 
-	void firstOffer() {
-		label->setText("Your computer has been slowed down. After 24 hours have elapsed, you will again be given the choice to either restore your computer's performance or keep your computer slow in exchange for money.\n\n\nYou may now exit this window.");
+	void resetPage(int days) {
+		if (days == TOTAL_DAYS) {
+			label->setText("Your computer has been slowed down. After 24 hours have elapsed, you will again be given the choice to either restore your computer's performance or keep your computer slow in exchange for money.\n\n\nYou may now exit this window.");
+		}
+		else {
+			label->setText("Your computer will remain slowed down for another 24 hours. After 24 hours have elapsed, you will again be given the choice to either restore your computer's performance or keep your computer slow in exchange for money.\n\n\nYou may now exit this window.");
+		}
 	}
+
+	/*void firstOffer() {
+		label->setText("Your computer has been slowed down. After 24 hours have elapsed, you will again be given the choice to either restore your computer's performance or keep your computer slow in exchange for money.\n\n\nYou may now exit this window.");
+	}*/
 };
 
 class NoMoreDaysPage : public ExitPage
@@ -35,12 +59,23 @@ class NoMoreDaysPage : public ExitPage
 
 public:
 	NoMoreDaysPage(QWidget* parent = Q_NULLPTR) : ExitPage(parent) {
-		label->setText("During this experiment, you endured x days of a slowed-down computer and have earned $y. You should expect to receive an Amazon gift card in your email inbox within the next few days. Thank you for your participation!\n\nYou may now exit this window. Afterwards, please delete this program from your computer.");
+		label->setAlignment(Qt::AlignJustify | Qt::AlignVCenter);
+		//label->setText("During this experiment, you endured x days of a slowed-down computer and have earned $y. You should expect to receive an Amazon gift card in your email inbox within the next few days. Thank you for your participation!\n\nYou may now exit this window. Afterwards, please delete this program from your computer.");
 	}
 
-	void firstOffer() {
-		label->setText("You have earned a participation fee of $5 but will not earn any additional compensation. In the next few days, we will mail you a Visa gift card to your provided address. Thank you for your participation!\n\nYou may now exit this window. Afterwards, please delete this program from your computer.");
+	void resetPage(int days) {
+		qDebug() << "nomoredays days: " << days;
+		if (days == TOTAL_DAYS) {
+			label->setText("Thank you for your participation! You have earned a participation fee of $5 but will not earn any additional compensation. You will receive this compensation via a prepaid debit card sent to the mailing address given at the beginning of this experiment.\n\nYou may now exit this window. Afterwards, please delete this program from your computer.");
+		}
+		else {
+			label->setText("Thank you for your participation! Your computer's performance has been restored. During this experiment, you endured " + QString::number(TOTAL_DAYS - days) + " days of a slowed-down computer and have accrued " + QString::number(TOTAL_DAYS - days) + " x $" + QString::number(OFFER) + " = $" + QString::number(OFFER * (TOTAL_DAYS - days)) + ", in addition to a participation fee of $5. This brings your total earnings to $" + QString::number((OFFER * (TOTAL_DAYS - days)) + 5) + ". You will receive this compensation via a prepaid debit card sent to the mailing address given at the beginning of this experiment.\n\nYou may now exit this window. Afterwards, please delete this program from your computer.");
+		}
 	}
+
+	/*void firstOffer() {
+		label->setText("You have earned a participation fee of $5 but will not earn any additional compensation. In the next few days, we will mail you a Visa gift card to your provided address. Thank you for your participation!\n\nYou may now exit this window. Afterwards, please delete this program from your computer.");
+	}*/
 };
 
 class NoAdminPage : public ExitPage
