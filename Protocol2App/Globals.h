@@ -19,6 +19,7 @@ inline int BUTTON_HEIGHT = H / 16;
 
 inline int SLOWDOWN;
 inline int OFFER;
+inline int TOTAL_DAYS;
 
 
 #endif

@@ -7,7 +7,11 @@
 #include  <QDebug>
 
 void Protocol2App::showWTA() {
-    SysUtils::initExperiment();
+    qDebug() << "days: " << days;
+    if (days == TOTAL_DAYS) {
+        SysUtils::initExperiment();
+    }
+    ui.wta->resetPage(days);
     ui.stackedWidget->setCurrentWidget(ui.wta);
 }
 
@@ -71,6 +75,30 @@ Protocol2App::Protocol2App(QWidget *parent)
 {
     ui.setupUi(this);
 
+    // If this isn't the first time, skip the first few pages.
+    if (RegistryUtils::getRegKey("days").isValid()) {
+        days = RegistryUtils::getRegKey("days").toInt();
+    }
+    else {
+        days = TOTAL_DAYS;
+    }
+    ////if (RegistryUtils::getRegKey("FirstOffer").toInt() == 0) {
+    //    stackedWidget->setCurrentWidget(wta);
+    //    DropBox::setDirectory(RegistryUtils::getRegKey("UNI").toString());
+    //}
+    //else {
+
+    // TODO maybe it makes more sense to do this in reverse? E.g. first offer is the default, and only change the wording if it's not the first time...
+     // TODO really need to re-evaluate this design issue here...
+     //wta->firstOffer();
+     //dc_accept->firstOffer();
+     //dc_decline->firstOffer();
+     //onemore->firstOffer();
+     //nomore->firstOffer();
+     //survey->firstOffer();
+     //stackedWidget->setCurrentWidget(start);
+     
+
 
     connect(ui.start->consent_btn, &QPushButton::clicked, this, &Protocol2App::showStartNext);
     connect(ui.start->not_consent_btn, &QPushButton::clicked, this, &Protocol2App::showGoodbye);
@@ -92,9 +120,13 @@ Protocol2App::Protocol2App(QWidget *parent)
     connect(ui.cheat->continue_btn, &QPushButton::clicked, this, &Protocol2App::declineOffer);
 
 #ifdef QT_DEBUG
-    connect(ui.start->consent_btn, &QPushButton::clicked, this, &Protocol2App::showCheat);
+    // connect(ui.start->consent_btn, &QPushButton::clicked, this, &Protocol2App::showCheat);
 #endif
 }
+
+//int Protocol2App::getDays() {
+//    return days;
+//}
 
 //void Protocol2App::restoreSystem(restoreReason r) {
 //    // TODO
@@ -134,11 +166,16 @@ void Protocol2App::closeEvent(QCloseEvent* event) {
                 ui.stackedWidget->setCurrentWidget(ui.nomore);
             }
             else {
-                ui.stackedWidget->setCurrentWidget(ui.wta);
+                resetProgram();
             }
             this->show();
 
         }
 
     }
+}
+
+void Protocol2App::resetProgram() {
+    ui.wta->resetPage(days);
+    ui.stackedWidget->setCurrentWidget(ui.wta);
 }

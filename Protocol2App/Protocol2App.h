@@ -13,13 +13,13 @@ public:
     Protocol2App(QWidget *parent = Q_NULLPTR);
     
     //static void restoreSystem(restoreReason r);
-    //int getDays();
+    static int getDays();
    
 
 private:
     Ui::MainWindow ui;
 
-    int days = 30;
+    int days;
 
 
 private:
@@ -34,4 +34,5 @@ private:
     void showCheat();
 
     void closeEvent(QCloseEvent* event);
+    void resetProgram();
 };
