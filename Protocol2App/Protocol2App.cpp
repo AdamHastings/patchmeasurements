@@ -18,10 +18,12 @@ void Protocol2App::showWTA() {
 
 void Protocol2App::WTAnext() {
     if (ui.wta->accept->isChecked()) {
-        ui.stackedWidget->setCurrentWidget(ui.dc_accept);
+        //ui.stackedWidget->setCurrentWidget(ui.dc_accept);
+        acceptOffer();
     }
     else if (ui.wta->decline->isChecked()) {
-        ui.stackedWidget->setCurrentWidget(ui.dc_decline);
+        //ui.stackedWidget->setCurrentWidget(ui.dc_decline);
+        showSurvey();
     }
     else {
         qDebug() << "ERROR: Nothing selected in WTA page";
