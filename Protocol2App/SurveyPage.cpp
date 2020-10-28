@@ -6,7 +6,6 @@ void SurveyPage::checkIfContinue() {
     if (
         not_enough_money->isChecked() ||
         mistrust->isChecked() ||
-        privacy->isChecked() ||
         other->isChecked()
         ) {
         continue_btn->setEnabled(true);
@@ -32,23 +31,16 @@ void SurveyPage::mistrust_clicked() {
     checkIfContinue();
 }
 
-void SurveyPage::privacy_clicked() {
-    checkIfContinue();
-}
-
 void SurveyPage::other_clicked() {
     checkIfContinue();
     if (other->isChecked()) {
         other_reason->setVisible(true);
-        //other_specify->setVisible(true);
         other->setText("Other (Please specify below)");
     }
     else {
         other_reason->setVisible(false);
-        //other_specify->setVisible(false);
         other->setText("Other");
     }
-
 }
 
 
@@ -91,11 +83,6 @@ void SurveyPage::setupPage() {
     other->setGeometry(2 * M, M * 6, LINEWIDTH - 2 * M, M);
     other->setText("Other");
 
-    /*other_specify = new QLabel(this);
-    other_specify->setGeometry(4 * M, M * 6, 4 * M, M);
-    other_specify->setText("Please specify below");
-    other_specify->setVisible(false);*/
-
     other_reason = new QTextEdit(this);
     other_reason->setGeometry(3 * M, 7 * M, LINEWIDTH - 4 * M, M);
     other_reason->setVisible(false);
@@ -103,9 +90,9 @@ void SurveyPage::setupPage() {
     continue_btn = new QPushButton(this);
     continue_btn->setGeometry(QRect(W / 2 - BUTTON_WIDTH / 2, M * 9, BUTTON_WIDTH, BUTTON_HEIGHT));
     continue_btn->setText("Continue");
-    //#if QT_NO_DEBUG
+//#if QT_NO_DEBUG
     continue_btn->setEnabled(false);
-    //#endif
+//#endif
 }
 
 void SurveyPage::makeConnections() {

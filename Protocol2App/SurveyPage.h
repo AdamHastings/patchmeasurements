@@ -26,13 +26,11 @@ private:
 
 	QCheckBox* not_enough_money;
 	QCheckBox* mistrust;
-	QCheckBox* privacy;
 	QCheckBox* other;
 
 	QLabel* offerq;
 	QDoubleSpinBox* wta_input;
 	QTextEdit* other_reason;
-	//QLabel* other_specify;
 
 	void setupPage();
 	void makeConnections();
@@ -40,6 +38,5 @@ private:
 
 	void not_enough_money_clicked();
 	void mistrust_clicked();
-	void privacy_clicked();
 	void other_clicked();
 };
