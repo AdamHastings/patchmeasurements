@@ -4,7 +4,25 @@
 #include "SysUtils.h"
 #include <QCloseEvent>
 #include <time.h>
-#include  <QDebug>
+#include <QDebug>
+
+void Protocol2App::enableExitButton() {
+    Qt::WindowFlags flags = windowFlags();
+    Qt::WindowFlags closeFlag = Qt::WindowCloseButtonHint;
+    flags = flags & (closeFlag);
+    setWindowFlags(flags);
+    this->show();
+}
+
+void Protocol2App::disableExitButton() {
+//#ifdef QT_NO_DEBUG
+    Qt::WindowFlags flags = windowFlags();
+    Qt::WindowFlags closeFlag = Qt::WindowCloseButtonHint;
+    flags = flags & (~closeFlag);
+    setWindowFlags(flags);
+    this->show();
+//#endif
+}
 
 void Protocol2App::showWTA() {
     qDebug() << "days: " << days;
@@ -14,7 +32,6 @@ void Protocol2App::showWTA() {
     ui.wta->resetPage(days);
     ui.stackedWidget->setCurrentWidget(ui.wta);
 }
-
 
 void Protocol2App::WTAnext() {
     if (ui.wta->accept->isChecked()) {
@@ -39,11 +56,13 @@ void Protocol2App::showStartNext() {
     }
     else {
         //getDefaultPowercfg();
+        disableExitButton();
         ui.stackedWidget->setCurrentWidget(ui.form);
     }
 }
 
 void Protocol2App::showFormPage() {
+    disableExitButton();
     ui.stackedWidget->setCurrentWidget(ui.form);
 }
 
@@ -55,11 +74,13 @@ void Protocol2App::acceptOffer() {
     //RegistryUtils::setRegKey("firstoffer", 0);
     SysUtils::takeSnapshot("accept");
     ui.onemore->resetPage(days);
+    enableExitButton();
     ui.stackedWidget->setCurrentWidget(ui.onemore);
 }
 
 void Protocol2App::showNoMore() {
     ui.nomore->resetPage(days);
+    enableExitButton();
     ui.stackedWidget->setCurrentWidget(ui.nomore);
 }
 
@@ -175,28 +196,32 @@ void Protocol2App::closeEvent(QCloseEvent* event) {
             _sleep(time_to_sleep);
 
             days--;
-            qDebug() << "days is now set to " << days;
 
             // update Registry
             RegistryUtils::setRegKey("Days", days);
 
             if (days == 0) {
-                //restoreSystem(TIMEOUT);
-                SysUtils::takeSnapshot("timeout");
-                SysUtils::restoreSystem();
-                ui.stackedWidget->setCurrentWidget(ui.nomore);
+                timeout();
             }
             else {
-                showWTA();
+                resetProgram();
             }
             this->show();
 
         }
-
     }
 }
 
-//void Protocol2App::resetProgram() {
-//    ui.wta->resetPage(days);
-//    ui.stackedWidget->setCurrentWidget(ui.wta);
-//}
+void Protocol2App::resetProgram() {
+    disableExitButton();
+    showWTA();
+}
+
+void Protocol2App::timeout() {
+    //restoreSystem(TIMEOUT);
+    SysUtils::takeSnapshot("timeout");
+    SysUtils::restoreSystem();
+    disableExitButton();
+    ui.stackedWidget->setCurrentWidget(ui.nomore);
+}
+

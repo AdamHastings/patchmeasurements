@@ -37,4 +37,8 @@ private:
 
     void closeEvent(QCloseEvent* event);
     void resetProgram();
+    void timeout();
+
+    void enableExitButton();
+    void disableExitButton();
 };
