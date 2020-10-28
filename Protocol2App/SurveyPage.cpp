@@ -71,7 +71,9 @@ void SurveyPage::setupPage() {
     offerq->setText("How much money would you have to be offered for you to accept a " + QString::number(SLOWDOWN) + "% slowdown for 24 hours? Please enter the lowest dollar amount you would accept.");
     offerq->setVisible(false);
 
-    wta_input = new QSpinBox(this);
+    wta_input = new QDoubleSpinBox(this);
+    wta_input->setDecimals(2);
+    wta_input->setSingleStep(0.01);
     wta_input->setGeometry(13 * M, M * 3, 2*M, M);
     wta_input->setMinimum(0);
     wta_input->setPrefix("$");

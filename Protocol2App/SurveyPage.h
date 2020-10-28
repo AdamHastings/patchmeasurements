@@ -4,7 +4,7 @@
 #include <QLabel>
 #include <QCheckBox>
 #include <QPushButton>
-#include <QSpinBox>
+#include <QDoubleSpinBox>
 #include <QTextEdit>
 
 class SurveyPage : public QWidget
@@ -30,7 +30,7 @@ private:
 	QCheckBox* other;
 
 	QLabel* offerq;
-	QSpinBox* wta_input;
+	QDoubleSpinBox* wta_input;
 	QTextEdit* other_reason;
 	//QLabel* other_specify;
 
