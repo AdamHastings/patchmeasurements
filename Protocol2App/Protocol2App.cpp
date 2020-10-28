@@ -221,7 +221,6 @@ void Protocol2App::timeout() {
     //restoreSystem(TIMEOUT);
     SysUtils::takeSnapshot("timeout");
     SysUtils::restoreSystem();
-    disableExitButton();
-    ui.stackedWidget->setCurrentWidget(ui.nomore);
+    showNoMore();
 }
 
