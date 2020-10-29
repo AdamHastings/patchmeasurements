@@ -26,20 +26,23 @@ void MainWindow::enableExitButton() {
 }
 
 void MainWindow::disableExitButton() {
-#ifdef QT_NO_DEBUG
+//#ifdef QT_NO_DEBUG
     Qt::WindowFlags flags = windowFlags();
     Qt::WindowFlags closeFlag = Qt::WindowCloseButtonHint;
     flags = flags & (~closeFlag);
     setWindowFlags(flags);
+    //setWindowFlags(Qt::Window | Qt::WindowTitleHint | Qt::CustomizeWindowHint | );
     this->show();
-#endif
+//#endif
 }
 
 
 void MainWindow::showStartNext() {
     if (!PowerMgmt::runningAsAdmin()) {
+        enableExitButton();
         ui.stackedWidget->setCurrentWidget(ui.noadmin);
     } else if (RegistryUtils::isCsEnabled()) {
+        enableExitButton();
         ui.stackedWidget->setCurrentWidget(ui.regedit);
     } else {
         ui.stackedWidget->setCurrentWidget(ui.mod);
@@ -52,7 +55,6 @@ void MainWindow::showGoodbye() {
 }
 
 void MainWindow::showTask1() {
-    disableExitButton();
     ui.stackedWidget->setCurrentWidget(ui.task1);
 }
 
@@ -71,6 +73,9 @@ void MainWindow::pickThrottledTask() {
 }
 
 void MainWindow::showPatch0() {
+    ui.stackedWidget->setCurrentWidget(ui.patch0);
+    ui.stackedWidget->setCurrentWidget(ui.patch0);
+    ui.stackedWidget->setCurrentWidget(ui.patch0);
     ui.stackedWidget->setCurrentWidget(ui.patch0);
 
     // Take a reading
@@ -206,7 +211,6 @@ void MainWindow::showHours() {
 }
 
 void MainWindow::showDebrief() {
-    enableExitButton();
     ui.debrief->setLabelText(throttled_task, slowdown);
     ui.stackedWidget->setCurrentWidget(ui.debrief);
 }
@@ -269,12 +273,14 @@ void MainWindow::showFinal() {
 #if QT_NO_DEBUG
     DropBox::upload(createResultsString(), ui.form->uni_str);
 #endif
+    enableExitButton();
     ui.final->updateText();
     ui.stackedWidget->setCurrentWidget(ui.final);
 }
 
 void MainWindow::showWithdrawNext() {
     if (ui.withdraw->withdraw_btn->isChecked()) {
+        enableExitButton();
         ui.withdraw->Withdraw();
     }
     else {
@@ -286,7 +292,7 @@ MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
 {
     ui.setupUi(this);    
-
+    disableExitButton();
 
     pickThrottledTask();
 
@@ -318,7 +324,7 @@ MainWindow::MainWindow(QWidget *parent)
     
 
 #ifndef QT_NO_DEBUG
-    connect(ui.start->consent_btn, &QPushButton::clicked, this, &MainWindow::showUsage);
+    //connect(ui.patch0->continue_btn, &QPushButton::clicked, this, &MainWindow::showUsage);
 #endif
 
 }
