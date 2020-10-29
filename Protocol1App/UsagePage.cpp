@@ -2,6 +2,34 @@
 #include "Globals.h"
 #include <QLabel>
 
+
+void UsagePage::checkIfContinue() {
+	if (
+		gaming->isChecked() ||
+		word_processing->isChecked() ||
+		spreadsheets->isChecked() ||
+		programming->isChecked() ||
+		streaming->isChecked() ||
+		video_editing->isChecked() ||
+		animation->isChecked() ||
+		design_tools->isChecked() ||
+		web_searches->isChecked() ||
+		email->isChecked() ||
+		e_reading->isChecked() ||
+		social_media->isChecked() ||
+		video_calls->isChecked() ||
+		crypto_mining->isChecked() ||
+		photo_storage->isChecked() ||
+		shopping->isChecked() ||
+		other->isChecked()
+		) {
+		continue_btn->setEnabled(true);
+	}
+	else {
+		continue_btn->setEnabled(false);
+	}
+}
+
 UsagePage::UsagePage(QWidget *parent)
 	: QWidget(parent)
 {
@@ -85,8 +113,27 @@ UsagePage::UsagePage(QWidget *parent)
 
 	continue_btn = new QPushButton(this);
 	continue_btn->setText("Continue");
+	continue_btn->setEnabled(false);
 	continue_btn->setGeometry(W / 2 - BUTTON_WIDTH / 2, M * 9, BUTTON_WIDTH, BUTTON_HEIGHT);
 
+
+	connect(gaming, &QPushButton::clicked, this, &UsagePage::checkIfContinue);
+	connect(word_processing, &QPushButton::clicked, this, &UsagePage::checkIfContinue);
+	connect(spreadsheets, &QPushButton::clicked, this, &UsagePage::checkIfContinue);
+	connect(programming, &QPushButton::clicked, this, &UsagePage::checkIfContinue);
+	connect(streaming, &QPushButton::clicked, this, &UsagePage::checkIfContinue);
+	connect(video_editing, &QPushButton::clicked, this, &UsagePage::checkIfContinue);
+	connect(animation, &QPushButton::clicked, this, &UsagePage::checkIfContinue);
+	connect(design_tools, &QPushButton::clicked, this, &UsagePage::checkIfContinue);
+	connect(web_searches, &QPushButton::clicked, this, &UsagePage::checkIfContinue);
+	connect(email, &QPushButton::clicked, this, &UsagePage::checkIfContinue);
+	connect(e_reading, &QPushButton::clicked, this, &UsagePage::checkIfContinue);
+	connect(social_media, &QPushButton::clicked, this, &UsagePage::checkIfContinue);
+	connect(video_calls, &QPushButton::clicked, this, &UsagePage::checkIfContinue);
+	connect(crypto_mining, &QPushButton::clicked, this, &UsagePage::checkIfContinue);
+	connect(photo_storage, &QPushButton::clicked, this, &UsagePage::checkIfContinue);
+	connect(shopping, &QPushButton::clicked, this, &UsagePage::checkIfContinue);
+	connect(other, &QPushButton::clicked, this, &UsagePage::checkIfContinue);
 }
 
 UsagePage::~UsagePage()

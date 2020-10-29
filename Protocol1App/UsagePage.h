@@ -37,4 +37,5 @@ public:
 
 private:
 	QLabel* label;
+	void checkIfContinue();
 };
