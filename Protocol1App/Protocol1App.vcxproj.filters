@@ -89,6 +89,12 @@
     <ClCompile Include="WithdrawPage.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="UsagePage.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="HoursPage.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DropBox.h">
@@ -155,6 +161,12 @@
     <QtMoc Include="WithdrawPage.h">
       <Filter>Header Files</Filter>
     </QtMoc>
+    <QtMoc Include="UsagePage.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="HoursPage.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
   </ItemGroup>
   <ItemGroup>
     <QtUic Include="GoodbyePage.ui">
@@ -194,6 +206,12 @@
       <Filter>Form Files</Filter>
     </QtUic>
     <QtUic Include="WithdrawPage.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+    <QtUic Include="UsagePage.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+    <QtUic Include="HoursPage.ui">
       <Filter>Form Files</Filter>
     </QtUic>
   </ItemGroup>

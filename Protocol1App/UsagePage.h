@@ -3,6 +3,8 @@
 #include <QWidget>
 #include <QCheckBox>
 #include <QPushButton>
+#include <QLabel>
+#include <QLineEdit>
 
 class UsagePage : public QWidget
 {
@@ -29,8 +31,10 @@ public:
 	QCheckBox* photo_storage;
 	QCheckBox* shopping;
 	QCheckBox* other;
+	QLineEdit* input;
 
 	QPushButton* continue_btn;
 
 private:
+	QLabel* label;
 };

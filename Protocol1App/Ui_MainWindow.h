@@ -13,6 +13,8 @@
 #include "ComparePage.h"
 #include "SingleChoicePage.h"
 #include "WTAPage.h"
+#include "UsagePage.h"
+#include "HoursPage.h"
 #include "FormPage.h"
 #include "DebriefPage.h"
 #include "WithdrawPage.h"
@@ -45,6 +47,8 @@ public:
     ComparePage* compare;
     PreWTAPage* preWTA;
     WTAPage* wta;
+    UsagePage* usage;
+    HoursPage* hours;
     DebriefPage* debrief;
     WithdrawPage* withdraw;
     FormPage* form;
@@ -135,6 +139,12 @@ public:
 
         wta = new WTAPage();
         stackedWidget->addWidget(wta);
+
+        usage = new UsagePage();
+        stackedWidget->addWidget(usage);
+
+        hours = new HoursPage();
+        stackedWidget->addWidget(hours);
 
         debrief = new DebriefPage();
         stackedWidget->addWidget(debrief);

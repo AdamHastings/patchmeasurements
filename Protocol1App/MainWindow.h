@@ -53,6 +53,8 @@ private:
     void showWTA();
     void updateOffer_no();
     void updateOffer_yes();
+    void showUsage();
+    void showHours();
     void showForm();
     void showDebrief();
     void showWithdraw();

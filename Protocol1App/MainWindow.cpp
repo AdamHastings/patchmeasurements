@@ -197,6 +197,14 @@ void MainWindow::showForm() {
     ui.stackedWidget->setCurrentWidget(ui.form);
 }
 
+void MainWindow::showUsage() {
+    ui.stackedWidget->setCurrentWidget(ui.usage);
+}
+
+void MainWindow::showHours() {
+    ui.stackedWidget->setCurrentWidget(ui.hours);
+}
+
 void MainWindow::showDebrief() {
     enableExitButton();
     ui.debrief->setLabelText(throttled_task, slowdown);
@@ -208,7 +216,7 @@ void MainWindow::updateOffer_yes() {
         if (offer == 4) {
             offer = 3;
         }
-        showForm();
+        showUsage();
     }
     else if (!first_accept) {
         first_accept = true;
@@ -221,7 +229,7 @@ void MainWindow::updateOffer_yes() {
         upper = offer;
         offer = (lower + upper) / 2;
         if (upper - lower <= 2) {
-            showForm();
+            showUsage();
         }
         else {
             ui.wta->updateOffer(offer);
@@ -232,7 +240,7 @@ void MainWindow::updateOffer_yes() {
 void MainWindow::updateOffer_no() {
     if (!first_accept) {
         if (offer > (2147483647 - 1)/2) {
-            showForm();
+            showUsage();
         } else if (offer == 0) {
             offer = 1;
         }
@@ -245,7 +253,7 @@ void MainWindow::updateOffer_no() {
         lower = offer;
         offer = (offer + upper) / 2;
         if (upper - lower <= 2) {
-            showForm();
+            showUsage();
         }
         else {
             ui.wta->updateOffer(offer);
@@ -301,6 +309,8 @@ MainWindow::MainWindow(QWidget *parent)
     connect(ui.preWTA->continue_btn, &QPushButton::clicked, this, &MainWindow::showWTA);
     connect(ui.wta->yes_btn, &QPushButton::clicked, this, &MainWindow::updateOffer_yes);
     connect(ui.wta->no_btn, &QPushButton::clicked, this, &MainWindow::updateOffer_no);
+    connect(ui.usage->continue_btn, &QPushButton::clicked, this, &MainWindow::showHours);
+    connect(ui.hours->continue_btn, &QPushButton::clicked, this, &MainWindow::showForm);
     connect(ui.form->continue_btn, &QPushButton::clicked, this, &MainWindow::showDebrief);
     connect(ui.debrief->yes_btn, &QPushButton::clicked, this, &MainWindow::showWithdraw);
     connect(ui.debrief->no_btn, &QPushButton::clicked, this, &MainWindow::showFinal);
@@ -308,7 +318,7 @@ MainWindow::MainWindow(QWidget *parent)
     
 
 #ifndef QT_NO_DEBUG
-    connect(ui.start->consent_btn, &QPushButton::clicked, this, &MainWindow::showPreWTA);
+    connect(ui.start->consent_btn, &QPushButton::clicked, this, &MainWindow::showUsage);
 #endif
 
 }

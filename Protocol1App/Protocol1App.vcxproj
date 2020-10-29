@@ -106,6 +106,7 @@
     <ClCompile Include="ComparePage.cpp" />
     <ClCompile Include="DebriefPage.cpp" />
     <ClCompile Include="FormPage.cpp" />
+    <ClCompile Include="HoursPage.cpp" />
     <ClCompile Include="PatchPage.cpp" />
     <ClCompile Include="PowerMgmt.cpp" />
     <ClCompile Include="RankPage.cpp" />
@@ -114,6 +115,7 @@
     <ClCompile Include="SingleChoicePage.cpp" />
     <ClCompile Include="StartPage.cpp" />
     <ClCompile Include="TaskPage.cpp" />
+    <ClCompile Include="UsagePage.cpp" />
     <ClCompile Include="WithdrawPage.cpp" />
     <ClCompile Include="WTAPage.cpp" />
     <QtRcc Include="MainWindow.qrc" />
@@ -122,6 +124,7 @@
     <QtUic Include="DebriefPage.ui" />
     <QtUic Include="FormPage.ui" />
     <QtUic Include="GoodbyePage.ui" />
+    <QtUic Include="HoursPage.ui" />
     <QtUic Include="MainWindow.ui" />
     <QtMoc Include="MainWindow.h" />
     <ClCompile Include="DropBox.cpp" />
@@ -134,10 +137,12 @@
     <QtUic Include="SingleChoicePage.ui" />
     <QtUic Include="StartPage.ui" />
     <QtUic Include="TaskPage.ui" />
+    <QtUic Include="UsagePage.ui" />
     <QtUic Include="WithdrawPage.ui" />
     <QtUic Include="WTAPage.ui" />
   </ItemGroup>
   <ItemGroup>
+    <QtMoc Include="UsagePage.h" />
     <QtMoc Include="WithdrawPage.h" />
     <QtMoc Include="WTAPage.h" />
     <QtMoc Include="ComparePage.h" />
@@ -150,6 +155,7 @@
     <QtMoc Include="TaskPage.h" />
     <QtMoc Include="StartPage.h" />
     <QtMoc Include="PatchPage.h" />
+    <QtMoc Include="HoursPage.h" />
     <ClInclude Include="PowerMgmt.h" />
     <QtMoc Include="RankPage.h" />
     <QtMoc Include="SingleChoicePage.h" />
