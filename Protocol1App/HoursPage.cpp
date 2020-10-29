@@ -1,7 +1,11 @@
 #include "HoursPage.h"
 #include "Globals.h"
 
-HoursPage::HoursPage(QWidget *parent)
+void HoursPage::enableContinue() {
+	continue_btn->setEnabled(true);
+}
+
+HoursPage::HoursPage(QWidget* parent)
 	: QWidget(parent)
 {
 
@@ -17,7 +21,10 @@ HoursPage::HoursPage(QWidget *parent)
 
 	continue_btn = new QPushButton(this);
 	continue_btn->setText("Continue");
+	continue_btn->setEnabled(false);
 	continue_btn->setGeometry(W / 2 - BUTTON_WIDTH / 2, M * 8, BUTTON_WIDTH, BUTTON_HEIGHT);
+
+	connect(this->spin, &QSpinBox::textChanged, this, &HoursPage::enableContinue);
 }
 
 HoursPage::~HoursPage()

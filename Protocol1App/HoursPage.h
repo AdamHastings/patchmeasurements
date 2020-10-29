@@ -18,4 +18,5 @@ public:
 
 private:
 	QLabel* label;
+	void enableContinue();
 };
