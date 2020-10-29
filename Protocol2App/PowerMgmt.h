@@ -1,30 +1,34 @@
 #pragma once
 #include <string>
+#include <QString>
 #include <vector>
-#include <map>
 #include <stdbool.h>
+#include <QProcess>
 
 class PowerMgmt
 {
 
 public:
 
-	static int default_CsEnabled;
-	static int default_ACProcThrottleMin;
-	static int default_ACProcThrottleMax;
-	static int default_DCProcThrottleMin;
-	static int default_DCProcThrottleMax;
+	static QString customPowerPlanGUID;
+	static QString defaultPowerPlan;
 
-	static std::vector<int> parsePowercfgOutput(std::string s);
 	static void getDefaultPowercfg();
-	static void setFreq(int p);
+	static void setFreqCap(int p);
+	static void removeFreqCap();
 	static void restoreDefaults();
 	static bool runningAsAdmin();
+	static void createCustomPowerPlan();
 
-	static std::map<std::string, int> getCurrentPowerSettings();
+	static double getCurrentClockFreq();
+	static void getCurrentClockFreqStart(QProcess& proc);
+	static double getCurrentClockFreqRead(QProcess& proc);
+
 
 private:
 	PowerMgmt();
 	~PowerMgmt();
-};
 
+	static void deleteCustomPowerPlan();
+	static void restoreDefaultPowerPlan();
+};

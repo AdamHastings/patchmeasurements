@@ -38,15 +38,15 @@ void SysUtils::takeSnapshot(QString snapshot_reason) {
     contents.append(RegistryUtils::getRegKey("Days").toString());
     contents.append("\n");
 
-    map<string, int> currentPowerSettings = PowerMgmt::getCurrentPowerSettings();
+    // map<string, int> currentPowerSettings = PowerMgmt::getCurrentPowerSettings();
 
     // power settings
-    for (auto i : currentPowerSettings) {
+  /*  for (auto i : currentPowerSettings) {
         contents.append(QString::fromStdString(i.first));
         contents.append(",");
         contents.append(QString::number(i.second));
         contents.append("\n");
-    }
+    }*/
 
     DropBox::upload(contents, filename);
 }

@@ -60,6 +60,8 @@ public:
         SLOWDOWN = 30;
         OFFER = 1;
         TOTAL_DAYS = 30;
+        REBOOT_AT_END = false;
+
 
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName(QStringLiteral("MainWindow"));
