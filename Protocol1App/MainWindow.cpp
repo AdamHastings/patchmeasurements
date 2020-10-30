@@ -168,31 +168,99 @@ void MainWindow::showWTA() {
     ui.stackedWidget->setCurrentWidget(ui.wta);
 }
 
-std::string MainWindow::createResultsString() {
-    string s = "";
+//std::string MainWindow::createResultsString() {
+//    string s = "";
+//
+//    s += "name,"    +  ui.form->name_str    +    "\n";
+//    s += "uni,"     +  ui.form->uni_str     +    "\n";
+//    s += "address," +  ui.form->address_str +    "\n";
+//    s += "city,"    +  ui.form->city_str    +    "\n";
+//    s += "state,"   +  ui.form->state_str   +    "\n";
+//    s += "zip,"     +  ui.form->zip_str     +    "\n";
+//    s += "wta," + to_string(offer) + "\n";
+//    s += "throttled_task,"   + to_string(throttled_task)   + "\n";
+//    s += "unthrottled_task," + to_string(unthrottled_task) + "\n";
+//    s += "slowdown," + to_string(slowdown) + "\n";
+//    s += "fastest," + ui.rank->listWidget->item(0)->text().toStdString() + "\n";
+//    s += "middle,"  + ui.rank->listWidget->item(1)->text().toStdString() + "\n";
+//    s += "slowest," + ui.rank->listWidget->item(2)->text().toStdString() + "\n";
+//    s += "fastest_vs_middle,"  + to_string(ui.compare->arr1->getClicked()) + "\n";
+//    s += "middle_vs_slowest,"  + to_string(ui.compare->arr2->getClicked()) + "\n";
+//    s += "fastest_vs_slowest," + to_string(ui.compare->arr3->getClicked()) + "\n";
+//    s += "pre_task_freq," + to_string(preTasksFreq) + "\n";
+//    s += "task1_freq," + to_string(task1Freq) + "\n";
+//    s += "task2_freq," + to_string(task2Freq) + "\n";
+//    s += "task3_freq," + to_string(task3Freq) + "\n";
+//    s += "post_task_freq," + to_string(postTasksFreq) + "\n";
+//    /*s += "gaming," + to_string(ui.usage->
+//    s += "word_processing," + to_string(ui.usage->
+//    s += "spreadsheets," + to_string(ui.usage->
+//    s += "programming," + to_string(ui.usage->
+//    s += "streaming," + to_string(ui.usage->
+//    s += "video_editing," + to_string(ui.usage->
+//    s += "animation," + to_string(ui.usage->
+//    s += "design_tools," + to_string(ui.usage->
+//    s += "web_searches," + to_string(ui.usage->
+//    s += "email," + to_string(ui.usage->
+//    s += "e_reading," + to_string(ui.usage->
+//    s += "social_media," + to_string(ui.usage->
+//    s += "video_calls," + to_string(ui.usage->
+//    s += "crypto_mining," + to_string(ui.usage->
+//    s += "photo_storage," + to_string(ui.usage->
+//    s += "shopping," + to_string(ui.usage->
+//    s += "other," + to_string(ui.usage->*/
+//    s += "CsEnabled_default," + to_string(REBOOT_AT_END);
+//
+//    return s;
+//}
 
-    s += "name,"    +  ui.form->name_str    +    "\n";
-    s += "uni,"     +  ui.form->uni_str     +    "\n";
-    s += "address," +  ui.form->address_str +    "\n";
-    s += "city,"    +  ui.form->city_str    +    "\n";
-    s += "state,"   +  ui.form->state_str   +    "\n";
-    s += "zip,"     +  ui.form->zip_str     +    "\n";
-    s += "wta," + to_string(offer) + "\n";
-    s += "throttled_task,"   + to_string(throttled_task)   + "\n";
-    s += "unthrottled_task," + to_string(unthrottled_task) + "\n";
-    s += "slowdown," + to_string(slowdown) + "\n";
-    s += "fastest," + ui.rank->listWidget->item(0)->text().toStdString() + "\n";
-    s += "middle,"  + ui.rank->listWidget->item(1)->text().toStdString() + "\n";
-    s += "slowest," + ui.rank->listWidget->item(2)->text().toStdString() + "\n";
-    s += "fastest_vs_middle,"  + to_string(ui.compare->arr1->getClicked()) + "\n";
-    s += "middle_vs_slowest,"  + to_string(ui.compare->arr2->getClicked()) + "\n";
-    s += "fastest_vs_slowest," + to_string(ui.compare->arr3->getClicked()) + "\n";
-    s += "pre_task_freq," + to_string(preTasksFreq) + "\n";
-    s += "task1_freq," + to_string(task1Freq) + "\n";
-    s += "task2_freq," + to_string(task2Freq) + "\n";
-    s += "task3_freq," + to_string(task3Freq) + "\n";
-    s += "post_task_freq," + to_string(postTasksFreq) + "\n";
-    s += "CsEnabled_default," + to_string(REBOOT_AT_END);
+QString MainWindow::createResultsString() {
+    QString s = "";
+
+    s += "name," + QString::fromStdString(ui.form->name_str) + "\n";
+    s += "uni," + QString::fromStdString(ui.form->uni_str) + "\n";
+    s += "address," + QString::fromStdString(ui.form->address_str) + "\n";
+    s += "city," + QString::fromStdString(ui.form->city_str) + "\n";
+    s += "state," + QString::fromStdString(ui.form->state_str) + "\n";
+    s += "zip," + QString::fromStdString(ui.form->zip_str) + "\n";
+    s += "wta," + QString::number(offer) + "\n";
+    s += "throttled_task," + QString::number(throttled_task) + "\n";
+    s += "unthrottled_task," + QString::number(unthrottled_task) + "\n";
+    s += "slowdown," + QString::number(slowdown) + "\n";
+    s += "fastest," + ui.rank->listWidget->item(0)->text() + "\n";
+    s += "middle," + ui.rank->listWidget->item(1)->text() + "\n";
+    s += "slowest," + ui.rank->listWidget->item(2)->text() + "\n";
+    s += "fastest_vs_middle," + QString::number(ui.compare->arr1->getClicked()) + "\n";
+    s += "middle_vs_slowest," + QString::number(ui.compare->arr2->getClicked()) + "\n";
+    s += "fastest_vs_slowest," + QString::number(ui.compare->arr3->getClicked()) + "\n";
+    s += "pre_task_freq," + QString::number(preTasksFreq) + "\n";
+    s += "task1_freq," + QString::number(task1Freq) + "\n";
+    s += "task2_freq," + QString::number(task2Freq) + "\n";
+    s += "task3_freq," + QString::number(task3Freq) + "\n";
+    s += "post_task_freq," + QString::number(postTasksFreq) + "\n";
+    s += "gaming," + QString::number(ui.usage->gaming->isChecked()) + "\n";
+    s += "word_processing," + QString::number(ui.usage->word_processing->isChecked()) + "\n";
+    s += "spreadsheets," + QString::number(ui.usage->spreadsheets->isChecked()) + "\n";
+    s += "programming," + QString::number(ui.usage->programming->isChecked()) + "\n";
+    s += "streaming," + QString::number(ui.usage->streaming->isChecked()) + "\n";
+    s += "video_editing," + QString::number(ui.usage->video_editing->isChecked()) + "\n";
+    s += "animation," + QString::number(ui.usage->animation->isChecked()) + "\n";
+    s += "design_tools," + QString::number(ui.usage->design_tools->isChecked()) + "\n";
+    s += "web_searches," + QString::number(ui.usage->web_searches->isChecked()) + "\n";
+    s += "email," + QString::number(ui.usage->email->isChecked()) + "\n";
+    s += "e_reading," + QString::number(ui.usage->e_reading->isChecked()) + "\n";
+    s += "social_media," + QString::number(ui.usage->social_media->isChecked()) + "\n";
+    s += "video_calls," + QString::number(ui.usage->video_calls->isChecked()) + "\n";
+    s += "crypto_mining," + QString::number(ui.usage->crypto_mining->isChecked()) + "\n";
+    s += "photo_storage," + QString::number(ui.usage->photo_storage->isChecked()) + "\n";
+    s += "shopping," + QString::number(ui.usage->shopping->isChecked()) + "\n";
+    s += "other," + QString::number(ui.usage->other->isChecked()) + "\n";
+    QString other_input = ui.usage->input->text();
+    other_input.replace(",", ";");
+    other_input.replace("\n", ";");
+    s += "other_input," + other_input + "\n";
+    s += "hours," + QString::number(ui.hours->spin->value()) + "\n";
+    s += "CsEnabled_default," + QString::number(REBOOT_AT_END) + "\n";
 
     return s;
 }

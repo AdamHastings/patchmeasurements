@@ -61,7 +61,8 @@ private:
     void showWithdrawNext();
     void showFinal();
 
-    std::string createResultsString();
+    //std::string createResultsString();
+    QString createResultsString();
 
     void disableExitButton();
     void enableExitButton();
