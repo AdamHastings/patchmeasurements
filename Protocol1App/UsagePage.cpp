@@ -30,6 +30,16 @@ void UsagePage::checkIfContinue() {
 	}
 }
 
+void UsagePage::handleOther() {
+	if (other->isChecked()) {
+		input->setEnabled(true);
+	}
+	else {
+		input->setText("");
+		input->setEnabled(false);
+	}
+}
+
 UsagePage::UsagePage(QWidget *parent)
 	: QWidget(parent)
 {
@@ -110,6 +120,7 @@ UsagePage::UsagePage(QWidget *parent)
 
 	input = new QLineEdit(this);
 	input->setGeometry(M * 8, 2 * M + 8 * BOX_HEIGHT + (BOX_HEIGHT - BUTTON_HEIGHT)/2, 7 * M, BUTTON_HEIGHT);
+	input->setEnabled(false);
 
 	continue_btn = new QPushButton(this);
 	continue_btn->setText("Continue");
@@ -134,6 +145,7 @@ UsagePage::UsagePage(QWidget *parent)
 	connect(photo_storage, &QPushButton::clicked, this, &UsagePage::checkIfContinue);
 	connect(shopping, &QPushButton::clicked, this, &UsagePage::checkIfContinue);
 	connect(other, &QPushButton::clicked, this, &UsagePage::checkIfContinue);
+	connect(other, &QPushButton::clicked, this, &UsagePage::handleOther);
 }
 
 UsagePage::~UsagePage()
