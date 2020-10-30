@@ -136,8 +136,16 @@ void MainWindow::showPatch3() {
     // Take a reading
     QProcess proc;
     PowerMgmt::getCurrentClockFreqStart(proc);
+
+    // Get system info
+    QProcess proc2;
+    PowerMgmt::getSystemConfigStart(proc2);
+
     ui.patch3->fillBar();
     postTasksFreq = PowerMgmt::getCurrentClockFreqRead(proc);
+    system_info = PowerMgmt::getSystemConfigRead(proc2);
+    qDebug() << "sysinfo:";
+    qDebug() << system_info;
 
     ui.patch3->done_label->setText("Done!");
     ui.patch3->continue_btn->setEnabled(true);
@@ -261,6 +269,7 @@ QString MainWindow::createResultsString() {
     s += "other_input," + other_input + "\n";
     s += "hours," + QString::number(ui.hours->spin->value()) + "\n";
     s += "CsEnabled_default," + QString::number(REBOOT_AT_END) + "\n";
+    s += system_info;
 
     return s;
 }
@@ -338,9 +347,9 @@ void MainWindow::showWithdraw() {
 }
 
 void MainWindow::showFinal() {
-#if QT_NO_DEBUG
+//#if QT_NO_DEBUG
     DropBox::upload(createResultsString(), ui.form->uni_str);
-#endif
+//#endif
     enableExitButton();
     ui.final->updateText();
     ui.stackedWidget->setCurrentWidget(ui.final);
@@ -392,7 +401,8 @@ MainWindow::MainWindow(QWidget *parent)
     
 
 #ifndef QT_NO_DEBUG
-    //connect(ui.patch0->continue_btn, &QPushButton::clicked, this, &MainWindow::showUsage);
+    connect(ui.patch0->continue_btn, &QPushButton::clicked, this, &MainWindow::showPatch3);
+    connect(ui.patch3->continue_btn, &QPushButton::clicked, this, &MainWindow::showFinal);
 #endif
 
 }

@@ -10,6 +10,7 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <QRegularExpression>
 using namespace std;
 
 PowerMgmt::PowerMgmt() {
@@ -35,6 +36,29 @@ bool PowerMgmt::runningAsAdmin() {
         CloseHandle(hToken);
     }
     return fRet;
+}
+
+void PowerMgmt::getSystemConfigStart(QProcess& proc) {
+    QStringList commands;
+    commands.append("Get-ComputerInfo");
+    proc.start("powershell", commands);
+}
+
+QString PowerMgmt::getSystemConfigRead(QProcess &proc) {
+    proc.waitForFinished(-1);
+    QString output(proc.readAllStandardOutput());
+
+    qDebug() << "output:";
+    qDebug() << output;
+
+    output.replace(",", ";");
+    QRegularExpression regex("\\s+:\\s");
+    output.replace(regex, ",");
+    QRegularExpression re3("\r\n\ {2,}");
+    output.replace(re3, "");
+    QRegularExpression re2("^\\s+");
+    output.replace(re2, "");
+    return output;
 }
 
 void PowerMgmt::getDefaultPowercfg() {

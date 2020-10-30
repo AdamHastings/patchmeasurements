@@ -35,6 +35,7 @@ private:
     double task2Freq = -1;
     double task3Freq = -1;
     double postTasksFreq = -1;
+    QString system_info;
 
     void showStartNext();
     void showGoodbye();

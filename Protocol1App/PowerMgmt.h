@@ -23,6 +23,9 @@ public:
 	static double getCurrentClockFreq();
 	static void getCurrentClockFreqStart(QProcess &proc);
 	static double getCurrentClockFreqRead(QProcess &proc);
+
+	static void getSystemConfigStart(QProcess& proc);
+	static QString getSystemConfigRead(QProcess& proc);
 	
 
 private:
