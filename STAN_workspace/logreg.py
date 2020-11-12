@@ -30,7 +30,11 @@ parameters {
 }
 model {
         y ~ bernoulli_logit(alpha + beta * x);   // likelihood
-}'''
+}
+generated quantities {
+    real x_crit = (logit(0.5) - alpha) / beta;
+}
+'''
 
 sm = stan.StanModel(model_code=stan_model, model_name='my_model')
 
@@ -39,7 +43,7 @@ data = dict(N = len(df),
             y = df.accept.values )
             
 
-fit = sm.sampling(data=data, chains=4, iter=3000, warmup=1000)
+fit = sm.sampling(data=data, chains=4, iter=1000, warmup=1000)
 
 
 print(fit)
