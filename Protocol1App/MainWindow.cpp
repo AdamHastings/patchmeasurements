@@ -347,15 +347,6 @@ void MainWindow::showWithdraw() {
     ui.stackedWidget->setCurrentWidget(ui.withdraw);
 }
 
-void MainWindow::showFinal() {
-////#if QT_NO_DEBUG
-//    DropBox::upload(createResultsString(), ui.form->uni_str);
-////#endif
-    enableExitButton();
-    ui.final->updateText();
-    ui.stackedWidget->setCurrentWidget(ui.final);
-}
-
 void MainWindow::showWithdrawNext() {
     if (ui.withdraw->withdraw_btn->isChecked()) {
         enableExitButton();
@@ -369,6 +360,11 @@ void MainWindow::showWithdrawNext() {
 void MainWindow::tryUpload() {
     // try upload
     try {
+
+#if QT_NO_DEBUG
+        DropBox::upload(createResultsString(), ui.form->uni_str);
+#endif
+
         ofstream results_file;
         results_file.open("results.txt");
         results_file << createResultsString().toStdString();
@@ -380,18 +376,24 @@ void MainWindow::tryUpload() {
     }
 
     // if unsuccessful, make participant manually upload results
-    if (1) { //DropBox::uploadSuccessful) {
+    if (DropBox::uploadSuccessful(ui.form->uni_str)) {
         showFinal();
     }
+    // if successfull, move to final page
     else {
         showFail();
     }
 
-    // if successfull, move to final page
 }
 
 void MainWindow::showFail() {
+    ui.stackedWidget->setCurrentWidget(ui.fail);
+}
 
+void MainWindow::showFinal() {
+    enableExitButton();
+    ui.final->updateText();
+    ui.stackedWidget->setCurrentWidget(ui.final);
 }
 
 MainWindow::MainWindow(QWidget *parent)
@@ -425,12 +427,13 @@ MainWindow::MainWindow(QWidget *parent)
     connect(ui.hours->continue_btn, &QPushButton::clicked, this, &MainWindow::showForm);
     connect(ui.form->continue_btn, &QPushButton::clicked, this, &MainWindow::showDebrief);
     connect(ui.debrief->yes_btn, &QPushButton::clicked, this, &MainWindow::showWithdraw);
-    connect(ui.debrief->no_btn, &QPushButton::clicked, this, &MainWindow::showFinal);
+    connect(ui.debrief->no_btn, &QPushButton::clicked, this, &MainWindow::tryUpload);
     connect(ui.withdraw->continue_btn, &QPushButton::clicked, this, &MainWindow::showWithdrawNext);
+    connect(ui.fail->continue_btn, &QPushButton::clicked, this, &MainWindow::showFinal);
     
 
 #ifndef QT_NO_DEBUG
-    //connect(ui.start->consent_btn, &QPushButton::clicked, this, &MainWindow::showForm);
+    connect(ui.start->consent_btn, &QPushButton::clicked, this, &MainWindow::showDebrief);
 #endif
 
 }

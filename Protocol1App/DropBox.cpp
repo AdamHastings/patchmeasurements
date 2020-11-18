@@ -64,3 +64,9 @@ void DropBox::upload(QString contents, std::string filename) {
 
     QNetworkReply* reply = mgr->post(request, contents.toUtf8());
 }
+
+bool DropBox::uploadSuccessful(std::string uni) {
+
+
+    return false;
+}
