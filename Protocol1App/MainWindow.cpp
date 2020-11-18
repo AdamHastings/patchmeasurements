@@ -9,6 +9,7 @@
 #include <stdlib.h>
 #include <string>
 #include <vector>
+#include <fstream>
 #include <sstream>
 #include <iostream>
 #include <QProcess>
@@ -347,9 +348,9 @@ void MainWindow::showWithdraw() {
 }
 
 void MainWindow::showFinal() {
-//#if QT_NO_DEBUG
-    DropBox::upload(createResultsString(), ui.form->uni_str);
-//#endif
+////#if QT_NO_DEBUG
+//    DropBox::upload(createResultsString(), ui.form->uni_str);
+////#endif
     enableExitButton();
     ui.final->updateText();
     ui.stackedWidget->setCurrentWidget(ui.final);
@@ -363,6 +364,34 @@ void MainWindow::showWithdrawNext() {
     else {
         showDebrief();
     }
+}
+
+void MainWindow::tryUpload() {
+    // try upload
+    try {
+        ofstream results_file;
+        results_file.open("results.txt");
+        results_file << createResultsString().toStdString();
+        results_file.close();
+    }
+    catch (...) {
+        // if some kind of error happened, make participant manually upload results
+        showFail();
+    }
+
+    // if unsuccessful, make participant manually upload results
+    if (1) { //DropBox::uploadSuccessful) {
+        showFinal();
+    }
+    else {
+        showFail();
+    }
+
+    // if successfull, move to final page
+}
+
+void MainWindow::showFail() {
+
 }
 
 MainWindow::MainWindow(QWidget *parent)
@@ -401,7 +430,7 @@ MainWindow::MainWindow(QWidget *parent)
     
 
 #ifndef QT_NO_DEBUG
-    connect(ui.start->consent_btn, &QPushButton::clicked, this, &MainWindow::showUsage);
+    //connect(ui.start->consent_btn, &QPushButton::clicked, this, &MainWindow::showForm);
 #endif
 
 }

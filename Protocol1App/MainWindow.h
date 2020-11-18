@@ -60,6 +60,8 @@ private:
     void showDebrief();
     void showWithdraw();
     void showWithdrawNext();
+    void tryUpload();
+    void showFail();
     void showFinal();
 
     //std::string createResultsString();
