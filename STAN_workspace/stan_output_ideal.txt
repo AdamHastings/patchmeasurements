@@ -1,0 +1,105 @@
+
+Gradient evaluation took 1.8e-05 seconds
+
+1000 transitions using 10 leapfrog steps per transition would take 0.18 seconds.
+Adjust your expectations accordingly!
+
+Gradient evaluation took 2.1e-05 seconds
+
+1000 transitions using 10 leapfrog steps per transition would take 0.21 seconds.
+Adjust your expectations accordingly!
+
+
+Iteration:    1 / 3000 [  0%]  (Warmup)
+Iteration:    1 / 3000 [  0%]  (Warmup)
+
+Gradient evaluation took 2e-05 seconds
+1000 transitions using 10 leapfrog steps per transition would take 0.2 seconds.
+Adjust your expectations accordingly!
+
+
+
+Gradient evaluation took 1.8e-05 seconds
+1000 transitions using 10 leapfrog steps per transition would take 0.18 seconds.
+Adjust your expectations accordingly!
+
+
+Iteration:    1 / 3000 [  0%]  (Warmup)
+Iteration:    1 / 3000 [  0%]  (Warmup)
+Iteration:  300 / 3000 [ 10%]  (Warmup)
+Iteration:  300 / 3000 [ 10%]  (Warmup)
+Iteration:  300 / 3000 [ 10%]  (Warmup)
+Iteration:  300 / 3000 [ 10%]  (Warmup)
+Iteration:  600 / 3000 [ 20%]  (Warmup)
+Iteration:  600 / 3000 [ 20%]  (Warmup)
+Iteration:  600 / 3000 [ 20%]  (Warmup)
+Iteration:  600 / 3000 [ 20%]  (Warmup)
+Iteration:  900 / 3000 [ 30%]  (Warmup)
+Iteration: 1001 / 3000 [ 33%]  (Sampling)
+Iteration:  900 / 3000 [ 30%]  (Warmup)
+Iteration: 1001 / 3000 [ 33%]  (Sampling)
+Iteration:  900 / 3000 [ 30%]  (Warmup)
+Iteration:  900 / 3000 [ 30%]  (Warmup)
+Iteration: 1001 / 3000 [ 33%]  (Sampling)
+Iteration: 1001 / 3000 [ 33%]  (Sampling)
+Iteration: 1300 / 3000 [ 43%]  (Sampling)
+Iteration: 1300 / 3000 [ 43%]  (Sampling)
+Iteration: 1300 / 3000 [ 43%]  (Sampling)
+Iteration: 1300 / 3000 [ 43%]  (Sampling)
+Iteration: 1600 / 3000 [ 53%]  (Sampling)
+Iteration: 1600 / 3000 [ 53%]  (Sampling)
+Iteration: 1600 / 3000 [ 53%]  (Sampling)
+Iteration: 1600 / 3000 [ 53%]  (Sampling)
+Iteration: 1900 / 3000 [ 63%]  (Sampling)
+Iteration: 2200 / 3000 [ 73%]  (Sampling)
+Iteration: 2500 / 3000 [ 83%]  (Sampling)
+Iteration: 1900 / 3000 [ 63%]  (Sampling)
+Iteration: 1900 / 3000 [ 63%]  (Sampling)
+Iteration: 1900 / 3000 [ 63%]  (Sampling)
+Iteration: 2800 / 3000 [ 93%]  (Sampling)
+Iteration: 3000 / 3000 [100%]  (Sampling)
+
+ Elapsed Time: 0.247813 seconds (Warm-up)
+               0.579945 seconds (Sampling)
+               0.827758 seconds (Total)
+
+Iteration: 2200 / 3000 [ 73%]  (Sampling)
+Iteration: 2200 / 3000 [ 73%]  (Sampling)
+Iteration: 2200 / 3000 [ 73%]  (Sampling)
+Iteration: 2500 / 3000 [ 83%]  (Sampling)
+Iteration: 2500 / 3000 [ 83%]  (Sampling)
+Iteration: 2800 / 3000 [ 93%]  (Sampling)
+Iteration: 2800 / 3000 [ 93%]  (Sampling)
+Iteration: 2500 / 3000 [ 83%]  (Sampling)
+Iteration: 3000 / 3000 [100%]  (Sampling)
+
+ Elapsed Time: 0.199729 seconds (Warm-up)
+               1.42641 seconds (Sampling)
+               1.62614 seconds (Total)
+
+Iteration: 3000 / 3000 [100%]  (Sampling)
+
+ Elapsed Time: 0.246309 seconds (Warm-up)
+               1.41674 seconds (Sampling)
+               1.66305 seconds (Total)
+
+Iteration: 2800 / 3000 [ 93%]  (Sampling)
+Iteration: 3000 / 3000 [100%]  (Sampling)
+
+ Elapsed Time: 0.229937 seconds (Warm-up)
+               2.09001 seconds (Sampling)
+               2.31995 seconds (Total)
+
+Inference for Stan model: my_model_979762b6b7f834960f2764e7f45bc333.
+4 chains, each with iter=3000; warmup=1000; thin=1; 
+post-warmup draws per chain=2000, total post-warmup draws=8000.
+
+           mean se_mean     sd   2.5%    25%    50%    75%  97.5%  n_eff   Rhat
+alpha    -7.2e7   2.3e7  6.0e7 -2.1e8 -1.1e8 -5.4e7 -2.5e7 -1.6e6      7   1.98
+beta      1.6e7   5.2e6  1.4e7  3.7e5  5.6e6  1.2e7  2.5e7  4.8e7      7   1.98
+lp__  -9.8e-174     nan    0.0    0.0    0.0    0.0    0.0    0.0    nan    nan
+
+Samples were drawn using NUTS at Wed Nov 11 16:39:27 2020.
+For each parameter, n_eff is a crude measure of effective sample size,
+and Rhat is the potential scale reduction factor on split chains (at 
+convergence, Rhat=1).
