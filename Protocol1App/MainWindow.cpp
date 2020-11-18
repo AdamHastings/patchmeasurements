@@ -361,9 +361,9 @@ void MainWindow::tryUpload() {
     // try upload
     try {
 
-#if QT_NO_DEBUG
+//#if QT_NO_DEBUG
         DropBox::upload(createResultsString(), ui.form->uni_str);
-#endif
+//#endif
 
         ofstream results_file;
         results_file.open("results.txt");
@@ -433,7 +433,7 @@ MainWindow::MainWindow(QWidget *parent)
     
 
 #ifndef QT_NO_DEBUG
-    connect(ui.start->consent_btn, &QPushButton::clicked, this, &MainWindow::showDebrief);
+    connect(ui.start->consent_btn, &QPushButton::clicked, this, &MainWindow::showForm);
 #endif
 
 }
