@@ -357,9 +357,15 @@ void MainWindow::showWithdrawNext() {
     }
 }
 
+
+
 void MainWindow::tryUpload() {
 
-    ui.debrief->disableButtons();
+    //ui.debrief->disableButtons();
+    ui.upload->continue_btn->setEnabled(false);
+    ui.upload->continue_btn->setVisible(false);
+    ui.stackedWidget->setCurrentWidget(ui.upload);
+    ui.upload->fillFirstHalf();
 
     // try upload
     try {
@@ -375,15 +381,18 @@ void MainWindow::tryUpload() {
     }
     catch (...) {
         // if some kind of error happened, make participant manually upload results
+        ui.upload->fillSecondHalf();
         showFail();
     }
 
     // if unsuccessful, make participant manually upload results
     if (DropBox::uploadSuccessful(ui.form->uni_str)) {
+        ui.upload->fillSecondHalf();
         showFinal();
     }
     // if successfull, move to final page
     else {
+        ui.upload->fillSecondHalf();
         showFail();
     }
 

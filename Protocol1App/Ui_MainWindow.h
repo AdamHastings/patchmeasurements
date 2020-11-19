@@ -53,6 +53,7 @@ public:
     WithdrawPage* withdraw;
     FormPage* form;
     Failed2UploadPage* fail;
+    PatchPage* upload;
     FinalPage* final;
 
     void setupUi(QMainWindow* MainWindow)
@@ -155,6 +156,9 @@ public:
 
         form = new FormPage();
         stackedWidget->addWidget(form);
+
+        upload = new PatchPage();
+        stackedWidget->addWidget(upload);
 
         fail = new Failed2UploadPage();
         stackedWidget->addWidget(fail);
