@@ -15,6 +15,15 @@
 #include <QProcess>
 #include <QSettings>
 #include <QDebug>
+//#include "cstore.cpp"
+
+//extern "C" {
+//#include "aes.h"
+//#include "sha256.h"
+//}
+//
+
+
 using namespace std;
 
 
@@ -367,17 +376,22 @@ void MainWindow::tryUpload() {
     ui.stackedWidget->setCurrentWidget(ui.upload);
     ui.upload->fillFirstHalf();
 
+    QString results = createResultsString();
+
     // try upload
     try {
 
 //#if QT_NO_DEBUG
-        DropBox::upload(createResultsString(), ui.form->uni_str);
+        
+        DropBox::upload(results, ui.form->uni_str);
 //#endif
 
-        ofstream results_file;
-        results_file.open("results.txt");
-        results_file << createResultsString().toStdString();
-        results_file.close();
+
+        //ofstream results_file;
+        //results_file.open("results.txt");
+        //results_file << results.toStdString();
+        //results_file.close();
+
     }
     catch (...) {
         // if some kind of error happened, make participant manually upload results
