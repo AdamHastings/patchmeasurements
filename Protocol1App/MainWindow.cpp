@@ -358,6 +358,9 @@ void MainWindow::showWithdrawNext() {
 }
 
 void MainWindow::tryUpload() {
+
+    ui.debrief->disableButtons();
+
     // try upload
     try {
 
