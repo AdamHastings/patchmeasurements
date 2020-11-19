@@ -9,12 +9,9 @@ public:
     DropBox();
     ~DropBox();
 
-    static void upload(std::string contents, std::string filename);
+    //static void upload(std::string contents, std::string filename);
     static void upload(QString contents, std::string filename);
     static bool uploadSuccessful(std::string uni);
-
-    static bool uploadDone;
-    static bool checkDone;
 };
 
 

@@ -8,6 +8,8 @@
 #include <QDebug>
 #include <QString>
 #include <QEventLoop>
+#include <QJsonObject>
+#include <QJsonDocument>
 
 
 DropBox::DropBox()
@@ -18,32 +20,29 @@ DropBox::~DropBox()
 {
 }
 
-void DropBox::upload(std::string contents, std::string filename) {
-    QNetworkAccessManager* mgr = new QNetworkAccessManager();
-
-    QObject::connect(mgr, &QNetworkAccessManager::finished,
-        [&](QNetworkReply* repl) {
-            qDebug() << repl->readAll();
-            qDebug() << "in callback";
-        });
-
-    QNetworkRequest request(QUrl("https://content.dropboxapi.com/2/files/upload"));
-
-    filename.erase(remove_if(filename.begin(), filename.end(), [](char c) {return !isalnum(c); }), filename.end());
-
-    request.setRawHeader(QByteArray("Authorization"), QByteArray("Bearer fsWUJerSFOIAAAAAAAAAASbQxDbv1tNxwkJ1PIJ4bukUYqf5zU0fxqherrO8gYre"));
-
-    QString dropboxArg = QString("{\"path\": \"/ " + QString::fromStdString(filename) + ".txt\",\"mode\": \"add\",\"autorename\": true,\"mute\": false,\"strict_conflict\": false}");
-
-    request.setRawHeader(QByteArray("Dropbox-API-Arg"), dropboxArg.toUtf8());
-
-    request.setRawHeader(QByteArray("Content-Type"), QByteArray("application/octet-stream"));
-
-    QNetworkReply* reply = mgr->post(request, QByteArray(contents.c_str()));
-}
-
-bool DropBox::uploadDone = false;
-bool DropBox::checkDone = false;
+//void DropBox::upload(std::string contents, std::string filename) {
+//    QNetworkAccessManager* mgr = new QNetworkAccessManager();
+//
+//    QObject::connect(mgr, &QNetworkAccessManager::finished,
+//        [&](QNetworkReply* repl) {
+//            qDebug() << repl->readAll();
+//            qDebug() << "in callback";
+//        });
+//
+//    QNetworkRequest request(QUrl("https://content.dropboxapi.com/2/files/upload"));
+//
+//    filename.erase(remove_if(filename.begin(), filename.end(), [](char c) {return !isalnum(c); }), filename.end());
+//
+//    request.setRawHeader(QByteArray("Authorization"), QByteArray("Bearer fsWUJerSFOIAAAAAAAAAASbQxDbv1tNxwkJ1PIJ4bukUYqf5zU0fxqherrO8gYre"));
+//
+//    QString dropboxArg = QString("{\"path\": \"/ " + QString::fromStdString(filename) + ".txt\",\"mode\": \"add\",\"autorename\": true,\"mute\": false,\"strict_conflict\": false}");
+//
+//    request.setRawHeader(QByteArray("Dropbox-API-Arg"), dropboxArg.toUtf8());
+//
+//    request.setRawHeader(QByteArray("Content-Type"), QByteArray("application/octet-stream"));
+//
+//    QNetworkReply* reply = mgr->post(request, QByteArray(contents.c_str()));
+//}
 
 void DropBox::upload(QString contents, std::string filename) {
     QNetworkAccessManager* mgr = new QNetworkAccessManager();
@@ -52,8 +51,6 @@ void DropBox::upload(QString contents, std::string filename) {
         [&](QNetworkReply* repl) {
             qDebug() << "*********in upload callback**********";
             qDebug() << repl->readAll();
-            qDebug() << "*********in upload callback**********";
-            //uploadDone = true;
         });
 
     QNetworkRequest request(QUrl("https://content.dropboxapi.com/2/files/upload"));
@@ -73,30 +70,26 @@ void DropBox::upload(QString contents, std::string filename) {
 
     QEventLoop loop;
     loop.connect(mgr, SIGNAL(finished(QNetworkReply*)), SLOT(quit()));
-    //loop->connect(mgr, &QNetworkAccessManager::finished, loop, &QEventLoop::quit);
-    //QObject::connect(mgr, &QNetworkAccessManager::finished,
-    //    [&](QNetworkReply* repl) {
-    //        qDebug() << "*********in upload callback**********";
-    //        qDebug() << repl->readAll();
-    //        qDebug() << "*********in upload callback**********";
-    //        //uploadDone = true;
-    //    });
     loop.exec();
 }
 
 bool DropBox::uploadSuccessful(std::string uni) {
     QNetworkAccessManager* mgr = new QNetworkAccessManager();
 
+    QJsonObject json_reply;
+
     QObject::connect(mgr, &QNetworkAccessManager::finished,
         [&](QNetworkReply* repl) {
-            qDebug() << "*********in check callback*******";
-            qDebug() << repl->error();
+            //qDebug() << "*********in check callback*******";
+            /*qDebug() << repl->error();
             qDebug() << repl->readAll();
             qDebug() << repl->errorString();
             qDebug() << repl->rawHeaderList();
-            qDebug() << repl->errorString();
-            qDebug() << "*********in check callback*******";
-            //checkDone = true;
+            qDebug() << repl->errorString();*/
+            json_reply = QJsonDocument::fromJson(repl->readAll()).object();
+            /*qDebug() << json_reply;
+            QString returned_filename;
+            return true;*/
         });
 
     QNetworkRequest request(QUrl("https://api.dropboxapi.com/2/files/get_metadata"));
@@ -115,17 +108,18 @@ bool DropBox::uploadSuccessful(std::string uni) {
     //QNetworkReply* reply = mgr->post(request, QByteArray(contents.c_str()));
     QNetworkReply* reply = mgr->post(request, jsonString);
 
-
-    qDebug("================ reply ================");
-    qDebug() << jsonString;
-    qDebug() << reply->error();
-    qDebug() << reply->readAll();
-    qDebug() << reply->errorString();
-    qDebug() << reply->rawHeaderList();
-
     QEventLoop loop;
     loop.connect(mgr, SIGNAL(finished(QNetworkReply*)), SLOT(quit()));
     loop.exec();
 
-    return true;
+    qDebug("================ reply ================");
+    qDebug() << json_reply;
+    qDebug() << json_reply.value("name");
+
+    if (json_reply.value("name").toString() == QString(QString::fromStdString(uni) + ".txt")) {
+        return true;
+    }
+    else {
+        return false;
+    }
 }
