@@ -17,9 +17,9 @@ public:
 	QPushButton* no_btn;
 
 	void setLabelText(int throttled, int slowdown);
+	void disableButtons();
 
 private:
 	QLabel* label;
 	QLabel* confirm_label;
-
 };
