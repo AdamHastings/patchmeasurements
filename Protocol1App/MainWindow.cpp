@@ -386,12 +386,6 @@ void MainWindow::tryUpload() {
         DropBox::upload(results, ui.form->uni_str);
 //#endif
 
-
-        ofstream results_file;
-        results_file.open("plaintext-results.txt");
-        results_file << results.toStdString();
-        results_file.close();
-
     }
     catch (...) {
         // if some kind of error happened, make participant manually upload results
