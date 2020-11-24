@@ -2,115 +2,147 @@
 #include <iostream>
 #include <fstream>
 #include <stdlib.h>  
+#include <sstream>
 #include <stdio.h>  
 #include <time.h> 
+#include <iomanip>
+#include "aes.h"
+#include "sha256.h"
+#include <QDebug>
 using namespace std;
 
 
-string crypto::EncryptFile(string content, vector<BYTE> key) {
+tuple<string, string, string> crypto::EncryptFile(string content, vector<BYTE> key) {
 
-    string retbuf = "";
-    
+    //string retbuf = "";
+    string enc_contents = "";
+    string iv_str = "";
+    string num_blocks_str = "";
     
     BYTE bytekey[32];
-    WORD key_schedule[60];
+    unsigned int key_schedule[60];
     for (size_t i = 0; i < 32; i++) {
         bytekey[i] = key[i];
     }
 
     aes_key_setup(bytekey, key_schedule, 256);
-
-    // Seed the random-number generator with the current time so that  
-    // the numbers will be different every time we run.  
-    srand((unsigned)time(NULL));
-
-    BYTE iv[16]; // = rand()
-    for (size_t i = 0; i < 16; i++) {
-        iv[i] = rand() % sizeof(BYTE);
-    }
-
-    BYTE toXor[16];
-    //ofstream myfile(writeToFile, std::ios_base::app);
-    //if (myfile.is_open()) {
-    for (size_t i = 0; i < 16; i++) {
-        //myfile << iv[i];
-        retbuf += iv[i];
-        toXor[i] = iv[i];
-    }
-    //    myfile << "\n";
-    retbuf += "\n";
-    //    myfile.close();
-    //}
-
     
-    bool padding = false;
-    for (size_t i = 0; i < content.length(); i += 16) {
-        // plaintext set up
-        BYTE plaintext[16];
-        size_t j = 0;
-        size_t k = i;
-        for (k = i; k < content.length() && j < 16; j++) {
-            plaintext[j] = content[k];
-            k++;
-        }
-        if (j != 16) { // j = 3, need to pad from index 3-15
-            padding = true;
-            int bytesLeft = 16 - j;
-            for (size_t h = j; h < 16; h++) {
-                plaintext[h] = bytesLeft;
-            }
-        }
-        // xor
-        for (size_t k = 0; k < 16; k++) {
-            plaintext[k] = plaintext[k] ^ toXor[k];
-        }
-        BYTE out[16];
-        // encrypt
-        aes_encrypt(plaintext, out, key_schedule, 256);
-        // ciphertext
-        //ofstream myfile(writeToFile, std::ios_base::app);
-        //if (myfile.is_open()) {
-            for (size_t m = 0; m < 16; m++) {
-                //myfile << out[m];
-                retbuf += out[m];
-                toXor[m] = out[m];
-            }
-            //myfile << "\n";
-            retbuf += "\n";
-            //myfile.close();
-        //}
+    BYTE iv[AES_BLOCK_SIZE];
+    for (int i = 0; i < AES_BLOCK_SIZE; i++) {
+        iv[i] = (BYTE)rand() % 256;
+        // comment out later!!
+        iv[i] = 'a';
+        //iv_str += iv[i];
+        stringstream ss;
+        ss << hex << setw(2) << setfill('0') << (int)iv[i];
+        iv_str += ss.str();
     }
-    // Add more padding if no padding was done
-    if (!padding) {
-        BYTE plaintext[16];
-        for (size_t k = 0; k < 16; k++) {
-            plaintext[k] = 16;
-        }
-        for (size_t k = 0; k < 16; k++) {
-            plaintext[k] = plaintext[k] ^ toXor[k];
-        }
-        BYTE out[16];
-        aes_encrypt(plaintext, out, key_schedule, 256);
-        //ofstream myfile(writeToFile, std::ios_base::app);
-        //if (myfile.is_open()) {
-            for (size_t i = 0; i < 16; i++) {
-                //myfile << out[i];
-                retbuf += out[i];
-                toXor[i] = out[i];
-            }
-            //myfile << "\n";
-            retbuf += "\n";
-            //myfile.close();
-        //}
-    }
-    
 
-    return retbuf;
-}
+    //int plaintext_length = content.length();
+    //BYTE* plaintext = &content[0];
+
+    // aes_encryp_cbc isn't going to work, because you need to a priori know the size of the array to pass in in C++. Not going to work
+    //aes_encrypt_cbc()
+
+
+    // So instead we are going to chaing together ECB mode
+  
+
+    int num_blocks = (content.length() / (AES_BLOCK_SIZE * sizeof(BYTE))) + 1;
+    num_blocks_str = to_string(num_blocks);
+    /*int remainder = content.length() % (AES_BLOCK_SIZE * sizeof(BYTE));*/
+
+    BYTE block_output[AES_BLOCK_SIZE];
+    BYTE plaintext_block[AES_BLOCK_SIZE];
+    BYTE block_input[AES_BLOCK_SIZE];
+
+    for (int j = 0; j < AES_BLOCK_SIZE; j++) {
+        block_output[j] = iv[j];
+    }
+
+    for (int i = 0; i < num_blocks; i++) {
+
+        for (int j = 0; j < AES_BLOCK_SIZE; j++) {
+            if (((i * 16) + j) < content.length()) {
+                plaintext_block[j] = content[(i * 16) + j];
+            }
+            else {
+                plaintext_block[j] = 0;
+            }
+            
+        }
+
+        //xor plaintext block and block_output
+        for (int j = 0; j < AES_BLOCK_SIZE; j++) {
+            block_input[j] = block_output[j] ^ plaintext_block[j];
+        }
+        
+        aes_encrypt(block_input, block_output, key_schedule, 256);
+
+        // add to buffer
+        for (int j = 0; j < AES_BLOCK_SIZE; j++) {
+            stringstream ss;
+            ss << hex << setw(2) << setfill('0') << (int)block_output[j];
+            //ss << std::hex << std::setfill('0') << block_output[j];
+            //sprintf(h)
+            //enc_contents += block_output[j];
+            enc_contents += ss.str();
+        }
+    }
+
+    return { enc_contents, iv_str, num_blocks_str };
+} 
 
 string crypto::getHMAC(string contents, vector<BYTE> key) {
 
+
+
+    BYTE i_key_pad[64];
+    BYTE o_key_pad[64];
+
+    for (int i = 0; i < key.size(); i++) {
+        i_key_pad[i] = key[i] ^ 0x36;
+        o_key_pad[i] = key[i] ^ 0x5c;
+    }
+
+    for (int i = key.size(); i < 64; i++) {
+        i_key_pad[i] = 0x36;
+        o_key_pad[i] = 0x5c;
+    }
+
+    SHA256_CTX ctx;
+    BYTE buf[SHA256_BLOCK_SIZE];
+
+    const unsigned char* message = reinterpret_cast<const unsigned char*>(contents.c_str());
+
+    sha256_init(&ctx);
+    sha256_update(&ctx, message, contents.size());
+    sha256_final(&ctx, buf);
+
+    //string test = "abc";
+    //BYTE message2[] = { (unsigned) test.c_str() };
+    BYTE message2[64 + SHA256_BLOCK_SIZE];
+    for (int i = 0; i < 64 + SHA256_BLOCK_SIZE; i++) {
+        if (i < 64) {
+            message2[i] = o_key_pad[i];
+        }
+        else {
+            message2[i] = buf[i - 64];
+        }
+    }
+
+
+    sha256_init(&ctx);
+    sha256_update(&ctx, message2, 96);
+    sha256_final(&ctx, buf);
+    
     string retbuf = "";
+
+    for (int i = 0; i < SHA256_BLOCK_SIZE; i++) {
+        stringstream ss;
+        ss << hex << setw(2) << setfill('0') << (int)buf[i];
+        retbuf += ss.str();
+    }
     return retbuf;
 }
 
@@ -118,16 +150,17 @@ void crypto::addFile(string filename, string content, string password) {
     vector<BYTE> enc_key = generateKey(password);
     vector<BYTE> mac_key = generateKey2(password);
 
-    string encrypted_contents = EncryptFile(content, enc_key);
-    string hmac_contents = getHMAC(content, mac_key);
+    auto [encrypted_contents, iv_str, num_blocks] = EncryptFile(content, enc_key);
+    string mac_content = to_string(content.length()) + iv_str + encrypted_contents;
+    string hmac = getHMAC(mac_content, mac_key);
 
     ofstream myfile;
     myfile.open(filename);
-    myfile << hmac_contents;
-    myfile << "\n";
-    myfile << encrypted_contents;
+    myfile << content.length() << endl;
+    myfile << hex << hmac << endl;
+    myfile << hex << iv_str << endl;
+    myfile << std::hex << encrypted_contents;
     myfile.close();
-    //std::ofstream file
 }
 
 vector<BYTE> crypto::generateKey(string password) {

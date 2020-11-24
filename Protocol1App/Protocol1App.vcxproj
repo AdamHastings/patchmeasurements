@@ -102,11 +102,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="aes.c" />
+    <ClCompile Include="aes.cpp" />
     <ClCompile Include="ButtonArray.cpp" />
     <ClCompile Include="ComparePage.cpp" />
     <ClCompile Include="crypto.cpp" />
-    <ClCompile Include="cstore.cpp" />
     <ClCompile Include="DebriefPage.cpp" />
     <ClCompile Include="FormPage.cpp" />
     <ClCompile Include="HoursPage.cpp" />
@@ -115,7 +114,7 @@
     <ClCompile Include="RankPage.cpp" />
     <ClCompile Include="RegistryEditPage.cpp" />
     <ClCompile Include="RegistryUtils.cpp" />
-    <ClCompile Include="sha256.c" />
+    <ClCompile Include="sha256.cpp" />
     <ClCompile Include="SingleChoicePage.cpp" />
     <ClCompile Include="StartPage.cpp" />
     <ClCompile Include="TaskPage.cpp" />
@@ -162,6 +161,7 @@
     <QtMoc Include="StartPage.h" />
     <QtMoc Include="PatchPage.h" />
     <QtMoc Include="HoursPage.h" />
+    <ClInclude Include="typedefs.h" />
     <ClInclude Include="PowerMgmt.h" />
     <QtMoc Include="RankPage.h" />
     <QtMoc Include="SingleChoicePage.h" />

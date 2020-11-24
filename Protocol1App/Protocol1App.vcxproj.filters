@@ -95,16 +95,13 @@
     <ClCompile Include="HoursPage.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="cstore.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="crypto.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="aes.c">
+    <ClCompile Include="aes.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="sha256.c">
+    <ClCompile Include="sha256.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -134,6 +131,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="crypto.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="typedefs.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

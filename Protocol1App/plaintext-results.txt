@@ -1,0 +1,41 @@
+name,k
+uni,k
+address,k
+city,k
+state,k
+zip,k
+wta,0
+throttled_task,3
+unthrottled_task,2
+slowdown,30
+fastest,Task 1
+middle,Task 2
+slowest,Task 3
+fastest_vs_middle,-1
+middle_vs_slowest,-1
+fastest_vs_slowest,-1
+pre_task_freq,-1
+task1_freq,-1
+task2_freq,-1
+task3_freq,-1
+post_task_freq,-1
+gaming,0
+word_processing,0
+spreadsheets,0
+programming,0
+streaming,0
+video_editing,0
+animation,0
+design_tools,0
+web_searches,0
+email,0
+e_reading,0
+social_media,0
+video_calls,0
+crypto_mining,0
+photo_storage,0
+shopping,0
+other,0
+other_input,
+hours,0
+CsEnabled_default,0

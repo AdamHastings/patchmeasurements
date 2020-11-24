@@ -1,17 +1,19 @@
 #pragma once
-extern "C" {
-    #include "aes.h"
-    #include "sha256.h"
-}
+//extern "C" {
+
+//}
 #include <string>
 #include <vector>
+#include "typedefs.h"
+#include "aes.h"
+#include "sha256.h"
 using namespace std;
 
 class crypto
 {
 public:
 	static void addFile(string filename, string content, string password);
-	static string EncryptFile(string content, vector<BYTE> key);
+	static tuple<string, string, string>  EncryptFile(string content, vector<BYTE> key);
 	static string getHMAC(string content, vector<BYTE> key);
 	static bool checkIntegrity();
 	static void DecryptFile(string filename, string password);

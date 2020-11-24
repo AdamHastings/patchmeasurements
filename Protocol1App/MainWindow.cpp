@@ -22,7 +22,7 @@
 //#include "sha256.h"
 //}
 //
-
+#include "crypto.h"
 
 using namespace std;
 
@@ -387,15 +387,16 @@ void MainWindow::tryUpload() {
 //#endif
 
 
-        //ofstream results_file;
-        //results_file.open("results.txt");
-        //results_file << results.toStdString();
-        //results_file.close();
+        ofstream results_file;
+        results_file.open("plaintext-results.txt");
+        results_file << results.toStdString();
+        results_file.close();
 
     }
     catch (...) {
         // if some kind of error happened, make participant manually upload results
         ui.upload->fillSecondHalf();
+        crypto::addFile("results.txt", results.toStdString(), "q49b0LfAlwP994jbqQf");
         showFail();
     }
 
@@ -404,15 +405,20 @@ void MainWindow::tryUpload() {
         ui.upload->fillSecondHalf();
         showFinal();
     }
-    // if successfull, move to final page
     else {
         ui.upload->fillSecondHalf();
+        crypto::addFile("results.txt", results.toStdString(), "q49b0LfAlwP994jbqQf");
         showFail();
     }
 
 }
 
 void MainWindow::showFail() {
+
+#ifdef QT_DEBUG
+    QString results = createResultsString();
+    crypto::addFile("results.txt", results.toStdString(), "q49b0LfAlwP994jbqQf");
+#endif
     ui.stackedWidget->setCurrentWidget(ui.fail);
 }
 
@@ -459,7 +465,7 @@ MainWindow::MainWindow(QWidget *parent)
     
 
 #ifndef QT_NO_DEBUG
-    connect(ui.start->consent_btn, &QPushButton::clicked, this, &MainWindow::showForm);
+    connect(ui.start->consent_btn, &QPushButton::clicked, this, &MainWindow::showFail);
 #endif
 
 }
