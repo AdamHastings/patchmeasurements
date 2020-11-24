@@ -1,0 +1,2 @@
+C:\Users\Administrator\patchmeasurements\decrypt\Debug\decrypt.exe
+C:\Users\Administrator\patchmeasurements\decrypt\Debug\decrypt.pdb
