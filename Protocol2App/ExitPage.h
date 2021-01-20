@@ -66,10 +66,10 @@ public:
 	void resetPage(int days) {
 		qDebug() << "nomoredays days: " << days;
 		if (days == TOTAL_DAYS) {
-			label->setText("Thank you for your participation! You have earned a participation fee of $5 but will not earn any additional compensation. You will receive this compensation via a prepaid debit card sent to the mailing address given at the beginning of this experiment.\n\nYou may now exit this window. Afterwards, please delete this program from your computer.");
+			label->setText("Thank you for your participation! You have earned a participation fee of $5 but will not earn any additional compensation. You will receive this compensation via a prepaid debit card sent to your UNI's email.\n\nYou may now exit this window. Afterwards, please delete this program from your computer.");
 		}
 		else {
-			label->setText("Thank you for your participation! Your computer's performance has been restored. During this experiment, you endured " + QString::number(TOTAL_DAYS - days) + " days of a slowed-down computer and have accrued " + QString::number(TOTAL_DAYS - days) + " x $" + QString::number(OFFER) + " = $" + QString::number(OFFER * (TOTAL_DAYS - days)) + ", in addition to a participation fee of $5. This brings your total earnings to $" + QString::number((OFFER * (TOTAL_DAYS - days)) + 5) + ". You will receive this compensation via a prepaid debit card sent to the mailing address given at the beginning of this experiment.\n\nYou may now exit this window. Afterwards, please delete this program from your computer.");
+			label->setText("Thank you for your participation! Your computer's performance has been restored. During this experiment, you endured " + QString::number(TOTAL_DAYS - days) + " days of a slowed-down computer and have accrued " + QString::number(TOTAL_DAYS - days) + " x $" + QString::number(OFFER) + " = $" + QString::number(OFFER * (TOTAL_DAYS - days)) + ", in addition to a participation fee of $5. This brings your total earnings to $" + QString::number((OFFER * (TOTAL_DAYS - days)) + 5) + ". You will receive this compensation via a prepaid debit card sent to your UNI's email.\n\nYou may now exit this window. Afterwards, please delete this program from your computer.");
 		}
 	}
 
