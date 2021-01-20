@@ -63,6 +63,7 @@ private:
     void tryUpload();
     void showFail();
     void showFinal();
+    void showNotEligible();
 
     //std::string createResultsString();
     QString createResultsString();

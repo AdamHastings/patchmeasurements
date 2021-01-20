@@ -55,6 +55,7 @@ public:
     Failed2UploadPage* fail;
     PatchPage* upload;
     FinalPage* final;
+    NotEligiblePage* noteligible;
 
     void setupUi(QMainWindow* MainWindow)
     {
@@ -165,6 +166,9 @@ public:
 
         final = new FinalPage();
         stackedWidget->addWidget(final);
+
+        noteligible = new NotEligiblePage();
+        stackedWidget->addWidget(noteligible);
 
     } // setupUi
 };

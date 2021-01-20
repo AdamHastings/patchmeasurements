@@ -26,6 +26,8 @@ public:
 
 	static void getSystemConfigStart(QProcess& proc);
 	static QString getSystemConfigRead(QProcess& proc);
+
+	static void restoreRegistry();
 	
 
 private:

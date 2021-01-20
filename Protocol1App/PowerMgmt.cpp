@@ -112,10 +112,7 @@ void PowerMgmt::removeFreqCap() {
     proc.waitForFinished(-1);
 }
 
-void PowerMgmt::restoreDefaults() {
-    restoreDefaultPowerPlan();
-    deleteCustomPowerPlan();
-
+void PowerMgmt::restoreRegistry() {
     QVariant qv = RegistryUtils::getRegKey("CsEnabled");
     if (qv.isValid()) {
         RegistryUtils::setCsEnabled(1);
@@ -123,6 +120,12 @@ void PowerMgmt::restoreDefaults() {
         REBOOT_AT_END = true;
     }
     RegistryUtils::nuke();
+}
+
+void PowerMgmt::restoreDefaults() {
+    restoreDefaultPowerPlan();
+    deleteCustomPowerPlan();
+    restoreRegistry();
 }
 
 void PowerMgmt::createCustomPowerPlan() {

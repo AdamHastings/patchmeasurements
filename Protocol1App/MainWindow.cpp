@@ -15,6 +15,8 @@
 #include <QProcess>
 #include <QSettings>
 #include <QDebug>
+#include <QSslSocket>
+
 //#include "cstore.cpp"
 
 //extern "C" {
@@ -82,6 +84,12 @@ void MainWindow::pickThrottledTask() {
     unthrottled_task = (throttled_task == 2) ? 3 : 2;
 }
 
+void MainWindow::showNotEligible() {
+    enableExitButton();
+    ui.noteligible->updateText();
+    ui.stackedWidget->setCurrentWidget(ui.noteligible);
+}
+
 void MainWindow::showPatch0() {
     ui.stackedWidget->setCurrentWidget(ui.patch0);
     ui.stackedWidget->setCurrentWidget(ui.patch0);
@@ -92,19 +100,32 @@ void MainWindow::showPatch0() {
     QProcess proc;
     PowerMgmt::getCurrentClockFreqStart(proc);
     ui.patch0->fillBar();
+    ui.patch0->label->setText("Checking to see if your device is compatible with this experiment");
     preTasksFreq = PowerMgmt::getCurrentClockFreqRead(proc);
 
-    PowerMgmt::getDefaultPowercfg();
-    PowerMgmt::createCustomPowerPlan();
-    PowerMgmt::removeFreqCap();
+    // DELETE THIS LATER!!
+#ifdef QT_DEBUG
+    preTasksFreq = -1;
+#endif
     
-    // Take another reading
-    PowerMgmt::getCurrentClockFreqStart(proc);
-    ui.patch0->fillBar();
-    task1Freq = PowerMgmt::getCurrentClockFreqRead(proc);
+    if (preTasksFreq == -1) {
+        PowerMgmt::restoreRegistry();
+        showNotEligible();
+    } else {
 
-    ui.patch0->done_label->setText("Done!");
-    ui.patch0->continue_btn->setEnabled(true);
+        PowerMgmt::getDefaultPowercfg();
+        PowerMgmt::createCustomPowerPlan();
+        PowerMgmt::removeFreqCap();
+
+        // Take another reading
+        ui.patch0->label->setText("We will now make some modifications to your computer. These modifications are only temporary and will end once this experiment concludes.");
+        PowerMgmt::getCurrentClockFreqStart(proc);
+        ui.patch0->fillBar();
+        task1Freq = PowerMgmt::getCurrentClockFreqRead(proc);
+
+        ui.patch0->done_label->setText("Done!");
+        ui.patch0->continue_btn->setEnabled(true);
+    }
 }
 
 void MainWindow::showPatch1() {
@@ -186,61 +207,15 @@ void MainWindow::showWTA() {
     ui.stackedWidget->setCurrentWidget(ui.wta);
 }
 
-//std::string MainWindow::createResultsString() {
-//    string s = "";
-//
-//    s += "name,"    +  ui.form->name_str    +    "\n";
-//    s += "uni,"     +  ui.form->uni_str     +    "\n";
-//    s += "address," +  ui.form->address_str +    "\n";
-//    s += "city,"    +  ui.form->city_str    +    "\n";
-//    s += "state,"   +  ui.form->state_str   +    "\n";
-//    s += "zip,"     +  ui.form->zip_str     +    "\n";
-//    s += "wta," + to_string(offer) + "\n";
-//    s += "throttled_task,"   + to_string(throttled_task)   + "\n";
-//    s += "unthrottled_task," + to_string(unthrottled_task) + "\n";
-//    s += "slowdown," + to_string(slowdown) + "\n";
-//    s += "fastest," + ui.rank->listWidget->item(0)->text().toStdString() + "\n";
-//    s += "middle,"  + ui.rank->listWidget->item(1)->text().toStdString() + "\n";
-//    s += "slowest," + ui.rank->listWidget->item(2)->text().toStdString() + "\n";
-//    s += "fastest_vs_middle,"  + to_string(ui.compare->arr1->getClicked()) + "\n";
-//    s += "middle_vs_slowest,"  + to_string(ui.compare->arr2->getClicked()) + "\n";
-//    s += "fastest_vs_slowest," + to_string(ui.compare->arr3->getClicked()) + "\n";
-//    s += "pre_task_freq," + to_string(preTasksFreq) + "\n";
-//    s += "task1_freq," + to_string(task1Freq) + "\n";
-//    s += "task2_freq," + to_string(task2Freq) + "\n";
-//    s += "task3_freq," + to_string(task3Freq) + "\n";
-//    s += "post_task_freq," + to_string(postTasksFreq) + "\n";
-//    /*s += "gaming," + to_string(ui.usage->
-//    s += "word_processing," + to_string(ui.usage->
-//    s += "spreadsheets," + to_string(ui.usage->
-//    s += "programming," + to_string(ui.usage->
-//    s += "streaming," + to_string(ui.usage->
-//    s += "video_editing," + to_string(ui.usage->
-//    s += "animation," + to_string(ui.usage->
-//    s += "design_tools," + to_string(ui.usage->
-//    s += "web_searches," + to_string(ui.usage->
-//    s += "email," + to_string(ui.usage->
-//    s += "e_reading," + to_string(ui.usage->
-//    s += "social_media," + to_string(ui.usage->
-//    s += "video_calls," + to_string(ui.usage->
-//    s += "crypto_mining," + to_string(ui.usage->
-//    s += "photo_storage," + to_string(ui.usage->
-//    s += "shopping," + to_string(ui.usage->
-//    s += "other," + to_string(ui.usage->*/
-//    s += "CsEnabled_default," + to_string(REBOOT_AT_END);
-//
-//    return s;
-//}
-
 QString MainWindow::createResultsString() {
     QString s = "";
 
     s += "name," + QString::fromStdString(ui.form->name_str) + "\n";
     s += "uni," + QString::fromStdString(ui.form->uni_str) + "\n";
-    s += "address," + QString::fromStdString(ui.form->address_str) + "\n";
-    s += "city," + QString::fromStdString(ui.form->city_str) + "\n";
-    s += "state," + QString::fromStdString(ui.form->state_str) + "\n";
-    s += "zip," + QString::fromStdString(ui.form->zip_str) + "\n";
+    //s += "address," + QString::fromStdString(ui.form->address_str) + "\n";
+    //s += "city," + QString::fromStdString(ui.form->city_str) + "\n";
+    //s += "state," + QString::fromStdString(ui.form->state_str) + "\n";
+    //s += "zip," + QString::fromStdString(ui.form->zip_str) + "\n";
     s += "wta," + QString::number(offer) + "\n";
     s += "throttled_task," + QString::number(throttled_task) + "\n";
     s += "unthrottled_task," + QString::number(unthrottled_task) + "\n";
@@ -378,30 +353,32 @@ void MainWindow::tryUpload() {
 
     QString results = createResultsString();
 
-    // try upload
-    try {
+    
+    bool success = false;
+    for (int i = 0; i < 5; i++) {
 
-//#if QT_NO_DEBUG
+        // try upload
+        try {
+            DropBox::upload(results, ui.form->uni_str);
+        }
+        catch(...) {
+            qDebug() << "upload didn't work";
+        }
         
-        DropBox::upload(results, ui.form->uni_str);
-//#endif
+        if (DropBox::uploadSuccessful(ui.form->uni_str)) {
+            success = true;
+            break;
+        }
+    }
 
-    }
-    catch (...) {
-        // if some kind of error happened, make participant manually upload results
-        ui.upload->fillSecondHalf();
-        crypto::addFile("results.txt", results.toStdString(), "q49b0LfAlwP994jbqQf");
-        showFail();
-    }
+    crypto::addFile("results.txt", results.toStdString(), "q49b0LfAlwP994jbqQf");
+    ui.upload->fillSecondHalf();
 
     // if unsuccessful, make participant manually upload results
-    if (DropBox::uploadSuccessful(ui.form->uni_str)) {
-        ui.upload->fillSecondHalf();
+    if (success) {
         showFinal();
     }
     else {
-        ui.upload->fillSecondHalf();
-        crypto::addFile("results.txt", results.toStdString(), "q49b0LfAlwP994jbqQf");
         showFail();
     }
 
@@ -409,10 +386,10 @@ void MainWindow::tryUpload() {
 
 void MainWindow::showFail() {
 
-#ifdef QT_DEBUG
-    QString results = createResultsString();
-    crypto::addFile("results.txt", results.toStdString(), "q49b0LfAlwP994jbqQf");
-#endif
+//#ifdef QT_DEBUG
+//    QString results = createResultsString();
+//    crypto::addFile("results.txt", results.toStdString(), "q49b0LfAlwP994jbqQf");
+//#endif
     ui.stackedWidget->setCurrentWidget(ui.fail);
 }
 
@@ -459,7 +436,8 @@ MainWindow::MainWindow(QWidget *parent)
     
 
 #ifndef QT_NO_DEBUG
-    connect(ui.start->consent_btn, &QPushButton::clicked, this, &MainWindow::showFail);
+    qDebug() << QSslSocket::supportsSsl() << QSslSocket::sslLibraryBuildVersionString() << QSslSocket::sslLibraryVersionString();
+    connect(ui.start->consent_btn, &QPushButton::clicked, this, &MainWindow::showForm);
 #endif
 
 }
