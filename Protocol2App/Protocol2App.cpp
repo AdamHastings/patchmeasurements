@@ -131,21 +131,6 @@ Protocol2App::Protocol2App(QWidget *parent)
     else {
         days = TOTAL_DAYS;
     }
-    ////if (RegistryUtils::getRegKey("FirstOffer").toInt() == 0) {
-    //    stackedWidget->setCurrentWidget(wta);
-    //    DropBox::setDirectory(RegistryUtils::getRegKey("UNI").toString());
-    //}
-    //else {
-
-    // TODO maybe it makes more sense to do this in reverse? E.g. first offer is the default, and only change the wording if it's not the first time...
-     // TODO really need to re-evaluate this design issue here...
-     //wta->firstOffer();
-     //dc_accept->firstOffer();
-     //dc_decline->firstOffer();
-     //onemore->firstOffer();
-     //nomore->firstOffer();
-     //survey->firstOffer();
-     //stackedWidget->setCurrentWidget(start);
      
 
 

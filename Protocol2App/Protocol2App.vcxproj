@@ -96,7 +96,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\Protocol1App\aes.cpp" />
+    <ClCompile Include="..\Protocol1App\sha256.cpp" />
     <ClCompile Include="Check4Cheating.cpp" />
+    <ClCompile Include="crypto.cpp" />
     <ClCompile Include="DoubleCheck.cpp" />
     <ClCompile Include="DropBox.cpp" />
     <ClCompile Include="ExitPage.cpp" />
@@ -129,6 +132,10 @@
     <QtMoc Include="ExitPage.h" />
     <QtMoc Include="FormPage.h" />
     <QtMoc Include="Check4Cheating.h" />
+    <ClInclude Include="..\Protocol1App\aes.h" />
+    <ClInclude Include="..\Protocol1App\sha256.h" />
+    <ClInclude Include="..\Protocol1App\typedefs.h" />
+    <ClInclude Include="crypto.h" />
     <ClInclude Include="DropBox.h" />
     <ClInclude Include="Globals.h" />
     <ClInclude Include="PowerMgmt.h" />
