@@ -20,6 +20,7 @@ public:
 	static bool runningAsAdmin();
 	static void createCustomPowerPlan();
 
+	// TODO does this really belong in PowerMgmt? Probably not...
 	static double getCurrentClockFreq();
 	static void getCurrentClockFreqStart(QProcess& proc);
 	static double getCurrentClockFreqRead(QProcess& proc);

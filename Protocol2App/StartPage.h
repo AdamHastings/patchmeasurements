@@ -27,7 +27,7 @@ class ModPage : public StartPage
 public:
 	ModPage(QWidget* parent = Q_NULLPTR) : StartPage(parent) {
 		/*label->setText("As part of this experiment, we will make temporary modifications to you computer. It is very important that your computer does not power down during this experiment. If you are using a battery-powered device such as a laptop, we recommend that you plug your device into a power source. If your computer powers down during this experiment, you will need to re-do this experiment to restore your computer to its original state and may also jeopardize your ability to earn money from participating in this experiment.");*/
-		label->setText("This experiment requires that this app make a temporary modification to your computer. Specifically, this modification enables this program to change the speed of your computer. These modifications will persist for the duration of the experiment and will be undone once this experiment concludes. Do you allow this program to make these temporary changes to your computer?");
+		label->setText("This experiment requires that this app make a temporary modification to your computer. Specifically, this modification changes the \"CsEnabled\" Windows registry key from a 1 to a 0, which gives your computer the ability to change it's running speed. This modification will persist for the duration of the experiment and will be undone once this experiment concludes. Do you allow this program to make this temporary change to your computer?");
 
 		consent_btn->setText("I understand\nand consent");
 		consent_btn->setGeometry(QRect(W / 2 - BUTTON_WIDTH - M, M * 8, BUTTON_WIDTH, 2 * BUTTON_HEIGHT));

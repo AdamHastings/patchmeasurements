@@ -125,7 +125,7 @@ void PowerMgmt::restoreRegistry() {
 void PowerMgmt::restoreDefaults() {
     restoreDefaultPowerPlan();
     deleteCustomPowerPlan();
-    restoreRegistry();
+    //restoreRegistry();
 }
 
 void PowerMgmt::createCustomPowerPlan() {

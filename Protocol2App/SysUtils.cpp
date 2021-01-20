@@ -6,6 +6,7 @@
 #include <iomanip>
 #include <ctime>
 #include <sstream>
+#include <qDebug>
 using namespace std;
 
 
@@ -58,15 +59,25 @@ void SysUtils::restoreExperiment() {
 }
 
 void SysUtils::restoreDefaultPowerSettings() {
-    // TODO
+
 }
 
 void SysUtils::restoreSystem() {
-    if (RegistryUtils::getRegKey("FirstOffer").toInt() != 1) {
-        restoreDefaultPowerSettings();
+    //if (RegistryUtils::getRegKey("FirstOffer").toInt() != 1) {
+    //    qDebug() << "restoring powermgmt defaults";
+    //    PowerMgmt::restoreDefaults();
+    //}
+    /*else {
+        qDebug() << "NOT restoring powermgmt defaults";
+    }*/
+    QVariant qv = RegistryUtils::getRegKey("CsEnabled");
+    if (qv.isValid()) {
+        RegistryUtils::setCsEnabled(1);
+        qDebug() << "Restoring CsEnabled to 1";
+        // REBOOT_AT_END = true; // TODO figure out how to do this
     }
-    takeSnapshot("restore");
     RegistryUtils::nuke();
+    takeSnapshot("restore");
 }
 
 void SysUtils::initExperiment() {

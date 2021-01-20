@@ -73,6 +73,11 @@ void Protocol2App::showGoodbye() {
 void Protocol2App::acceptOffer() {
     //RegistryUtils::setRegKey("firstoffer", 0);
     SysUtils::takeSnapshot("accept");
+    if (days == TOTAL_DAYS) { // This is the first acceptance
+        PowerMgmt::getDefaultPowercfg();
+        PowerMgmt::createCustomPowerPlan();
+        PowerMgmt::setFreqCap(100 - SLOWDOWN);
+    }
     ui.onemore->resetPage(days);
     enableExitButton();
     ui.stackedWidget->setCurrentWidget(ui.onemore);
@@ -87,6 +92,9 @@ void Protocol2App::showNoMore() {
 void Protocol2App::declineOffer() {
     //RegistryUtils::setRegKey("firstoffer", 0);
     SysUtils::takeSnapshot("decline");
+    if (days != TOTAL_DAYS) { // The system was actually slowed down
+        PowerMgmt::restoreDefaults();
+    }
     SysUtils::restoreSystem();
     showSurvey();
     //showNoMore();
@@ -220,6 +228,9 @@ void Protocol2App::resetProgram() {
 void Protocol2App::timeout() {
     //restoreSystem(TIMEOUT);
     SysUtils::takeSnapshot("timeout");
+    if (days != TOTAL_DAYS) { // The system was actually slowed down
+        PowerMgmt::restoreDefaults();
+    }
     SysUtils::restoreSystem();
     showNoMore();
 }
