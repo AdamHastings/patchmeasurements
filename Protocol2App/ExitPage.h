@@ -4,6 +4,8 @@
 #include <QLabel>
 #include "Globals.h"
 #include <QDebug>
+#include "RegistryUtils.h"
+#include "SysUtils.h"
 
 class ExitPage : public QWidget
 {
@@ -85,6 +87,16 @@ class NoAdminPage : public ExitPage
 public:
 	NoAdminPage(QWidget* parent = Q_NULLPTR) : ExitPage(parent) {
 		label->setText("This program is not running in Administrator mode. In order to conduct this experiment, you will need to allow this program to have Administrator privileges. Please exit this program and re-run it as Administrator (right click on program and click \"Run as Administrator\").");
+	}
+};
+
+class WrongInstallLocationPage : public ExitPage
+{
+	Q_OBJECT
+
+public:
+	WrongInstallLocationPage(QWidget* parent = Q_NULLPTR) : ExitPage(parent) {
+		label->setText("This program has been installed at \n" + SysUtils::getpwd() + ", which is the wrong location. Please make sure that this program is located in \n C:\\Program Files\\" + RegistryUtils::AppName + "\\" + RegistryUtils::AppName + ".exe and try again.");
 	}
 };
 

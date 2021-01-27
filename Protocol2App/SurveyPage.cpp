@@ -31,6 +31,10 @@ void SurveyPage::mistrust_clicked() {
     checkIfContinue();
 }
 
+void SurveyPage::other_users_clicked() {
+    checkIfContinue();
+}
+
 void SurveyPage::other_clicked() {
     checkIfContinue();
     if (other->isChecked()) {
@@ -73,7 +77,11 @@ void SurveyPage::setupPage() {
 
     mistrust = new QCheckBox(this);
     mistrust->setGeometry(2 * M, M * 4, LINEWIDTH - 2 * M, M);
-    mistrust->setText("I'm worried about lasting damage to my computer");
+    mistrust->setText("I don't trust you enough to make temporary changes to my computer");
+
+    other_users = new QCheckBox(this);
+    other_users->setGeometry(2 * M, M * 5, LINEWIDTH - 2 * M, M);
+    other_users->setText("There are other users on this device besides myself");
 
     //privacy = new QCheckBox(this);
     //privacy->setGeometry(2 * M, M * 5, LINEWIDTH - 2 * M, M);
@@ -100,6 +108,7 @@ void SurveyPage::makeConnections() {
     connect(mistrust, &QPushButton::clicked, this, &SurveyPage::mistrust_clicked);
     //connect(privacy, &QPushButton::clicked, this, &SurveyPage::privacy_clicked);
     connect(other, &QPushButton::clicked, this, &SurveyPage::other_clicked);
+    connect(other_users, &QPushButton::clicked, this, &SurveyPage::other_users_clicked);
 }
 
 SurveyPage::SurveyPage(QWidget *parent)
