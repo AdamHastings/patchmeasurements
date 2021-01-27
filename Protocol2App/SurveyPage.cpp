@@ -6,7 +6,8 @@ void SurveyPage::checkIfContinue() {
     if (
         not_enough_money->isChecked() ||
         mistrust->isChecked() ||
-        other->isChecked()
+        other->isChecked() ||
+        other_users->isChecked()
         ) {
         continue_btn->setEnabled(true);
     }
