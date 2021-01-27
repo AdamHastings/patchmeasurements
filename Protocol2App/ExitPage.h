@@ -42,12 +42,16 @@ public:
 	}
 
 	void resetPage(int days) {
+		QString labeltext;
 		if (days == TOTAL_DAYS) {
-			label->setText("Your computer has been slowed down. After 24 hours have elapsed, you will again be given the choice to either restore your computer's performance or keep your computer slow in exchange for money.\n\n\nYou may now exit this window.");
+			labeltext = "Your computer has been slowed down.";
 		}
 		else {
-			label->setText("Your computer will remain slowed down for another 24 hours. After 24 hours have elapsed, you will again be given the choice to either restore your computer's performance or keep your computer slow in exchange for money.\n\n\nYou may now exit this window.");
+			labeltext = "Your computer will remain slowed down for another 24 hours.";
 		}
+		//label += "When you close this computer program, the window will disappear but the program will not be killed: This program will sit idly in the background and will occasionally monitor your device's speed to ensure that it remains slowed down.\n\nIf you reboot your computer, this program will automatically restart itself (although you may have to re-authorize it to run as Administrator). After 24 hours have elapsed, this program will wake itself up and you will be given the choice to either restore your computer's performance or keep your computer slow in exchange for money.\n\n\nYou may now exit this window.";
+		labeltext += " When you close this computer program, the window will disappear but the program will not be killed: This program will sit idly in the background and will occasionally monitor your device's speed to ensure that it remains slowed down.\n\nIf you reboot your computer, this program will automatically restart itself (although you may have to re-authorize it to run as Administrator). After 24 hours have elapsed, this program will wake itself up and you will be given the choice to either restore your computer's performance or keep your computer slow in exchange for money.\n\n\nYou may now exit this window.";
+		label->setText(labeltext);
 	}
 
 	/*void firstOffer() {

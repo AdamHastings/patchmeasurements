@@ -47,6 +47,9 @@ void SysUtils::takeSnapshot(QString snapshot_reason) {
     contents.append("\n");
 
     // TODO add more details here
+    // including system details
+    // and clock speed
+    // and survey results
 
     qDebug() << "adding file";
     string encrypted_filename = "logs/" + filename.toStdString() + ".txt";
