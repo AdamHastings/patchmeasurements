@@ -33,6 +33,7 @@ public:
 
     StartPage* start;
     NoAdminPage* noadmin;
+    WrongInstallLocationPage* wronginstall;
     RegistryEditPage* regedit;
     GoodbyePage* goodbye;
     ModPage* mod;
@@ -83,6 +84,9 @@ public:
 
         noadmin = new NoAdminPage();
         stackedWidget->addWidget(noadmin);
+
+        wronginstall = new WrongInstallLocationPage();
+        stackedWidget->addWidget(wronginstall);
 
         regedit = new RegistryEditPage();
         stackedWidget->addWidget(regedit);

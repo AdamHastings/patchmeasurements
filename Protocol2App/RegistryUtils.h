@@ -17,11 +17,13 @@ public:
 	static void setCsEnabled(int i);
 	static void nuke();
 
+public:
+	static QString AppName;
+
 
 private:
 	static QString RegOrg;
 	static QString RegApp;
-	static QString AppName;
 
 };
 

@@ -8,6 +8,7 @@
 #include <ctime>
 #include <sstream>
 #include <qDebug>
+#include <filesystem>
 using namespace std;
 
 
@@ -86,4 +87,11 @@ void SysUtils::initExperiment() {
     RegistryUtils::setRegKey("FirstOffer", 1);
     RegistryUtils::setRegKey("Days", 30);
     takeSnapshot("start");
+}
+
+QString SysUtils::getpwd() {
+    string exename = (RegistryUtils::AppName + ".exe").toStdString();
+    QString pwd = QString::fromStdString(std::filesystem::absolute(exename).string());
+    qDebug() << pwd;
+    return pwd;
 }

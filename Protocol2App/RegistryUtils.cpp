@@ -55,5 +55,7 @@ void RegistryUtils::setAutorun() {
 }
 
 void RegistryUtils::unsetAutorun() {
-	// TODO
+	QString path = "HKEY_LOCAL_MACHINE\\SOFTWARE\\WOW6432Node\\Microsoft\\Windows\\CurrentVersion\\Run";
+	QSettings(path, QSettings::NativeFormat).remove(AppName);
+	// "C:\Program Files (x86)\Dropbox\Client\Dropbox.exe" /systemstartup
 }

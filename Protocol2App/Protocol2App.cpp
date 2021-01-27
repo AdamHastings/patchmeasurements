@@ -51,6 +51,11 @@ void Protocol2App::showStartNext() {
     if (!PowerMgmt::runningAsAdmin()) {
         ui.stackedWidget->setCurrentWidget(ui.noadmin);
     }
+#if QT_NO_DEBUG
+    else if (SysUtils::getpwd() != "C:\\Program Files\\" + RegistryUtils::AppName + "\\" + RegistryUtils::AppName + ".exe") {
+        ui.stackedWidget->setCurrentWidget(ui.wronginstall);
+    }
+#endif
     else if (RegistryUtils::isCsEnabled()) {
         ui.stackedWidget->setCurrentWidget(ui.regedit);
     }
@@ -190,9 +195,6 @@ void Protocol2App::closeEvent(QCloseEvent* event) {
             time_to_sleep = 1 * 1000;
             days /= 2;
 #endif
-            // TODO this is for testing purposes only, remove later on!!
-            time_to_sleep = 30 * 1000;
-
             _sleep(time_to_sleep);
 
             days--;
