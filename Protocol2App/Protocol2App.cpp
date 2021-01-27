@@ -74,6 +74,8 @@ void Protocol2App::acceptOffer() {
     //RegistryUtils::setRegKey("firstoffer", 0);
     SysUtils::takeSnapshot("accept");
     if (days == TOTAL_DAYS) { // This is the first acceptance
+        RegistryUtils::setAutorun();
+
         PowerMgmt::getDefaultPowercfg();
         PowerMgmt::createCustomPowerPlan();
         PowerMgmt::setFreqCap(100 - SLOWDOWN);
@@ -90,6 +92,7 @@ void Protocol2App::showNoMore() {
 }
 
 void Protocol2App::declineOffer() {
+    qDebug() << "declining offer";
     //RegistryUtils::setRegKey("firstoffer", 0);
     SysUtils::takeSnapshot("decline");
     if (days != TOTAL_DAYS) { // The system was actually slowed down
@@ -127,6 +130,8 @@ Protocol2App::Protocol2App(QWidget *parent)
     // If this isn't the first time, load values from the registry
     if (RegistryUtils::getRegKey("days").isValid()) {
         days = RegistryUtils::getRegKey("days").toInt();
+        // TODO is this what we want?
+        resetProgram();
     }
     else {
         days = TOTAL_DAYS;
@@ -185,6 +190,8 @@ void Protocol2App::closeEvent(QCloseEvent* event) {
             time_to_sleep = 1 * 1000;
             days /= 2;
 #endif
+            // TODO this is for testing purposes only, remove later on!!
+            time_to_sleep = 30 * 1000;
 
             _sleep(time_to_sleep);
 
@@ -202,6 +209,10 @@ void Protocol2App::closeEvent(QCloseEvent* event) {
             this->show();
 
         }
+    }
+    else {
+        // one more for good measure...
+        RegistryUtils::nuke();
     }
 }
 

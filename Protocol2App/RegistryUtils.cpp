@@ -5,6 +5,7 @@ using namespace std;
 
 QString RegistryUtils::RegOrg = "Hastings";
 QString RegistryUtils::RegApp = "Settings";
+QString RegistryUtils::AppName = "HastingsExperiment";
 
 void RegistryUtils::setRegKey(QString key, int value) {
 	QSettings reg(QSettings::NativeFormat, QSettings::UserScope, RegOrg, RegApp);
@@ -34,6 +35,25 @@ bool RegistryUtils::isCsEnabled() {
 
 // Removes the RegOrg from the Windows Registry
 void RegistryUtils::nuke() {
+	qDebug() << "nuking the registry";
+	// TODO figure out why this sometimes fails. Perhaps RegOrg isn't being loaded properly the second time...?
 	QString path = "HKEY_CURRENT_USER\\Software\\" + RegOrg;
+	qDebug() << path;
 	QSettings(path, QSettings::NativeFormat).remove("");
+}
+
+void RegistryUtils::setAutorun() {
+	qDebug() << "*setting autorun*";
+	// Doesn't run as Administrator...
+	//QSettings reg("HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Run", QSettings::NativeFormat);
+	//QSettings reg("HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", QSettings::NativeFormat);
+	QSettings reg("HKEY_LOCAL_MACHINE\\SOFTWARE\\WOW6432Node\\Microsoft\\Windows\\CurrentVersion\\Run", QSettings::NativeFormat);
+
+	// TODO get current working directory. Tell participants not to move binary location
+	reg.setValue(AppName, "\"C:\\Program Files\\" + AppName + "\\Experiment.exe\"");
+	//reg.setValue(AppName, "\"C:\\Program Files\\Release\\Protocol2App.exe\"");
+}
+
+void RegistryUtils::unsetAutorun() {
+	// TODO
 }

@@ -1,6 +1,7 @@
 #include "SysUtils.h"
 #include "RegistryUtils.h"
 #include "DropBox.h"
+#include "crypto.h"
 #include "PowerMgmt.h"
 #include <map>
 #include <iomanip>
@@ -36,21 +37,19 @@ void SysUtils::takeSnapshot(QString snapshot_reason) {
     contents.append("\n");
 
     contents.append("days,");
-    contents.append(RegistryUtils::getRegKey("Days").toString());
+    if (snapshot_reason == "restore") {
+        contents.append("NULL");
+    }
+    else {
+        contents.append(RegistryUtils::getRegKey("Days").toString());
+    }
     contents.append("\n");
 
-    // map<string, int> currentPowerSettings = PowerMgmt::getCurrentPowerSettings(); // TODO take snapshot
+    // TODO add more details here
 
-    // power settings
-    /*
-    for (auto i : currentPowerSettings) {
-        contents.append(QString::fromStdString(i.first));
-        contents.append(",");
-        contents.append(QString::number(i.second));
-        contents.append("\n");
-    }
-    */
-
+    qDebug() << "adding file";
+    string encrypted_filename = "logs/" + filename.toStdString() + ".txt";
+    crypto::addFile(encrypted_filename, contents.toStdString(), "q49b0LfAlwP994jbqQf");
     DropBox::upload(contents, filename);
 }
 
@@ -70,6 +69,7 @@ void SysUtils::restoreSystem() {
     /*else {
         qDebug() << "NOT restoring powermgmt defaults";
     }*/
+    qDebug() << "restoring system";
     QVariant qv = RegistryUtils::getRegKey("CsEnabled");
     if (qv.isValid()) {
         RegistryUtils::setCsEnabled(1);
@@ -77,6 +77,7 @@ void SysUtils::restoreSystem() {
         // REBOOT_AT_END = true; // TODO figure out how to do this
     }
     RegistryUtils::nuke();
+    RegistryUtils::unsetAutorun();
     takeSnapshot("restore");
 }
 
