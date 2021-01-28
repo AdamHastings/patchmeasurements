@@ -19,6 +19,7 @@ public:
 	static void restoreSystem();
 	static void initExperiment();
 	static void restoreExperiment();
+	static QString getpwd();
 
 private:
 

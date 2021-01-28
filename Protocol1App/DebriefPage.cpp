@@ -1,8 +1,8 @@
 #include "DebriefPage.h"
 #include "Globals.h"
 
-DebriefPage::DebriefPage(QWidget *parent)
-	: QWidget(parent)
+DebriefPage::DebriefPage(QWidget* parent)
+    : QWidget(parent)
 {
     label = new QLabel(this);
     label->setGeometry(QRect(M, M, LINEWIDTH, M * 8));
@@ -16,6 +16,13 @@ DebriefPage::DebriefPage(QWidget *parent)
     no_btn = new QPushButton(this);
     no_btn->setGeometry(W / 2 - 5 * M, M * 8, 4 * M, M);
     no_btn->setText("No, do not withdraw me\nfrom this experiment");
+
+
+}
+
+void DebriefPage::disableButtons() {
+    yes_btn->setDisabled(true);
+    no_btn->setDisabled(true);
 }
 
 DebriefPage::~DebriefPage()

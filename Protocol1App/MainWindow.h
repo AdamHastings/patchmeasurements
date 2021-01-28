@@ -60,7 +60,10 @@ private:
     void showDebrief();
     void showWithdraw();
     void showWithdrawNext();
+    void tryUpload();
+    void showFail();
     void showFinal();
+    void showNotEligible();
 
     //std::string createResultsString();
     QString createResultsString();

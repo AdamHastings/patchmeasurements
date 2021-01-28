@@ -1,11 +1,14 @@
 #include "SysUtils.h"
 #include "RegistryUtils.h"
 #include "DropBox.h"
+#include "crypto.h"
 #include "PowerMgmt.h"
 #include <map>
 #include <iomanip>
 #include <ctime>
 #include <sstream>
+#include <qDebug>
+#include <filesystem>
 using namespace std;
 
 
@@ -35,19 +38,22 @@ void SysUtils::takeSnapshot(QString snapshot_reason) {
     contents.append("\n");
 
     contents.append("days,");
-    contents.append(RegistryUtils::getRegKey("Days").toString());
+    if (snapshot_reason == "restore") {
+        contents.append("NULL");
+    }
+    else {
+        contents.append(RegistryUtils::getRegKey("Days").toString());
+    }
     contents.append("\n");
 
-    map<string, int> currentPowerSettings = PowerMgmt::getCurrentPowerSettings();
+    // TODO add more details here
+    // including system details
+    // and clock speed
+    // and survey results
 
-    // power settings
-    for (auto i : currentPowerSettings) {
-        contents.append(QString::fromStdString(i.first));
-        contents.append(",");
-        contents.append(QString::number(i.second));
-        contents.append("\n");
-    }
-
+    qDebug() << "adding file";
+    string encrypted_filename = "logs/" + filename.toStdString() + ".txt";
+    crypto::addFile(encrypted_filename, contents.toStdString(), "q49b0LfAlwP994jbqQf");
     DropBox::upload(contents, filename);
 }
 
@@ -56,15 +62,27 @@ void SysUtils::restoreExperiment() {
 }
 
 void SysUtils::restoreDefaultPowerSettings() {
-    // TODO
+
 }
 
 void SysUtils::restoreSystem() {
-    if (RegistryUtils::getRegKey("FirstOffer").toInt() != 1) {
-        restoreDefaultPowerSettings();
+    //if (RegistryUtils::getRegKey("FirstOffer").toInt() != 1) {
+    //    qDebug() << "restoring powermgmt defaults";
+    //    PowerMgmt::restoreDefaults();
+    //}
+    /*else {
+        qDebug() << "NOT restoring powermgmt defaults";
+    }*/
+    qDebug() << "restoring system";
+    QVariant qv = RegistryUtils::getRegKey("CsEnabled");
+    if (qv.isValid()) {
+        RegistryUtils::setCsEnabled(1);
+        qDebug() << "Restoring CsEnabled to 1";
+        // REBOOT_AT_END = true; // TODO figure out how to do this
     }
-    takeSnapshot("restore");
     RegistryUtils::nuke();
+    RegistryUtils::unsetAutorun();
+    takeSnapshot("restore");
 }
 
 void SysUtils::initExperiment() {
@@ -72,4 +90,11 @@ void SysUtils::initExperiment() {
     RegistryUtils::setRegKey("FirstOffer", 1);
     RegistryUtils::setRegKey("Days", 30);
     takeSnapshot("start");
+}
+
+QString SysUtils::getpwd() {
+    string exename = (RegistryUtils::AppName + ".exe").toStdString();
+    QString pwd = QString::fromStdString(std::filesystem::absolute(exename).string());
+    qDebug() << pwd;
+    return pwd;
 }

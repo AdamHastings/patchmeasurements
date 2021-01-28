@@ -51,6 +51,11 @@ void Protocol2App::showStartNext() {
     if (!PowerMgmt::runningAsAdmin()) {
         ui.stackedWidget->setCurrentWidget(ui.noadmin);
     }
+#if QT_NO_DEBUG
+    else if (SysUtils::getpwd() != "C:\\Program Files\\" + RegistryUtils::AppName + "\\" + RegistryUtils::AppName + ".exe") {
+        ui.stackedWidget->setCurrentWidget(ui.wronginstall);
+    }
+#endif
     else if (RegistryUtils::isCsEnabled()) {
         ui.stackedWidget->setCurrentWidget(ui.regedit);
     }
@@ -73,6 +78,13 @@ void Protocol2App::showGoodbye() {
 void Protocol2App::acceptOffer() {
     //RegistryUtils::setRegKey("firstoffer", 0);
     SysUtils::takeSnapshot("accept");
+    if (days == TOTAL_DAYS) { // This is the first acceptance
+        RegistryUtils::setAutorun();
+
+        PowerMgmt::getDefaultPowercfg();
+        PowerMgmt::createCustomPowerPlan();
+        PowerMgmt::setFreqCap(100 - SLOWDOWN);
+    }
     ui.onemore->resetPage(days);
     enableExitButton();
     ui.stackedWidget->setCurrentWidget(ui.onemore);
@@ -85,8 +97,12 @@ void Protocol2App::showNoMore() {
 }
 
 void Protocol2App::declineOffer() {
+    qDebug() << "declining offer";
     //RegistryUtils::setRegKey("firstoffer", 0);
     SysUtils::takeSnapshot("decline");
+    if (days != TOTAL_DAYS) { // The system was actually slowed down
+        PowerMgmt::restoreDefaults();
+    }
     SysUtils::restoreSystem();
     showSurvey();
     //showNoMore();
@@ -119,25 +135,12 @@ Protocol2App::Protocol2App(QWidget *parent)
     // If this isn't the first time, load values from the registry
     if (RegistryUtils::getRegKey("days").isValid()) {
         days = RegistryUtils::getRegKey("days").toInt();
+        // TODO is this what we want?
+        resetProgram();
     }
     else {
         days = TOTAL_DAYS;
     }
-    ////if (RegistryUtils::getRegKey("FirstOffer").toInt() == 0) {
-    //    stackedWidget->setCurrentWidget(wta);
-    //    DropBox::setDirectory(RegistryUtils::getRegKey("UNI").toString());
-    //}
-    //else {
-
-    // TODO maybe it makes more sense to do this in reverse? E.g. first offer is the default, and only change the wording if it's not the first time...
-     // TODO really need to re-evaluate this design issue here...
-     //wta->firstOffer();
-     //dc_accept->firstOffer();
-     //dc_decline->firstOffer();
-     //onemore->firstOffer();
-     //nomore->firstOffer();
-     //survey->firstOffer();
-     //stackedWidget->setCurrentWidget(start);
      
 
 
@@ -192,7 +195,6 @@ void Protocol2App::closeEvent(QCloseEvent* event) {
             time_to_sleep = 1 * 1000;
             days /= 2;
 #endif
-
             _sleep(time_to_sleep);
 
             days--;
@@ -210,6 +212,10 @@ void Protocol2App::closeEvent(QCloseEvent* event) {
 
         }
     }
+    else {
+        // one more for good measure...
+        RegistryUtils::nuke();
+    }
 }
 
 void Protocol2App::resetProgram() {
@@ -220,6 +226,9 @@ void Protocol2App::resetProgram() {
 void Protocol2App::timeout() {
     //restoreSystem(TIMEOUT);
     SysUtils::takeSnapshot("timeout");
+    if (days != TOTAL_DAYS) { // The system was actually slowed down
+        PowerMgmt::restoreDefaults();
+    }
     SysUtils::restoreSystem();
     showNoMore();
 }

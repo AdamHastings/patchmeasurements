@@ -20,8 +20,10 @@ PatchPage::PatchPage(QWidget *parent)
         label->setText("We will now make some modifications to your computer. These modifications are only temporary and will end once this experiment concludes.");
     else if (patchCount == 1 || patchCount == 2)
         label->setText("We will now undo the previous modifications to your computer and apply some new ones. These modifications are only temporary and will end once this experiment concludes.");
-    else
+    else if (patchCount == 3)
         label->setText("We will now undo all modifications made to your computer.");
+    else
+        label->setText("Please wait while survey responses are securely sent to the researchers.");
     
     patchCount++;
 
@@ -47,7 +49,6 @@ PatchPage::PatchPage(QWidget *parent)
 }
 
 void PatchPage::fillBar() {
-#if QT_NO_DEBUG
     int MAGIC_THRES = 45;
 
     for (int i = 0; i < MAGIC_THRES; i++) {
@@ -59,7 +60,29 @@ void PatchPage::fillBar() {
         progress_bar->setValue(i);
         std::this_thread::sleep_for(std::chrono::milliseconds(10));
     }
-#endif
+}
+
+void PatchPage::slowFillBar() {
+    for (int i = 0; i <= 100; i++) {
+        progress_bar->setValue(i);
+        std::this_thread::sleep_for(std::chrono::milliseconds(250));
+    }
+}
+
+void PatchPage::fillFirstHalf() {
+    for (int i = 0; i < 50; i++) {
+        progress_bar->setValue(i);
+        std::this_thread::sleep_for(std::chrono::milliseconds(100));
+    }
+
+}
+
+void PatchPage::fillSecondHalf() {
+    for (int i = 50; i <= 100; i++) {
+        progress_bar->setValue(i);
+        std::this_thread::sleep_for(std::chrono::milliseconds(10));
+    }
+
 }
 
 PatchPage::~PatchPage()

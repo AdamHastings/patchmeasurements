@@ -1,0 +1,7 @@
+﻿  decrypt.cpp
+C:\Users\Administrator\patchmeasurements\decrypt\decrypt.cpp(47,23): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Administrator\patchmeasurements\decrypt\decrypt.cpp(171,23): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Administrator\patchmeasurements\decrypt\decrypt.cpp(191,23): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Administrator\patchmeasurements\decrypt\decrypt.cpp(183,14): warning C4101: 'plaintext_block': unreferenced local variable
+C:\Users\Administrator\patchmeasurements\decrypt\decrypt.cpp(162,14): warning C4101: 'c': unreferenced local variable
+  decrypt.vcxproj -> C:\Users\Administrator\patchmeasurements\decrypt\Debug\decrypt.exe

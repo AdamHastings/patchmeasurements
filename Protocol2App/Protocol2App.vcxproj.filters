@@ -77,13 +77,19 @@
     <ClCompile Include="Check4Cheating.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="crypto.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Protocol1App\aes.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Protocol1App\sha256.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ui_Protocol2App.h">
       <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Globals.h">
-      <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="DropBox.h">
       <Filter>Header Files</Filter>
@@ -95,6 +101,21 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="SysUtils.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Globals.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="crypto.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Protocol1App\aes.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Protocol1App\sha256.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Protocol1App\typedefs.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -53,6 +53,10 @@
     <ClCompile>
       <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
+    <Link>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <QtUic>
@@ -61,6 +65,10 @@
     <ClCompile>
       <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
+    <Link>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
   </ItemDefinitionGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'" Label="QtSettings">
     <QtInstall>5.15.0</QtInstall>
@@ -102,8 +110,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="aes.cpp" />
     <ClCompile Include="ButtonArray.cpp" />
     <ClCompile Include="ComparePage.cpp" />
+    <ClCompile Include="crypto.cpp" />
     <ClCompile Include="DebriefPage.cpp" />
     <ClCompile Include="FormPage.cpp" />
     <ClCompile Include="HoursPage.cpp" />
@@ -112,6 +122,7 @@
     <ClCompile Include="RankPage.cpp" />
     <ClCompile Include="RegistryEditPage.cpp" />
     <ClCompile Include="RegistryUtils.cpp" />
+    <ClCompile Include="sha256.cpp" />
     <ClCompile Include="SingleChoicePage.cpp" />
     <ClCompile Include="StartPage.cpp" />
     <ClCompile Include="TaskPage.cpp" />
@@ -148,6 +159,8 @@
     <QtMoc Include="ComparePage.h" />
     <QtMoc Include="ButtonArray.h" />
     <QtMoc Include="DebriefPage.h" />
+    <ClInclude Include="aes.h" />
+    <ClInclude Include="crypto.h" />
     <ClInclude Include="DropBox.h" />
     <QtMoc Include="GoodbyePage.h" />
     <QtMoc Include="FormPage.h" />
@@ -156,11 +169,13 @@
     <QtMoc Include="StartPage.h" />
     <QtMoc Include="PatchPage.h" />
     <QtMoc Include="HoursPage.h" />
+    <ClInclude Include="typedefs.h" />
     <ClInclude Include="PowerMgmt.h" />
     <QtMoc Include="RankPage.h" />
     <QtMoc Include="SingleChoicePage.h" />
     <QtMoc Include="RegistryEditPage.h" />
     <ClInclude Include="RegistryUtils.h" />
+    <ClInclude Include="sha256.h" />
     <ClInclude Include="Ui_MainWindow.h" />
     <ClInclude Include="resource.h" />
   </ItemGroup>

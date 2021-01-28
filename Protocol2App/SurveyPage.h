@@ -26,6 +26,7 @@ private:
 
 	QCheckBox* not_enough_money;
 	QCheckBox* mistrust;
+	QCheckBox* other_users;
 	QCheckBox* other;
 
 	QLabel* offerq;
@@ -37,6 +38,7 @@ private:
 	void checkIfContinue();
 
 	void not_enough_money_clicked();
+	void other_users_clicked();
 	void mistrust_clicked();
 	void other_clicked();
 };

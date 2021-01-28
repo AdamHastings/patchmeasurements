@@ -52,7 +52,10 @@ public:
     DebriefPage* debrief;
     WithdrawPage* withdraw;
     FormPage* form;
+    Failed2UploadPage* fail;
+    PatchPage* upload;
     FinalPage* final;
+    NotEligiblePage* noteligible;
 
     void setupUi(QMainWindow* MainWindow)
     {
@@ -155,8 +158,17 @@ public:
         form = new FormPage();
         stackedWidget->addWidget(form);
 
+        upload = new PatchPage();
+        stackedWidget->addWidget(upload);
+
+        fail = new Failed2UploadPage();
+        stackedWidget->addWidget(fail);
+
         final = new FinalPage();
         stackedWidget->addWidget(final);
+
+        noteligible = new NotEligiblePage();
+        stackedWidget->addWidget(noteligible);
 
     } // setupUi
 };
