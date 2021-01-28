@@ -1,3 +1,0 @@
-﻿  moc dropbox.h
-   C:\Users\Administrator\patchmeasurements\QtWidgetsApplication1\dropbox.h(7): Error: Class contains Q_OBJECT macro but does not inherit from QObject
-dropbox.h : error 1: moc (C:\Qt\5.15.0\msvc2019_64\bin\moc.exe)
