@@ -1,6 +1,0 @@
-name,noticed difference?,explanation,noticed slowdown?,estimated slowdown percentage,WTA
-person1,y,"Things seemed to load much faster the second time.",n,-30%,1,
-person2,n,,n,25,66,
-person3,y,"the questions for the email part were different ",n,25%,38,
-person4,n,,n,10%,6998,
-person5,y,"The computer was a little faster in modulation 2",n,0.5%,270,

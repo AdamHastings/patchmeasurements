@@ -1,6 +1,0 @@
-#!/bin/bash
-
-modprobe cpufreq_userspace
-cpupower frequency-set --governor userspace
-cpupower --cpu all frequency-set --freq $1
-cat /proc/cpuinfo | grep "^[c]pu MHz"
