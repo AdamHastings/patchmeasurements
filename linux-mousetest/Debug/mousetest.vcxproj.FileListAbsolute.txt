@@ -1,0 +1,2 @@
+C:\Users\Administrator\patchmeasurements\mousetest\Debug\mousetest.exe
+C:\Users\Administrator\patchmeasurements\mousetest\Debug\mousetest.pdb
