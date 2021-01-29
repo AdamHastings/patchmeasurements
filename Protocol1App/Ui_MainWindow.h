@@ -113,7 +113,7 @@ public:
         stackedWidget->addWidget(task2);
 
 
-        task3 = new TaskPage("\nfrom Sydney, Australia to Perth, Australia", "Low Library", "\"Fantasia on a Theme by Thomas Tallis\"\nby composer Ralph Vaughan Williams");
+        task3 = new TaskPage("\nfrom Sydney, Australia to Perth, Australia", "Butler Library", "\"Fantasia on a Theme by Thomas Tallis\"\nby composer Ralph Vaughan Williams");
         stackedWidget->addWidget(task3);
 
         patch0 = new PatchPage();

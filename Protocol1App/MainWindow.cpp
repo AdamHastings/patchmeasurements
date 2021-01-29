@@ -103,10 +103,6 @@ void MainWindow::showPatch0() {
     ui.patch0->label->setText("Checking to see if your device is compatible with this experiment");
     preTasksFreq = PowerMgmt::getCurrentClockFreqRead(proc);
 
-    // DELETE THIS LATER!!
-#ifdef QT_DEBUG
-    preTasksFreq = -1;
-#endif
     
     if (preTasksFreq == -1) {
         PowerMgmt::restoreRegistry();
@@ -437,7 +433,9 @@ MainWindow::MainWindow(QWidget *parent)
 
 #ifndef QT_NO_DEBUG
     qDebug() << QSslSocket::supportsSsl() << QSslSocket::sslLibraryBuildVersionString() << QSslSocket::sslLibraryVersionString();
-    connect(ui.start->consent_btn, &QPushButton::clicked, this, &MainWindow::showForm);
+    connect(ui.task1->continue_btn, &QPushButton::clicked, this, &MainWindow::showPatch3);
+    connect(ui.patch3->continue_btn, &QPushButton::clicked, this, &MainWindow::showFinal);
+
 #endif
 
 }
