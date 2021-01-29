@@ -29,10 +29,16 @@ y = 1 / (1 + np.exp(-1 * (alpha + beta * x)))
 y_2p5 = 1 / (1 + np.exp(-1 * (alpha_2p5 + beta * x)))
 y_97p5 = 1 / (1 + np.exp(-1 * (alpha_97p5 + beta * x)))
 
+y_2p5b = 1 / (1 + np.exp(-1 * (alpha + beta_2p5 * x)))
+y_97p5b = 1 / (1 + np.exp(-1 * (alpha + beta_97p5 * x)))
+
 plt.plot(x, y, 'b')
 
 #plt.plot(x, y_2p5, 'g')
 #plt.plot(x, y_97p5, 'g')
+#
+#plt.plot(x, y_2p5b, 'k')
+#plt.plot(x, y_97p5b, 'k')
 
 
 plt.show()
@@ -60,7 +66,19 @@ beta_97p5 = 0.61
 x = np.arange(-5.0, 15.0, 0.1)
 y = 1 / (1 + np.exp(-1 * (alpha + beta * x)))
 
+y_2p5 = 1 / (1 + np.exp(-1 * (alpha_2p5 + beta * x)))
+y_97p5 = 1 / (1 + np.exp(-1 * (alpha_97p5 + beta * x)))
+
+y_2p5b = 1 / (1 + np.exp(-1 * (alpha + beta_2p5 * x)))
+y_97p5b = 1 / (1 + np.exp(-1 * (alpha + beta_97p5 * x)))
+
 plt.plot(x, y, 'b')
+
+plt.plot(x, y_2p5, 'g')
+plt.plot(x, y_97p5, 'g')
+
+plt.plot(x, y_2p5b, 'k')
+plt.plot(x, y_97p5b, 'k')
 
 
 plt.show()

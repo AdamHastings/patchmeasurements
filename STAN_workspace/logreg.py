@@ -30,9 +30,20 @@ parameters {
 }
 model {
         y ~ bernoulli_logit(alpha + beta * x);   // likelihood
+}
+generated quantities {
+    real x_crit;
+    x_crit = (logit(0.5) - alpha) / beta;
 }'''
 
+
+#generated quantities {
+#    real x_crit;
+#    x_crit = (logit(0.5) - alpha) / beta;
+
 sm = stan.StanModel(model_code=stan_model, model_name='my_model')
+
+print("model made")
 
 data = dict(N = len(df),
             x = df.offer.values,
