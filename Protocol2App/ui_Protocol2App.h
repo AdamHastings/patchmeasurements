@@ -16,6 +16,8 @@
 #include "RegistryEditPage.h"
 #include "SurveyPage.h"
 #include "Check4Cheating.h"
+#include "HoursPage.h"
+#include "UsagePage.h"
 
 #include "RegistryUtils.h"
 #include "DropBox.h"
@@ -45,6 +47,8 @@ public:
     FormPage* form;
     SurveyPage* survey;
     Check4Cheating* cheat;
+    UsagePage* usage;
+    HoursPage* hours;
 
 
 
@@ -120,6 +124,12 @@ public:
 
         cheat = new Check4Cheating();
         stackedWidget->addWidget(cheat);
+
+        usage = new UsagePage();
+        stackedWidget->addWidget(usage);
+
+        hours = new HoursPage();
+        stackedWidget->addWidget(hours);
 
         //// If this isn't the first time, skip the first few pages.
         //if (RegistryUtils::getRegKey("UNI").isValid()) {

@@ -65,13 +65,15 @@ void SysUtils::takeSnapshot(QString snapshot_reason) {
 
     // Slowdown
     contents.append("slowdown," + QString::number(SLOWDOWN) + "\n");
+
+    contents.append("earnings," + QString::number(5 + Protocol2App::getDays() * OFFER) + "\n");
     
     // Append clock speed. Maybe we'll need to introduce the patch page?
     contents.append("freq," + QString::number(PowerMgmt::getCurrentClockFreqRead(proc)) + "\n");
 
 
-    // TODO survey results
-    // TODO only append survey results if this is a timeout or a decline.
+    // survey results
+    // only append survey results if this is a timeout or a decline.
 
     if (snapshot_reason == "final") {
         if (SurveyPage::not_enough_money->isChecked()) {
@@ -89,26 +91,27 @@ void SysUtils::takeSnapshot(QString snapshot_reason) {
             contents.append("other," + reason + "\n");
         }
         else {
-            contents.append("other,\n");
+            contents.append("other,0\n");
+        }
+        // Not first time, cheating  is possible
+        if (Protocol2App::getDays() != TOTAL_DAYS) {
+            contents.append("cheated,");
+            if (Check4Cheating::cheated_btn->isChecked()) {
+                QString cheat_method = Check4Cheating::details->toPlainText();
+                cheat_method.replace(",", ";");
+                cheat_method.replace("\n", ";");
+                contents.append(cheat_method);
+            }
+            else if (Check4Cheating::honest_btn->isChecked()) {
+                contents.append("no");
+            }
+            else {
+                contents.append("neither?");
+            }
+            contents.append("\n");
         }
     }
-    // Not first time, cheating  is possible
-    if (Protocol2App::getDays() != TOTAL_DAYS) {
-        contents.append("cheated,");
-        if (Check4Cheating::cheated_btn->isChecked()) {
-            QString cheat_method = Check4Cheating::details->toPlainText();
-            cheat_method.replace(",", ";");
-            cheat_method.replace("\n", ";");
-            contents.append("other," + cheat_method + "\n");
-        }
-        else if (Check4Cheating::honest_btn->isChecked()) {
-            contents.append("no");
-        }
-        else {
-            contents.append("neither?");
-        }
-        contents.append("\n");
-    }
+    
     
 
 

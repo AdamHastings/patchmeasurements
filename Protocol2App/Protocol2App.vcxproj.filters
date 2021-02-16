@@ -89,6 +89,12 @@
     <ClCompile Include="PatchPage.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="HoursPage.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="UsagePage.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ui_Protocol2App.h">
@@ -148,6 +154,12 @@
       <Filter>Header Files</Filter>
     </QtMoc>
     <QtMoc Include="PatchPage.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="HoursPage.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="UsagePage.h">
       <Filter>Header Files</Filter>
     </QtMoc>
   </ItemGroup>

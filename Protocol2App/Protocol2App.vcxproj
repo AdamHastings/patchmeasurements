@@ -110,6 +110,7 @@
     <ClCompile Include="DropBox.cpp" />
     <ClCompile Include="ExitPage.cpp" />
     <ClCompile Include="FormPage.cpp" />
+    <ClCompile Include="HoursPage.cpp" />
     <ClCompile Include="PatchPage.cpp" />
     <ClCompile Include="PowerMgmt.cpp" />
     <ClCompile Include="RegistryUtils.cpp" />
@@ -117,6 +118,7 @@
     <ClCompile Include="StartPage.cpp" />
     <ClCompile Include="SurveyPage.cpp" />
     <ClCompile Include="SysUtils.cpp" />
+    <ClCompile Include="UsagePage.cpp" />
     <ClCompile Include="WTAPage.cpp" />
     <QtRcc Include="Protocol2App.qrc" />
     <QtUic Include="Check4Cheating.ui" />
@@ -133,6 +135,7 @@
     <QtUic Include="WTAPage.ui" />
   </ItemGroup>
   <ItemGroup>
+    <QtMoc Include="UsagePage.h" />
     <QtMoc Include="WTAPage.h" />
     <QtMoc Include="StartPage.h" />
     <QtMoc Include="DoubleCheck.h" />
@@ -146,6 +149,7 @@
     <ClInclude Include="DropBox.h" />
     <ClInclude Include="Globals.h" />
     <QtMoc Include="PatchPage.h" />
+    <QtMoc Include="HoursPage.h" />
     <ClInclude Include="PowerMgmt.h" />
     <ClInclude Include="RegistryUtils.h" />
     <QtMoc Include="RegistryEditPage.h" />
