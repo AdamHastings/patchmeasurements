@@ -1,5 +1,14 @@
 #include "SurveyPage.h"
 #include "Globals.h"
+#include <QDebug>
+
+QCheckBox* SurveyPage::not_enough_money;
+QCheckBox* SurveyPage::mistrust;
+QCheckBox* SurveyPage::other_users;
+QCheckBox* SurveyPage::other;
+
+QDoubleSpinBox* SurveyPage::wta_input;
+QTextEdit* SurveyPage::other_reason;
 
 
 void SurveyPage::checkIfContinue() {
@@ -17,6 +26,7 @@ void SurveyPage::checkIfContinue() {
 }
 
 void SurveyPage::not_enough_money_clicked() {
+    //qDebug() << "not_enough_money checked?" << not_enough_money->isChecked();
     checkIfContinue();
     if (not_enough_money->isChecked()) {
         offerq->setVisible(true);

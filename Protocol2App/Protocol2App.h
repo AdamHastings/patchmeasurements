@@ -14,12 +14,16 @@ public:
     
     //static void restoreSystem(restoreReason r);
     static int getDays();
+    static QString getUNI();
+
+    static void setUNI(QString input);
    
 
 private:
     Ui::MainWindow ui;
 
-    int days;
+    static int days;
+    static QString uni;
 
 
 private:

@@ -110,6 +110,7 @@
     <ClCompile Include="DropBox.cpp" />
     <ClCompile Include="ExitPage.cpp" />
     <ClCompile Include="FormPage.cpp" />
+    <ClCompile Include="PatchPage.cpp" />
     <ClCompile Include="PowerMgmt.cpp" />
     <ClCompile Include="RegistryUtils.cpp" />
     <ClCompile Include="RegistryEditPage.cpp" />
@@ -144,6 +145,7 @@
     <ClInclude Include="crypto.h" />
     <ClInclude Include="DropBox.h" />
     <ClInclude Include="Globals.h" />
+    <QtMoc Include="PatchPage.h" />
     <ClInclude Include="PowerMgmt.h" />
     <ClInclude Include="RegistryUtils.h" />
     <QtMoc Include="RegistryEditPage.h" />

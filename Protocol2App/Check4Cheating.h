@@ -15,10 +15,12 @@ public:
 	~Check4Cheating();
 
 public:
-	QRadioButton* cheated_btn;
-	QRadioButton* honest_btn;
+	static QRadioButton* cheated_btn;
+	static QRadioButton* honest_btn;
+	static QTextEdit* details;
+
 	QPushButton* continue_btn;
-	QTextEdit* details;
+
 
 private:
 	QLabel* label;

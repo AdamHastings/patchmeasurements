@@ -21,17 +21,20 @@ public:
 	//void firstOffer();
 	void resetPage(int days);
 
+	static QCheckBox* not_enough_money;
+	static QCheckBox* mistrust;
+	static QCheckBox* other_users;
+	static QCheckBox* other;
+
+	static QDoubleSpinBox* wta_input;
+	static QTextEdit* other_reason;
+
 private:
 	QLabel* label;
-
-	QCheckBox* not_enough_money;
-	QCheckBox* mistrust;
-	QCheckBox* other_users;
-	QCheckBox* other;
-
 	QLabel* offerq;
-	QDoubleSpinBox* wta_input;
-	QTextEdit* other_reason;
+
+
+	
 
 	void setupPage();
 	void makeConnections();

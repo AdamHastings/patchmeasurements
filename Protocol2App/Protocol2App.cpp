@@ -6,6 +6,10 @@
 #include <time.h>
 #include <QDebug>
 
+int Protocol2App::days;
+QString Protocol2App::uni;
+
+
 void Protocol2App::enableExitButton() {
     Qt::WindowFlags flags = windowFlags();
     Qt::WindowFlags closeFlag = Qt::WindowCloseButtonHint;
@@ -22,29 +26,6 @@ void Protocol2App::disableExitButton() {
     setWindowFlags(flags);
     this->show();
 //#endif
-}
-
-void Protocol2App::showWTA() {
-    qDebug() << "days: " << days;
-    if (days == TOTAL_DAYS) {
-        SysUtils::initExperiment();
-    }
-    ui.wta->resetPage(days);
-    ui.stackedWidget->setCurrentWidget(ui.wta);
-}
-
-void Protocol2App::WTAnext() {
-    if (ui.wta->accept->isChecked()) {
-        //ui.stackedWidget->setCurrentWidget(ui.dc_accept);
-        acceptOffer();
-    }
-    else if (ui.wta->decline->isChecked()) {
-        //ui.stackedWidget->setCurrentWidget(ui.dc_decline);
-        declineOffer();
-    }
-    else {
-        qDebug() << "ERROR: Nothing selected in WTA page";
-    }
 }
 
 void Protocol2App::showStartNext() {
@@ -71,6 +52,31 @@ void Protocol2App::showFormPage() {
     ui.stackedWidget->setCurrentWidget(ui.form);
 }
 
+
+void Protocol2App::showWTA() {
+    qDebug() << "days: " << days;
+    if (days == TOTAL_DAYS) {
+        SysUtils::initExperiment();
+        SysUtils::takeSnapshot("start");
+    }
+    ui.wta->resetPage(days);
+    ui.stackedWidget->setCurrentWidget(ui.wta);
+}
+
+void Protocol2App::WTAnext() {
+    if (ui.wta->accept->isChecked()) {
+        //ui.stackedWidget->setCurrentWidget(ui.dc_accept);
+        acceptOffer();
+    }
+    else if (ui.wta->decline->isChecked()) {
+        //ui.stackedWidget->setCurrentWidget(ui.dc_decline);
+        declineOffer();
+    }
+    else {
+        qDebug() << "ERROR: Nothing selected in WTA page";
+    }
+}
+
 void Protocol2App::showGoodbye() {
     ui.stackedWidget->setCurrentWidget(ui.goodbye);
 }
@@ -91,6 +97,7 @@ void Protocol2App::acceptOffer() {
 }
 
 void Protocol2App::showNoMore() {
+    SysUtils::takeSnapshot("final");
     ui.nomore->resetPage(days);
     enableExitButton();
     ui.stackedWidget->setCurrentWidget(ui.nomore);
@@ -118,6 +125,7 @@ void Protocol2App::showCheat() {
 }
 
 void Protocol2App::showSurveyNext() {
+    SurveyPage::not_enough_money->isChecked();
     if (days == TOTAL_DAYS) {
         // This is the first time
         showNoMore();
@@ -225,11 +233,24 @@ void Protocol2App::resetProgram() {
 
 void Protocol2App::timeout() {
     //restoreSystem(TIMEOUT);
-    SysUtils::takeSnapshot("timeout");
+    //SysUtils::takeSnapshot("timeout");
     if (days != TOTAL_DAYS) { // The system was actually slowed down
         PowerMgmt::restoreDefaults();
     }
     SysUtils::restoreSystem();
     showNoMore();
 }
+
+int Protocol2App::getDays() {
+    return days;
+}
+
+QString Protocol2App::getUNI() {
+    return uni;
+}
+
+void Protocol2App::setUNI(QString input) {
+    uni = input;
+}
+
 

@@ -1,6 +1,10 @@
 #include "Check4Cheating.h"
 #include "Globals.h"
 
+ QRadioButton* Check4Cheating::cheated_btn;
+ QRadioButton* Check4Cheating::honest_btn;
+ QTextEdit* Check4Cheating::details;
+
 void Check4Cheating::checkIfContinue() {
 	if (honest_btn->isChecked()) {
 		continue_btn->setEnabled(true);
