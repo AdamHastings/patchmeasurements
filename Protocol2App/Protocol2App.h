@@ -36,6 +36,8 @@ private:
     void declineOffer();
     void showSurvey();
     void showCheat();
+    void showUsage();
+    void showHours();
     void showNoMore();
     void showSurveyNext();
 

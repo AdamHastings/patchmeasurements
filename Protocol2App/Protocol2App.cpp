@@ -125,14 +125,21 @@ void Protocol2App::showCheat() {
 }
 
 void Protocol2App::showSurveyNext() {
-    SurveyPage::not_enough_money->isChecked();
     if (days == TOTAL_DAYS) {
         // This is the first time
-        showNoMore();
+        showHours();
     }
     else {
         showCheat();
     }
+}
+
+void Protocol2App::showHours() {
+    ui.stackedWidget->setCurrentWidget(ui.hours);
+}
+
+void Protocol2App::showUsage() {
+    ui.stackedWidget->setCurrentWidget(ui.usage);
 }
 
 Protocol2App::Protocol2App(QWidget *parent)
@@ -162,30 +169,18 @@ Protocol2App::Protocol2App(QWidget *parent)
 
     connect(ui.wta->continue_btn, &QPushButton::clicked, this, &Protocol2App::WTAnext);
 
-    /*connect(ui.dc_accept->mistake_btn, &QPushButton::clicked, this, &Protocol2App::showWTA);
-    connect(ui.dc_decline->mistake_btn, &QPushButton::clicked, this, &Protocol2App::showWTA);
-
-    connect(ui.dc_accept->confirm_btn, &QPushButton::clicked, this, &Protocol2App::acceptOffer);
-    connect(ui.dc_decline->confirm_btn, &QPushButton::clicked, this, &Protocol2App::showSurvey);*/
 
     connect(ui.survey->continue_btn, &QPushButton::clicked, this, &Protocol2App::showSurveyNext);
-    connect(ui.cheat->continue_btn, &QPushButton::clicked, this, &Protocol2App::showNoMore);
+
+    connect(ui.cheat->continue_btn, &QPushButton::clicked, this, &Protocol2App::showHours);
+
+    connect(ui.hours->continue_btn, &QPushButton::clicked, this, &Protocol2App::showUsage);
+    connect(ui.usage->continue_btn, &QPushButton::clicked, this, &Protocol2App::showNoMore);
 
 #ifdef QT_DEBUG
     // connect(ui.start->consent_btn, &QPushButton::clicked, this, &Protocol2App::showCheat);
 #endif
 }
-
-//int Protocol2App::getDays() {
-//    return days;
-//}
-
-//void Protocol2App::restoreSystem(restoreReason r) {
-//    // TODO
-//    //restorePowerDefaults();
-//    RegistryUtils::nuke();
-//}
-
 
 void Protocol2App::closeEvent(QCloseEvent* event) {
 
