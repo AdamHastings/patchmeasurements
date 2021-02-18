@@ -14,24 +14,24 @@ public:
 	UsagePage(QWidget* parent = Q_NULLPTR);
 	~UsagePage();
 
-	QCheckBox* gaming;
-	QCheckBox* word_processing;
-	QCheckBox* spreadsheets;
-	QCheckBox* programming;
-	QCheckBox* streaming;
-	QCheckBox* video_editing;
-	QCheckBox* animation;
-	QCheckBox* design_tools;
-	QCheckBox* web_searches;
-	QCheckBox* email;
-	QCheckBox* e_reading;
-	QCheckBox* social_media;
-	QCheckBox* video_calls;
-	QCheckBox* crypto_mining;
-	QCheckBox* photo_storage;
-	QCheckBox* shopping;
-	QCheckBox* other;
-	QLineEdit* input;
+	static QCheckBox* gaming;
+	static QCheckBox* word_processing;
+	static QCheckBox* spreadsheets;
+	static QCheckBox* programming;
+	static QCheckBox* streaming;
+	static QCheckBox* video_editing;
+	static QCheckBox* animation;
+	static QCheckBox* design_tools;
+	static QCheckBox* web_searches;
+	static QCheckBox* email;
+	static QCheckBox* e_reading;
+	static QCheckBox* social_media;
+	static QCheckBox* video_calls;
+	static QCheckBox* crypto_mining;
+	static QCheckBox* photo_storage;
+	static QCheckBox* shopping;
+	static QCheckBox* other;
+	static QLineEdit* input;
 
 	QPushButton* continue_btn;
 

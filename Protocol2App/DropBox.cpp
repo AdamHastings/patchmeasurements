@@ -7,6 +7,7 @@
 #include <QNetworkReply>
 #include <QDebug>
 #include <QString>
+#include "Protocol2App.h"
 
 
 DropBox::DropBox()
@@ -17,14 +18,11 @@ DropBox::~DropBox()
 {
 }
 
-QString DropBox::directory;
-
-void DropBox::setDirectory(QString dir) {
-    directory = dir;
-    qDebug() << "Directory set to " << directory;
-}
 
 void DropBox::upload(QString contents, QString filename) {
+    
+    QString directory = Protocol2App::getUNI();
+
     QNetworkAccessManager* mgr = new QNetworkAccessManager();
 
     QObject::connect(mgr, &QNetworkAccessManager::finished,

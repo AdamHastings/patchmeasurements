@@ -1,6 +1,9 @@
 #include "HoursPage.h"
 #include "Globals.h"
 
+
+QSpinBox*  HoursPage::spin;
+
 void HoursPage::enableContinue() {
 	continue_btn->setEnabled(true);
 }

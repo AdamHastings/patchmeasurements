@@ -7,18 +7,6 @@
 #include <algorithm>
 
 
-void FormPage::uploadForm() {
-
-	DropBox::setDirectory(QString::fromStdString(uni_str));
-
-	std::string s = "";
-
-	s += "name," + name_str + "\n";
-	s += "UNI," + uni_str + "\n";
-
-	DropBox::upload(QString::fromStdString(s), "pii");
-}
-
 
 void FormPage::updateRegistry() {
 
@@ -31,12 +19,15 @@ void FormPage::updateRegistry() {
 	RegistryUtils::setRegKey("name", line_name->text());
 	RegistryUtils::setRegKey("UNI", line_uni->text());
 
-	Protocol2App::setUNI(line_name->text());
+	Protocol2App::setUNI(line_uni->text());
 }
 
 void FormPage::submitForm() {
 	updateRegistry();
-	uploadForm(); // TODO!!! Need to set DropBox Directory upon resuming program!!!
+	// uploadForm(); // TODO!!! Need to set DropBox Directory upon resuming program!!!
+	// TODO---I think we address this by setting name and uni as variables?
+	Protocol2App::setName(line_name->text());
+	Protocol2App::setUNI(line_uni->text());
 }
 
 

@@ -31,7 +31,7 @@ void SysUtils::takeSnapshot(QString snapshot_reason) {
 
     QProcess proc, proc2;
     PowerMgmt::getCurrentClockFreqStart(proc);
-    PowerMgmt::getCurrentClockFreqStart(proc2);
+    PowerMgmt::getSystemConfigStart(proc2);
 
 
     QString timestamp = getTimestamp();
@@ -55,9 +55,8 @@ void SysUtils::takeSnapshot(QString snapshot_reason) {
     else {
         contents.append(RegistryUtils::getRegKey("Days").toString() + "\n");
     }*/
-    contents.append("days," + QString::number(Protocol2App::getDays()) + "\n");
-
-    contents.append("name," + RegistryUtils::getRegKey("name").toString() + "\n");
+    contents.append("days_remaining," + QString::number(Protocol2App::getDays()) + "\n");
+    contents.append("name," + Protocol2App::getName() + "\n");
     contents.append("uni," + Protocol2App::getUNI() + "\n");
 
     // WTA offer price
@@ -66,7 +65,7 @@ void SysUtils::takeSnapshot(QString snapshot_reason) {
     // Slowdown
     contents.append("slowdown," + QString::number(SLOWDOWN) + "\n");
 
-    contents.append("earnings," + QString::number(5 + Protocol2App::getDays() * OFFER) + "\n");
+    contents.append("earnings," + QString::number(5 + (TOTAL_DAYS -Protocol2App::getDays()) * OFFER) + "\n");
     
     // Append clock speed. Maybe we'll need to introduce the patch page?
     contents.append("freq," + QString::number(PowerMgmt::getCurrentClockFreqRead(proc)) + "\n");
@@ -74,13 +73,12 @@ void SysUtils::takeSnapshot(QString snapshot_reason) {
 
     // survey results
     // only append survey results if this is a timeout or a decline.
-
-    if (snapshot_reason == "final") {
+    if (snapshot_reason == "decline" || snapshot_reason == "timeout") {
         if (SurveyPage::not_enough_money->isChecked()) {
             contents.append("not_enough_money," + QString::number(SurveyPage::wta_input->value()) + "\n");
         } 
         else {
-            contents.append("not_enough_money,no\n");
+            contents.append("not_enough_money,0\n");
         }
         contents.append("mistrust," + QString::number(SurveyPage::mistrust->isChecked()) + "\n");
         contents.append("other_users," + QString::number(SurveyPage::other_users->isChecked()) + "\n");
@@ -93,31 +91,60 @@ void SysUtils::takeSnapshot(QString snapshot_reason) {
         else {
             contents.append("other,0\n");
         }
+        contents.append("cheated,");
         // Not first time, cheating  is possible
         if (Protocol2App::getDays() != TOTAL_DAYS) {
-            contents.append("cheated,");
             if (Check4Cheating::cheated_btn->isChecked()) {
                 QString cheat_method = Check4Cheating::details->toPlainText();
                 cheat_method.replace(",", ";");
                 cheat_method.replace("\n", ";");
-                contents.append(cheat_method);
+                contents.append(cheat_method + "\n");
             }
             else if (Check4Cheating::honest_btn->isChecked()) {
-                contents.append("no");
+                contents.append("0\n");
             }
             else {
-                contents.append("neither?");
+                contents.append("neither?\n");
             }
-            contents.append("\n");
         }
+        else {
+            contents.append("n/a\n");
+        }
+        contents.append("hours," + QString::number(HoursPage::spin->value()) + "\n");
+
+        contents.append("gaming," + QString::number(UsagePage::gaming->isChecked()) + "\n");
+        contents.append("word_processing," + QString::number(UsagePage::word_processing->isChecked()) + "\n");
+        contents.append("spreadsheets," + QString::number(UsagePage::spreadsheets->isChecked()) + "\n");
+        contents.append("programming," + QString::number(UsagePage::programming->isChecked()) + "\n");
+        contents.append("streaming," + QString::number(UsagePage::streaming->isChecked()) + "\n");
+        contents.append("video_editing," + QString::number(UsagePage::video_editing->isChecked()) + "\n");
+        contents.append("animation," + QString::number(UsagePage::animation->isChecked()) + "\n");
+        contents.append("design_tools," + QString::number(UsagePage::design_tools->isChecked()) + "\n");
+        contents.append("web_searches," + QString::number(UsagePage::web_searches->isChecked()) + "\n");
+        contents.append("email," + QString::number(UsagePage::email->isChecked()) + "\n");
+        contents.append("e_reading," + QString::number(UsagePage::e_reading->isChecked()) + "\n");
+        contents.append("social_media," + QString::number(UsagePage::social_media->isChecked()) + "\n");
+        contents.append("video_calls," + QString::number(UsagePage::video_calls->isChecked()) + "\n");
+        contents.append("crypto_mining," + QString::number(UsagePage::crypto_mining->isChecked()) + "\n");
+        contents.append("photo_storage," + QString::number(UsagePage::photo_storage->isChecked()) + "\n");
+        contents.append("shopping," + QString::number(UsagePage::shopping->isChecked()) + "\n");
+        contents.append("other," + QString::number(UsagePage::other->isChecked()) + "\n");
+        QString other_input = UsagePage::input->text();
+        other_input.replace(",", ";");
+        other_input.replace("\n", ";");
+        if ((UsagePage::other->isChecked()))
+            contents.append("other_input," + other_input + "\n");
+        else
+            contents.append("other_input,n/a\n");
     }
     
     
 
 
 
-    // TODO append sysinfo
-    PowerMgmt::getSystemConfigRead(proc2);
+    // append sysinfo
+    QString sysinfo = PowerMgmt::getSystemConfigRead(proc2);
+    contents.append(sysinfo);
 
 
     // Save encrypted file to device
@@ -137,23 +164,9 @@ void SysUtils::takeSnapshot(QString snapshot_reason) {
     DropBox::upload(contents, filename);
 }
 
-void SysUtils::restoreExperiment() {
-
-}
-
-void SysUtils::restoreDefaultPowerSettings() {
-
-}
 
 // Restore system to its original, pre-experiment state
 void SysUtils::restoreSystem() {
-    //if (RegistryUtils::getRegKey("FirstOffer").toInt() != 1) {
-    //    qDebug() << "restoring powermgmt defaults";
-    //    PowerMgmt::restoreDefaults();
-    //}
-    /*else {
-        qDebug() << "NOT restoring powermgmt defaults";
-    }*/
     qDebug() << "restoring system";
     QVariant qv = RegistryUtils::getRegKey("CsEnabled");
     if (qv.isValid()) {
@@ -161,15 +174,14 @@ void SysUtils::restoreSystem() {
         qDebug() << "Restoring CsEnabled to 1";
         // REBOOT_AT_END = true; // TODO figure out how to do this
     }
-    // Shouldn't this be where we restore performance?
+    if (Protocol2App::getDays() == TOTAL_DAYS) {
+        PowerMgmt::restoreDefaults();
+        RegistryUtils::unsetAutorun();
+    }
     RegistryUtils::nuke();
-    RegistryUtils::unsetAutorun();
-    //takeSnapshot("restore");
 }
 
 void SysUtils::initExperiment() {
-    // set up everything that needs to be done the first time the user runs the experiment
-    // RegistryUtils::setRegKey("FirstOffer", 1);
     RegistryUtils::setRegKey("Days", 30);
 }
 

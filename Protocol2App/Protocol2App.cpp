@@ -8,6 +8,7 @@
 
 int Protocol2App::days;
 QString Protocol2App::uni;
+QString Protocol2App::name;
 
 
 void Protocol2App::enableExitButton() {
@@ -82,7 +83,6 @@ void Protocol2App::showGoodbye() {
 }
 
 void Protocol2App::acceptOffer() {
-    //RegistryUtils::setRegKey("firstoffer", 0);
     SysUtils::takeSnapshot("accept");
     if (days == TOTAL_DAYS) { // This is the first acceptance
         RegistryUtils::setAutorun();
@@ -97,22 +97,18 @@ void Protocol2App::acceptOffer() {
 }
 
 void Protocol2App::showNoMore() {
-    SysUtils::takeSnapshot("final");
+    if (days == 0)
+        SysUtils::takeSnapshot("timeout");
+    else
+        SysUtils::takeSnapshot("decline");
     ui.nomore->resetPage(days);
     enableExitButton();
     ui.stackedWidget->setCurrentWidget(ui.nomore);
 }
 
 void Protocol2App::declineOffer() {
-    qDebug() << "declining offer";
-    //RegistryUtils::setRegKey("firstoffer", 0);
-    SysUtils::takeSnapshot("decline");
-    if (days != TOTAL_DAYS) { // The system was actually slowed down
-        PowerMgmt::restoreDefaults();
-    }
     SysUtils::restoreSystem();
     showSurvey();
-    //showNoMore();
 }
 
 void Protocol2App::showSurvey() {
@@ -149,8 +145,6 @@ Protocol2App::Protocol2App(QWidget *parent)
 
     // If this isn't the first time, load values from the registry
     if (RegistryUtils::getRegKey("days").isValid()) {
-        days = RegistryUtils::getRegKey("days").toInt();
-        // TODO is this what we want?
         resetProgram();
     }
     else {
@@ -198,12 +192,11 @@ void Protocol2App::closeEvent(QCloseEvent* event) {
             time_to_sleep = 1 * 1000;
             days /= 2;
 #endif
+            // update Registry
+            RegistryUtils::setRegKey("Days", --days);
+
             _sleep(time_to_sleep);
 
-            days--;
-
-            // update Registry
-            RegistryUtils::setRegKey("Days", days);
 
             if (days == 0) {
                 timeout();
@@ -222,16 +215,16 @@ void Protocol2App::closeEvent(QCloseEvent* event) {
 }
 
 void Protocol2App::resetProgram() {
+    days = RegistryUtils::getRegKey("days").toInt();
+    uni = RegistryUtils::getRegKey("UNI").toString();
+    name = RegistryUtils::getRegKey("name").toString();
+    SysUtils::takeSnapshot("audit");
+    // TODO might need to make it sleep for longer if the 24 hours hasn't elapsed
     disableExitButton();
     showWTA();
 }
 
 void Protocol2App::timeout() {
-    //restoreSystem(TIMEOUT);
-    //SysUtils::takeSnapshot("timeout");
-    if (days != TOTAL_DAYS) { // The system was actually slowed down
-        PowerMgmt::restoreDefaults();
-    }
     SysUtils::restoreSystem();
     showNoMore();
 }
@@ -246,6 +239,14 @@ QString Protocol2App::getUNI() {
 
 void Protocol2App::setUNI(QString input) {
     uni = input;
+}
+
+void Protocol2App::setName(QString input) {
+    name = input;
+}
+
+QString Protocol2App::getName() {
+    return name;
 }
 
 

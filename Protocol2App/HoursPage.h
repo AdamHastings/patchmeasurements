@@ -13,7 +13,7 @@ public:
 	HoursPage(QWidget* parent = Q_NULLPTR);
 	~HoursPage();
 
-	QSpinBox* spin;
+	static QSpinBox* spin;
 	QPushButton* continue_btn;
 
 private:

@@ -15,8 +15,10 @@ public:
     //static void restoreSystem(restoreReason r);
     static int getDays();
     static QString getUNI();
+    static QString getName();
 
     static void setUNI(QString input);
+    static void setName(QString input);
    
 
 private:
@@ -24,6 +26,7 @@ private:
 
     static int days;
     static QString uni;
+    static QString name;
 
 
 private:

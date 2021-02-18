@@ -2,6 +2,24 @@
 #include "Globals.h"
 #include <QLabel>
 
+QCheckBox* UsagePage::gaming;
+QCheckBox* UsagePage::word_processing;
+QCheckBox* UsagePage::spreadsheets;
+QCheckBox* UsagePage::programming;
+QCheckBox* UsagePage::streaming;
+QCheckBox* UsagePage::video_editing;
+QCheckBox* UsagePage::animation;
+QCheckBox* UsagePage::design_tools;
+QCheckBox* UsagePage::web_searches;
+QCheckBox* UsagePage::email;
+QCheckBox* UsagePage::e_reading;
+QCheckBox* UsagePage::social_media;
+QCheckBox* UsagePage::video_calls;
+QCheckBox* UsagePage::crypto_mining;
+QCheckBox* UsagePage::photo_storage;
+QCheckBox* UsagePage::shopping;
+QCheckBox* UsagePage::other;
+QLineEdit* UsagePage::input;
 
 void UsagePage::checkIfContinue() {
 	if (
