@@ -301,7 +301,7 @@ void MainWindow::updateOffer_yes() {
 
 void MainWindow::updateOffer_no() {
     if (!first_accept) {
-        if (offer > (2147483647 - 1)/2) {
+        if (offer >= 16384) {
             showUsage();
         } else if (offer == 0) {
             offer = 1;
