@@ -105,6 +105,7 @@
     <ClCompile Include="..\Protocol1App\aes.cpp" />
     <ClCompile Include="..\Protocol1App\sha256.cpp" />
     <ClCompile Include="Check4Cheating.cpp" />
+    <ClCompile Include="ChoicePage.cpp" />
     <ClCompile Include="crypto.cpp" />
     <ClCompile Include="DoubleCheck.cpp" />
     <ClCompile Include="DropBox.cpp" />
@@ -122,6 +123,7 @@
     <ClCompile Include="WTAPage.cpp" />
     <QtRcc Include="Protocol2App.qrc" />
     <QtUic Include="Check4Cheating.ui" />
+    <QtUic Include="ChoicePage.ui" />
     <QtUic Include="DoubleCheck.ui" />
     <QtUic Include="ExitPage.ui" />
     <QtUic Include="FormPage.ui" />
@@ -145,6 +147,7 @@
     <ClInclude Include="..\Protocol1App\aes.h" />
     <ClInclude Include="..\Protocol1App\sha256.h" />
     <ClInclude Include="..\Protocol1App\typedefs.h" />
+    <QtMoc Include="ChoicePage.h" />
     <ClInclude Include="crypto.h" />
     <ClInclude Include="DropBox.h" />
     <ClInclude Include="Globals.h" />

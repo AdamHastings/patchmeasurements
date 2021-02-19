@@ -18,6 +18,7 @@
 #include "Check4Cheating.h"
 #include "HoursPage.h"
 #include "UsagePage.h"
+#include "ChoicePage.h"
 
 #include "RegistryUtils.h"
 #include "DropBox.h"
@@ -49,6 +50,8 @@ public:
     Check4Cheating* cheat;
     UsagePage* usage;
     HoursPage* hours;
+    ImproveChoicePage* improve;
+    DecreaseChoicePage* decrease;
 
 
 
@@ -130,6 +133,12 @@ public:
 
         hours = new HoursPage();
         stackedWidget->addWidget(hours);
+
+        improve = new ImproveChoicePage();
+        stackedWidget->addWidget(improve);
+
+        decrease = new DecreaseChoicePage();
+        stackedWidget->addWidget(decrease);
 
         //// If this isn't the first time, skip the first few pages.
         //if (RegistryUtils::getRegKey("UNI").isValid()) {

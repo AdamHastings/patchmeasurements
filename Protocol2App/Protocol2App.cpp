@@ -134,6 +134,14 @@ void Protocol2App::showHours() {
     ui.stackedWidget->setCurrentWidget(ui.hours);
 }
 
+void Protocol2App::showImprove() {
+    ui.stackedWidget->setCurrentWidget(ui.improve);
+}
+
+void Protocol2App::showDecrease() {
+    ui.stackedWidget->setCurrentWidget(ui.decrease);
+}
+
 void Protocol2App::showUsage() {
     ui.stackedWidget->setCurrentWidget(ui.usage);
 }
@@ -168,7 +176,10 @@ Protocol2App::Protocol2App(QWidget *parent)
 
     connect(ui.cheat->continue_btn, &QPushButton::clicked, this, &Protocol2App::showHours);
 
-    connect(ui.hours->continue_btn, &QPushButton::clicked, this, &Protocol2App::showUsage);
+    connect(ui.hours->continue_btn, &QPushButton::clicked, this, &Protocol2App::showImprove);
+    connect(ui.improve->continue_btn, &QPushButton::clicked, this, &Protocol2App::showDecrease);
+    connect(ui.decrease->continue_btn, &QPushButton::clicked, this, &Protocol2App::showUsage);
+
     connect(ui.usage->continue_btn, &QPushButton::clicked, this, &Protocol2App::showNoMore);
 
 #ifdef QT_DEBUG

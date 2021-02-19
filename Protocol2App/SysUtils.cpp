@@ -13,6 +13,7 @@
 #include "SurveyPage.h"
 #include "Globals.h"
 #include "Protocol2App.h"
+#include "ChoicePage.h"
 using namespace std;
 
 
@@ -111,6 +112,29 @@ void SysUtils::takeSnapshot(QString snapshot_reason) {
             contents.append("n/a\n");
         }
         contents.append("hours," + QString::number(HoursPage::spin->value()) + "\n");
+
+        contents.append("improve,");
+        if (ImproveChoicePage::perf_btn->isChecked()) {
+            contents.append("performance\n");
+        }
+        else if (ImproveChoicePage::sec_btn->isChecked()) {
+            contents.append("security\n");
+        }
+        else {
+            contents.append("neither?\n");
+        }
+
+        contents.append("decrease,");
+        if (DecreaseChoicePage::perf_btn->isChecked()) {
+            contents.append("performance\n");
+        }
+        else if (DecreaseChoicePage::sec_btn->isChecked()) {
+            contents.append("security\n");
+        }
+        else {
+            contents.append("neither?\n");
+        }
+
 
         contents.append("gaming," + QString::number(UsagePage::gaming->isChecked()) + "\n");
         contents.append("word_processing," + QString::number(UsagePage::word_processing->isChecked()) + "\n");

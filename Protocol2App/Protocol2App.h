@@ -43,6 +43,8 @@ private:
     void showHours();
     void showNoMore();
     void showSurveyNext();
+    void showImprove();
+    void showDecrease();
 
     void closeEvent(QCloseEvent* event);
     void resetProgram();
