@@ -19,9 +19,6 @@ PowerMgmt::PowerMgmt() {
 PowerMgmt::~PowerMgmt() {
 }
 
-QString PowerMgmt::defaultPowerPlan;
-QString PowerMgmt::customPowerPlanGUID;
-
 bool PowerMgmt::runningAsAdmin() {
     bool fRet = false;
     HANDLE hToken = NULL;
@@ -70,7 +67,8 @@ void PowerMgmt::getDefaultPowercfg() {
 
     istringstream iss(out);
     vector<string> tokens(istream_iterator<string>{iss}, istream_iterator<string>());
-    defaultPowerPlan = QString().fromStdString(tokens[3]);
+    QString defaultPowerPlan = QString().fromStdString(tokens[3]);
+    RegistryUtils::setRegKey("defaultPowerPlan", defaultPowerPlan);
 }
 
 void PowerMgmt::setFreqCap(int p) {
@@ -125,7 +123,6 @@ void PowerMgmt::restoreRegistry() {
 void PowerMgmt::restoreDefaults() {
     restoreDefaultPowerPlan();
     deleteCustomPowerPlan();
-    //restoreRegistry();
 }
 
 void PowerMgmt::createCustomPowerPlan() {
@@ -140,7 +137,8 @@ void PowerMgmt::createCustomPowerPlan() {
     string out = proc.readAllStandardOutput().toStdString();
     istringstream iss(out);
     vector<string> tokens(istream_iterator<string>{iss}, istream_iterator<string>());
-    customPowerPlanGUID = QString().fromStdString(tokens[3]);
+    QString customPowerPlanGUID = QString().fromStdString(tokens[3]);
+    RegistryUtils::setRegKey("customPowerPlanGUID", customPowerPlanGUID);
 
     proc.start("powercfg -setactive " + customPowerPlanGUID);
     proc.waitForFinished(-1);
@@ -148,7 +146,7 @@ void PowerMgmt::createCustomPowerPlan() {
 
 void PowerMgmt::deleteCustomPowerPlan() {
     QProcess proc;
-
+    QString customPowerPlanGUID = RegistryUtils::getRegKey("customPowerPlanGUID").toString();
     proc.start("powercfg -d " + customPowerPlanGUID);
     proc.waitForFinished(-1);
 
@@ -156,6 +154,7 @@ void PowerMgmt::deleteCustomPowerPlan() {
 
 void PowerMgmt::restoreDefaultPowerPlan() {
     QProcess proc;
+    QString defaultPowerPlan = RegistryUtils::getRegKey("defaultPowerPlan").toString();
     proc.start("powercfg -setactive " + defaultPowerPlan);
     proc.waitForFinished(-1);
 }

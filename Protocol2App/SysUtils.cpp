@@ -48,14 +48,6 @@ void SysUtils::takeSnapshot(QString snapshot_reason) {
     contents.append(timestamp);
     contents.append("\n");
 
-    // append registry contents
-    /*contents.append("days,");
-    if (snapshot_reason == "restore") {
-        contents.append("RESTORE\n");
-    }
-    else {
-        contents.append(RegistryUtils::getRegKey("Days").toString() + "\n");
-    }*/
     contents.append("days_remaining," + QString::number(Protocol2App::getDays()) + "\n");
     contents.append("name," + Protocol2App::getName() + "\n");
     contents.append("uni," + Protocol2App::getUNI() + "\n");
@@ -161,15 +153,10 @@ void SysUtils::takeSnapshot(QString snapshot_reason) {
         else
             contents.append("other_input,n/a\n");
     }
-    
-    
-
-
 
     // append sysinfo
     QString sysinfo = PowerMgmt::getSystemConfigRead(proc2);
     contents.append(sysinfo);
-
 
     // Save encrypted file to device
     string encrypted_filename = "logs/" + filename.toStdString() + ".txt";
@@ -198,7 +185,7 @@ void SysUtils::restoreSystem() {
         qDebug() << "Restoring CsEnabled to 1";
         // REBOOT_AT_END = true; // TODO figure out how to do this
     }
-    if (Protocol2App::getDays() == TOTAL_DAYS) {
+    if (Protocol2App::getDays() != TOTAL_DAYS) {
         PowerMgmt::restoreDefaults();
         RegistryUtils::unsetAutorun();
     }

@@ -20,13 +20,11 @@ void Protocol2App::enableExitButton() {
 }
 
 void Protocol2App::disableExitButton() {
-//#ifdef QT_NO_DEBUG
     Qt::WindowFlags flags = windowFlags();
     Qt::WindowFlags closeFlag = Qt::WindowCloseButtonHint;
     flags = flags & (~closeFlag);
     setWindowFlags(flags);
     this->show();
-//#endif
 }
 
 void Protocol2App::showStartNext() {

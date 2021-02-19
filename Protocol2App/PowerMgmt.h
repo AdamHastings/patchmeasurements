@@ -10,9 +10,6 @@ class PowerMgmt
 
 public:
 
-	static QString customPowerPlanGUID;
-	static QString defaultPowerPlan;
-
 	static void getDefaultPowercfg();
 	static void setFreqCap(int p);
 	static void removeFreqCap();
