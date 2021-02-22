@@ -12,6 +12,7 @@ public:
 	static void takeSnapshot(QString snapshot_reason);
 	static void restoreSystem();
 	static void initExperiment();
+	static int getUnixTime();
 	static QString getpwd();
 
 private:

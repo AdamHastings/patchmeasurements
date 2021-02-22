@@ -52,6 +52,7 @@ public:
     HoursPage* hours;
     ImproveChoicePage* improve;
     DecreaseChoicePage* decrease;
+    TimeoutSplashPage* timeout;
 
 
 
@@ -66,8 +67,17 @@ public:
         BUTTON_HEIGHT = H / 16;
 
         SLOWDOWN = 30;
-        OFFER = 1;
+        OFFER = 5;
         TOTAL_DAYS = 30;
+#ifdef QT_DEBUG
+        TOTAL_DAYS = 2;
+#endif
+
+        // WAIT_PERIOD = 60 * 60 * 24; // one day, in seconds
+        WAIT_PERIOD = 5 * 60; // TODO FOR TESTING ONLY!! CHANGE BACK!!
+#ifdef QT_DEBUG
+        WAIT_PERIOD = 30; // one minute
+#endif
 
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName(QStringLiteral("MainWindow"));
@@ -139,6 +149,9 @@ public:
 
         decrease = new DecreaseChoicePage();
         stackedWidget->addWidget(decrease);
+
+        timeout = new TimeoutSplashPage();
+        stackedWidget->addWidget(timeout);
 
         //// If this isn't the first time, skip the first few pages.
         //if (RegistryUtils::getRegKey("UNI").isValid()) {

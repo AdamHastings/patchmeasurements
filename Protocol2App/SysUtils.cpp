@@ -193,7 +193,7 @@ void SysUtils::restoreSystem() {
 }
 
 void SysUtils::initExperiment() {
-    RegistryUtils::setRegKey("Days", 30);
+    RegistryUtils::setRegKey("Days", TOTAL_DAYS);
 }
 
 QString SysUtils::getpwd() {
@@ -201,4 +201,12 @@ QString SysUtils::getpwd() {
     QString pwd = QString::fromStdString(std::filesystem::absolute(exename).string());
     qDebug() << pwd;
     return pwd;
+}
+
+int SysUtils::getUnixTime() {
+    /*const auto p1 = std::chrono::system_clock::now();
+    uint timeSinceEpoch = std::chrono::duration_cast<uint>(p1.time_since_epoch());
+    return timeSinceEpoch;*/
+    std::time_t t = std::time(0);  // t is an integer type
+    return t;
 }

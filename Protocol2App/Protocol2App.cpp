@@ -31,7 +31,7 @@ void Protocol2App::showStartNext() {
     if (!PowerMgmt::runningAsAdmin()) {
         ui.stackedWidget->setCurrentWidget(ui.noadmin);
     }
-#if QT_NO_DEBUG
+#ifndef QT_DEBUG
     else if (SysUtils::getpwd() != "C:\\Program Files\\" + RegistryUtils::AppName + "\\" + RegistryUtils::AppName + ".exe") {
         ui.stackedWidget->setCurrentWidget(ui.wronginstall);
     }
@@ -82,13 +82,19 @@ void Protocol2App::showGoodbye() {
 
 void Protocol2App::acceptOffer() {
     SysUtils::takeSnapshot("accept");
+    // get current time
+    int time = SysUtils::getUnixTime();
     if (days == TOTAL_DAYS) { // This is the first acceptance
         RegistryUtils::setAutorun();
 
         PowerMgmt::getDefaultPowercfg();
         PowerMgmt::createCustomPowerPlan();
         PowerMgmt::setFreqCap(100 - SLOWDOWN);
+        // add timestamp of first accept
+        RegistryUtils::setRegKey("first_accept", time);
     }
+    // add timestamp of last accept (which should be the same)
+    RegistryUtils::setRegKey("last_accept", time);
     ui.onemore->resetPage(days);
     enableExitButton();
     ui.stackedWidget->setCurrentWidget(ui.onemore);
@@ -144,6 +150,10 @@ void Protocol2App::showUsage() {
     ui.stackedWidget->setCurrentWidget(ui.usage);
 }
 
+void Protocol2App::showTimeoutSplash() {
+    ui.stackedWidget->setCurrentWidget(ui.timeout);
+}
+
 Protocol2App::Protocol2App(QWidget *parent)
     : QMainWindow(parent)
 {
@@ -157,28 +167,19 @@ Protocol2App::Protocol2App(QWidget *parent)
         days = TOTAL_DAYS;
     }
      
-
-
     connect(ui.start->consent_btn, &QPushButton::clicked, this, &Protocol2App::showStartNext);
     connect(ui.start->not_consent_btn, &QPushButton::clicked, this, &Protocol2App::showGoodbye);
-
     connect(ui.mod->consent_btn, &QPushButton::clicked, this, &Protocol2App::showFormPage);
     connect(ui.mod->not_consent_btn, &QPushButton::clicked, this, &Protocol2App::showGoodbye);
-
     connect(ui.form->continue_btn, &QPushButton::clicked, this, &Protocol2App::showWTA);
-
     connect(ui.wta->continue_btn, &QPushButton::clicked, this, &Protocol2App::WTAnext);
-
-
     connect(ui.survey->continue_btn, &QPushButton::clicked, this, &Protocol2App::showSurveyNext);
-
     connect(ui.cheat->continue_btn, &QPushButton::clicked, this, &Protocol2App::showHours);
-
     connect(ui.hours->continue_btn, &QPushButton::clicked, this, &Protocol2App::showImprove);
     connect(ui.improve->continue_btn, &QPushButton::clicked, this, &Protocol2App::showDecrease);
     connect(ui.decrease->continue_btn, &QPushButton::clicked, this, &Protocol2App::showUsage);
-
     connect(ui.usage->continue_btn, &QPushButton::clicked, this, &Protocol2App::showNoMore);
+    connect(ui.timeout->continue_btn, &QPushButton::clicked, this, &Protocol2App::showCheat);
 
 #ifdef QT_DEBUG
     // connect(ui.start->consent_btn, &QPushButton::clicked, this, &Protocol2App::showCheat);
@@ -195,25 +196,22 @@ void Protocol2App::closeEvent(QCloseEvent* event) {
             this->hide();
 
             // wait
-            int time_to_sleep = 60 * 60 * 24 * 1000; // one day
+            //int time_to_sleep = WAIT_PERIOD * 1000; // seconds to milliseconds
 
-#ifdef QT_DEBUG
-            time_to_sleep = 1 * 1000;
-            days /= 2;
-#endif
             // update Registry
-            RegistryUtils::setRegKey("Days", --days);
+            //days = days - 1;
+            //RegistryUtils::setRegKey("Days", days);
 
-            _sleep(time_to_sleep);
+            //_sleep(time_to_sleep);
 
 
-            if (days == 0) {
-                timeout();
-            }
-            else {
-                resetProgram();
-            }
-            this->show();
+            //if (days == 0) {
+                //timeout();
+            //}
+            //else {
+            resetProgram();
+            //}
+            //this->show();
 
         }
     }
@@ -227,15 +225,57 @@ void Protocol2App::resetProgram() {
     days = RegistryUtils::getRegKey("days").toInt();
     uni = RegistryUtils::getRegKey("UNI").toString();
     name = RegistryUtils::getRegKey("name").toString();
+
+    //  figure out how long to sleep, and how many days have elapsed
+    int first_accept = RegistryUtils::getRegKey("first_accept").toInt();
+    int last_accept = RegistryUtils::getRegKey("last_accept").toInt();
+    int time_now = SysUtils::getUnixTime();
+    
+    if ((time_now - first_accept) >= (WAIT_PERIOD * TOTAL_DAYS)) { //timeout
+        days = 0;
+        RegistryUtils::setRegKey("days", days);
+        SysUtils::takeSnapshot("audit");
+        timeout();
+        return;
+    }
+    if ((time_now - last_accept) <= (WAIT_PERIOD)) { // It hasn't been a full WAIT_PERIOD since last accept
+        int time_to_sleep = (WAIT_PERIOD)-(time_now - last_accept);
+        _sleep(time_to_sleep * 1000);
+    }
+
+
+    // days = (time_now - first_accept) / (WAIT_PERIOD * TOTAL_DAYS);
+    time_now = SysUtils::getUnixTime();
+    days = TOTAL_DAYS - ((time_now - first_accept) / WAIT_PERIOD);
+    RegistryUtils::setRegKey("days", days);
     SysUtils::takeSnapshot("audit");
-    // TODO might need to make it sleep for longer if the 24 hours hasn't elapsed
-    disableExitButton();
-    showWTA();
+
+    if (days <= 0) {
+        timeout();
+        return;
+    }
+    else {
+        disableExitButton();
+        showWTA();
+        return;
+    }
+
+    //}
+    //else { // It's been at least a full WAIT_PERIOD since last accept. Need to adjust the registry...
+    //   
+    //    days = TOTAL_DAYS - ((time_now - first_accept) / WAIT_PERIOD);
+    //    RegistryUtils::setRegKey("days", days);
+    //    SysUtils::takeSnapshot("audit");
+
+    //    disableExitButton();
+    //    showWTA();
+    //}
 }
 
 void Protocol2App::timeout() {
     SysUtils::restoreSystem();
-    showNoMore();
+    showTimeoutSplash();
+    this->show();
 }
 
 int Protocol2App::getDays() {

@@ -45,6 +45,7 @@ private:
     void showSurveyNext();
     void showImprove();
     void showDecrease();
+    void showTimeoutSplash();
 
     void closeEvent(QCloseEvent* event);
     void resetProgram();

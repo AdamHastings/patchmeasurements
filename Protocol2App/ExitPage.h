@@ -6,6 +6,7 @@
 #include <QDebug>
 #include "RegistryUtils.h"
 #include "SysUtils.h"
+#include <QPushButton>
 
 class ExitPage : public QWidget
 {
@@ -111,5 +112,24 @@ class GoodbyePage : public ExitPage
 public:
 	GoodbyePage(QWidget* parent = Q_NULLPTR) : ExitPage(parent) {
 		label->setText("Thank you for your interest in this experiment. Unfortunately, you are not eligible to participate. You may now exit this window. You may also delete this program from your computer.\n\nIf you ended up on this page by mistake but still want to participate in this experiment, you can simply just re-run this application.");
+	}
+};
+
+class TimeoutSplashPage : public ExitPage
+{
+	Q_OBJECT
+
+public:
+	QPushButton* continue_btn;
+
+	TimeoutSplashPage(QWidget* parent = Q_NULLPTR) : ExitPage(parent) {
+		label->setText("Thank you for your participation in this experiment. You have participated in this experiment for the maximum of " + QString::number(TOTAL_DAYS) + " days. Your device's performance has been restored. To conclude this experiment, we will now ask you a few survey questions.");
+
+		continue_btn = new QPushButton(this);
+		continue_btn->setGeometry(QRect(W / 2 - BUTTON_WIDTH / 2, M * 8, BUTTON_WIDTH, BUTTON_HEIGHT));
+		continue_btn->setText("Continue");
+#if QT_NO_DEBUG
+		continue_btn->setEnabled(false);
+#endif
 	}
 };
