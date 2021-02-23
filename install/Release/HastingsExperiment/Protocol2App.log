@@ -1,0 +1,11 @@
+﻿  DoubleCheck.cpp
+  DropBox.cpp
+  ExitPage.cpp
+  FormPage.cpp
+  SysUtils.cpp
+  Protocol2App.cpp
+  main.cpp
+C:\Users\Administrator\patchmeasurements\Protocol2App\FormPage.cpp(5,10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+  moc_ExitPage.cpp
+  moc_Protocol2App.cpp
+  Protocol2App.vcxproj -> C:\Users\Administrator\patchmeasurements\Protocol2App\x64\Release\Protocol2App.exe
