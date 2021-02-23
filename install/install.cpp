@@ -19,10 +19,10 @@ int main()
 {
     std::string s;
     // std::transform(s.begin(), s.end(), s.begin(), [](unsigned char c) { return std::tolower(c); });
-    std::cout << "Thank you for participating in this experiment. To get started, you must install a computer program to your computer.\n";
+    std::cout << "Thank you for participating in this experiment. To get started, you must install a computer program to your computer. This program will be uninstalled at the end of this experiment.\n";
 
     while (s != "Yes" && s != "yes" && s != "Y" && s != "y") {
-        std::cout << "\nType Yes and hit Enter to install the program:\n";
+        std::cout << "\nDo you allow this program to be installed onto your computer? If so, type Yes and hit Enter to install the program. If not, you may exit this window.\n";
         std::getline(std::cin, s);
     }
 

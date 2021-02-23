@@ -1,0 +1,2 @@
+C:\Users\Administrator\patchmeasurements\uninstall\Debug\uninstall.exe
+C:\Users\Administrator\patchmeasurements\uninstall\Debug\uninstall.pdb
