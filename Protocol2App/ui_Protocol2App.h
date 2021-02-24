@@ -70,13 +70,13 @@ public:
         OFFER = 5;
         TOTAL_DAYS = 30;
 #ifdef QT_DEBUG
-        TOTAL_DAYS = 2;
+        TOTAL_DAYS = 5;
 #endif
 
         // WAIT_PERIOD = 60 * 60 * 24; // one day, in seconds
         WAIT_PERIOD = 5 * 60; // TODO FOR TESTING ONLY!! CHANGE BACK!!
 #ifdef QT_DEBUG
-        WAIT_PERIOD = 30; // one minute
+        WAIT_PERIOD = 3 * 60; // one minute
 #endif
 
         if (MainWindow->objectName().isEmpty())

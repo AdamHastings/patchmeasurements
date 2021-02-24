@@ -194,25 +194,7 @@ void Protocol2App::closeEvent(QCloseEvent* event) {
 
             event->ignore();
             this->hide();
-
-            // wait
-            //int time_to_sleep = WAIT_PERIOD * 1000; // seconds to milliseconds
-
-            // update Registry
-            //days = days - 1;
-            //RegistryUtils::setRegKey("Days", days);
-
-            //_sleep(time_to_sleep);
-
-
-            //if (days == 0) {
-                //timeout();
-            //}
-            //else {
             resetProgram();
-            //}
-            //this->show();
-
         }
     }
     else {
@@ -243,8 +225,6 @@ void Protocol2App::resetProgram() {
         _sleep(time_to_sleep * 1000);
     }
 
-
-    // days = (time_now - first_accept) / (WAIT_PERIOD * TOTAL_DAYS);
     time_now = SysUtils::getUnixTime();
     days = TOTAL_DAYS - ((time_now - first_accept) / WAIT_PERIOD);
     RegistryUtils::setRegKey("days", days);
@@ -259,17 +239,6 @@ void Protocol2App::resetProgram() {
         showWTA();
         return;
     }
-
-    //}
-    //else { // It's been at least a full WAIT_PERIOD since last accept. Need to adjust the registry...
-    //   
-    //    days = TOTAL_DAYS - ((time_now - first_accept) / WAIT_PERIOD);
-    //    RegistryUtils::setRegKey("days", days);
-    //    SysUtils::takeSnapshot("audit");
-
-    //    disableExitButton();
-    //    showWTA();
-    //}
 }
 
 void Protocol2App::timeout() {
