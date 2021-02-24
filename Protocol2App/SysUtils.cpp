@@ -67,22 +67,37 @@ void SysUtils::takeSnapshot(QString snapshot_reason) {
     // survey results
     // only append survey results if this is a timeout or a decline.
     if (snapshot_reason == "decline" || snapshot_reason == "timeout") {
-        if (SurveyPage::not_enough_money->isChecked()) {
-            contents.append("not_enough_money," + QString::number(SurveyPage::wta_input->value()) + "\n");
-        } 
-        else {
-            contents.append("not_enough_money,0\n");
-        }
-        contents.append("mistrust," + QString::number(SurveyPage::mistrust->isChecked()) + "\n");
-        contents.append("other_users," + QString::number(SurveyPage::other_users->isChecked()) + "\n");
-        if (SurveyPage::other->isChecked()) {
-            QString reason = SurveyPage::other_reason->toPlainText();
-            reason.replace(",", ";");
-            reason.replace("\n", ";");
-            contents.append("other," + reason + "\n");
-        }
-        else {
-            contents.append("other,0\n");
+        if (snapshot_reason == "decline") {
+            if (SurveyPage::not_enough_money->isChecked()) {
+                contents.append("not_enough_money," + QString::number(SurveyPage::wta_input->value()) + "\n");
+            }
+            else {
+                contents.append("not_enough_money,0\n");
+            }
+            contents.append("mistrust," + QString::number(SurveyPage::mistrust->isChecked()) + "\n");
+            contents.append("other_users," + QString::number(SurveyPage::other_users->isChecked()) + "\n");
+            contents.append("malfunction,");
+            if (Protocol2App::getDays() == TOTAL_DAYS) {
+                contents.append("n/a\n");
+            }
+            else if (SurveyPage::malfunction->isChecked()) {
+                QString reason = SurveyPage::malfunction_reason->toPlainText();
+                reason.replace(",", ";");
+                reason.replace("\n", ";");
+                contents.append(reason + "\n");
+            }
+            else {
+                contents.append("0\n");
+            }
+            if (SurveyPage::other->isChecked()) {
+                QString reason = SurveyPage::other_reason->toPlainText();
+                reason.replace(",", ";");
+                reason.replace("\n", ";");
+                contents.append("other," + reason + "\n");
+            }
+            else {
+                contents.append("other,0\n");
+            }
         }
         contents.append("cheated,");
         // Not first time, cheating  is possible

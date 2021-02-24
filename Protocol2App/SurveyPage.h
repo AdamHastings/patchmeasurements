@@ -24,15 +24,16 @@ public:
 	static QCheckBox* not_enough_money;
 	static QCheckBox* mistrust;
 	static QCheckBox* other_users;
+	static QCheckBox* malfunction;
 	static QCheckBox* other;
 
 	static QDoubleSpinBox* wta_input;
 	static QTextEdit* other_reason;
+	static QTextEdit* malfunction_reason;
 
 private:
 	QLabel* label;
 	QLabel* offerq;
-
 
 	
 
@@ -43,5 +44,6 @@ private:
 	void not_enough_money_clicked();
 	void other_users_clicked();
 	void mistrust_clicked();
+	void malfunction_clicked();
 	void other_clicked();
 };

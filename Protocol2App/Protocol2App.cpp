@@ -182,7 +182,7 @@ Protocol2App::Protocol2App(QWidget *parent)
     connect(ui.timeout->continue_btn, &QPushButton::clicked, this, &Protocol2App::showCheat);
 
 #ifdef QT_DEBUG
-    // connect(ui.start->consent_btn, &QPushButton::clicked, this, &Protocol2App::showCheat);
+    //connect(ui.start->consent_btn, &QPushButton::clicked, this, &Protocol2App::showSurvey);
 #endif
 }
 

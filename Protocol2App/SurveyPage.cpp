@@ -5,10 +5,12 @@
 QCheckBox* SurveyPage::not_enough_money;
 QCheckBox* SurveyPage::mistrust;
 QCheckBox* SurveyPage::other_users;
+QCheckBox* SurveyPage::malfunction;
 QCheckBox* SurveyPage::other;
 
 QDoubleSpinBox* SurveyPage::wta_input;
 QTextEdit* SurveyPage::other_reason;
+QTextEdit* SurveyPage::malfunction_reason;
 
 
 void SurveyPage::checkIfContinue() {
@@ -16,7 +18,8 @@ void SurveyPage::checkIfContinue() {
         not_enough_money->isChecked() ||
         mistrust->isChecked() ||
         other->isChecked() ||
-        other_users->isChecked()
+        other_users->isChecked() ||
+        malfunction->isChecked()
         ) {
         continue_btn->setEnabled(true);
     }
@@ -44,6 +47,18 @@ void SurveyPage::mistrust_clicked() {
 
 void SurveyPage::other_users_clicked() {
     checkIfContinue();
+}
+
+void SurveyPage::malfunction_clicked() {
+    checkIfContinue();
+    if (malfunction->isChecked()) {
+        malfunction_reason->setVisible(true);
+        malfunction->setText("Accepting the offer caused my computer to malfunction (Please specify below)");
+    }
+    else {
+        malfunction_reason->setVisible(false);
+        malfunction->setText("Accepting the offer caused my computer to malfunction");
+    }
 }
 
 void SurveyPage::other_clicked() {
@@ -88,22 +103,30 @@ void SurveyPage::setupPage() {
 
     mistrust = new QCheckBox(this);
     mistrust->setGeometry(2 * M, M * 4, LINEWIDTH - 2 * M, M);
-    mistrust->setText("I don't trust you enough to make temporary changes to my computer");
+    mistrust->setText("I'm not comfortable with this program making temporary changes to my computer");
 
     other_users = new QCheckBox(this);
-    other_users->setGeometry(2 * M, M * 5, LINEWIDTH - 2 * M, M);
+    other_users->setGeometry(2 * M, M * 4 + BUTTON_HEIGHT, LINEWIDTH - 2 * M, M);
     other_users->setText("There are other users on this device besides myself");
 
     //privacy = new QCheckBox(this);
     //privacy->setGeometry(2 * M, M * 5, LINEWIDTH - 2 * M, M);
     //privacy->setText("I'm no longer comfortable with the data being collected during this experiment");
 
+    malfunction = new QCheckBox(this);
+    malfunction->setGeometry(2 * M, M * 4 + 2 * BUTTON_HEIGHT, LINEWIDTH - 2 * M, M);
+    malfunction->setText("Accepting the offer caused my computer to malfunction");
+
+    malfunction_reason = new QTextEdit(this);
+    malfunction_reason->setGeometry(3 * M, M * 4 + 3.5 * BUTTON_HEIGHT, LINEWIDTH - 3 * M, BUTTON_HEIGHT);
+    malfunction_reason->setVisible(false);
+
     other = new QCheckBox(this);
-    other->setGeometry(2 * M, M * 6, LINEWIDTH - 2 * M, M);
+    other->setGeometry(2 * M, M * 4 + 4.5 * BUTTON_HEIGHT, LINEWIDTH - 2 * M, M);
     other->setText("Other");
 
     other_reason = new QTextEdit(this);
-    other_reason->setGeometry(3 * M, 7 * M, LINEWIDTH - 4 * M, M);
+    other_reason->setGeometry(3 * M, M * 4 + 6 * BUTTON_HEIGHT,  LINEWIDTH - 3 * M, BUTTON_HEIGHT);
     other_reason->setVisible(false);
 
     continue_btn = new QPushButton(this);
@@ -119,6 +142,7 @@ void SurveyPage::makeConnections() {
     connect(mistrust, &QPushButton::clicked, this, &SurveyPage::mistrust_clicked);
     //connect(privacy, &QPushButton::clicked, this, &SurveyPage::privacy_clicked);
     connect(other, &QPushButton::clicked, this, &SurveyPage::other_clicked);
+    connect(malfunction, &QPushButton::clicked, this, &SurveyPage::malfunction_clicked);
     connect(other_users, &QPushButton::clicked, this, &SurveyPage::other_users_clicked);
 }
 
@@ -136,9 +160,12 @@ SurveyPage::SurveyPage(QWidget *parent)
 void SurveyPage::resetPage(int days) {
     if (days == TOTAL_DAYS) {
         label->setText("Your computer's performance will not be modified. Before you are finished, please let us know why you declined to slow your computer by " + QString::number(SLOWDOWN) + "% for 24 hours in exchange for $" + QString::number(OFFER) + ". Please select all that apply.");
+        malfunction->setVisible(false);
+        malfunction_reason->setVisible(false);
     }
     else {
         label->setText("Your computer's performance has been restored. Before you are finished, please let us know why you declined to slow your computer by " + QString::number(SLOWDOWN) + "% for 24 hours in exchange for $" + QString::number(OFFER) + ". Please select all that apply.");
+        malfunction->setVisible(true);
     }
 }
 
