@@ -18,6 +18,7 @@ inline int LINEWIDTH = W - (2 * MARGIN);
 inline int BUTTON_WIDTH = W / 4;
 inline int BUTTON_HEIGHT = H / 16;
 
+inline int HOURS_THRESHOLD;
 inline int SLOWDOWN;
 inline int OFFER;
 inline int TOTAL_DAYS;

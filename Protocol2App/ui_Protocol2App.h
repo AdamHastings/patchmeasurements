@@ -66,6 +66,7 @@ public:
         BUTTON_WIDTH = W / 4;
         BUTTON_HEIGHT = H / 16;
 
+        HOURS_THRESHOLD = 0.75;
         SLOWDOWN = 30;
         OFFER = 5;
         TOTAL_DAYS = 30;
