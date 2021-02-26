@@ -51,7 +51,7 @@ class HoursMonitorPage : public StartPage
 	Q_OBJECT
 public:
 	HoursMonitorPage(QWidget* parent = Q_NULLPTR) : StartPage(parent) {
-		label->setText("In a moment, you will be asked to choose between money and computer performance. If you choose to accept the money, your device will be slowed down for 24 hours. If you accept the money, this program may monitor your device's speed to ensure that the slowdown has taken effect. Likewise, if you accept the money, this program may also log the number of hours you use the device to ensure that you are actually using your device while it is slowed down. This program will not track or log any other data about you while you use this device.\n\nDo you consent to having this program monitor your device's speed and hours active for the duration of the experiment?");
+		label->setText("In a moment, you will be asked to choose between money and computer performance. If you choose to accept the money, your device will be slowed down for 24 hours. If you accept the money, this program may monitor your device's speed to ensure that the slowdown has taken effect. Likewise, if you accept the money, this program may also log the number of hours you use the device to ensure that you are actually using your device while it is slowed down. This program may also collect some details about your computer's hardware configuration, such as the the number of cores in your CPU and amount of RAM installed. This program will not track or log any other data about you.\n\nDo you consent to having this program monitor your computer's speed, active hours, and hardware configuration for the duration of the experiment?");
 	}
 };
 
@@ -61,16 +61,13 @@ class HoursMinimumPage : public StartPage
 	Q_OBJECT
 public:
 	HoursMinimumPage(QWidget* parent = Q_NULLPTR) : StartPage(parent) {
-		label->setText("Based on your previous response, you reported to use this device " + QString::number(hours) + " per week on average. If you accept the money, you will be expected to use your device at least 0.75 x " + QString::number(hours) + " = " + QString::number(0.75 * hours) + " hours per week. If you do not use your device this many hours, we will consider you to be \"cheating\" the experiment and you will not be awarded compensation.\n\nDo you agree to use your device for at least " + QString::number(0.75 * hours) + " per week for the duration of this experiment, and do you understand the consequences if you do not?");
 		consent_btn->setText("I agree and understand");
 		not_consent_btn->setText("I do not agree");
 	}
 
-	void setHours(int input) {
-		hours = input;
+	void resetPage(int hours) {
+		label->setText("Based on your previous response, you reported to use this device " + QString::number(hours) + " per week on average. If you accept the money, you will be expected to use your device at least 0.75 x " + QString::number(hours) + " = " + QString::number(0.75 * hours) + " hours per week. If you do not use your device this many hours, we will consider you to be \"cheating\" the experiment and you will not be awarded compensation.\n\nDo you agree to use your device for at least " + QString::number(0.75 * hours) + " per week for the duration of this experiment, and do you understand the consequences if you do not?");
 	}
-private:
-	int hours;
 };
 
 

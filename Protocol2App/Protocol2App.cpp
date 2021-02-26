@@ -64,6 +64,7 @@ void Protocol2App::showModNext() {
 }
 
 void Protocol2App::showHMonitor() {
+    setHours(ui.hours->spin->value());
     ui.stackedWidget->setCurrentWidget(ui.hmonitor);
 }
 
@@ -73,6 +74,7 @@ void Protocol2App::showHMonitorNext(){
     }
     else {
         //showFormPage();
+        ui.hmin->resetPage(hours);
         ui.stackedWidget->setCurrentWidget(ui.hmin);
     }
 }
