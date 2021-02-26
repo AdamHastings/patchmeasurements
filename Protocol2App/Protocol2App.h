@@ -16,9 +16,11 @@ public:
     static int getDays();
     static QString getUNI();
     static QString getName();
+    static int getHours();
 
     static void setUNI(QString input);
     static void setName(QString input);
+    static void setHours(int input);
    
 
 private:
@@ -27,10 +29,12 @@ private:
     static int days;
     static QString uni;
     static QString name;
+    static int hours;
 
 
 private:
     void showStartNext();
+    void showModNext();
     void showWTA();
     void WTAnext();
     void showFormPage();

@@ -9,7 +9,7 @@
 int Protocol2App::days;
 QString Protocol2App::uni;
 QString Protocol2App::name;
-
+int Protocol2App::hours;
 
 void Protocol2App::enableExitButton() {
     Qt::WindowFlags flags = windowFlags();
@@ -28,21 +28,35 @@ void Protocol2App::disableExitButton() {
 }
 
 void Protocol2App::showStartNext() {
-    if (!PowerMgmt::runningAsAdmin()) {
-        ui.stackedWidget->setCurrentWidget(ui.noadmin);
-    }
-#ifndef QT_DEBUG
-    else if (SysUtils::getpwd() != "C:\\Program Files\\" + RegistryUtils::AppName + "\\" + RegistryUtils::AppName + ".exe") {
-        ui.stackedWidget->setCurrentWidget(ui.wronginstall);
-    }
-#endif
-    else if (RegistryUtils::isCsEnabled()) {
-        ui.stackedWidget->setCurrentWidget(ui.regedit);
+    if (ui.start->not_consent_btn->isChecked()) {
+        showGoodbye();
     }
     else {
-        //getDefaultPowercfg();
-        disableExitButton();
-        ui.stackedWidget->setCurrentWidget(ui.form);
+        if (!PowerMgmt::runningAsAdmin()) {
+            ui.stackedWidget->setCurrentWidget(ui.noadmin);
+        }
+#ifndef QT_DEBUG
+        else if (SysUtils::getpwd() != "C:\\Program Files\\" + RegistryUtils::AppName + "\\" + RegistryUtils::AppName + ".exe") {
+            ui.stackedWidget->setCurrentWidget(ui.wronginstall);
+        }
+#endif
+        else if (RegistryUtils::isCsEnabled()) {
+            ui.stackedWidget->setCurrentWidget(ui.regedit);
+        }
+        else {
+            //getDefaultPowercfg();
+            disableExitButton();
+            ui.stackedWidget->setCurrentWidget(ui.form);
+        }
+    }
+}
+
+void Protocol2App::showModNext() {
+    if (ui.mod->not_consent_btn->isChecked()) {
+        showGoodbye();
+    }
+    else {
+        showFormPage();
     }
 }
 
@@ -167,10 +181,12 @@ Protocol2App::Protocol2App(QWidget *parent)
         days = TOTAL_DAYS;
     }
      
-    connect(ui.start->consent_btn, &QPushButton::clicked, this, &Protocol2App::showStartNext);
-    connect(ui.start->not_consent_btn, &QPushButton::clicked, this, &Protocol2App::showGoodbye);
-    connect(ui.mod->consent_btn, &QPushButton::clicked, this, &Protocol2App::showFormPage);
-    connect(ui.mod->not_consent_btn, &QPushButton::clicked, this, &Protocol2App::showGoodbye);
+    //connect(ui.start->consent_btn, &QPushButton::clicked, this, &Protocol2App::showStartNext);
+    //connect(ui.start->not_consent_btn, &QPushButton::clicked, this, &Protocol2App::showGoodbye);
+    connect(ui.start->continue_btn, &QPushButton::clicked, this, &Protocol2App::showStartNext);
+    //connect(ui.mod->consent_btn, &QPushButton::clicked, this, &Protocol2App::showFormPage);
+    //connect(ui.mod->not_consent_btn, &QPushButton::clicked, this, &Protocol2App::showGoodbye);
+    connect(ui.mod->continue_btn, &QPushButton::clicked, this, &Protocol2App::showModNext);
     connect(ui.form->continue_btn, &QPushButton::clicked, this, &Protocol2App::showWTA);
     connect(ui.wta->continue_btn, &QPushButton::clicked, this, &Protocol2App::WTAnext);
     connect(ui.survey->continue_btn, &QPushButton::clicked, this, &Protocol2App::showSurveyNext);
@@ -267,4 +283,11 @@ QString Protocol2App::getName() {
     return name;
 }
 
+int Protocol2App::getHours() {
+    return hours;
+}
+
+void Protocol2App::setHours(int input) {
+    hours = input;
+}
 

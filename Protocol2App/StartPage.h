@@ -3,6 +3,7 @@
 #include <QWidget>
 #include <QLabel>
 #include <QPushButton>
+#include <QRadioButton>
 #include "Globals.h"
 
 class StartPage : public QWidget
@@ -14,10 +15,12 @@ public:
 	~StartPage();
 
 	QLabel* label;
-	QPushButton* consent_btn;
-	QPushButton* not_consent_btn;
+	QRadioButton* consent_btn;
+	QRadioButton* not_consent_btn;
+	QPushButton* continue_btn;
 
 private:
+	void checkIfContinue();
 };
 
 class ModPage : public StartPage
@@ -37,3 +40,40 @@ public:
 
 	}
 };
+
+
+
+
+class HoursMonitorPage : public StartPage
+{
+	Q_OBJECT
+public:
+	HoursMonitorPage(QWidget* parent = Q_NULLPTR) : StartPage(parent) {
+		label->setText("In a moment, you will be asked to choose between money and computer performance. If you choose to accept the money, your device will be slowed down for 24 hours. If you accept the money, this program may monitor your device's speed to ensure that the slowdown has taken effect. Likewise, if you accept the money, this program may also log the number of hours you use the device to ensure that you are actually using your device while it is slowed down. This program will not track or log any other data about you while you use this device.\n\nDo you consent to having this program monitor your device's speed and hours active for the duration of the experiment?");
+	}
+};
+
+/*
+class HoursMinimumPage : public StartPage
+{
+	Q_OBJECT
+public:
+	HoursMinimumPage(QWidget* parent = Q_NULLPTR) : StartPage(parent) {
+		label->setText("Based on your previous response, you reported to use this device " + QString::number(Protocol2App::getHours()) + " per week on average. If you accept the money, you will be expected to use your device at least 0.75 x " + QString::number(Protocol2App::getHours()) + " = " + QString::number(Protocol2App::getHours() * 0.75) + " hours per week. If you do not use your device this many hours, we will consider you to be \"cheating\" the experiment and you will not be awarded compensation.\n\nDo you agree to use your device for at least " + QString::number(Protocol2App::getHours() * 0.75) + " per week for the duration of this experiment, and do you understand the consequences if you do not?");
+		consent_btn->setText("I agree and understand");
+		not_consent_btn->setText("I do not agree");
+	}
+};
+
+
+class PrimaryDevicePage : public StartPage
+{
+	Q_OBJECT
+public:
+	PrimaryDevicePage(QWidget* parent = Q_NULLPTR) : StartPage(parent) {
+		label->setText("This experiment requires that the device you are currently using is your primary computer. A \"primary computer\" is a computer that you use more than any other computer. For the purposes of this experiment, do not consider your phone as a primary computer.\n\nIs the computer you are currently using right now your primary computer?");
+		consent_btn->setText("Yes");
+		not_consent_btn->setText("No");
+	}
+};
+*/
