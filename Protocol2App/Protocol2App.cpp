@@ -45,8 +45,10 @@ void Protocol2App::showStartNext() {
 #endif
         else {
             //getDefaultPowercfg();
-            disableExitButton();
-            ui.stackedWidget->setCurrentWidget(ui.form);
+            //disableExitButton();
+            //ui.stackedWidget->setCurrentWidget(ui.form);
+            ui.stackedWidget->setCurrentWidget(ui.mod);
+
         }
     }
 }
@@ -56,9 +58,45 @@ void Protocol2App::showModNext() {
         showGoodbye();
     }
     else {
+        //showFormPage();
+        ui.stackedWidget->setCurrentWidget(ui.primary);
+    }
+}
+
+void Protocol2App::showHMonitor() {
+    ui.stackedWidget->setCurrentWidget(ui.hmonitor);
+}
+
+void Protocol2App::showHMonitorNext(){
+    if (ui.hmonitor->not_consent_btn->isChecked()) {
+        showGoodbye();
+    }
+    else {
+        //showFormPage();
+        ui.stackedWidget->setCurrentWidget(ui.hmin);
+    }
+}
+
+void Protocol2App::showHMinNext(){
+    if (ui.hmin->not_consent_btn->isChecked()) {
+        showGoodbye();
+    }
+    else {
+        //showFormPage();
         showFormPage();
     }
 }
+
+void Protocol2App::showPrimaryNext() {
+    if (ui.primary->not_consent_btn->isChecked()) {
+        showGoodbye();
+    }
+    else {
+        //showFormPage();
+        showHours();
+    }
+}
+
 
 void Protocol2App::showFormPage() {
     disableExitButton();
@@ -141,7 +179,8 @@ void Protocol2App::showCheat() {
 void Protocol2App::showSurveyNext() {
     if (days == TOTAL_DAYS) {
         // This is the first time
-        showHours();
+        //showHours();
+        showImprove();
     }
     else {
         showCheat();
@@ -187,11 +226,18 @@ Protocol2App::Protocol2App(QWidget *parent)
     //connect(ui.mod->consent_btn, &QPushButton::clicked, this, &Protocol2App::showFormPage);
     //connect(ui.mod->not_consent_btn, &QPushButton::clicked, this, &Protocol2App::showGoodbye);
     connect(ui.mod->continue_btn, &QPushButton::clicked, this, &Protocol2App::showModNext);
+
+    connect(ui.primary->continue_btn, &QPushButton::clicked, this, &Protocol2App::showPrimaryNext);
+    connect(ui.hours->continue_btn, &QPushButton::clicked, this, &Protocol2App::showHMonitor);
+    connect(ui.hmonitor->continue_btn, &QPushButton::clicked, this, &Protocol2App::showHMonitorNext);
+    connect(ui.hmin->continue_btn, &QPushButton::clicked, this, &Protocol2App::showHMinNext);
+
     connect(ui.form->continue_btn, &QPushButton::clicked, this, &Protocol2App::showWTA);
     connect(ui.wta->continue_btn, &QPushButton::clicked, this, &Protocol2App::WTAnext);
     connect(ui.survey->continue_btn, &QPushButton::clicked, this, &Protocol2App::showSurveyNext);
-    connect(ui.cheat->continue_btn, &QPushButton::clicked, this, &Protocol2App::showHours);
-    connect(ui.hours->continue_btn, &QPushButton::clicked, this, &Protocol2App::showImprove);
+    //connect(ui.cheat->continue_btn, &QPushButton::clicked, this, &Protocol2App::showHours);
+    connect(ui.cheat->continue_btn, &QPushButton::clicked, this, &Protocol2App::showImprove);
+    //connect(ui.hours->continue_btn, &QPushButton::clicked, this, &Protocol2App::showImprove);
     connect(ui.improve->continue_btn, &QPushButton::clicked, this, &Protocol2App::showDecrease);
     connect(ui.decrease->continue_btn, &QPushButton::clicked, this, &Protocol2App::showUsage);
     connect(ui.usage->continue_btn, &QPushButton::clicked, this, &Protocol2App::showNoMore);

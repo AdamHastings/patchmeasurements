@@ -35,6 +35,10 @@ private:
 private:
     void showStartNext();
     void showModNext();
+    void showHMonitor();
+    void showHMonitorNext();
+    void showHMinNext();
+    void showPrimaryNext();
     void showWTA();
     void WTAnext();
     void showFormPage();
