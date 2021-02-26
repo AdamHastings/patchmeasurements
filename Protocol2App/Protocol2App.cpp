@@ -39,10 +39,10 @@ void Protocol2App::showStartNext() {
         else if (SysUtils::getpwd() != "C:\\Program Files\\" + RegistryUtils::AppName + "\\" + RegistryUtils::AppName + ".exe") {
             ui.stackedWidget->setCurrentWidget(ui.wronginstall);
         }
-#endif
         else if (RegistryUtils::isCsEnabled()) {
             ui.stackedWidget->setCurrentWidget(ui.regedit);
         }
+#endif
         else {
             //getDefaultPowercfg();
             disableExitButton();

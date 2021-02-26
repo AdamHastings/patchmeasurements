@@ -6,6 +6,7 @@
 #include <QRadioButton>
 #include "Globals.h"
 
+
 class StartPage : public QWidget
 {
 	Q_OBJECT
@@ -33,12 +34,13 @@ public:
 		label->setText("This experiment requires that this app make a temporary modification to your computer. Specifically, this modification changes the \"CsEnabled\" Windows registry key from a 1 to a 0, which gives your computer the ability to change it's running speed. This modification will persist for the duration of the experiment and will be undone once this experiment concludes. Do you allow this program to make this temporary change to your computer?");
 
 		consent_btn->setText("I understand\nand consent");
-		consent_btn->setGeometry(QRect(W / 2 - BUTTON_WIDTH - M, M * 8, BUTTON_WIDTH, 2 * BUTTON_HEIGHT));
+		//consent_btn->setGeometry(QRect(W / 2 - BUTTON_WIDTH - M, M * 8, BUTTON_WIDTH, 2 * BUTTON_HEIGHT));
 
 		not_consent_btn->setText("Do not make changes\n to my computer");
-		not_consent_btn->setGeometry(QRect(W / 2 + M, M * 8, BUTTON_WIDTH, 2 * BUTTON_HEIGHT));
+		//not_consent_btn->setGeometry(QRect(W / 2 + M, M * 8, BUTTON_WIDTH, 2 * BUTTON_HEIGHT));
 
 	}
+
 };
 
 
@@ -53,16 +55,22 @@ public:
 	}
 };
 
-/*
+
 class HoursMinimumPage : public StartPage
 {
 	Q_OBJECT
 public:
 	HoursMinimumPage(QWidget* parent = Q_NULLPTR) : StartPage(parent) {
-		label->setText("Based on your previous response, you reported to use this device " + QString::number(Protocol2App::getHours()) + " per week on average. If you accept the money, you will be expected to use your device at least 0.75 x " + QString::number(Protocol2App::getHours()) + " = " + QString::number(Protocol2App::getHours() * 0.75) + " hours per week. If you do not use your device this many hours, we will consider you to be \"cheating\" the experiment and you will not be awarded compensation.\n\nDo you agree to use your device for at least " + QString::number(Protocol2App::getHours() * 0.75) + " per week for the duration of this experiment, and do you understand the consequences if you do not?");
+		label->setText("Based on your previous response, you reported to use this device " + QString::number(hours) + " per week on average. If you accept the money, you will be expected to use your device at least 0.75 x " + QString::number(hours) + " = " + QString::number(0.75 * hours) + " hours per week. If you do not use your device this many hours, we will consider you to be \"cheating\" the experiment and you will not be awarded compensation.\n\nDo you agree to use your device for at least " + QString::number(0.75 * hours) + " per week for the duration of this experiment, and do you understand the consequences if you do not?");
 		consent_btn->setText("I agree and understand");
 		not_consent_btn->setText("I do not agree");
 	}
+
+	void setHours(int input) {
+		hours = input;
+	}
+private:
+	int hours;
 };
 
 
@@ -76,4 +84,3 @@ public:
 		not_consent_btn->setText("No");
 	}
 };
-*/
