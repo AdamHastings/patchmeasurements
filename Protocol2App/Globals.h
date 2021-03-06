@@ -4,6 +4,7 @@
 #include <QtWidgets/QApplication>
 #include <algorithm>
 #include <QDesktopWidget>
+#include  <QString>
 
 
 #if !defined(CONSTANTS_LIB)
@@ -20,6 +21,7 @@ inline int BUTTON_HEIGHT = H / 16;
 
 inline int SLOWDOWN;
 inline int BASELINE;
+inline QString COMPLETION_CODE;
 inline int OFFER;
 inline int TOTAL_DAYS;
 inline int WAIT_PERIOD;

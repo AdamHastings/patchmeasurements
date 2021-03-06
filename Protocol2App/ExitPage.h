@@ -65,18 +65,13 @@ public:
 	}
 
 	void resetPage(int days) {
-		qDebug() << "nomoredays days: " << days;
 		if (days == TOTAL_DAYS) {
-			label->setText("Thank you for your participation! You have earned a participation fee of $5 but will not earn any additional compensation. You will receive this compensation via a prepaid debit card sent to your UNI's email.\n\nYou may now exit this window. Afterwards, please delete this program from your computer.");
+			label->setText("Thank you for your participation! You have earned a baseline participation compensation of $" + QString::number(BASELINE) + " but will not earn any additional compensation. You may redeem this compensation via the following Prolific Completion Code:\n\n" + COMPLETION_CODE + "\n\nYou may now exit this window. Afterwards, please delete this program from your computer by running the \"uninstall\" program.");
 		}
 		else {
-			label->setText("Thank you for your participation! Your computer's performance has been restored. During this experiment, you endured " + QString::number(TOTAL_DAYS - days) + " days of a slowed-down computer and have accrued " + QString::number(TOTAL_DAYS - days) + " x $" + QString::number(OFFER) + " = $" + QString::number(OFFER * (TOTAL_DAYS - days)) + ", in addition to a participation fee of $5. This brings your total earnings to $" + QString::number((OFFER * (TOTAL_DAYS - days)) + 5) + ". You will receive this compensation via a prepaid debit card sent to your UNI's email.\n\nYou may now exit this window. Afterwards, please delete this program from your computer.");
+			label->setText("Thank you for your participation! Your computer's performance has been restored. During this experiment, you endured " + QString::number(TOTAL_DAYS - days) + " days of a slowed-down computer and have accrued " + QString::number(TOTAL_DAYS - days) + " x $" + QString::number(OFFER) + " = $" + QString::number(OFFER * (TOTAL_DAYS - days)) + ", in addition to a baseline participation compensation of $" + QString::number(BASELINE) + ". This brings your total earnings to $" + QString::number((OFFER * (TOTAL_DAYS - days)) + BASELINE) + ". You have already received the completion code for the baseline compensation. The remaining compensation will be paid to you as a bonus payment via Prolific.\n\nYou may now exit this window. Afterwards, please delete this program from your computer by running the \"uninstall\" program.");
 		}
 	}
-
-	/*void firstOffer() {
-		label->setText("You have earned a participation fee of $5 but will not earn any additional compensation. In the next few days, we will mail you a Visa gift card to your provided address. Thank you for your participation!\n\nYou may now exit this window. Afterwards, please delete this program from your computer.");
-	}*/
 };
 
 class NoAdminPage : public ExitPage
@@ -105,7 +100,7 @@ class GoodbyePage : public ExitPage
 
 public:
 	GoodbyePage(QWidget* parent = Q_NULLPTR) : ExitPage(parent) {
-		label->setText("Thank you for your interest in this experiment. Unfortunately, you are not eligible to participate. You may now exit this window. You may also delete this program from your computer.\n\nIf you ended up on this page by mistake but still want to participate in this experiment, you can simply just re-run this application.");
+		label->setText("Thank you for your interest in this experiment. Unfortunately, you are not eligible to participate.\n\nYou may now exit this window. Afterwards, please delete this program from your computer by running the \"uninstall\" program.");
 	}
 };
 

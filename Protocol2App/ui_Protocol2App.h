@@ -73,6 +73,7 @@ public:
         OFFER = 5;
         BASELINE = 2;
         TOTAL_DAYS = 30;
+        COMPLETION_CODE = "121A16C6";
 #ifdef QT_DEBUG
         TOTAL_DAYS = 2;
 #endif
