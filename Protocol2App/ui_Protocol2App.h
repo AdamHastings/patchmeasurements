@@ -71,6 +71,7 @@ public:
 
         SLOWDOWN = 30;
         OFFER = 5;
+        BASELINE = 2;
         TOTAL_DAYS = 30;
 #ifdef QT_DEBUG
         TOTAL_DAYS = 2;

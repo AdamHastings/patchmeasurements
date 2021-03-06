@@ -39,7 +39,6 @@ class OneMoreDayPage : public ExitPage
 public:
 	OneMoreDayPage(QWidget* parent = Q_NULLPTR) : ExitPage(parent) {
 		label->setAlignment(Qt::AlignJustify | Qt::AlignVCenter);
-		//label->setText("Your computer will remain slowed down for another 24 hours. After 24 hours have elapsed, you will again be given the choice to either restore your computer's performance or keep your computer slow in exchange for money.\n\n\nYou may now exit this window.");
 	}
 
 	void resetPage(int days) {
@@ -50,14 +49,10 @@ public:
 		else {
 			labeltext = "Your computer will remain slowed down for another 24 hours.";
 		}
-		//label += "When you close this computer program, the window will disappear but the program will not be killed: This program will sit idly in the background and will occasionally monitor your device's speed to ensure that it remains slowed down.\n\nIf you reboot your computer, this program will automatically restart itself (although you may have to re-authorize it to run as Administrator). After 24 hours have elapsed, this program will wake itself up and you will be given the choice to either restore your computer's performance or keep your computer slow in exchange for money.\n\n\nYou may now exit this window.";
+
 		labeltext += " When you close this computer program, the window will disappear but the program will not be killed: This program will sit idly in the background and will occasionally monitor your device's speed to ensure that it remains slowed down.\n\nIf you reboot your computer, this program will automatically restart itself (although you may have to re-authorize it to run as Administrator). After 24 hours have elapsed, this program will wake itself up and you will be given the choice to either restore your computer's performance or keep your computer slow in exchange for money.\n\n\nYou may now exit this window.";
 		label->setText(labeltext);
 	}
-
-	/*void firstOffer() {
-		label->setText("Your computer has been slowed down. After 24 hours have elapsed, you will again be given the choice to either restore your computer's performance or keep your computer slow in exchange for money.\n\n\nYou may now exit this window.");
-	}*/
 };
 
 class NoMoreDaysPage : public ExitPage
@@ -67,7 +62,6 @@ class NoMoreDaysPage : public ExitPage
 public:
 	NoMoreDaysPage(QWidget* parent = Q_NULLPTR) : ExitPage(parent) {
 		label->setAlignment(Qt::AlignJustify | Qt::AlignVCenter);
-		//label->setText("During this experiment, you endured x days of a slowed-down computer and have earned $y. You should expect to receive an Amazon gift card in your email inbox within the next few days. Thank you for your participation!\n\nYou may now exit this window. Afterwards, please delete this program from your computer.");
 	}
 
 	void resetPage(int days) {
