@@ -61,7 +61,7 @@ FormPage::FormPage(QWidget* parent)
 	header->setWordWrap(true);
 	header->setAlignment(Qt::AlignJustify | Qt::AlignVCenter);
 	//header->setText("Thank you for participating in this study. After this experiment concludes, we will send you a Visa gift card worth the amount of money you'ved earned. To receive compensation, we will need your name and UNI so that we can email you this gift card.");
-	header->setText("Please enter your Prolific ID number below so that we may compensate you for your participation.");
+	header->setText("Please enter your Prolific ID number below. We need to collect your Prolific ID number since some compensation may be distributed as bonus payments via Prolific.");
 
 	/*name = new QLabel(this);
 	name->setGeometry(2 * M, 3 * M, 2 * M, BUTTON_HEIGHT);
