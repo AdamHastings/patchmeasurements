@@ -45,7 +45,7 @@ class PostTasksPage : public SingleChoicePage
 
 public:
 	PostTasksPage(QWidget* parent = Q_NULLPTR) : SingleChoicePage(parent) {
-		label->setText("We are now done with the task exercises. We will now ask a few questions based on your experience during the tasks.\n\nAt this point, you may also delete the previously created Google Docs if you wish.");
+		label->setText("We are now done with the task exercises. We will now ask a few questions based on your experience during the tasks.");
 	}
 };
 
@@ -60,7 +60,7 @@ public:
 	}
 
 	void updateText() {
-		QString text = "Thank you for your participation in this experiment. If we received three emails from you demonstrating that you completed the three tasks, we will mail a prepaid debit card worth $15 to the provided mailing address within the next few days.\n\nYou may now exit this window and delete this program from your computer.\n\nIf you have any questions, comments, or concerns about this experiment or your participation, you may contact the researchers at hastings-experiment@cs.columbia.edu.";
+		QString text = "Thank you for your participation in this experiment. If we received three emails from you demonstrating that you completed the three tasks, we will respond to your email with a Prolific Completion Code. If you would like us to send the Completion Code to a different email address, please contact us at\nhastings-experiment@cs.columbia.edu.\n\nYou may now exit this window and delete this program from your computer.\n\n";
 
 		if (REBOOT_AT_END) {
 			text += "\n\nTo completely undo all changes made during this experiment, please reboot your computer now.";
@@ -90,7 +90,7 @@ class Failed2UploadPage : public SingleChoicePage
 
 public:
 	Failed2UploadPage(QWidget* parent = Q_NULLPTR) : SingleChoicePage(parent) {
-		label->setText("This program had trouble uploading your survey responses. In order for you to receive compnensation, we will need you to manually email the survey results to the researchers. To manually send the results, look for a file called \"results.txt\" in the same folder where you first ran this program. Attach this document to an email titled \"Results\" and send it to hastings-experiment@cs.columbia.edu.\n\nPlease send this email before continuing. We apologize for the inconvenience.");
+		label->setText("This program had trouble uploading your survey responses. In order for you to receive compnensation, we will need you to manually email the survey results to the researchers. To manually send the results, look for a file called \"results.txt\" in the same folder where you first ran this program. Attach this document to an email titled \"Results\" and send it to hastings-experiment@cs.columbia.edu.\n\nPlease send this email before continuing. If we do not receive this email, we cannot send you your compensation. We apologize for the inconvenience.");
 
 	}
 };

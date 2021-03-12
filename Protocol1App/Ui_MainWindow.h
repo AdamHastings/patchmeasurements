@@ -106,14 +106,14 @@ public:
         mod = new ModPage();
         stackedWidget->addWidget(mod);
 
-        task1 = new TaskPage("\nfrom Los Angeles, USA to New York City, USA", "Low Library", "\"Bolero\"\nby composer Maurice Ravel");
+        task1 = new TaskPage("\nfrom Los Angeles, USA to New York City, USA", "the Statue of Liberty", "\"Bolero\"\nby composer Maurice Ravel");
         stackedWidget->addWidget(task1);
 
-        task2 = new TaskPage("\nfrom Casablanca, Morocco to Cairo, Egypt", "the Alma Mater statue", "\"Rhapsody in Blue\"\nby composer George Gershwin");
+        task2 = new TaskPage("\nfrom Casablanca, Morocco to Cairo, Egypt", "the Eiffel Tower", "\"Rhapsody in Blue\"\nby composer George Gershwin");
         stackedWidget->addWidget(task2);
 
 
-        task3 = new TaskPage("\nfrom Sydney, Australia to Perth, Australia", "Butler Library", "\"Fantasia on a Theme by Thomas Tallis\"\nby composer Ralph Vaughan Williams");
+        task3 = new TaskPage("\nfrom Sydney, Australia to Perth, Australia", "the Pyramids of Giza", "\"Fantasia on a Theme by Thomas Tallis\"\nby composer Ralph Vaughan Williams");
         stackedWidget->addWidget(task3);
 
         patch0 = new PatchPage();

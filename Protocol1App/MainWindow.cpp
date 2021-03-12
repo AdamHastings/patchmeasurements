@@ -433,9 +433,7 @@ MainWindow::MainWindow(QWidget *parent)
 
 #ifndef QT_NO_DEBUG
     qDebug() << QSslSocket::supportsSsl() << QSslSocket::sslLibraryBuildVersionString() << QSslSocket::sslLibraryVersionString();
-    connect(ui.task1->continue_btn, &QPushButton::clicked, this, &MainWindow::showPatch3);
-    connect(ui.patch3->continue_btn, &QPushButton::clicked, this, &MainWindow::showFinal);
-
+    connect(ui.start->consent_btn, &QPushButton::clicked, this, &MainWindow::showDebrief);
 #endif
 
 }
