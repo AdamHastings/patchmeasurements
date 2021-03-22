@@ -40,6 +40,7 @@ public:
     RegistryEditPage* regedit;
     GoodbyePage* goodbye;
     ModPage* mod;
+    RestartPage* restart;
     WTAPage* wta;
     DoubleCheckAccept* dc_accept;
     DoubleCheckDecline* dc_decline;
@@ -116,6 +117,9 @@ public:
 
         mod = new ModPage();
         stackedWidget->addWidget(mod);
+
+        restart = new RestartPage();
+        stackedWidget->addWidget(restart);
 
         form = new FormPage();
         stackedWidget->addWidget(form);

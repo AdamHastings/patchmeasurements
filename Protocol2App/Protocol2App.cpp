@@ -31,26 +31,25 @@ void Protocol2App::showStartNext() {
     if (ui.start->not_consent_btn->isChecked()) {
         showGoodbye();
     }
-    else {
-        if (!PowerMgmt::runningAsAdmin()) {
+    else if (!PowerMgmt::runningAsAdmin()) {
             ui.stackedWidget->setCurrentWidget(ui.noadmin);
-        }
-#ifndef QT_DEBUG
-        else if (SysUtils::getpwd() != "C:\\Program Files\\" + RegistryUtils::AppName + "\\" + RegistryUtils::AppName + ".exe") {
-            ui.stackedWidget->setCurrentWidget(ui.wronginstall);
-        }
-        else if (RegistryUtils::isCsEnabled()) {
-            ui.stackedWidget->setCurrentWidget(ui.regedit);
-        }
-#endif
-        else {
-            //getDefaultPowercfg();
-            //disableExitButton();
-            //ui.stackedWidget->setCurrentWidget(ui.form);
-            ui.stackedWidget->setCurrentWidget(ui.mod);
-
-        }
     }
+#ifndef QT_DEBUG
+    else if (SysUtils::getpwd() != "C:\\Program Files\\" + RegistryUtils::AppName + "\\" + RegistryUtils::AppName + ".exe") {
+        ui.stackedWidget->setCurrentWidget(ui.wronginstall);
+    }
+#endif
+    else if (RegistryUtils::isCsEnabled()) {
+        RegistryUtils::setCsEnabled(0);
+        ui.stackedWidget->setCurrentWidget(ui.mod);
+    } else {
+        //getDefaultPowercfg();
+        //disableExitButton();
+        //ui.stackedWidget->setCurrentWidget(ui.form);
+        ui.stackedWidget->setCurrentWidget(ui.primary);
+
+    }
+    
 }
 
 void Protocol2App::showModNext() {
@@ -59,7 +58,7 @@ void Protocol2App::showModNext() {
     }
     else {
         //showFormPage();
-        ui.stackedWidget->setCurrentWidget(ui.primary);
+        ui.stackedWidget->setCurrentWidget(ui.restart);
     }
 }
 
