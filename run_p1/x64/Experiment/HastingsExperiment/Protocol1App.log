@@ -1,7 +1,6 @@
 ﻿  moc SingleChoicePage.h
   MainWindow.cpp
   SingleChoicePage.cpp
-  WithdrawPage.cpp
   main.cpp
   moc_MainWindow.cpp
   moc_SingleChoicePage.cpp
