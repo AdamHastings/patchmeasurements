@@ -111,7 +111,17 @@ class GoodbyePage : public ExitPage
 
 public:
 	GoodbyePage(QWidget* parent = Q_NULLPTR) : ExitPage(parent) {
-		label->setText("Thank you for your interest in this experiment. Unfortunately, you are not eligible to participate. You may now exit this window. You may also delete this program from your computer.\n\nIf you ended up on this page by mistake but still want to participate in this experiment, you can simply just re-run this application.");
+		label->setText("Thank you for your interest in this experiment. Unfortunately, you are not eligible to participate. You may now exit this window. You may also delete this program from your computer by running the \"uninstall\" program.");
+	}
+};
+
+class RestartPage : public ExitPage
+{
+	Q_OBJECT
+
+public:
+	RestartPage(QWidget* parent = Q_NULLPTR) : ExitPage(parent) {
+		label->setText("Your computer's configuration has been changed. You will need to reboot your computer for the changes to take place. Please restart your computer and re-run this program.");
 	}
 };
 
