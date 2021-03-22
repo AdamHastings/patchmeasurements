@@ -84,7 +84,7 @@ void Protocol2App::showHMinNext(){
     }
     else {
         //showFormPage();
-        showFormPage();
+        showWTA();
     }
 }
 
@@ -94,7 +94,7 @@ void Protocol2App::showPrimaryNext() {
     }
     else {
         //showFormPage();
-        showHours();
+        showFormPage();
     }
 }
 
@@ -130,6 +130,8 @@ void Protocol2App::WTAnext() {
 }
 
 void Protocol2App::showGoodbye() {
+    RegistryUtils::nuke();
+    enableExitButton();
     ui.stackedWidget->setCurrentWidget(ui.goodbye);
 }
 
@@ -229,11 +231,12 @@ Protocol2App::Protocol2App(QWidget *parent)
     connect(ui.mod->continue_btn, &QPushButton::clicked, this, &Protocol2App::showModNext);
 
     connect(ui.primary->continue_btn, &QPushButton::clicked, this, &Protocol2App::showPrimaryNext);
+    connect(ui.form->continue_btn, &QPushButton::clicked, this, &Protocol2App::showHours);
+
     connect(ui.hours->continue_btn, &QPushButton::clicked, this, &Protocol2App::showHMonitor);
     connect(ui.hmonitor->continue_btn, &QPushButton::clicked, this, &Protocol2App::showHMonitorNext);
     connect(ui.hmin->continue_btn, &QPushButton::clicked, this, &Protocol2App::showHMinNext);
 
-    connect(ui.form->continue_btn, &QPushButton::clicked, this, &Protocol2App::showWTA);
     connect(ui.wta->continue_btn, &QPushButton::clicked, this, &Protocol2App::WTAnext);
     connect(ui.survey->continue_btn, &QPushButton::clicked, this, &Protocol2App::showSurveyNext);
     //connect(ui.cheat->continue_btn, &QPushButton::clicked, this, &Protocol2App::showHours);
