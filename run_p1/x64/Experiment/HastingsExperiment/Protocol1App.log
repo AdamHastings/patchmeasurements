@@ -1,0 +1,7 @@
+﻿  moc SingleChoicePage.h
+  MainWindow.cpp
+  SingleChoicePage.cpp
+  main.cpp
+  moc_MainWindow.cpp
+  moc_SingleChoicePage.cpp
+  Protocol1App.vcxproj -> C:\Users\Administrator\patchmeasurements\Protocol1App\x64\Release\Protocol1App.exe
