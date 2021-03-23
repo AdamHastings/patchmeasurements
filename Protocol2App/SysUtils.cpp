@@ -49,7 +49,7 @@ void SysUtils::takeSnapshot(QString snapshot_reason) {
     contents.append("\n");
 
     contents.append("days_remaining," + QString::number(Protocol2App::getDays()) + "\n");
-    contents.append("name," + Protocol2App::getName() + "\n");
+    // contents.append("name," + Protocol2App::getName() + "\n"); // no name in Prolific
     contents.append("uni," + Protocol2App::getUNI() + "\n");
 
     // WTA offer price

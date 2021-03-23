@@ -28,7 +28,7 @@ private:
 
     static int days;
     static QString uni;
-    static QString name;
+    //static QString name;
     static int hours;
 
 

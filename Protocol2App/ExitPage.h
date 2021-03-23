@@ -111,7 +111,6 @@ class RestartPage : public ExitPage
 public:
 	RestartPage(QWidget* parent = Q_NULLPTR) : ExitPage(parent) {
 		label->setText("Your computer's configuration has been changed. You will need to reboot your computer for the changes to take place. Please restart your computer and re-run this program.");
->>>>>>> master
 	}
 };
 

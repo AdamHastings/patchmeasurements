@@ -8,7 +8,7 @@
 
 int Protocol2App::days;
 QString Protocol2App::uni;
-QString Protocol2App::name;
+//QString Protocol2App::name;
 int Protocol2App::hours;
 
 void Protocol2App::enableExitButton() {
@@ -272,7 +272,7 @@ void Protocol2App::closeEvent(QCloseEvent* event) {
 void Protocol2App::resetProgram() {
     days = RegistryUtils::getRegKey("days").toInt();
     uni = RegistryUtils::getRegKey("UNI").toString();
-    name = RegistryUtils::getRegKey("name").toString();
+    //name = RegistryUtils::getRegKey("name").toString();
 
     //  figure out how long to sleep, and how many days have elapsed
     int first_accept = RegistryUtils::getRegKey("first_accept").toInt();
@@ -325,13 +325,13 @@ void Protocol2App::setUNI(QString input) {
     uni = input;
 }
 
-void Protocol2App::setName(QString input) {
-    name = input;
-}
-
-QString Protocol2App::getName() {
-    return name;
-}
+//void Protocol2App::setName(QString input) {
+//    name = input;
+//}
+//
+//QString Protocol2App::getName() {
+//    return name;
+//}
 
 int Protocol2App::getHours() {
     return hours;

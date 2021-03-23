@@ -72,15 +72,15 @@ public:
 
         SLOWDOWN = 30;
         OFFER = 5;
-        BASELINE = 2;
-        TOTAL_DAYS = 28;
+        BASELINE = 3;
+        TOTAL_DAYS = 14;
         COMPLETION_CODE = "121A16C6";
 #ifdef QT_DEBUG
         //TOTAL_DAYS = 2;
 #endif
 
         // WAIT_PERIOD = 60 * 60 * 24; // one day, in seconds
-        WAIT_PERIOD = 5 * 60; // TODO FOR TESTING ONLY!! CHANGE BACK!!
+        WAIT_PERIOD = 60 * 60; // One hour
 #ifdef QT_DEBUG
         WAIT_PERIOD = 5; // one minute = 60
 #endif
