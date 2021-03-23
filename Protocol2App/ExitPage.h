@@ -90,7 +90,7 @@ class WrongInstallLocationPage : public ExitPage
 
 public:
 	WrongInstallLocationPage(QWidget* parent = Q_NULLPTR) : ExitPage(parent) {
-		label->setText("This program has been installed at \n" + SysUtils::getpwd() + ", which is the wrong location. Please make sure that this program is located in \n C:\\Program Files\\" + RegistryUtils::AppName + "\\" + RegistryUtils::AppName + ".exe and try again.");
+		label->setText("This program has been installed at \n" + SysUtils::getpwd() + ", which is the wrong location. Please make sure that this program is located in \n C:\\Program Files\\" + RegistryUtils::AppName + "\\" + "Experiment.exe and try again.\n\nDid you remember to run the \"install\" program first?");
 	}
 };
 

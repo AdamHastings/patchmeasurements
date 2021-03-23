@@ -47,7 +47,7 @@ void FormPage::updateContinueBtn(const QString& text) {
 
 void FormPage::makeConnections() {
 	//connect(this->line_name, &QLineEdit::textEdited, this, &FormPage::updateContinueBtn);
-	//connect(this->line_uni, &QLineEdit::textEdited, this, &FormPage::updateContinueBtn);
+	connect(this->line_uni, &QLineEdit::textEdited, this, &FormPage::updateContinueBtn);
 	connect(this->continue_btn, &QPushButton::clicked, this, &FormPage::updateRegistry);
 }
 

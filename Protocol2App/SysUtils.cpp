@@ -14,6 +14,7 @@
 #include "Globals.h"
 #include "Protocol2App.h"
 #include "ChoicePage.h"
+#include <QDir>
 using namespace std;
 
 
@@ -190,7 +191,6 @@ void SysUtils::takeSnapshot(QString snapshot_reason) {
     DropBox::upload(contents, filename);
 }
 
-
 // Restore system to its original, pre-experiment state
 void SysUtils::restoreSystem() {
     qDebug() << "restoring system";
@@ -212,8 +212,10 @@ void SysUtils::initExperiment() {
 }
 
 QString SysUtils::getpwd() {
-    string exename = (RegistryUtils::AppName + ".exe").toStdString();
-    QString pwd = QString::fromStdString(std::filesystem::absolute(exename).string());
+    string exename = "Experiment.exe";
+    //QString pwd = QString::fromStdString(std::filesystem::absolute(exename).string());
+    //QString pwd = QString::fromStdString(std::filesystem::current_path().string());
+    QString pwd = QDir::currentPath();
     qDebug() << pwd;
     return pwd;
 }

@@ -70,7 +70,7 @@ public:
         BUTTON_WIDTH = W / 4;
         BUTTON_HEIGHT = H / 16;
 
-        SLOWDOWN = 30;
+        SLOWDOWN = 1;
         OFFER = 5;
         BASELINE = 3;
         TOTAL_DAYS = 14;

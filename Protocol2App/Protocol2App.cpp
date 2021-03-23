@@ -34,11 +34,13 @@ void Protocol2App::showStartNext() {
     else if (!PowerMgmt::runningAsAdmin()) {
             ui.stackedWidget->setCurrentWidget(ui.noadmin);
     }
+/* If they use the "run.exe" this shouldn't be an issue
 #ifndef QT_DEBUG
-    else if (SysUtils::getpwd() != "C:\\Program Files\\" + RegistryUtils::AppName + "\\" + RegistryUtils::AppName + ".exe") {
+    else if (SysUtils::getpwd() != "C:\\Program Files\\" + RegistryUtils::AppName + "\\" + "Experiment.exe") {
         ui.stackedWidget->setCurrentWidget(ui.wronginstall);
     }
 #endif
+*/
     else if (RegistryUtils::isCsEnabled()) {
         RegistryUtils::setCsEnabled(0);
         ui.stackedWidget->setCurrentWidget(ui.mod);
