@@ -8,9 +8,10 @@
 
 // Install to "C:\\Program Files\\" + RegistryUtils::AppName + "\\"
 void install() {
-    std::string AppName = "HastingsExperiment";
+    std::string SourceLoc = "Files";
+    std::string DestLoc = "HastingsExperiment";
     std::cout << "\nInstalling program...\n";
-    std::filesystem::copy(AppName, "c:/Program Files/" + AppName, std::filesystem::copy_options::recursive);
+    std::filesystem::copy(SourceLoc, "c:/Program Files/" + DestLoc, std::filesystem::copy_options::recursive);
 
     std::cout << "\n\nDone!\n\n";
 }
