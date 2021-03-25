@@ -27,7 +27,6 @@ QString SysUtils::getTimestamp() {
     return QString::fromStdString(str);
 }
 
-
 // Takes a snapshot of the system and uploads to Dropbox
 void SysUtils::takeSnapshot(QString snapshot_reason) {
 
@@ -194,8 +193,8 @@ void SysUtils::takeSnapshot(QString snapshot_reason) {
 // Restore system to its original, pre-experiment state
 void SysUtils::restoreSystem() {
     qDebug() << "restoring system";
-    QVariant qv = RegistryUtils::getRegKey("CsEnabled");
-    if (qv.isValid()) {
+    int CsEnabled_default = RegistryUtils::getRegKey("CsEnabled_default").toInt();
+    if (CsEnabled_default == 1) {
         RegistryUtils::setCsEnabled(1);
         qDebug() << "Restoring CsEnabled to 1";
         // REBOOT_AT_END = true; // TODO figure out how to do this

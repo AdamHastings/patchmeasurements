@@ -42,7 +42,6 @@ void Protocol2App::showStartNext() {
 #endif
 */
     else if (RegistryUtils::isCsEnabled()) {
-        RegistryUtils::setCsEnabled(0);
         ui.stackedWidget->setCurrentWidget(ui.mod);
     } else {
         //getDefaultPowercfg();
@@ -60,6 +59,9 @@ void Protocol2App::showModNext() {
     }
     else {
         //showFormPage();
+        RegistryUtils::setCsEnabled(0);
+        RegistryUtils::setRegKey("CsEnabled_default", 1);
+        qDebug() << "CsEnabled_default is " + RegistryUtils::getRegKey("CsEnabled_default").toString();
         ui.stackedWidget->setCurrentWidget(ui.restart);
     }
 }
@@ -71,6 +73,8 @@ void Protocol2App::showHMonitor() {
 
 void Protocol2App::showHMonitorNext(){
     if (ui.hmonitor->not_consent_btn->isChecked()) {
+        SysUtils::takeSnapshot("no-monitor");
+        SysUtils::restoreSystem();
         showGoodbye();
     }
     else {
@@ -82,6 +86,8 @@ void Protocol2App::showHMonitorNext(){
 
 void Protocol2App::showHMinNext(){
     if (ui.hmin->not_consent_btn->isChecked()) {
+        SysUtils::takeSnapshot("no-min");
+        SysUtils::restoreSystem();
         showGoodbye();
     }
     else {
@@ -132,7 +138,8 @@ void Protocol2App::WTAnext() {
 }
 
 void Protocol2App::showGoodbye() {
-    RegistryUtils::nuke();
+    SysUtils::restoreSystem();
+    // RegistryUtils::nuke();
     enableExitButton();
     ui.stackedWidget->setCurrentWidget(ui.goodbye);
 }
@@ -257,18 +264,22 @@ Protocol2App::Protocol2App(QWidget *parent)
 void Protocol2App::closeEvent(QCloseEvent* event) {
 
     // If the user has elected to end the experiment, this should be empty..
-    if (RegistryUtils::getRegKey("UNI").isValid()) {
-        if (days > 0) {
-
+    if (RegistryUtils::getRegKey("UNI").isValid())
+    {
+        if (days > 0) 
+        {
             event->ignore();
             this->hide();
             resetProgram();
         }
     }
-    else {
+    
+    else if (RegistryUtils::getRegKey("CsEnabled_default") != 1)
+    {
         // one more for good measure...
         RegistryUtils::nuke();
     }
+    
 }
 
 void Protocol2App::resetProgram() {
