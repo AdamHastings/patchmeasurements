@@ -44,13 +44,13 @@ public:
 	void resetPage(int days) {
 		QString labeltext;
 		if (days == TOTAL_DAYS) {
-			labeltext = "Your computer has been slowed down.";
+			labeltext = "Your computer has been slowed down. You may now redeem your baseline compensation of " + QString::number(BASELINE) + " by entering the completion code " + COMPLETION_CODE + " into Prolific. Additional earnings will later be paid via bonus payments in Prolific.\n\n";
 		}
 		else {
-			labeltext = "Your computer will remain slowed down for another 24 hours.";
+			labeltext = "Your computer will remain slowed down for another 24 hours. ";
 		}
 
-		labeltext += " When you close this computer program, the window will disappear but the program will not be killed: This program will sit idly in the background and will occasionally monitor your device's speed to ensure that it remains slowed down.\n\nIf you reboot your computer, this program will automatically restart itself (although you may have to re-authorize it to run as Administrator). After 24 hours have elapsed, this program will wake itself up and you will be given the choice to either restore your computer's performance or keep your computer slow in exchange for money.\n\n\nYou may now exit this window.";
+		labeltext += "When you close this computer program, the window will disappear but the program will not be killed: This program will sit idly in the background and will occasionally monitor your device's speed to ensure that it remains slowed down.\n\nIf you reboot your computer, this program will automatically restart itself (although you may have to re-authorize it to run as Administrator). After 24 hours have elapsed, this program will wake itself up and you will be given the choice to either restore your computer's performance or keep your computer slow in exchange for money.\n\n\nYou may now exit this window.";
 		label->setText(labeltext);
 	}
 };
@@ -66,10 +66,10 @@ public:
 
 	void resetPage(int days) {
 		if (days == TOTAL_DAYS) {
-			label->setText("Thank you for your participation! You have earned a baseline participation compensation of $" + QString::number(BASELINE) + " but will not earn any additional compensation. You may redeem this compensation via the following Prolific Completion Code:\n\n" + COMPLETION_CODE + "\n\nYou may now exit this window. Afterwards, please delete this program from your computer by running the \"uninstall\" program.");
+			label->setText("Thank you for your participation! You have earned a baseline participation compensation of $" + QString::number(BASELINE) + " but will not earn any additional compensation. You may redeem this compensation via the following Prolific Completion Code:\n\n" + COMPLETION_CODE + "\n\nYou may now exit this window. Afterwards, please delete this program from your computer by running the \"uninstall\" program. After you uninstall the program, please reboot your computer for all changes to take effect.");
 		}
 		else {
-			label->setText("Thank you for your participation! Your computer's performance has been restored. During this experiment, you endured " + QString::number(TOTAL_DAYS - days) + " days of a slowed-down computer and have accrued " + QString::number(TOTAL_DAYS - days) + " x $" + QString::number(OFFER) + " = $" + QString::number(OFFER * (TOTAL_DAYS - days)) + ", in addition to a baseline participation compensation of $" + QString::number(BASELINE) + ". This brings your total earnings to $" + QString::number((OFFER * (TOTAL_DAYS - days)) + BASELINE) + ". You have already received the completion code for the baseline compensation. The remaining compensation will be paid to you as a bonus payment via Prolific.\n\nYou may now exit this window. Afterwards, please delete this program from your computer by running the \"uninstall\" program.");
+			label->setText("Thank you for your participation! Your computer's performance has been restored. During this experiment, you endured " + QString::number(TOTAL_DAYS - days) + " days of a slowed-down computer and have accrued " + QString::number(TOTAL_DAYS - days) + " x $" + QString::number(OFFER) + " = $" + QString::number(OFFER * (TOTAL_DAYS - days)) + ", in addition to a baseline participation compensation of $" + QString::number(BASELINE) + ". This brings your total earnings to $" + QString::number((OFFER * (TOTAL_DAYS - days)) + BASELINE) + ". You have already received the completion code for the baseline compensation. The remaining compensation will be paid to you as a bonus payment via Prolific.\n\nYou may now exit this window. Afterwards, please delete this program from your computer by running the \"uninstall\" program. After you uninstall the program, please reboot your computer for all changes to take effect.");
 		}
 	}
 };
@@ -100,7 +100,7 @@ class GoodbyePage : public ExitPage
 
 public:
 	GoodbyePage(QWidget* parent = Q_NULLPTR) : ExitPage(parent) {
-		label->setText("Thank you for your interest in this experiment. Unfortunately, you are not eligible to participate.\n\nYou may now exit this window. Afterwards, please delete this program from your computer by running the \"uninstall\" program.");
+		label->setText("Thank you for your interest in this experiment. Unfortunately, you are not eligible to participate.\n\nYou may now exit this window. Afterwards, please delete this program from your computer by running the \"uninstall\" program. Any changes made to your device have been undone. Please reboot your device for all undone changes to take effect.");
 	}
 };
 
@@ -127,8 +127,5 @@ public:
 		continue_btn = new QPushButton(this);
 		continue_btn->setGeometry(QRect(W / 2 - BUTTON_WIDTH / 2, M * 8, BUTTON_WIDTH, BUTTON_HEIGHT));
 		continue_btn->setText("Continue");
-#if QT_NO_DEBUG
-		continue_btn->setEnabled(false);
-#endif
 	}
 };
