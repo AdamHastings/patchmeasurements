@@ -1,0 +1,2 @@
+C:\Users\Administrator\patchmeasurements\run\x64\Debug\run.exe
+C:\Users\Administrator\patchmeasurements\run\x64\Debug\run.pdb
