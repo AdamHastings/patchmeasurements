@@ -72,18 +72,18 @@ public:
         BUTTON_HEIGHT = H / 16;
 
         SLOWDOWN = 30;
-        OFFER = 2;
+        OFFER = 0;
         BASELINE = 3;
         TOTAL_DAYS = 14;
-        COMPLETION_CODE = "793DF184";
+        COMPLETION_CODE = "6A6E5D3F";
 #ifdef QT_DEBUG
         //TOTAL_DAYS = 2;
 #endif
 
-        // WAIT_PERIOD = 60 * 60 * 24; // one day, in seconds
+        WAIT_PERIOD = 60 * 60 * 24; // one day, in seconds
         // WAIT_PERIOD = 60 * 60; // One hour
         // WAIT_PERIOD = 1 * 60; // 1 Minute
-        WAIT_PERIOD = 5; // 5 seconds
+        // WAIT_PERIOD = 5; // 5 seconds
 #ifdef QT_DEBUG
         WAIT_PERIOD = 5; // one minute = 60
 #endif
