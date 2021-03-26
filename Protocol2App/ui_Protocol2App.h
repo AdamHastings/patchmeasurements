@@ -72,10 +72,10 @@ public:
         BUTTON_HEIGHT = H / 16;
 
         SLOWDOWN = 30;
-        OFFER = 5;
+        OFFER = 6;
         BASELINE = 3;
         TOTAL_DAYS = 14;
-        COMPLETION_CODE = "356B9E49";
+        COMPLETION_CODE = "6D4E9009";
 #ifdef QT_DEBUG
         //TOTAL_DAYS = 2;
 #endif
