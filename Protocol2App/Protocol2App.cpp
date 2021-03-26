@@ -102,6 +102,15 @@ void Protocol2App::showPrimaryNext() {
     }
     else {
         //showFormPage();
+        ui.stackedWidget->setCurrentWidget(ui.internet);
+    }
+}
+
+void Protocol2App::showInternetNext() {
+    if (ui.internet->not_consent_btn->isChecked()) {
+        showGoodbye();
+    }
+    else {
         showFormPage();
     }
 }
@@ -240,6 +249,9 @@ Protocol2App::Protocol2App(QWidget *parent)
     connect(ui.mod->continue_btn, &QPushButton::clicked, this, &Protocol2App::showModNext);
 
     connect(ui.primary->continue_btn, &QPushButton::clicked, this, &Protocol2App::showPrimaryNext);
+
+    connect(ui.internet->continue_btn, &QPushButton::clicked, this, &Protocol2App::showInternetNext);
+
     connect(ui.form->continue_btn, &QPushButton::clicked, this, &Protocol2App::showHours);
 
     connect(ui.hours->continue_btn, &QPushButton::clicked, this, &Protocol2App::showHMonitor);

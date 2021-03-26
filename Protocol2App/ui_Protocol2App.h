@@ -57,6 +57,7 @@ public:
     HoursMonitorPage* hmonitor;
     HoursMinimumPage* hmin;
     PrimaryDevicePage* primary;
+    InternetPage* internet;
 
 
 
@@ -172,6 +173,9 @@ public:
 
         primary = new PrimaryDevicePage();
         stackedWidget->addWidget(primary);
+
+        internet = new InternetPage();
+        stackedWidget->addWidget(internet);
 
     } // setupUi
 };

@@ -15,11 +15,12 @@ public:
     //static void restoreSystem(restoreReason r);
     static int getDays();
     static QString getUNI();
-    static QString getName();
+    // static QString getName();
     static int getHours();
+    static int getAcceptances();
 
     static void setUNI(QString input);
-    static void setName(QString input);
+    // static void setName(QString input);
     static void setHours(int input);
    
 
@@ -30,6 +31,7 @@ private:
     static QString uni;
     //static QString name;
     static int hours;
+    static int acceptances;
 
 
 private:
@@ -54,6 +56,7 @@ private:
     void showImprove();
     void showDecrease();
     void showTimeoutSplash();
+    void showInternetNext();
 
     void closeEvent(QCloseEvent* event);
     void resetProgram();
