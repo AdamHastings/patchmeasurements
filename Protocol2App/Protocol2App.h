@@ -18,6 +18,7 @@ public:
     // static QString getName();
     static int getHours();
     static int getAcceptances();
+    static void setAcceptances(int input);
 
     static void setUNI(QString input);
     // static void setName(QString input);

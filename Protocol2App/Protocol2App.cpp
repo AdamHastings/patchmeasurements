@@ -10,6 +10,7 @@ int Protocol2App::days;
 QString Protocol2App::uni;
 //QString Protocol2App::name;
 int Protocol2App::hours;
+int Protocol2App::acceptances = 0;
 
 void Protocol2App::enableExitButton() {
     Qt::WindowFlags flags = windowFlags();
@@ -128,7 +129,7 @@ void Protocol2App::showWTA() {
         SysUtils::initExperiment();
         SysUtils::takeSnapshot("start");
     }
-    ui.wta->resetPage(days);
+    ui.wta->resetPage(days, acceptances);
     ui.stackedWidget->setCurrentWidget(ui.wta);
 }
 
@@ -154,6 +155,8 @@ void Protocol2App::showGoodbye() {
 }
 
 void Protocol2App::acceptOffer() {
+    acceptances++;
+    RegistryUtils::setRegKey("acceptances", acceptances);
     SysUtils::takeSnapshot("accept");
     // get current time
     int time = SysUtils::getUnixTime();
@@ -178,7 +181,7 @@ void Protocol2App::showNoMore() {
         SysUtils::takeSnapshot("timeout");
     else
         SysUtils::takeSnapshot("decline");
-    ui.nomore->resetPage(days);
+    ui.nomore->resetPage(days, acceptances);
     enableExitButton();
     ui.stackedWidget->setCurrentWidget(ui.nomore);
 }
@@ -297,6 +300,7 @@ void Protocol2App::closeEvent(QCloseEvent* event) {
 void Protocol2App::resetProgram() {
     days = RegistryUtils::getRegKey("days").toInt();
     uni = RegistryUtils::getRegKey("UNI").toString();
+    acceptances = RegistryUtils::getRegKey("acceptances").toInt();
     //name = RegistryUtils::getRegKey("name").toString();
 
     //  figure out how long to sleep, and how many days have elapsed
@@ -366,3 +370,10 @@ void Protocol2App::setHours(int input) {
     hours = input;
 }
 
+int Protocol2App::getAcceptances() {
+    return acceptances;
+}
+
+void Protocol2App::setAcceptances(int input) {
+    acceptances = input;
+}

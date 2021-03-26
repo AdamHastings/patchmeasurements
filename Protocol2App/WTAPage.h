@@ -20,6 +20,6 @@ public:
 	QRadioButton* decline;
 
 	void firstOffer();
-	void resetPage(int days);
+	void resetPage(int days, int acceptances);
 
 };

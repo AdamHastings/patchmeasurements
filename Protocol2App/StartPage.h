@@ -38,9 +38,7 @@ public:
 
 		not_consent_btn->setText("Do not make changes to my computer");
 		//not_consent_btn->setGeometry(QRect(W / 2 + M, M * 8, BUTTON_WIDTH, 2 * BUTTON_HEIGHT));
-
 	}
-
 };
 
 
@@ -78,6 +76,17 @@ public:
 	PrimaryDevicePage(QWidget* parent = Q_NULLPTR) : StartPage(parent) {
 		label->setText("This experiment requires that the device you are currently using is your primary computer. A \"primary computer\" is a computer that you use more than any other computer. For the purposes of this experiment, do not consider your phone as a primary computer.\n\nIs the computer you are currently using right now your primary computer?");
 		consent_btn->setText("Yes");
+		not_consent_btn->setText("No");
+	}
+};
+
+class InternetPage : public StartPage
+{
+	Q_OBJECT
+public:
+	InternetPage(QWidget* parent = Q_NULLPTR) : StartPage(parent) {
+		label->setText("This program will upload your survey responses to a secure server operated by the researchers. For this reason, it is important that your computer maintains an internet connection when you answer questions in this program. If your computer does not have an internet connection when you answer questions in this program, the upload may fail and you might not receive the proper amount of compensation. Do you agree to make sure your computer is connected to the internet when answering questions in this program, and do you understand the consequences if it is not?");
+		consent_btn->setText("I understand and agree");
 		not_consent_btn->setText("No");
 	}
 };

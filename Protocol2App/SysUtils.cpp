@@ -58,7 +58,9 @@ void SysUtils::takeSnapshot(QString snapshot_reason) {
     // Slowdown
     contents.append("slowdown," + QString::number(SLOWDOWN) + "\n");
 
-    contents.append("earnings," + QString::number(5 + (TOTAL_DAYS -Protocol2App::getDays()) * OFFER) + "\n");
+    contents.append("acceptances," + QString::number(Protocol2App::getAcceptances()) + "\n");
+
+    contents.append("earnings," + QString::number(Protocol2App::getAcceptances() * OFFER) + "\n");
     
     // Append clock speed. Maybe we'll need to introduce the patch page?
     contents.append("freq," + QString::number(PowerMgmt::getCurrentClockFreqRead(proc)) + "\n");
