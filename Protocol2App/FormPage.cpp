@@ -61,7 +61,7 @@ FormPage::FormPage(QWidget* parent)
 	header->setWordWrap(true);
 	header->setAlignment(Qt::AlignJustify | Qt::AlignVCenter);
 	//header->setText("Thank you for participating in this study. After this experiment concludes, we will send you a Visa gift card worth the amount of money you'ved earned. To receive compensation, we will need your name and UNI so that we can email you this gift card.");
-	header->setText("Please enter your Prolific ID number below. We need to collect your Prolific ID number since some compensation may be distributed as bonus payments via Prolific.");
+	header->setText("Please enter your Mechanical Turk Worker ID number below. We need to collect your Mechanical Turk Worker ID number since some compensation may be distributed as bonus payments via Mechanical Turk.");
 
 	/*name = new QLabel(this);
 	name->setGeometry(2 * M, 3 * M, 2 * M, BUTTON_HEIGHT);
@@ -73,7 +73,7 @@ FormPage::FormPage(QWidget* parent)
 	uni = new QLabel(this);
 	uni->setGeometry(4 * M, 3 * M, 2 * M, BUTTON_HEIGHT);
 	uni->setAlignment(Qt::AlignRight | Qt::AlignVCenter);
-	uni->setText("Prolific ID #:  ");
+	uni->setText("Worker ID #:  ");
 	line_uni = new QLineEdit(this);
 	line_uni->setGeometry(6 * M, 3 * M, 4 * M, BUTTON_HEIGHT);
 

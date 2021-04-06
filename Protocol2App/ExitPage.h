@@ -44,7 +44,7 @@ public:
 	void resetPage(int days) {
 		QString labeltext;
 		if (days == TOTAL_DAYS) {
-			labeltext = "Your computer has been slowed down. You may now redeem your baseline compensation of " + QString::number(BASELINE) + " by entering the completion code " + COMPLETION_CODE + " into Prolific. Additional earnings will later be paid via bonus payments in Prolific.\n\n";
+			labeltext = "Your computer has been slowed down. You may now redeem your baseline compensation of " + QString::number(BASELINE) + " by entering the completion code " + COMPLETION_CODE + " into Mechanical Turk. Additional earnings will later be paid via bonus payments in Mechanical Turk.\n\n";
 		}
 		else {
 			labeltext = "Your computer will remain slowed down for another 24 hours. ";
@@ -66,10 +66,10 @@ public:
 
 	void resetPage(int days, int acceptances) {
 		if (days == TOTAL_DAYS) {
-			label->setText("Thank you for your participation! You have earned a baseline participation compensation of $" + QString::number(BASELINE) + " but will not earn any additional compensation. You may redeem this compensation via the following Prolific Completion Code:\n\n" + COMPLETION_CODE + "\n\nYou may now exit this window. Afterwards, please delete this program from your computer by running the \"uninstall\" program. After you uninstall the program, please reboot your computer for all changes to take effect.");
+			label->setText("Thank you for your participation! You have earned a baseline participation compensation of $" + QString::number(BASELINE) + " but will not earn any additional compensation. You may redeem this compensation via the following Mechanical Turk Completion Code:\n\n" + COMPLETION_CODE + "\n\nYou may now exit this window. Afterwards, please delete this program from your computer by running the \"uninstall\" program. After you uninstall the program, please reboot your computer for all changes to take effect.");
 		}
 		else {
-			label->setText("Thank you for your participation! Your computer's performance has been restored. During this experiment, you accepted slowing down your computer " + QString::number(acceptances) + " time(s), earning you $" + QString::number(OFFER) + " x " + QString::number(acceptances) + " = $" + QString::number(OFFER * acceptances) + ". Including your baseline participation compensation of $" + QString::number(BASELINE) + ", this brings your total earnings to $" + QString::number((OFFER * acceptances) + BASELINE) + ". You have already received the completion code for the baseline compensation. The remaining compensation will be paid to you as a bonus payment via Prolific.\n\nYou may now exit this window. Afterwards, please delete this program from your computer by running the \"uninstall\" program. After you uninstall the program, please reboot your computer for all changes to take effect.");
+			label->setText("Thank you for your participation! Your computer's performance has been restored. During this experiment, you accepted slowing down your computer " + QString::number(acceptances) + " time(s), earning you $" + QString::number(OFFER) + " x " + QString::number(acceptances) + " = $" + QString::number(OFFER * acceptances) + ". Including your baseline participation compensation of $" + QString::number(BASELINE) + ", this brings your total earnings to $" + QString::number((OFFER * acceptances) + BASELINE) + ". You have already received the completion code for the baseline compensation. The remaining compensation will be paid to you as a bonus payment via Mechanical Turk.\n\nYou may now exit this window. Afterwards, please delete this program from your computer by running the \"uninstall\" program. After you uninstall the program, please reboot your computer for all changes to take effect.");
 		}
 	}
 };
