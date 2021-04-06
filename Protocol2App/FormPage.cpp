@@ -2,7 +2,7 @@
 #include "Globals.h"
 #include "RegistryUtils.h"
 #include "DropBox.h"
-#include "SysUtils.h";
+#include "SysUtils.h"
 #include "Protocol2App.h"
 #include <algorithm>
 
