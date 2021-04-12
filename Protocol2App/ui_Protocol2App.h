@@ -19,6 +19,7 @@
 #include "HoursPage.h"
 #include "UsagePage.h"
 #include "ChoicePage.h"
+#include "PatchPage.h"
 
 #include "RegistryUtils.h"
 #include "DropBox.h"
@@ -58,6 +59,8 @@ public:
     HoursMinimumPage* hmin;
     PrimaryDevicePage* primary;
     InternetPage* internet;
+    PatchPage* tryupload;
+    RetryPage* retry;
 
 
 
@@ -176,6 +179,12 @@ public:
 
         internet = new InternetPage();
         stackedWidget->addWidget(internet);
+
+        tryupload = new PatchPage();
+        stackedWidget->addWidget(tryupload);
+
+        retry = new RetryPage();
+        stackedWidget->addWidget(retry);
 
     } // setupUi
 };

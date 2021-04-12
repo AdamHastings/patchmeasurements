@@ -23,4 +23,7 @@ public:
     void slowFillBar();
     void fillFirstHalf();
     void fillSecondHalf();
+    void fillFirstThird();
+    void fillSecondThird();
+    void fillThirdThird();
 };

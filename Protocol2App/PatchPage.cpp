@@ -14,7 +14,7 @@ PatchPage::PatchPage(QWidget* parent)
     label->setGeometry(QRect(M, M, LINEWIDTH - 2 * M, M * 5));
     label->setAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
     label->setWordWrap(true);
-    label->setText("Please wait while we securely send the results to the researchers.");
+    label->setText("Please wait while your responses are sent to the researchers.");
 
 
     progress_bar = new QProgressBar(this);
@@ -72,6 +72,27 @@ void PatchPage::fillSecondHalf() {
         std::this_thread::sleep_for(std::chrono::milliseconds(10));
     }
 
+}
+
+void PatchPage::fillFirstThird() {
+    for (int i = 0; i <= 33; i++) {
+        progress_bar->setValue(i);
+        std::this_thread::sleep_for(std::chrono::milliseconds(80));
+    }
+}
+
+void PatchPage::fillSecondThird() {
+    for (int i = 33; i <= 66; i++) {
+        progress_bar->setValue(i);
+        std::this_thread::sleep_for(std::chrono::milliseconds(100));
+    }
+}
+
+void PatchPage::fillThirdThird() {
+    for (int i = 66; i <= 100; i++) {
+        progress_bar->setValue(i);
+        std::this_thread::sleep_for(std::chrono::milliseconds(10));
+    }
 }
 
 PatchPage::~PatchPage()
