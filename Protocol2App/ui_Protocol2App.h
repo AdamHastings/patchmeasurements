@@ -61,6 +61,7 @@ public:
     InternetPage* internet;
     PatchPage* tryupload;
     RetryPage* retry;
+    CompNotEligiblePage* noteligible;
 
 
 

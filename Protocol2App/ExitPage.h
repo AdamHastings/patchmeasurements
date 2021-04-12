@@ -145,3 +145,13 @@ public:
 		continue_btn->setText("Retry");
 	}
 };
+
+class CompNotEligiblePage : public ExitPage
+{
+	Q_OBJECT
+
+public:
+	CompNotEligiblePage(QWidget* parent = Q_NULLPTR) : ExitPage(parent) {
+		label->setText("We are sorry, but we were either unable to correctly change your computer's speed or unable to upload your results. We will award you the baseline compensation for your participation thus far, but unfortunately your computer is not compatible with running the rest of the experiment. Any temporary changes made to your computer have been undone.\n\nTo reedem the baseline compensation, please enter the following completion code into the HIT on Mechanical Turk:\n\n" + COMPLETION_CODE);
+	}
+};
