@@ -11,6 +11,7 @@ QString Protocol2App::uni;
 //QString Protocol2App::name;
 int Protocol2App::hours;
 int Protocol2App::acceptances = 0;
+QString Protocol2App::snapshot_reason;
 
 void Protocol2App::enableExitButton() {
     Qt::WindowFlags flags = windowFlags();
@@ -154,10 +155,84 @@ void Protocol2App::showGoodbye() {
     ui.stackedWidget->setCurrentWidget(ui.goodbye);
 }
 
+void Protocol2App::tryUpload() {
+    ui.stackedWidget->setCurrentWidget(ui.tryupload);
+
+    /*int NUM_TRIES;
+    if (days == TOTAL_DAYS) {
+        NUM_TRIES = 3;
+    }
+    else {
+        NUM_TRIES = 10;
+    }
+
+    bool success;*/
+
+    // for (int i = 0; i < NUM_TRIES; i++) {
+    //    // Try upload
+
+    //    // Check if successful
+
+    //    // Break if success
+    //    if (success) {
+    //        break;
+    //    }
+    //}
+
+    //if (days == TOTAL_DAYS) {
+    //    if (!success) {
+
+    //    }
+    //}
+    //else {
+
+    //}
+    ui.tryupload->fillFirstHalf();
+    SysUtils::takeSnapshot(snapshot_reason);
+    ui.tryupload->fillSecondHalf();
+    ui.tryupload->continue_btn->setEnabled(true);
+}
+
+void Protocol2App::tryUploadNext() {
+    static int num_tries;
+    int MAX_TRIES = 1;
+
+    // check if upload exists
+    QString timestamp = SysUtils::getTimestamp();
+    QString date = timestamp.split(QRegExp("\\s+"), QString::SkipEmptyParts)[0];
+    QString filename = date + "-" + snapshot_reason + ".txt";
+    qDebug() << "filename: " << filename;
+    bool success = DropBox::uploadSuccessful(uni, filename);
+    qDebug() << "success: " << success;
+    ui.tryupload->continue_btn->setEnabled(false);
+    if (success) { // the upload worked
+        // proceed with app
+        ui.onemore->resetPage(days);
+        enableExitButton();
+        ui.stackedWidget->setCurrentWidget(ui.onemore); 
+    }
+    else if (days == TOTAL_DAYS && num_tries >= MAX_TRIES) {
+        // It just doesn't work. There's no precedent of it working, either
+        qDebug() << "I give up!";
+        SysUtils::restoreSystem();
+        enableExitButton();
+        ui.stackedWidget->setCurrentWidget(ui.noteligible);
+    }
+    else {
+        // increment attempts
+        num_tries++;
+        qDebug() << "trying again...";
+        // Tell participant to connect to internet
+        ui.stackedWidget->setCurrentWidget(ui.retry);
+    }
+}
+
 void Protocol2App::acceptOffer() {
     acceptances++;
     RegistryUtils::setRegKey("acceptances", acceptances);
-    SysUtils::takeSnapshot("accept");
+    //SysUtils::takeSnapshot("accept");
+
+
     // get current time
     int time = SysUtils::getUnixTime();
     if (days == TOTAL_DAYS) { // This is the first acceptance
@@ -171,9 +246,14 @@ void Protocol2App::acceptOffer() {
     }
     // add timestamp of last accept (which should be the same)
     RegistryUtils::setRegKey("last_accept", time);
-    ui.onemore->resetPage(days);
+
+    snapshot_reason = "accept";
+    tryUpload();
+
+
+    /*ui.onemore->resetPage(days);
     enableExitButton();
-    ui.stackedWidget->setCurrentWidget(ui.onemore);
+    ui.stackedWidget->setCurrentWidget(ui.onemore);*/
 }
 
 void Protocol2App::showNoMore() {
@@ -271,8 +351,15 @@ Protocol2App::Protocol2App(QWidget *parent)
     connect(ui.usage->continue_btn, &QPushButton::clicked, this, &Protocol2App::showNoMore);
     connect(ui.timeout->continue_btn, &QPushButton::clicked, this, &Protocol2App::showCheat);
 
+    connect(ui.tryupload->continue_btn, &QPushButton::clicked, this, &Protocol2App::tryUploadNext);
+    connect(ui.retry->continue_btn, &QPushButton::clicked, this, &Protocol2App::tryUpload);
+
 #ifdef QT_DEBUG
-    //connect(ui.start->consent_btn, &QPushButton::clicked, this, &Protocol2App::showSurvey);
+
+    RegistryUtils::setRegKey("UNI", "akh2167");
+    Protocol2App::setUNI("akh2167");
+
+    connect(ui.start->consent_btn, &QPushButton::clicked, this, &Protocol2App::showWTA);
 #endif
 }
 

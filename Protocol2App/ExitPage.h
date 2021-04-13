@@ -138,7 +138,7 @@ public:
 	QPushButton* continue_btn;
 
 	RetryPage(QWidget* parent = Q_NULLPTR) : ExitPage(parent) {
-		label->setText("The results failed to send correctly. This is likely because you are not connected to the internet. Please make sure you are connected to the internet and clikc the button below to try again.");
+		label->setText("The results failed to send correctly. This is likely because you are not connected to the internet. Please make sure you are connected to the internet and click the button below to try again.");
 
 		continue_btn = new QPushButton(this);
 		continue_btn->setGeometry(QRect(W / 2 - BUTTON_WIDTH / 2, M * 8, BUTTON_WIDTH, BUTTON_HEIGHT));

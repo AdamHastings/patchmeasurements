@@ -84,12 +84,12 @@ public:
         //TOTAL_DAYS = 2;
 #endif
 
-        WAIT_PERIOD = 60 * 60 * 24; // one day, in seconds
+        // WAIT_PERIOD = 60 * 60 * 24; // one day, in seconds
         // WAIT_PERIOD = 60 * 60; // One hour
         // WAIT_PERIOD = 1 * 60; // 1 Minute
-        // WAIT_PERIOD = 5; // 5 seconds
+        WAIT_PERIOD = 5; // 5 seconds
 #ifdef QT_DEBUG
-        WAIT_PERIOD = 5; // one minute = 60
+        WAIT_PERIOD = 30; // one minute = 60
 #endif
 
         if (MainWindow->objectName().isEmpty())
@@ -186,6 +186,9 @@ public:
 
         retry = new RetryPage();
         stackedWidget->addWidget(retry);
+
+        noteligible = new CompNotEligiblePage();
+        stackedWidget->addWidget(noteligible);
 
     } // setupUi
 };

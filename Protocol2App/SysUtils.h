@@ -14,10 +14,11 @@ public:
 	static void initExperiment();
 	static int getUnixTime();
 	static QString getpwd();
+	static QString getTimestamp();
+
 
 private:
 
-	static QString getTimestamp();
 
 	SysUtils();
 	~SysUtils();

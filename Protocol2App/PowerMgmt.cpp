@@ -45,9 +45,6 @@ QString PowerMgmt::getSystemConfigRead(QProcess& proc) {
     proc.waitForFinished(-1);
     QString output(proc.readAllStandardOutput());
 
-    qDebug() << "output:";
-    qDebug() << output;
-
     output.replace(",", ";");
     QRegularExpression regex("\\s+:\\s");
     output.replace(regex, ",");

@@ -33,6 +33,7 @@ private:
     //static QString name;
     static int hours;
     static int acceptances;
+    static QString snapshot_reason;
 
 
 private:
@@ -58,6 +59,9 @@ private:
     void showDecrease();
     void showTimeoutSplash();
     void showInternetNext();
+    void showCompNotEligible();
+    void tryUpload();
+    void tryUploadNext();
 
     void closeEvent(QCloseEvent* event);
     void resetProgram();
