@@ -59,9 +59,12 @@ public:
     HoursMinimumPage* hmin;
     PrimaryDevicePage* primary;
     InternetPage* internet;
-    PatchPage* tryupload;
+    //PatchPage* tryupload;
+    WaitPage* wait;
     RetryPage* retry;
     CompNotEligiblePage* noteligible;
+    WaitPage* waitfinal;
+    RetryPage* retryfinal;
 
 
 
@@ -181,14 +184,22 @@ public:
         internet = new InternetPage();
         stackedWidget->addWidget(internet);
 
-        tryupload = new PatchPage();
-        stackedWidget->addWidget(tryupload);
+        /*tryupload = new PatchPage();
+        stackedWidget->addWidget(tryupload);*/
+        wait = new WaitPage();
+        stackedWidget->addWidget(wait);
 
         retry = new RetryPage();
         stackedWidget->addWidget(retry);
 
         noteligible = new CompNotEligiblePage();
         stackedWidget->addWidget(noteligible);
+
+        waitfinal = new WaitPage();
+        stackedWidget->addWidget(waitfinal);
+
+        retryfinal = new RetryPage();
+        stackedWidget->addWidget(retryfinal);
 
     } // setupUi
 };

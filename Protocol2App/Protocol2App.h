@@ -64,6 +64,9 @@ private:
     void showCompNotEligible();
     void tryUpload();
     void tryUploadNext();
+    void tryFinalUpload();
+    void tryFinalUploadNext();
+    void showFinalRetry();
 
     void closeEvent(QCloseEvent* event);
     void resetProgram();

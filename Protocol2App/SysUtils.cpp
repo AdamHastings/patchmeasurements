@@ -15,6 +15,9 @@
 #include "Protocol2App.h"
 #include "ChoicePage.h"
 #include <QDir>
+#include <thread>
+#include <chrono>
+#include <stdlib.h>
 using namespace std;
 
 
@@ -29,6 +32,8 @@ QString SysUtils::getTimestamp() {
 
 // Takes a snapshot of the system and uploads to Dropbox
 void SysUtils::takeSnapshot(QString snapshot_reason) {
+
+
 
     QProcess proc, proc2;
     PowerMgmt::getCurrentClockFreqStart(proc);

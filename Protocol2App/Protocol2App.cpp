@@ -5,6 +5,9 @@
 #include <QCloseEvent>
 #include <time.h>
 #include <QDebug>
+#include <thread>
+#include <chrono>
+#include <stdlib.h>
 
 int Protocol2App::days;
 QString Protocol2App::uni;
@@ -117,12 +120,10 @@ void Protocol2App::showInternetNext() {
     }
 }
 
-
 void Protocol2App::showFormPage() {
     disableExitButton();
     ui.stackedWidget->setCurrentWidget(ui.form);
 }
-
 
 void Protocol2App::showWTA() {
     qDebug() << "days: " << days;
@@ -156,41 +157,12 @@ void Protocol2App::showGoodbye() {
 }
 
 void Protocol2App::tryUpload() {
-    ui.stackedWidget->setCurrentWidget(ui.tryupload);
-
-    /*int NUM_TRIES;
-    if (days == TOTAL_DAYS) {
-        NUM_TRIES = 3;
-    }
-    else {
-        NUM_TRIES = 10;
-    }
-
-    bool success;*/
-
-    // for (int i = 0; i < NUM_TRIES; i++) {
-    //    // Try upload
-
-    //    // Check if successful
-
-    //    // Break if success
-    //    if (success) {
-    //        break;
-    //    }
-    //}
-
-    //if (days == TOTAL_DAYS) {
-    //    if (!success) {
-
-    //    }
-    //}
-    //else {
-
-    //}
-    ui.tryupload->fillFirstHalf();
+    ui.wait->continue_btn->setEnabled(false);
+    ui.stackedWidget->setCurrentWidget(ui.wait);
+    //ui.tryupload->fillFirstHalf();
     SysUtils::takeSnapshot(snapshot_reason);
-    ui.tryupload->fillSecondHalf();
-    ui.tryupload->continue_btn->setEnabled(true);
+    //ui.tryupload->fillSecondHalf();
+    ui.wait->continue_btn->setEnabled(true);
 }
 
 void Protocol2App::tryUploadNext() {
@@ -201,11 +173,9 @@ void Protocol2App::tryUploadNext() {
     QString timestamp = SysUtils::getTimestamp();
     QString date = timestamp.split(QRegExp("\\s+"), QString::SkipEmptyParts)[0];
     QString filename = date + "-" + snapshot_reason + ".txt";
-    qDebug() << "filename: " << filename;
-    bool success = DropBox::uploadSuccessful(uni, filename);
-    qDebug() << "success: " << success;
-    ui.tryupload->continue_btn->setEnabled(false);
-    if (success) { // the upload worked
+    
+    ui.wait->continue_btn->setEnabled(false);
+    if (DropBox::uploadSuccessful(uni, filename)) { // the upload worked
         // proceed with app
         ui.onemore->resetPage(days);
         enableExitButton();
@@ -256,11 +226,47 @@ void Protocol2App::acceptOffer() {
     ui.stackedWidget->setCurrentWidget(ui.onemore);*/
 }
 
+void Protocol2App::tryFinalUpload() {
+    ui.waitfinal->continue_btn->setEnabled(false);
+    ui.stackedWidget->setCurrentWidget(ui.waitfinal);
+
+
+    if (days == 0) {
+        snapshot_reason = "timeout";
+    }
+    else {
+        snapshot_reason = "decline";
+    }
+    qDebug() << "snapshot reason: " << snapshot_reason;
+    SysUtils::takeSnapshot(snapshot_reason);
+    ui.waitfinal->continue_btn->setEnabled(true);
+}
+
+void Protocol2App::tryFinalUploadNext() {
+    // Check if upload was successful
+    QString timestamp = SysUtils::getTimestamp();
+    QString date = timestamp.split(QRegExp("\\s+"), QString::SkipEmptyParts)[0];
+    QString filename = date + "-" + snapshot_reason + ".txt";
+
+    if (DropBox::uploadSuccessful(uni, filename)) {
+        showNoMore();
+    }
+    else {
+        showFinalRetry();
+    }
+}
+
+void Protocol2App::showFinalRetry() {
+    ui.stackedWidget->setCurrentWidget(ui.retryfinal);
+}
+
 void Protocol2App::showNoMore() {
-    if (days == 0)
+    /*if (days == 0) {
         SysUtils::takeSnapshot("timeout");
-    else
+    }
+    else {
         SysUtils::takeSnapshot("decline");
+    }*/
     ui.nomore->resetPage(days, acceptances);
     enableExitButton();
     ui.stackedWidget->setCurrentWidget(ui.nomore);
@@ -348,10 +354,14 @@ Protocol2App::Protocol2App(QWidget *parent)
     //connect(ui.hours->continue_btn, &QPushButton::clicked, this, &Protocol2App::showImprove);
     connect(ui.improve->continue_btn, &QPushButton::clicked, this, &Protocol2App::showDecrease);
     connect(ui.decrease->continue_btn, &QPushButton::clicked, this, &Protocol2App::showUsage);
-    connect(ui.usage->continue_btn, &QPushButton::clicked, this, &Protocol2App::showNoMore);
+    //connect(ui.usage->continue_btn, &QPushButton::clicked, this, &Protocol2App::showNoMore);
+    connect(ui.usage->continue_btn, &QPushButton::clicked, this, &Protocol2App::tryFinalUpload);
+    connect(ui.waitfinal->continue_btn, &QPushButton::clicked, this, &Protocol2App::tryFinalUploadNext);
+    connect(ui.retryfinal->continue_btn, &QPushButton::clicked, this, &Protocol2App::tryFinalUpload);
+
     connect(ui.timeout->continue_btn, &QPushButton::clicked, this, &Protocol2App::showCheat);
 
-    connect(ui.tryupload->continue_btn, &QPushButton::clicked, this, &Protocol2App::tryUploadNext);
+    connect(ui.wait->continue_btn, &QPushButton::clicked, this, &Protocol2App::tryUploadNext);
     connect(ui.retry->continue_btn, &QPushButton::clicked, this, &Protocol2App::tryUpload);
 
 #ifdef QT_DEBUG
@@ -359,7 +369,7 @@ Protocol2App::Protocol2App(QWidget *parent)
     RegistryUtils::setRegKey("UNI", "akh2167");
     Protocol2App::setUNI("akh2167");
 
-    connect(ui.start->consent_btn, &QPushButton::clicked, this, &Protocol2App::showWTA);
+    connect(ui.start->consent_btn, &QPushButton::clicked, this, &Protocol2App::showUsage);
 #endif
 }
 
@@ -440,14 +450,6 @@ QString Protocol2App::getUNI() {
 void Protocol2App::setUNI(QString input) {
     uni = input;
 }
-
-//void Protocol2App::setName(QString input) {
-//    name = input;
-//}
-//
-//QString Protocol2App::getName() {
-//    return name;
-//}
 
 int Protocol2App::getHours() {
     return hours;
