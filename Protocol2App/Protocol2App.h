@@ -25,6 +25,8 @@ public:
     static void setHours(int input);
 
     static QString snapshot_reason;
+    static double start_freq;
+    static double accept_freq;
 
    
 
@@ -67,6 +69,7 @@ private:
     void tryFinalUpload();
     void tryFinalUploadNext();
     void showFinalRetry();
+    void showHoursNext();
 
     void closeEvent(QCloseEvent* event);
     void resetProgram();

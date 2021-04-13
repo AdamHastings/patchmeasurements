@@ -15,6 +15,8 @@ QString Protocol2App::uni;
 int Protocol2App::hours;
 int Protocol2App::acceptances = 0;
 QString Protocol2App::snapshot_reason;
+double Protocol2App::start_freq;
+double Protocol2App::accept_freq;
 
 void Protocol2App::enableExitButton() {
     Qt::WindowFlags flags = windowFlags();
@@ -71,8 +73,17 @@ void Protocol2App::showModNext() {
     }
 }
 
+void Protocol2App::showHoursNext() {
+    if (ui.hours->spin->value() >= 10) {
+        setHours(ui.hours->spin->value());
+        showHMonitor();
+    }
+    else {
+        showGoodbye();
+    }
+}
+
 void Protocol2App::showHMonitor() {
-    setHours(ui.hours->spin->value());
     ui.stackedWidget->setCurrentWidget(ui.hmonitor);
 }
 
@@ -175,18 +186,31 @@ void Protocol2App::tryUploadNext() {
     QString filename = date + "-" + snapshot_reason + ".txt";
     
     ui.wait->continue_btn->setEnabled(false);
-    if (DropBox::uploadSuccessful(uni, filename)) { // the upload worked
-        // proceed with app
+    if (days == TOTAL_DAYS) {
+        if (num_tries >= MAX_TRIES) {
+            // It just doesn't work. There's no precedent of it working, either
+            qDebug() << "I give up!";
+            SysUtils::restoreSystem();
+            enableExitButton();
+            ui.stackedWidget->setCurrentWidget(ui.noteligible);
+            return;
+        }
+        // check that freqs are acceptable
+        else if (accept_freq > (start_freq * 0.8)
+            || accept_freq == 0
+            || start_freq == 0
+            ) {
+            SysUtils::restoreSystem();
+            enableExitButton();
+            ui.stackedWidget->setCurrentWidget(ui.noteligible);
+            return;
+        }
+    }
+    if (DropBox::uploadSuccessful(uni, filename)) { 
+        // the upload worked // proceed with app
         ui.onemore->resetPage(days);
         enableExitButton();
-        ui.stackedWidget->setCurrentWidget(ui.onemore); 
-    }
-    else if (days == TOTAL_DAYS && num_tries >= MAX_TRIES) {
-        // It just doesn't work. There's no precedent of it working, either
-        qDebug() << "I give up!";
-        SysUtils::restoreSystem();
-        enableExitButton();
-        ui.stackedWidget->setCurrentWidget(ui.noteligible);
+        ui.stackedWidget->setCurrentWidget(ui.onemore);
     }
     else {
         // increment attempts
@@ -343,7 +367,9 @@ Protocol2App::Protocol2App(QWidget *parent)
 
     connect(ui.form->continue_btn, &QPushButton::clicked, this, &Protocol2App::showHours);
 
-    connect(ui.hours->continue_btn, &QPushButton::clicked, this, &Protocol2App::showHMonitor);
+    connect(ui.hours->continue_btn, &QPushButton::clicked, this, &Protocol2App::showHoursNext);
+
+
     connect(ui.hmonitor->continue_btn, &QPushButton::clicked, this, &Protocol2App::showHMonitorNext);
     connect(ui.hmin->continue_btn, &QPushButton::clicked, this, &Protocol2App::showHMinNext);
 

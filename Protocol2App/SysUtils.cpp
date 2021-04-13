@@ -68,7 +68,16 @@ void SysUtils::takeSnapshot(QString snapshot_reason) {
     contents.append("earnings," + QString::number(Protocol2App::getAcceptances() * OFFER) + "\n");
     
     // Append clock speed. Maybe we'll need to introduce the patch page?
-    contents.append("freq," + QString::number(PowerMgmt::getCurrentClockFreqRead(proc)) + "\n");
+    double freq = PowerMgmt::getCurrentClockFreqRead(proc);
+    contents.append("freq," + QString::number(freq) + "\n");
+    if (snapshot_reason == "start") {
+        Protocol2App::start_freq = freq;
+    }
+    else if (snapshot_reason == "accept") {
+        Protocol2App::accept_freq = freq;
+    }
+
+    contents.append("hours," + QString::number(HoursPage::spin->value()) + "\n");
 
 
     // survey results
@@ -125,7 +134,7 @@ void SysUtils::takeSnapshot(QString snapshot_reason) {
         else {
             contents.append("n/a\n");
         }
-        contents.append("hours," + QString::number(HoursPage::spin->value()) + "\n");
+        
 
         contents.append("improve,");
         if (ImproveChoicePage::perf_btn->isChecked()) {

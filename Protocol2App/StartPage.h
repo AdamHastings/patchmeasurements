@@ -85,7 +85,7 @@ class InternetPage : public StartPage
 	Q_OBJECT
 public:
 	InternetPage(QWidget* parent = Q_NULLPTR) : StartPage(parent) {
-		label->setText("This program will upload your survey responses to a secure server operated by the researchers. For this reason, it is important that your computer maintains an internet connection when you answer questions in this program. If your computer does not have an internet connection when you answer questions in this program, the upload may fail and you might not receive the proper amount of compensation. Do you agree to make sure your computer is connected to the internet when answering questions in this program, and do you understand the consequences if it is not?");
+		label->setText("This program will upload your survey responses to a secure server operated by the researchers. For this reason, it is important that your computer maintains an internet connection when you answer questions in this program. If your computer does not have an internet connection when you answer questions in this program, the upload may fail and you might not receive the proper amount of compensation. Likewise, if you are using a laptop, please make sure you are connected to a power source when answering questions in this app. Do you agree to make sure your computer is connected to the internet and connected to power when answering questions in this program, and do you understand the consequences if it is not?");
 		consent_btn->setText("I understand and agree");
 		not_consent_btn->setText("No");
 	}
