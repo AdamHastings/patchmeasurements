@@ -195,7 +195,7 @@ void Protocol2App::tryUpload() {
 
 void Protocol2App::tryUploadNext() {
     static int num_tries;
-    int MAX_TRIES = 1;
+    int MAX_TRIES = 3;
 
     // check if upload exists
     QString timestamp = SysUtils::getTimestamp();

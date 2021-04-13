@@ -23,6 +23,9 @@ public:
     static void setUNI(QString input);
     // static void setName(QString input);
     static void setHours(int input);
+
+    static QString snapshot_reason;
+
    
 
 private:
@@ -33,7 +36,6 @@ private:
     //static QString name;
     static int hours;
     static int acceptances;
-    static QString snapshot_reason;
 
 
 private:

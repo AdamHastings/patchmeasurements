@@ -201,7 +201,7 @@ void SysUtils::restoreSystem() {
         qDebug() << "Restoring CsEnabled to 1";
         // REBOOT_AT_END = true; // TODO figure out how to do this
     }
-    if (Protocol2App::getDays() != TOTAL_DAYS) {
+    if (Protocol2App::getDays() != TOTAL_DAYS || (Protocol2App::getDays() == TOTAL_DAYS && Protocol2App::snapshot_reason == "accept")) {
         PowerMgmt::restoreDefaults();
         RegistryUtils::unsetAutorun();
     }
