@@ -16,6 +16,8 @@ public:
 	static QString getpwd();
 	static QString getTimestamp();
 
+	static bool REBOOT_AT_END;
+
 
 private:
 

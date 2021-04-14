@@ -53,7 +53,7 @@ public:
 			labeltext = "Your computer will remain slowed down for another 24 hours. ";
 		}
 
-		labeltext += "When you close this computer program, the window will disappear but the program will not be killed: This program will sit idly in the background and will occasionally monitor your device's speed to ensure that it remains slowed down.\n\nIf you reboot your computer, this program will automatically restart itself (although you may have to re-authorize it to run as Administrator). After 24 hours have elapsed, this program will wake itself up and you will be given the choice to either restore your computer's performance or keep your computer slow in exchange for money.\n\n\nYou may now exit this window.";
+		labeltext += "When you close this computer program, the window will disappear but the program will not be killed: This program will sit idly in the background and will occasionally monitor your device's speed to ensure that it remains slowed down.\n\nIf you reboot your computer, this program will automatically restart itself (although you will have to re-authorize it to run as Administrator). After 24 hours have elapsed, this program will wake itself up and you will be given the choice to either restore your computer's performance or keep your computer slow in exchange for money.\n\n\nYou may now exit this window.";
 		label->setText(labeltext);
 	}
 };
@@ -70,13 +70,17 @@ public:
 	void resetPage(int days, int acceptances, QString uni) {
 		QString lastchr = uni[uni.length() - 1];
 		QString cc = COMPLETION_CODE + lastchr;
-
+		QString text;
 		if (days == TOTAL_DAYS) {
-			label->setText("Thank you for your participation! You have earned a baseline participation compensation of $" + QString::number(BASELINE) + " but will not earn any additional compensation. You may redeem this compensation via the following Mechanical Turk Completion Code:\n\n" + cc + "\n\nYou may now exit this window. Afterwards, please delete this program from your computer by running the \"uninstall\" program. After you uninstall the program, please reboot your computer for all changes to take effect.");
+			text = "Thank you for your participation! You have earned a baseline participation compensation of $" + QString::number(BASELINE) + " but will not earn any additional compensation. You may redeem this compensation via the following Mechanical Turk Completion Code:\n\n" + cc + "\n\nYou may now exit this window. Afterwards, please delete this program from your computer by running the \"uninstall\" program.";
 		}
 		else {
-			label->setText("Thank you for your participation! Your computer's performance has been restored. During this experiment, you accepted slowing down your computer " + QString::number(acceptances) + " time(s), earning you $" + QString::number(OFFER) + " x " + QString::number(acceptances) + " = $" + QString::number(OFFER * acceptances) + ". Including your baseline participation compensation of $" + QString::number(BASELINE) + ", this brings your total earnings to $" + QString::number((OFFER * acceptances) + BASELINE) + ". You have already received the completion code for the baseline compensation. The remaining compensation will be paid to you as a bonus payment via Mechanical Turk.\n\nYou may now exit this window. Afterwards, please delete this program from your computer by running the \"uninstall\" program. After you uninstall the program, please reboot your computer for all changes to take effect.");
+			text = "Thank you for your participation! Your computer's performance has been restored. During this experiment, you accepted slowing down your computer " + QString::number(acceptances) + " time(s), earning you $" + QString::number(OFFER) + " x " + QString::number(acceptances) + " = $" + QString::number(OFFER * acceptances) + ". Including your baseline participation compensation of $" + QString::number(BASELINE) + ", this brings your total earnings to $" + QString::number((OFFER * acceptances) + BASELINE) + ". You have already received the completion code for the baseline compensation. The remaining compensation will be paid to you as a bonus payment via Mechanical Turk.\n\nYou may now exit this window. Afterwards, please delete this program from your computer by running the \"uninstall\" program.";
 		}
+		if (SysUtils::REBOOT_AT_END) {
+			text += " After you uninstall the program, please reboot your computer for all changes to be undone.";
+		}
+		label->setText(text);
 	}
 };
 
@@ -106,7 +110,16 @@ class GoodbyePage : public ExitPage
 
 public:
 	GoodbyePage(QWidget* parent = Q_NULLPTR) : ExitPage(parent) {
-		label->setText("Thank you for your interest in this experiment. Unfortunately, you are not eligible to participate.\n\nYou may now exit this window. Afterwards, please delete this program from your computer by running the \"uninstall\" program. Any changes made to your device have been undone. Please reboot your device for all undone changes to take effect.");
+		
+	}
+
+	void resetPage() {
+		QString text = "Thank you for your interest in this experiment. Unfortunately, you are not eligible to participate.\n\nYou may now exit this window. Afterwards, please delete this program from your computer by running the \"uninstall\" program. Any changes made to your device have been undone.";
+
+		if (SysUtils::REBOOT_AT_END) {
+			text += " Please also reboot your device for all changes to be undone.";
+		}
+		label->setText(text);
 	}
 };
 

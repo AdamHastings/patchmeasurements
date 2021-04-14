@@ -20,6 +20,7 @@
 #include <stdlib.h>
 using namespace std;
 
+bool SysUtils::REBOOT_AT_END = false;
 
 QString SysUtils::getTimestamp() {
     auto t = std::time(nullptr);
@@ -213,7 +214,7 @@ void SysUtils::restoreSystem() {
     if (CsEnabled_default == 1) {
         RegistryUtils::setCsEnabled(1);
         qDebug() << "Restoring CsEnabled to 1";
-        // REBOOT_AT_END = true; // TODO figure out how to do this
+        REBOOT_AT_END = true;
     }
     if (Protocol2App::getDays() != TOTAL_DAYS || (Protocol2App::getDays() == TOTAL_DAYS && Protocol2App::snapshot_reason == "accept")) {
         PowerMgmt::restoreDefaults();

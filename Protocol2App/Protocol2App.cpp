@@ -163,6 +163,7 @@ void Protocol2App::WTAnext() {
 void Protocol2App::showGoodbye() {
     SysUtils::restoreSystem();
     // RegistryUtils::nuke();
+    ui.goodbye->resetPage();
     enableExitButton();
     ui.stackedWidget->setCurrentWidget(ui.goodbye);
 }
