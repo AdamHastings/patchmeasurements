@@ -651,5 +651,215 @@ int TimeoutSplashPage::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     _id = ExitPage::qt_metacall(_c, _id, _a);
     return _id;
 }
+struct qt_meta_stringdata_RetryPage_t {
+    QByteArrayData data[1];
+    char stringdata0[10];
+};
+#define QT_MOC_LITERAL(idx, ofs, len) \
+    Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
+    qptrdiff(offsetof(qt_meta_stringdata_RetryPage_t, stringdata0) + ofs \
+        - idx * sizeof(QByteArrayData)) \
+    )
+static const qt_meta_stringdata_RetryPage_t qt_meta_stringdata_RetryPage = {
+    {
+QT_MOC_LITERAL(0, 0, 9) // "RetryPage"
+
+    },
+    "RetryPage"
+};
+#undef QT_MOC_LITERAL
+
+static const uint qt_meta_data_RetryPage[] = {
+
+ // content:
+       8,       // revision
+       0,       // classname
+       0,    0, // classinfo
+       0,    0, // methods
+       0,    0, // properties
+       0,    0, // enums/sets
+       0,    0, // constructors
+       0,       // flags
+       0,       // signalCount
+
+       0        // eod
+};
+
+void RetryPage::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
+{
+    Q_UNUSED(_o);
+    Q_UNUSED(_id);
+    Q_UNUSED(_c);
+    Q_UNUSED(_a);
+}
+
+QT_INIT_METAOBJECT const QMetaObject RetryPage::staticMetaObject = { {
+    QMetaObject::SuperData::link<ExitPage::staticMetaObject>(),
+    qt_meta_stringdata_RetryPage.data,
+    qt_meta_data_RetryPage,
+    qt_static_metacall,
+    nullptr,
+    nullptr
+} };
+
+
+const QMetaObject *RetryPage::metaObject() const
+{
+    return QObject::d_ptr->metaObject ? QObject::d_ptr->dynamicMetaObject() : &staticMetaObject;
+}
+
+void *RetryPage::qt_metacast(const char *_clname)
+{
+    if (!_clname) return nullptr;
+    if (!strcmp(_clname, qt_meta_stringdata_RetryPage.stringdata0))
+        return static_cast<void*>(this);
+    return ExitPage::qt_metacast(_clname);
+}
+
+int RetryPage::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
+{
+    _id = ExitPage::qt_metacall(_c, _id, _a);
+    return _id;
+}
+struct qt_meta_stringdata_CompNotEligiblePage_t {
+    QByteArrayData data[1];
+    char stringdata0[20];
+};
+#define QT_MOC_LITERAL(idx, ofs, len) \
+    Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
+    qptrdiff(offsetof(qt_meta_stringdata_CompNotEligiblePage_t, stringdata0) + ofs \
+        - idx * sizeof(QByteArrayData)) \
+    )
+static const qt_meta_stringdata_CompNotEligiblePage_t qt_meta_stringdata_CompNotEligiblePage = {
+    {
+QT_MOC_LITERAL(0, 0, 19) // "CompNotEligiblePage"
+
+    },
+    "CompNotEligiblePage"
+};
+#undef QT_MOC_LITERAL
+
+static const uint qt_meta_data_CompNotEligiblePage[] = {
+
+ // content:
+       8,       // revision
+       0,       // classname
+       0,    0, // classinfo
+       0,    0, // methods
+       0,    0, // properties
+       0,    0, // enums/sets
+       0,    0, // constructors
+       0,       // flags
+       0,       // signalCount
+
+       0        // eod
+};
+
+void CompNotEligiblePage::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
+{
+    Q_UNUSED(_o);
+    Q_UNUSED(_id);
+    Q_UNUSED(_c);
+    Q_UNUSED(_a);
+}
+
+QT_INIT_METAOBJECT const QMetaObject CompNotEligiblePage::staticMetaObject = { {
+    QMetaObject::SuperData::link<ExitPage::staticMetaObject>(),
+    qt_meta_stringdata_CompNotEligiblePage.data,
+    qt_meta_data_CompNotEligiblePage,
+    qt_static_metacall,
+    nullptr,
+    nullptr
+} };
+
+
+const QMetaObject *CompNotEligiblePage::metaObject() const
+{
+    return QObject::d_ptr->metaObject ? QObject::d_ptr->dynamicMetaObject() : &staticMetaObject;
+}
+
+void *CompNotEligiblePage::qt_metacast(const char *_clname)
+{
+    if (!_clname) return nullptr;
+    if (!strcmp(_clname, qt_meta_stringdata_CompNotEligiblePage.stringdata0))
+        return static_cast<void*>(this);
+    return ExitPage::qt_metacast(_clname);
+}
+
+int CompNotEligiblePage::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
+{
+    _id = ExitPage::qt_metacall(_c, _id, _a);
+    return _id;
+}
+struct qt_meta_stringdata_WaitPage_t {
+    QByteArrayData data[1];
+    char stringdata0[9];
+};
+#define QT_MOC_LITERAL(idx, ofs, len) \
+    Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
+    qptrdiff(offsetof(qt_meta_stringdata_WaitPage_t, stringdata0) + ofs \
+        - idx * sizeof(QByteArrayData)) \
+    )
+static const qt_meta_stringdata_WaitPage_t qt_meta_stringdata_WaitPage = {
+    {
+QT_MOC_LITERAL(0, 0, 8) // "WaitPage"
+
+    },
+    "WaitPage"
+};
+#undef QT_MOC_LITERAL
+
+static const uint qt_meta_data_WaitPage[] = {
+
+ // content:
+       8,       // revision
+       0,       // classname
+       0,    0, // classinfo
+       0,    0, // methods
+       0,    0, // properties
+       0,    0, // enums/sets
+       0,    0, // constructors
+       0,       // flags
+       0,       // signalCount
+
+       0        // eod
+};
+
+void WaitPage::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
+{
+    Q_UNUSED(_o);
+    Q_UNUSED(_id);
+    Q_UNUSED(_c);
+    Q_UNUSED(_a);
+}
+
+QT_INIT_METAOBJECT const QMetaObject WaitPage::staticMetaObject = { {
+    QMetaObject::SuperData::link<ExitPage::staticMetaObject>(),
+    qt_meta_stringdata_WaitPage.data,
+    qt_meta_data_WaitPage,
+    qt_static_metacall,
+    nullptr,
+    nullptr
+} };
+
+
+const QMetaObject *WaitPage::metaObject() const
+{
+    return QObject::d_ptr->metaObject ? QObject::d_ptr->dynamicMetaObject() : &staticMetaObject;
+}
+
+void *WaitPage::qt_metacast(const char *_clname)
+{
+    if (!_clname) return nullptr;
+    if (!strcmp(_clname, qt_meta_stringdata_WaitPage.stringdata0))
+        return static_cast<void*>(this);
+    return ExitPage::qt_metacast(_clname);
+}
+
+int WaitPage::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
+{
+    _id = ExitPage::qt_metacall(_c, _id, _a);
+    return _id;
+}
 QT_WARNING_POP
 QT_END_MOC_NAMESPACE
