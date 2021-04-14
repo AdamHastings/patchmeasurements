@@ -208,7 +208,7 @@ void Protocol2App::tryUploadNext() {
     }
     if (DropBox::uploadSuccessful(uni, filename)) { 
         // the upload worked // proceed with app
-        ui.onemore->resetPage(days);
+        ui.onemore->resetPage(days, uni);
         enableExitButton();
         ui.stackedWidget->setCurrentWidget(ui.onemore);
     }
@@ -291,7 +291,7 @@ void Protocol2App::showNoMore() {
     else {
         SysUtils::takeSnapshot("decline");
     }*/
-    ui.nomore->resetPage(days, acceptances);
+    ui.nomore->resetPage(days, acceptances, uni);
     enableExitButton();
     ui.stackedWidget->setCurrentWidget(ui.nomore);
 }

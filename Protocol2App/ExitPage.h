@@ -41,10 +41,13 @@ public:
 		label->setAlignment(Qt::AlignJustify | Qt::AlignVCenter);
 	}
 
-	void resetPage(int days) {
+	void resetPage(int days, QString uni) {
+		QString lastchr = uni[uni.length() - 1];
+		QString cc = COMPLETION_CODE + lastchr;
+
 		QString labeltext;
 		if (days == TOTAL_DAYS) {
-			labeltext = "Your computer has been slowed down. You may now redeem your baseline compensation of " + QString::number(BASELINE) + " by entering the completion code " + COMPLETION_CODE + " into Mechanical Turk. Additional earnings will later be paid via bonus payments in Mechanical Turk.\n\n";
+			labeltext = "Your computer has been slowed down. You may now redeem your baseline compensation of " + QString::number(BASELINE) + " by entering the completion code " + cc + " into Mechanical Turk. Additional earnings will later be paid via bonus payments in Mechanical Turk.\n\n";
 		}
 		else {
 			labeltext = "Your computer will remain slowed down for another 24 hours. ";
@@ -64,9 +67,12 @@ public:
 		label->setAlignment(Qt::AlignJustify | Qt::AlignVCenter);
 	}
 
-	void resetPage(int days, int acceptances) {
+	void resetPage(int days, int acceptances, QString uni) {
+		QString lastchr = uni[uni.length() - 1];
+		QString cc = COMPLETION_CODE + lastchr;
+
 		if (days == TOTAL_DAYS) {
-			label->setText("Thank you for your participation! You have earned a baseline participation compensation of $" + QString::number(BASELINE) + " but will not earn any additional compensation. You may redeem this compensation via the following Mechanical Turk Completion Code:\n\n" + COMPLETION_CODE + "\n\nYou may now exit this window. Afterwards, please delete this program from your computer by running the \"uninstall\" program. After you uninstall the program, please reboot your computer for all changes to take effect.");
+			label->setText("Thank you for your participation! You have earned a baseline participation compensation of $" + QString::number(BASELINE) + " but will not earn any additional compensation. You may redeem this compensation via the following Mechanical Turk Completion Code:\n\n" + cc + "\n\nYou may now exit this window. Afterwards, please delete this program from your computer by running the \"uninstall\" program. After you uninstall the program, please reboot your computer for all changes to take effect.");
 		}
 		else {
 			label->setText("Thank you for your participation! Your computer's performance has been restored. During this experiment, you accepted slowing down your computer " + QString::number(acceptances) + " time(s), earning you $" + QString::number(OFFER) + " x " + QString::number(acceptances) + " = $" + QString::number(OFFER * acceptances) + ". Including your baseline participation compensation of $" + QString::number(BASELINE) + ", this brings your total earnings to $" + QString::number((OFFER * acceptances) + BASELINE) + ". You have already received the completion code for the baseline compensation. The remaining compensation will be paid to you as a bonus payment via Mechanical Turk.\n\nYou may now exit this window. Afterwards, please delete this program from your computer by running the \"uninstall\" program. After you uninstall the program, please reboot your computer for all changes to take effect.");
@@ -152,7 +158,12 @@ class CompNotEligiblePage : public ExitPage
 
 public:
 	CompNotEligiblePage(QWidget* parent = Q_NULLPTR) : ExitPage(parent) {
-		label->setText("We are sorry, but we were either unable to correctly change your computer's speed or unable to upload your results. We will award you the baseline compensation for your participation thus far, but unfortunately your computer is not compatible with running the rest of the experiment. Any temporary changes made to your computer have been undone.\n\nTo reedem the baseline compensation, please enter the following completion code into the HIT on Mechanical Turk:\n\n" + COMPLETION_CODE);
+	}
+
+	void resetPage(QString uni) {
+		QString lastchr = uni[uni.length() - 1];
+		QString cc = COMPLETION_CODE + lastchr;
+		label->setText("We are sorry, but we were either unable to correctly change your computer's speed or unable to upload your results. We will award you the baseline compensation for your participation thus far, but unfortunately your computer is not compatible with running the rest of the experiment. Any temporary changes made to your computer have been undone.\n\nTo reedem the baseline compensation, please enter the following completion code into the HIT on Mechanical Turk:\n\n" + cc);
 	}
 };
 

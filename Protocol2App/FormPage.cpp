@@ -43,6 +43,9 @@ void FormPage::updateContinueBtn(const QString& text) {
 		
 		continue_btn->setEnabled(true);
 	}
+	else {
+		continue_btn->setEnabled(false);
+	}
 }
 
 void FormPage::makeConnections() {
