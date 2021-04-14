@@ -190,7 +190,7 @@ void Protocol2App::tryUploadNext() {
     if (days == TOTAL_DAYS) {
         if (num_tries >= MAX_TRIES) {
             // It just doesn't work. There's no precedent of it working, either
-            qDebug() << "I give up!";
+            SysUtils::takeSnapshot("num_tries_exceeded");
             SysUtils::restoreSystem();
             enableExitButton();
             ui.stackedWidget->setCurrentWidget(ui.noteligible);
@@ -201,6 +201,7 @@ void Protocol2App::tryUploadNext() {
             || accept_freq == 0
             || start_freq == 0
             ) {
+            SysUtils::takeSnapshot("bad_freqs");
             SysUtils::restoreSystem();
             enableExitButton();
             ui.stackedWidget->setCurrentWidget(ui.noteligible);
