@@ -104,6 +104,9 @@
     <ClCompile Include="sha256.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="ChoicePage.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DropBox.h">
@@ -188,6 +191,9 @@
     <QtMoc Include="HoursPage.h">
       <Filter>Header Files</Filter>
     </QtMoc>
+    <QtMoc Include="ChoicePage.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
   </ItemGroup>
   <ItemGroup>
     <QtUic Include="GoodbyePage.ui">
@@ -233,6 +239,9 @@
       <Filter>Form Files</Filter>
     </QtUic>
     <QtUic Include="HoursPage.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+    <QtUic Include="ChoicePage.ui">
       <Filter>Form Files</Filter>
     </QtUic>
   </ItemGroup>

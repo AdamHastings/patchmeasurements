@@ -17,13 +17,6 @@
 #include <QDebug>
 #include <QSslSocket>
 
-//#include "cstore.cpp"
-
-//extern "C" {
-//#include "aes.h"
-//#include "sha256.h"
-//}
-//
 #include "crypto.h"
 
 using namespace std;
@@ -48,21 +41,61 @@ void MainWindow::disableExitButton() {
 //#endif
 }
 
-
 void MainWindow::showStartNext() {
-    if (!PowerMgmt::runningAsAdmin()) {
+    if (ui.start->not_consent_btn->isChecked()) {
+        showGoodbye();
+    } else if (!PowerMgmt::runningAsAdmin()) {
         enableExitButton();
         ui.stackedWidget->setCurrentWidget(ui.noadmin);
     } else if (RegistryUtils::isCsEnabled()) {
         enableExitButton();
-        ui.stackedWidget->setCurrentWidget(ui.regedit);
-    } else {
         ui.stackedWidget->setCurrentWidget(ui.mod);
+    } else {
+        ui.stackedWidget->setCurrentWidget(ui.monitor);
+    }
+}
+
+void MainWindow::showModNext() {
+    if (ui.mod->not_consent_btn->isChecked()) {
+        showGoodbye();
+    }
+    else {
+        RegistryUtils::setRegKey("CsEnabled", 1);
+        RegistryUtils::setCsEnabled(0);
+        ui.stackedWidget->setCurrentWidget(ui.modmade);
+    }
+}
+
+void MainWindow::showMonitorNext() {
+    if (ui.monitor->not_consent_btn->isChecked()) {
+        showGoodbye();
+    }
+    else {
+        ui.stackedWidget->setCurrentWidget(ui.primary);
+    }
+}
+
+void MainWindow::showPrimaryNext() {
+    if (ui.primary->not_consent_btn->isChecked()) {
+        showGoodbye();
+    }
+    else {
+        ui.stackedWidget->setCurrentWidget(ui.internet);
+    }
+}
+
+void MainWindow::showInternetNext() {
+    if (ui.internet->not_consent_btn->isChecked()) {
+        showGoodbye();
+    }
+    else {
+        showPatch0();
     }
 }
 
 void MainWindow::showGoodbye() {
     enableExitButton();
+    // TODO RESTORE SYSTEM!!
     ui.stackedWidget->setCurrentWidget(ui.goodbye);
 }
 
@@ -84,11 +117,11 @@ void MainWindow::pickThrottledTask() {
     unthrottled_task = (throttled_task == 2) ? 3 : 2;
 }
 
-void MainWindow::showNotEligible() {
-    enableExitButton();
-    ui.noteligible->updateText();
-    ui.stackedWidget->setCurrentWidget(ui.noteligible);
-}
+//void MainWindow::showNotEligible() {
+//    enableExitButton();
+//    ui.noteligible->updateText();
+//    ui.stackedWidget->setCurrentWidget(ui.noteligible);
+//}
 
 void MainWindow::showPatch0() {
     ui.stackedWidget->setCurrentWidget(ui.patch0);
@@ -104,10 +137,10 @@ void MainWindow::showPatch0() {
     preTasksFreq = PowerMgmt::getCurrentClockFreqRead(proc);
 
     
-    if (preTasksFreq == -1) {
-        PowerMgmt::restoreRegistry();
-        showNotEligible();
-    } else {
+    //if (preTasksFreq == -1) {
+    //    PowerMgmt::restoreRegistry();
+    //    showNotEligible();
+    //} else {
 
         PowerMgmt::getDefaultPowercfg();
         PowerMgmt::createCustomPowerPlan();
@@ -121,7 +154,7 @@ void MainWindow::showPatch0() {
 
         ui.patch0->done_label->setText("Done!");
         ui.patch0->continue_btn->setEnabled(true);
-    }
+    //}
 }
 
 void MainWindow::showPatch1() {
@@ -381,11 +414,6 @@ void MainWindow::tryUpload() {
 }
 
 void MainWindow::showFail() {
-
-//#ifdef QT_DEBUG
-//    QString results = createResultsString();
-//    crypto::addFile("results.txt", results.toStdString(), "q49b0LfAlwP994jbqQf");
-//#endif
     ui.stackedWidget->setCurrentWidget(ui.fail);
 }
 
@@ -405,10 +433,14 @@ MainWindow::MainWindow(QWidget *parent)
 
 
 
-    connect(ui.start->not_consent_btn, &QPushButton::clicked, this, &MainWindow::showGoodbye);
-    connect(ui.start->consent_btn, &QPushButton::clicked, this, &MainWindow::showStartNext);
-    connect(ui.mod->consent_btn, &QPushButton::clicked, this, &MainWindow::showPatch0);
-    connect(ui.mod->not_consent_btn, &QPushButton::clicked, this, &MainWindow::showGoodbye);
+    connect(ui.start->continue_btn, &QPushButton::clicked, this, &MainWindow::showStartNext);
+    //connect(ui.mod->consent_btn, &QPushButton::clicked, this, &MainWindow::showPatch0);
+    //connect(ui.mod->not_consent_btn, &QPushButton::clicked, this, &MainWindow::showGoodbye);
+    connect(ui.mod->continue_btn, &QPushButton::clicked, this, &MainWindow::showModNext);
+    connect(ui.monitor->continue_btn, &QPushButton::clicked, this, &MainWindow::showMonitorNext);
+    connect(ui.primary->continue_btn, &QPushButton::clicked, this, &MainWindow::showPrimaryNext);
+    connect(ui.internet->continue_btn, &QPushButton::clicked, this, &MainWindow::showInternetNext);
+
     connect(ui.patch0->continue_btn, &QPushButton::clicked, this, &MainWindow::showTask1);
     connect(ui.task1->continue_btn, &QPushButton::clicked, this, &MainWindow::showPatch1);
     connect(ui.patch1->continue_btn, &QPushButton::clicked, this, &MainWindow::showTask2);

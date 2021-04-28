@@ -55,7 +55,11 @@ public:
     Failed2UploadPage* fail;
     PatchPage* upload;
     FinalPage* final;
-    NotEligiblePage* noteligible;
+    //NotEligiblePage* noteligible;
+    MonitorPage* monitor;
+    PrimaryDevicePage* primary;
+    InternetPage* internet;
+    ModMadePage* modmade;
 
     void setupUi(QMainWindow* MainWindow)
     {
@@ -71,6 +75,8 @@ public:
         BUTTON_HEIGHT = H / 16;
 
         REBOOT_AT_END = false;
+
+        COMPLETION_CODE = "f09a9c00";
 
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName(QStringLiteral("MainWindow"));
@@ -167,9 +173,20 @@ public:
         final = new FinalPage();
         stackedWidget->addWidget(final);
 
-        noteligible = new NotEligiblePage();
-        stackedWidget->addWidget(noteligible);
+        //noteligible = new NotEligiblePage();
+        //stackedWidget->addWidget(noteligible);
 
+        monitor = new MonitorPage();
+        stackedWidget->addWidget(monitor);
+
+        primary = new PrimaryDevicePage();
+        stackedWidget->addWidget(primary);
+
+        internet = new InternetPage();
+        stackedWidget->addWidget(internet);
+
+        modmade = new ModMadePage();
+        stackedWidget->addWidget(modmade);
     } // setupUi
 };
 

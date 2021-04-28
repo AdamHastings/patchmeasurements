@@ -1,25 +1,41 @@
 #include "StartPage.h"
 #include "Globals.h"
+#include <QLabel>
 
-StartPage::StartPage(QWidget *parent)
-	: QWidget(parent)
+void StartPage::checkIfContinue() {
+    if (consent_btn->isChecked() || not_consent_btn->isChecked()) {
+        continue_btn->setEnabled(true);
+    }
+    else {
+        continue_btn->setEnabled(false);
+    }
+}
+
+StartPage::StartPage(QWidget* parent)
+    : QWidget(parent)
 {
     label = new QLabel(this);
-    label->setGeometry(QRect(MARGIN, MARGIN, LINEWIDTH, MARGIN * 6));
+    label->setGeometry(QRect(M, M, LINEWIDTH, M * 4));
     label->setAlignment(Qt::AlignJustify | Qt::AlignVCenter);
     label->setWordWrap(true);
+    label->setText("Thank you for participating in this experiment. This experiment is designed to study how much you value the performance on your computer.\n\nDo you consent to participate in this experiment?");
 
-    consent_btn = new QPushButton(this);
-    consent_btn->setGeometry(QRect(W / 2 - BUTTON_WIDTH - M, M * 7, BUTTON_WIDTH, BUTTON_HEIGHT));
+    consent_btn = new QRadioButton(this);
+    consent_btn->setGeometry(QRect(2 * M, M * 5, LINEWIDTH - 2 * M, M));
     consent_btn->setText("I consent");
 
-    not_consent_btn = new QPushButton(this);
-    not_consent_btn->setGeometry(QRect(W / 2 + M, M * 7, BUTTON_WIDTH, BUTTON_HEIGHT));
+    not_consent_btn = new QRadioButton(this);
+    not_consent_btn->setGeometry(QRect(2 * M, M * 6, LINEWIDTH - 2 * M, M));
     not_consent_btn->setText("I do not consent");
 
-    label->setText("Thank you for participating in this experiment. This experiment is designed to test how computer users respond to some computer system modifications we are prototyping. We will have you complete some simple tasks under a variety of different circumstances. After you complete the tasks, we will ask you a few questions about your experience. The experiment is self-guided and takes about 20 to 30 minutes to complete.\n\nDo you consent to participate in this study? You may exit the experiment at any point.");
+    continue_btn = new QPushButton(this);
+    continue_btn->setGeometry(QRect(W / 2 - BUTTON_WIDTH / 2, M * 8, BUTTON_WIDTH, BUTTON_HEIGHT));
+    continue_btn->setText("Continue");
+    continue_btn->setEnabled(false);
 
-    // TODO can we tell them they have to finish the experiment?
+    //stackedWidget->addWidget(start_page);
+    connect(consent_btn, &QRadioButton::clicked, this, &StartPage::checkIfContinue);
+    connect(not_consent_btn, &QRadioButton::clicked, this, &StartPage::checkIfContinue);
 }
 
 StartPage::~StartPage()

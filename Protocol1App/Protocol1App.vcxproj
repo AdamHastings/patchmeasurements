@@ -112,6 +112,7 @@
   <ItemGroup>
     <ClCompile Include="aes.cpp" />
     <ClCompile Include="ButtonArray.cpp" />
+    <ClCompile Include="ChoicePage.cpp" />
     <ClCompile Include="ComparePage.cpp" />
     <ClCompile Include="crypto.cpp" />
     <ClCompile Include="DebriefPage.cpp" />
@@ -131,6 +132,7 @@
     <ClCompile Include="WTAPage.cpp" />
     <QtRcc Include="MainWindow.qrc" />
     <QtUic Include="ButtonArray.ui" />
+    <QtUic Include="ChoicePage.ui" />
     <QtUic Include="ComparePage.ui" />
     <QtUic Include="DebriefPage.ui" />
     <QtUic Include="FormPage.ui" />
@@ -160,6 +162,7 @@
     <QtMoc Include="ButtonArray.h" />
     <QtMoc Include="DebriefPage.h" />
     <ClInclude Include="aes.h" />
+    <QtMoc Include="ChoicePage.h" />
     <ClInclude Include="crypto.h" />
     <ClInclude Include="DropBox.h" />
     <QtMoc Include="GoodbyePage.h" />

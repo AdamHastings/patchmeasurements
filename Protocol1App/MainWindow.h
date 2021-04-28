@@ -38,6 +38,10 @@ private:
     QString system_info;
 
     void showStartNext();
+    void showModNext();
+    void showMonitorNext();
+    void showPrimaryNext();
+    void showInternetNext();
     void showGoodbye();
     void showTask1();
     void showTask2();
@@ -63,7 +67,7 @@ private:
     void tryUpload();
     void showFail();
     void showFinal();
-    void showNotEligible();
+    //void showNotEligible();
 
     //std::string createResultsString();
     QString createResultsString();
