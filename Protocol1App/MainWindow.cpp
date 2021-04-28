@@ -160,7 +160,7 @@ void MainWindow::showPatch0() {
 void MainWindow::showPatch1() {
     ui.stackedWidget->setCurrentWidget(ui.patch1);
     if (throttled_task == 2)
-        PowerMgmt::setFreqCap(100 - slowdown);
+        PowerMgmt::setFreqCap(100 - SLOWDOWN);
 
     // Take a reading
     QProcess proc;
@@ -175,7 +175,7 @@ void MainWindow::showPatch1() {
 void MainWindow::showPatch2() {
     ui.stackedWidget->setCurrentWidget(ui.patch2);
     if (throttled_task == 3)
-        PowerMgmt::setFreqCap(100 - slowdown);
+        PowerMgmt::setFreqCap(100 - SLOWDOWN);
     else
         PowerMgmt::removeFreqCap();
 
@@ -221,7 +221,7 @@ void MainWindow::showCompare() {
 }
 
 void MainWindow::showPreWTA() {
-    ui.preWTA->setLabelText(throttled_task, unthrottled_task, slowdown);
+    ui.preWTA->setLabelText(throttled_task, unthrottled_task, SLOWDOWN);
     ui.stackedWidget->setCurrentWidget(ui.preWTA);
 }
 
@@ -231,7 +231,7 @@ void MainWindow::showPostTasks() {
 
 void MainWindow::showWTA() {
     offer = 0;
-    ui.wta->header->setText("Would you be willing to accept a permanent " + QString::number(slowdown) + "% slowdown on this computer in exchange for ");
+    ui.wta->header->setText("Would you be willing to accept a permanent " + QString::number(SLOWDOWN) + "% SLOWDOWN on this computer in exchange for ");
     ui.wta->updateOffer(offer);
     ui.stackedWidget->setCurrentWidget(ui.wta);
 }
@@ -248,7 +248,7 @@ QString MainWindow::createResultsString() {
     s += "wta," + QString::number(offer) + "\n";
     s += "throttled_task," + QString::number(throttled_task) + "\n";
     s += "unthrottled_task," + QString::number(unthrottled_task) + "\n";
-    s += "slowdown," + QString::number(slowdown) + "\n";
+    s += "SLOWDOWN," + QString::number(SLOWDOWN) + "\n";
     s += "fastest," + ui.rank->listWidget->item(0)->text() + "\n";
     s += "middle," + ui.rank->listWidget->item(1)->text() + "\n";
     s += "slowest," + ui.rank->listWidget->item(2)->text() + "\n";
@@ -302,7 +302,7 @@ void MainWindow::showHours() {
 }
 
 void MainWindow::showDebrief() {
-    ui.debrief->setLabelText(throttled_task, slowdown);
+    ui.debrief->setLabelText(throttled_task, SLOWDOWN);
     ui.stackedWidget->setCurrentWidget(ui.debrief);
 }
 
@@ -410,7 +410,14 @@ void MainWindow::tryUpload() {
     else {
         showFail();
     }
+}
 
+void MainWindow::showImprove() {
+    ui.stackedWidget->setCurrentWidget(ui.improve);
+}
+
+void MainWindow::showDecrease() {
+    ui.stackedWidget->setCurrentWidget(ui.decrease);
 }
 
 void MainWindow::showFail() {
@@ -419,7 +426,7 @@ void MainWindow::showFail() {
 
 void MainWindow::showFinal() {
     enableExitButton();
-    ui.final->updateText();
+    ui.final->updateText(QString::fromStdString(ui.form->uni_str));
     ui.stackedWidget->setCurrentWidget(ui.final);
 }
 
@@ -456,7 +463,10 @@ MainWindow::MainWindow(QWidget *parent)
     connect(ui.wta->no_btn, &QPushButton::clicked, this, &MainWindow::updateOffer_no);
     connect(ui.usage->continue_btn, &QPushButton::clicked, this, &MainWindow::showHours);
     connect(ui.hours->continue_btn, &QPushButton::clicked, this, &MainWindow::showForm);
-    connect(ui.form->continue_btn, &QPushButton::clicked, this, &MainWindow::showDebrief);
+    //connect(ui.form->continue_btn, &QPushButton::clicked, this, &MainWindow::showDebrief);
+    connect(ui.form->continue_btn, &QPushButton::clicked, this, &MainWindow::showImprove);
+    connect(ui.improve->continue_btn, &QPushButton::clicked, this, &MainWindow::showDecrease);
+    connect(ui.decrease->continue_btn, &QPushButton::clicked, this, &MainWindow::showDebrief);
     connect(ui.debrief->yes_btn, &QPushButton::clicked, this, &MainWindow::showWithdraw);
     connect(ui.debrief->no_btn, &QPushButton::clicked, this, &MainWindow::tryUpload);
     connect(ui.withdraw->continue_btn, &QPushButton::clicked, this, &MainWindow::showWithdrawNext);

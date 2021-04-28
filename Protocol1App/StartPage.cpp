@@ -18,7 +18,7 @@ StartPage::StartPage(QWidget* parent)
     label->setGeometry(QRect(M, M, LINEWIDTH, M * 4));
     label->setAlignment(Qt::AlignJustify | Qt::AlignVCenter);
     label->setWordWrap(true);
-    label->setText("Thank you for participating in this experiment. This experiment is designed to study how much you value the performance on your computer.\n\nDo you consent to participate in this experiment?");
+    label->setText("Thank you for participating in this experiment. This experiment is designed to test out some computer features we are prototyping. We will have you complete some simple tasks followed by a brief survey. Participation will take about 20 to 30 minutes. Participation will help the researchers better understand the economics of the computer industry.\n\nDo you consent to participate in this experiment?");
 
     consent_btn = new QRadioButton(this);
     consent_btn->setGeometry(QRect(2 * M, M * 5, LINEWIDTH - 2 * M, M));

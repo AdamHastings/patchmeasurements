@@ -17,6 +17,7 @@ inline int BUTTON_WIDTH; // = W / 4;
 inline int BUTTON_HEIGHT; // = H / 16;
 inline bool REBOOT_AT_END; // = false;
 inline QString COMPLETION_CODE;
+inline int SLOWDOWN;
 
 
 #endif

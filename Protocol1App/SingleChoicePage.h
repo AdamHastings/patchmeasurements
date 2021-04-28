@@ -59,8 +59,13 @@ public:
 		continue_btn->setVisible(false);
 	}
 
-	void updateText() {
-		QString text = "Thank you for your participation in this experiment. Please enter the following Completion Code into the HIT submission box:\n\n" + COMPLETION_CODE + "\n\nIf we received the three uploaded files from you demonstrating that you completed the three tasks, we will respond to your email with a Prolific Completion Code. If you would like us to send the Completion Code to a different email address, please contact us at\nhastings-experiment@cs.columbia.edu.\n\nYou may now exit this window and delete this program from your computer.\n\n";
+	void updateText(QString uni) {
+
+		QString lastchr = uni[uni.length() - 1];
+		QString cc = COMPLETION_CODE + lastchr;
+
+
+		QString text = "Thank you for your participation in this experiment. Please enter the following Completion Code into the HIT submission box:\n\n" + cc + "\n\nIf we received the three uploaded files from you demonstrating that you completed the three tasks, we will respond to your email with a Prolific Completion Code. If you would like us to send the Completion Code to a different email address, please contact us at\nhastings-experiment@cs.columbia.edu.\n\nYou may now exit this window and delete this program from your computer.\n\n";
 
 		if (REBOOT_AT_END) {
 			text += "\n\nTo completely undo all changes made during this experiment, please reboot your computer now.";

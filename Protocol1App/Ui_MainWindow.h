@@ -18,7 +18,8 @@
 #include "FormPage.h"
 #include "DebriefPage.h"
 #include "WithdrawPage.h"
-
+#include "ChoicePage.h"
+#include <fstream>
 
 QT_BEGIN_NAMESPACE
 
@@ -60,9 +61,10 @@ public:
     PrimaryDevicePage* primary;
     InternetPage* internet;
     ModMadePage* modmade;
+    ImproveChoicePage* improve;
+    DecreaseChoicePage* decrease;
 
-    void setupUi(QMainWindow* MainWindow)
-    {
+    void setupGlobals() {
         rec = QApplication::desktop()->screenGeometry();
         H = std::min(rec.height() / 2, rec.width() / 2);
         W = std::max(rec.height() / 2, rec.width() / 2);
@@ -77,6 +79,17 @@ public:
         REBOOT_AT_END = false;
 
         COMPLETION_CODE = "f09a9c00";
+
+        // read file
+        std::string slowdownstr;
+        std::ifstream infile("cfg.txt");
+        std::getline(infile, slowdownstr);
+        SLOWDOWN = std::stoi(slowdownstr);
+    }
+
+    void setupUi(QMainWindow* MainWindow)
+    {
+        setupGlobals();
 
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName(QStringLiteral("MainWindow"));
@@ -187,6 +200,13 @@ public:
 
         modmade = new ModMadePage();
         stackedWidget->addWidget(modmade);
+
+        improve = new ImproveChoicePage();
+        stackedWidget->addWidget(improve);
+
+        decrease = new DecreaseChoicePage();
+        stackedWidget->addWidget(decrease);
+
     } // setupUi
 };
 

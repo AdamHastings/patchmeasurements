@@ -22,7 +22,7 @@ private:
 
     int throttled_task = -1;
     int unthrottled_task = -1;
-    int slowdown = 30;
+    // int slowdown = 30;
 
     int offer = 0;
     int upper = -1;
@@ -60,6 +60,8 @@ private:
     void updateOffer_yes();
     void showUsage();
     void showHours();
+    void showImprove();
+    void showDecrease();
     void showForm();
     void showDebrief();
     void showWithdraw();
