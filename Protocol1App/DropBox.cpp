@@ -34,7 +34,7 @@ void DropBox::upload(QString contents, std::string filename) {
 
     filename.erase(remove_if(filename.begin(), filename.end(), [](char c) {return !isalnum(c); }), filename.end());
 
-    request.setRawHeader(QByteArray("Authorization"), QByteArray("Bearer sl.Avz9FpovjVJodwdKFgam9GWmtFUZ0-IdCWpGqkbzCxenT3QQS6HtgRQH-Pl-c4BJFjTYYM3BrJel5K9WBJgnPRhGCDJmT2GAfX40PAUxXszMmoZdgow-yajKUEoF5cQ3BUbUQZg"));
+    request.setRawHeader(QByteArray("Authorization"), QByteArray("Bearer 7-w9A2_0YVIAAAAAAAAAARwHzd43MaFM2t-cBg866rjK918ZLcnMu40QXzbsze2V"));
 
     QString dropboxArg = QString("{\"path\": \"/" + QString::fromStdString(filename) + ".txt\",\"mode\": \"add\",\"autorename\": true,\"mute\": false,\"strict_conflict\": false}");
 
@@ -61,7 +61,7 @@ bool DropBox::uploadSuccessful(std::string uni) {
 
     QNetworkRequest request(QUrl("https://api.dropboxapi.com/2/files/get_metadata"));
 
-    request.setRawHeader(QByteArray("Authorization"), QByteArray("Bearer fsWUJerSFOIAAAAAAAAAASbQxDbv1tNxwkJ1PIJ4bukUYqf5zU0fxqherrO8gYre"));
+    request.setRawHeader(QByteArray("Authorization"), QByteArray("Bearer 7-w9A2_0YVIAAAAAAAAAARwHzd43MaFM2t-cBg866rjK918ZLcnMu40QXzbsze2V"));
 
     request.setRawHeader(QByteArray("Content-Type"), QByteArray("application/json"));
 

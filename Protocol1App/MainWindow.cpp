@@ -95,7 +95,7 @@ void MainWindow::showInternetNext() {
 
 void MainWindow::showGoodbye() {
     enableExitButton();
-    // TODO RESTORE SYSTEM!!
+    PowerMgmt::restoreRegistry(); // Don't need to bother restoring other power plans...that's handled elsewhere
     ui.stackedWidget->setCurrentWidget(ui.goodbye);
 }
 
@@ -238,13 +238,7 @@ void MainWindow::showWTA() {
 
 QString MainWindow::createResultsString() {
     QString s = "";
-
-    s += "name," + QString::fromStdString(ui.form->name_str) + "\n";
-    s += "uni," + QString::fromStdString(ui.form->uni_str) + "\n";
-    //s += "address," + QString::fromStdString(ui.form->address_str) + "\n";
-    //s += "city," + QString::fromStdString(ui.form->city_str) + "\n";
-    //s += "state," + QString::fromStdString(ui.form->state_str) + "\n";
-    //s += "zip," + QString::fromStdString(ui.form->zip_str) + "\n";
+    s += "worker-id," + QString::fromStdString(ui.form->uni_str) + "\n";
     s += "wta," + QString::number(offer) + "\n";
     s += "throttled_task," + QString::number(throttled_task) + "\n";
     s += "unthrottled_task," + QString::number(unthrottled_task) + "\n";
@@ -289,7 +283,6 @@ QString MainWindow::createResultsString() {
 }
 
 void MainWindow::showForm() {
-    qDebug() << offer;
     ui.stackedWidget->setCurrentWidget(ui.form);
 }
 
@@ -421,7 +414,14 @@ void MainWindow::showDecrease() {
 }
 
 void MainWindow::showFail() {
-    ui.stackedWidget->setCurrentWidget(ui.fail);
+    static int retries = 0;
+    if (retries < 5) {
+        ui.stackedWidget->setCurrentWidget(ui.retry);
+    }
+    else {
+        ui.stackedWidget->setCurrentWidget(ui.fail);
+    }
+    retries++;
 }
 
 void MainWindow::showFinal() {
@@ -462,20 +462,21 @@ MainWindow::MainWindow(QWidget *parent)
     connect(ui.wta->yes_btn, &QPushButton::clicked, this, &MainWindow::updateOffer_yes);
     connect(ui.wta->no_btn, &QPushButton::clicked, this, &MainWindow::updateOffer_no);
     connect(ui.usage->continue_btn, &QPushButton::clicked, this, &MainWindow::showHours);
-    connect(ui.hours->continue_btn, &QPushButton::clicked, this, &MainWindow::showForm);
+    connect(ui.hours->continue_btn, &QPushButton::clicked, this, &MainWindow::showImprove);
     //connect(ui.form->continue_btn, &QPushButton::clicked, this, &MainWindow::showDebrief);
-    connect(ui.form->continue_btn, &QPushButton::clicked, this, &MainWindow::showImprove);
+    connect(ui.form->continue_btn, &QPushButton::clicked, this, &MainWindow::showDebrief);
     connect(ui.improve->continue_btn, &QPushButton::clicked, this, &MainWindow::showDecrease);
-    connect(ui.decrease->continue_btn, &QPushButton::clicked, this, &MainWindow::showDebrief);
+    connect(ui.decrease->continue_btn, &QPushButton::clicked, this, &MainWindow::showForm);
     connect(ui.debrief->yes_btn, &QPushButton::clicked, this, &MainWindow::showWithdraw);
     connect(ui.debrief->no_btn, &QPushButton::clicked, this, &MainWindow::tryUpload);
     connect(ui.withdraw->continue_btn, &QPushButton::clicked, this, &MainWindow::showWithdrawNext);
     connect(ui.fail->continue_btn, &QPushButton::clicked, this, &MainWindow::showFinal);
+    connect(ui.retry->continue_btn, &QPushButton::clicked, this, &MainWindow::tryUpload);
     
 
-#ifndef QT_NO_DEBUG
+#ifdef QT_DEBUG
     qDebug() << QSslSocket::supportsSsl() << QSslSocket::sslLibraryBuildVersionString() << QSslSocket::sslLibraryVersionString();
-    connect(ui.start->consent_btn, &QPushButton::clicked, this, &MainWindow::showDebrief);
+    connect(ui.start->continue_btn, &QPushButton::clicked, this, &MainWindow::showImprove);
 #endif
 
 }

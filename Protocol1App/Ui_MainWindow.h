@@ -63,6 +63,7 @@ public:
     ModMadePage* modmade;
     ImproveChoicePage* improve;
     DecreaseChoicePage* decrease;
+    RetryUploadPage* retry;
 
     void setupGlobals() {
         rec = QApplication::desktop()->screenGeometry();
@@ -206,6 +207,9 @@ public:
 
         decrease = new DecreaseChoicePage();
         stackedWidget->addWidget(decrease);
+
+        retry = new RetryUploadPage();
+        stackedWidget->addWidget(retry);
 
     } // setupUi
 };

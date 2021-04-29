@@ -31,7 +31,7 @@ FormPage::FormPage(QWidget *parent)
 	uni->setAlignment(Qt::AlignRight | Qt::AlignVCenter);
 	uni->setText("Worker ID:  ");
 	line_uni = new QLineEdit(this);
-	line_uni->setGeometry(W-M, 3 * M, 4 * M, BUTTON_HEIGHT);
+	line_uni->setGeometry(W/2-M, 3 * M, 4 * M, BUTTON_HEIGHT);
 	
 
 	continue_btn = new QPushButton(this);
