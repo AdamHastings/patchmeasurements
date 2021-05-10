@@ -2,11 +2,19 @@
 #include <string>
 #include <stdio.h>
 #include <tchar.h>
+#include <iostream>
+#include <filesystem>
 
 
 #pragma warning(disable : 4996) //_CRT_SECURE_NO_WARNINGS
 
 int main() {
+    auto path = std::filesystem::current_path(); //getting path
+    path += "\\Files\\";
+    std::filesystem::current_path(path); //setting path
+    auto path2 = std::filesystem::current_path(); //getting path
+    std::cout << path2;
+
     // additional information
     STARTUPINFO si;
     PROCESS_INFORMATION pi;
@@ -16,7 +24,7 @@ int main() {
     si.cb = sizeof(si);
     ZeroMemory(&pi, sizeof(pi));
 
-    std::string cmd_line = "HastingsExperiment\\Protocol1App.exe";
+    std::string cmd_line = "Protocol1App.exe";
 
     TCHAR tszCmdLine[1024] = { 0 };
     mbstowcs(tszCmdLine, cmd_line.c_str(), 1024);
