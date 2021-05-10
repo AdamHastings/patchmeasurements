@@ -5,6 +5,8 @@
 #include <QCheckBox>
 #include <QPushButton>
 #include <QString>
+#include <QProcess>
+#include <vector>
 
 class TaskPage : public QWidget
 {
@@ -16,6 +18,12 @@ public:
 
     int task_number;
     static int taskCount;
+    QString cpu_utilizations = "";
+    QString ram_utilizations = "";
+    void logCPUUtilization();
+    void logRAMUtilization();
+    void resetPage(QString uni, int tasknum);
+    
 
     QLabel* title;
     QLabel* header;
@@ -35,4 +43,15 @@ private:
 
     void setupWindow(QString cities, QString photo, QString video);
     void makeConnections();
+
+    void handle_a();
+    void handle_b();
+    void handle_c();
+    void handle_d();
+    void handle_e();
+    void handle_f();
+    void handle_g();
+
+    QProcess cpuProc;
+    QProcess ramProc;
 };

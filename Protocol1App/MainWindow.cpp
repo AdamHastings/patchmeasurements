@@ -89,7 +89,7 @@ void MainWindow::showInternetNext() {
         showGoodbye();
     }
     else {
-        showPatch0();
+        showForm();
     }
 }
 
@@ -100,14 +100,17 @@ void MainWindow::showGoodbye() {
 }
 
 void MainWindow::showTask1() {
+    ui.task1->resetPage(QString::fromStdString(ui.form->uni_str), 1);
     ui.stackedWidget->setCurrentWidget(ui.task1);
 }
 
 void MainWindow::showTask2() {
+    ui.task2->resetPage(QString::fromStdString(ui.form->uni_str), 2);
     ui.stackedWidget->setCurrentWidget(ui.task2);
 }
 
 void MainWindow::showTask3() {
+    ui.task3->resetPage(QString::fromStdString(ui.form->uni_str), 3);
     ui.stackedWidget->setCurrentWidget(ui.task3);
 }
 
@@ -131,10 +134,16 @@ void MainWindow::showPatch0() {
 
     // Take a reading
     QProcess proc;
+    QProcess cpuproc;
+    QProcess ramproc;
     PowerMgmt::getCurrentClockFreqStart(proc);
+    PowerMgmt::getCurrentCPUUtilizationStart(cpuproc);
+    PowerMgmt::getCurrentRAMUtilizationStart(ramproc);
     ui.patch0->fillBar();
     ui.patch0->label->setText("Checking to see if your device is compatible with this experiment");
     preTasksFreq = PowerMgmt::getCurrentClockFreqRead(proc);
+    baselineCPUUtilization = PowerMgmt::getCurrentCPUUtilizationRead(cpuproc);
+    baselineRAMUtilization = PowerMgmt::getCurrentRAMUtilizationRead(ramproc);
 
     
     //if (preTasksFreq == -1) {
@@ -254,6 +263,15 @@ QString MainWindow::createResultsString() {
     s += "task2_freq," + QString::number(task2Freq) + "\n";
     s += "task3_freq," + QString::number(task3Freq) + "\n";
     s += "post_task_freq," + QString::number(postTasksFreq) + "\n";
+    s += "total_ram," + PowerMgmt::getTotalRAM() + "\n";
+    s += "baseline_ram," + baselineRAMUtilization + "\n";
+    s += "task1_ram," + ui.task1->ram_utilizations + "\n";
+    s += "task2_ram," + ui.task2->ram_utilizations + "\n";
+    s += "task3_ram," + ui.task3->ram_utilizations + "\n";
+    s += "baseline_cpu," + baselineCPUUtilization + "\n";
+    s += "task1_cpu," + ui.task1->cpu_utilizations + "\n";
+    s += "task2_cpu," + ui.task2->cpu_utilizations + "\n";
+    s += "task3_cpu," + ui.task3->cpu_utilizations + "\n";
     s += "gaming," + QString::number(ui.usage->gaming->isChecked()) + "\n";
     s += "word_processing," + QString::number(ui.usage->word_processing->isChecked()) + "\n";
     s += "spreadsheets," + QString::number(ui.usage->spreadsheets->isChecked()) + "\n";
@@ -464,9 +482,9 @@ MainWindow::MainWindow(QWidget *parent)
     connect(ui.usage->continue_btn, &QPushButton::clicked, this, &MainWindow::showHours);
     connect(ui.hours->continue_btn, &QPushButton::clicked, this, &MainWindow::showImprove);
     //connect(ui.form->continue_btn, &QPushButton::clicked, this, &MainWindow::showDebrief);
-    connect(ui.form->continue_btn, &QPushButton::clicked, this, &MainWindow::showDebrief);
+    connect(ui.form->continue_btn, &QPushButton::clicked, this, &MainWindow::showPatch0);
     connect(ui.improve->continue_btn, &QPushButton::clicked, this, &MainWindow::showDecrease);
-    connect(ui.decrease->continue_btn, &QPushButton::clicked, this, &MainWindow::showForm);
+    connect(ui.decrease->continue_btn, &QPushButton::clicked, this, &MainWindow::showDebrief);
     connect(ui.debrief->yes_btn, &QPushButton::clicked, this, &MainWindow::showWithdraw);
     connect(ui.debrief->no_btn, &QPushButton::clicked, this, &MainWindow::tryUpload);
     connect(ui.withdraw->continue_btn, &QPushButton::clicked, this, &MainWindow::showWithdrawNext);

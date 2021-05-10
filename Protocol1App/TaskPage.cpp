@@ -1,5 +1,6 @@
 #include "TaskPage.h"
 #include "Globals.h"
+#include "PowerMgmt.h"
 
 
 int TaskPage::taskCount = 1;
@@ -42,17 +43,17 @@ void TaskPage::setupWindow(QString cities, QString photo, QString video) {
 
     subtask_e = new QCheckBox(this);
     subtask_e->setGeometry(QRect(M, M * 6, LINEWIDTH, M));
-    subtask_e->setText("Save the Word document as a PDF (click on File > Save As > This PC, and then change \nthe document type from .docx to .pdf).");
+    //subtask_e->setText("Save the Word document as a PDF named (click on File > Save As > This PC, and then select a folder and change \nthe document type from .docx to .pdf).");
     subtask_e->setEnabled(false);
 
     subtask_f = new QCheckBox(this);
     subtask_f->setGeometry(QRect(M, M * 7, LINEWIDTH, M));
-    subtask_f->setText("Open your email. Compose a new email titled \"Task " + QString::number(task_number) + "\".\nAttach the saved PDF to the email and send to hastings-experiment@cs.columbia.edu.");
+    //subtask_f->setText("In your web browser, go to https://www.cs.columbia.edu/~hastings/protocol1/mturk/db/upload.html and upload");
     subtask_f->setEnabled(false);
 
     subtask_g = new QCheckBox(this);
     subtask_g->setGeometry(QRect(M, M * 8, LINEWIDTH, M));
-    subtask_g->setText("Close your email and web browser. Close Microsoft Word and delete\nthe \"Task " + QString::number(task_number) + "\" document and PDF from your computer.");
+    subtask_g->setText("Close your web browser. Close Microsoft Word and delete\nthe \"Task " + QString::number(task_number) + "\" document and PDF from your computer.");
     subtask_g->setEnabled(false);
 
     continue_btn = new QPushButton(this);
@@ -63,15 +64,102 @@ void TaskPage::setupWindow(QString cities, QString photo, QString video) {
 #endif
 }
 
+void TaskPage::resetPage(QString uni, int tasknum) {
+    QString text = "Save the Word document as a PDF named task" + QString::number(tasknum) + "_" + uni + " (click on File > Save As > This PC, and then\nselect a folder and then change the name and document type from .docx to .pdf).";
+    QString text2 = "In your web browser, go to https://www.cs.columbia.edu/~hastings/protocol1/mturk/db/upload.html \n and upload task" + QString::number(tasknum) + "_" + uni + ".pdf";
+    subtask_f->setText(text2);
+    subtask_e->setText(text);
+}
+
+void TaskPage::logCPUUtilization() {
+    //cpu_utilizations.push_back(PowerMgmt::getCurrentCPUUtilization());
+    cpu_utilizations += PowerMgmt::getCurrentCPUUtilization() + ",";
+}
+
+void TaskPage::logRAMUtilization() {
+    //ram_utilizations.push_back(PowerMgmt::getCurrentRAMUtilization());
+    ram_utilizations += PowerMgmt::getCurrentRAMUtilization() + ",";
+}
+
+void TaskPage::handle_a() {
+    subtask_a->setDisabled(true);
+    subtask_b->setEnabled(true);
+    PowerMgmt::getCurrentCPUUtilizationStart(cpuProc);
+    PowerMgmt::getCurrentRAMUtilizationStart(ramProc);
+}
+
+void TaskPage::handle_b() {
+    subtask_b->setDisabled(true);
+    subtask_c->setEnabled(true);
+    cpu_utilizations += PowerMgmt::getCurrentCPUUtilizationRead(cpuProc) + ",";
+    ram_utilizations += PowerMgmt::getCurrentRAMUtilizationRead(ramProc) + ",";
+    PowerMgmt::getCurrentCPUUtilizationStart(cpuProc);
+    PowerMgmt::getCurrentRAMUtilizationStart(ramProc);
+    
+}
+
+void TaskPage::handle_c() {
+    subtask_c->setDisabled(true);
+    subtask_d->setEnabled(true);
+    cpu_utilizations += PowerMgmt::getCurrentCPUUtilizationRead(cpuProc) + ",";
+    ram_utilizations += PowerMgmt::getCurrentRAMUtilizationRead(ramProc) + ",";
+    PowerMgmt::getCurrentCPUUtilizationStart(cpuProc);
+    PowerMgmt::getCurrentRAMUtilizationStart(ramProc);
+}
+
+void TaskPage::handle_d() {
+    subtask_d->setDisabled(true);
+    subtask_e->setEnabled(true);
+    cpu_utilizations += PowerMgmt::getCurrentCPUUtilizationRead(cpuProc) + ",";
+    ram_utilizations += PowerMgmt::getCurrentRAMUtilizationRead(ramProc) + ",";
+    PowerMgmt::getCurrentCPUUtilizationStart(cpuProc);
+    PowerMgmt::getCurrentRAMUtilizationStart(ramProc);
+}
+
+void TaskPage::handle_e() {
+    subtask_e->setDisabled(true);
+    subtask_f->setEnabled(true);
+    cpu_utilizations += PowerMgmt::getCurrentCPUUtilizationRead(cpuProc) + ",";
+    ram_utilizations += PowerMgmt::getCurrentRAMUtilizationRead(ramProc) + ",";
+    PowerMgmt::getCurrentCPUUtilizationStart(cpuProc);
+    PowerMgmt::getCurrentRAMUtilizationStart(ramProc);
+}
+
+void TaskPage::handle_f() {
+    subtask_f->setDisabled(true);
+    subtask_g->setEnabled(true);
+    cpu_utilizations += PowerMgmt::getCurrentCPUUtilizationRead(cpuProc) + ",";
+    ram_utilizations += PowerMgmt::getCurrentRAMUtilizationRead(ramProc) + ",";
+    PowerMgmt::getCurrentCPUUtilizationStart(cpuProc);
+    PowerMgmt::getCurrentRAMUtilizationStart(ramProc);
+}
+
+void TaskPage::handle_g() {
+    subtask_g->setDisabled(true);
+    continue_btn->setEnabled(true);
+    cpu_utilizations += PowerMgmt::getCurrentCPUUtilizationRead(cpuProc) + ",";
+    ram_utilizations += PowerMgmt::getCurrentRAMUtilizationRead(ramProc) + ",";
+}
+
+
 void TaskPage::makeConnections() {
-    connect(this->subtask_a, &QPushButton::clicked, this->subtask_a, &QCheckBox::setDisabled);
+
+    connect(this->subtask_a, &QPushButton::clicked, this, &TaskPage::handle_a);
+    connect(this->subtask_b, &QPushButton::clicked, this, &TaskPage::handle_b);
+    connect(this->subtask_c, &QPushButton::clicked, this, &TaskPage::handle_c);
+    connect(this->subtask_d, &QPushButton::clicked, this, &TaskPage::handle_d);
+    connect(this->subtask_e, &QPushButton::clicked, this, &TaskPage::handle_e);
+    connect(this->subtask_f, &QPushButton::clicked, this, &TaskPage::handle_f);
+    connect(this->subtask_g, &QPushButton::clicked, this, &TaskPage::handle_g);
+
+    /*connect(this->subtask_a, &QPushButton::clicked, this->subtask_a, &QCheckBox::setDisabled);
     connect(this->subtask_b, &QPushButton::clicked, this->subtask_b, &QCheckBox::setDisabled);
     connect(this->subtask_c, &QPushButton::clicked, this->subtask_c, &QCheckBox::setDisabled);
     connect(this->subtask_d, &QPushButton::clicked, this->subtask_d, &QCheckBox::setDisabled);
     connect(this->subtask_e, &QPushButton::clicked, this->subtask_e, &QCheckBox::setDisabled);
     connect(this->subtask_f, &QPushButton::clicked, this->subtask_f, &QCheckBox::setDisabled);
     connect(this->subtask_g, &QPushButton::clicked, this->subtask_g, &QCheckBox::setDisabled);
-    
+
     connect(this->subtask_a, &QPushButton::clicked, this->subtask_b, &QCheckBox::setEnabled);
     connect(this->subtask_b, &QPushButton::clicked, this->subtask_c, &QCheckBox::setEnabled);
     connect(this->subtask_c, &QPushButton::clicked, this->subtask_d, &QCheckBox::setEnabled);
@@ -79,6 +167,23 @@ void TaskPage::makeConnections() {
     connect(this->subtask_e, &QPushButton::clicked, this->subtask_f, &QCheckBox::setEnabled);
     connect(this->subtask_f, &QPushButton::clicked, this->subtask_g, &QCheckBox::setEnabled);
     connect(this->subtask_g, &QPushButton::clicked, this->continue_btn, &QCheckBox::setEnabled);
+
+    connect(this->subtask_a, &QPushButton::clicked, this, &TaskPage::logCPUUtilization);
+    connect(this->subtask_b, &QPushButton::clicked, this, &TaskPage::logCPUUtilization);
+    connect(this->subtask_c, &QPushButton::clicked, this, &TaskPage::logCPUUtilization);
+    connect(this->subtask_d, &QPushButton::clicked, this, &TaskPage::logCPUUtilization);
+    connect(this->subtask_e, &QPushButton::clicked, this, &TaskPage::logCPUUtilization);
+    connect(this->subtask_f, &QPushButton::clicked, this, &TaskPage::logCPUUtilization);
+    connect(this->subtask_g, &QPushButton::clicked, this, &TaskPage::logCPUUtilization);
+
+    connect(this->subtask_a, &QPushButton::clicked, this, &TaskPage::logRAMUtilization);
+    connect(this->subtask_b, &QPushButton::clicked, this, &TaskPage::logRAMUtilization);
+    connect(this->subtask_c, &QPushButton::clicked, this, &TaskPage::logRAMUtilization);
+    connect(this->subtask_d, &QPushButton::clicked, this, &TaskPage::logRAMUtilization);
+    connect(this->subtask_e, &QPushButton::clicked, this, &TaskPage::logRAMUtilization);
+    connect(this->subtask_f, &QPushButton::clicked, this, &TaskPage::logRAMUtilization);
+    connect(this->subtask_g, &QPushButton::clicked, this, &TaskPage::logRAMUtilization);*/
+
 }
 
 TaskPage::TaskPage(QString cities, QString photo, QString video, QWidget *parent)

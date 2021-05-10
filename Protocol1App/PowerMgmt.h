@@ -28,6 +28,14 @@ public:
 	static QString getSystemConfigRead(QProcess& proc);
 
 	static void restoreRegistry();
+
+	static QString getTotalRAM();
+	static QString getCurrentCPUUtilization();
+	static QString getCurrentRAMUtilization();
+	static void getCurrentCPUUtilizationStart(QProcess& proc);
+	static void getCurrentRAMUtilizationStart(QProcess& proc);
+	static QString getCurrentCPUUtilizationRead(QProcess& proc);
+	static QString getCurrentRAMUtilizationRead(QProcess& proc);
 	
 
 private:

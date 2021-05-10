@@ -48,8 +48,8 @@ QString PowerMgmt::getSystemConfigRead(QProcess &proc) {
     proc.waitForFinished(-1);
     QString output(proc.readAllStandardOutput());
 
-    qDebug() << "output:";
-    qDebug() << output;
+    // qDebug() << "output:";
+    // qDebug() << output;
 
     output.replace(",", ";");
     QRegularExpression regex("\\s+:\\s");
@@ -202,5 +202,77 @@ double PowerMgmt::getCurrentClockFreqRead(QProcess &proc) {
     else {
         return -1;
     }
+}
+
+QString PowerMgmt::getCurrentCPUUtilization() {
+    QProcess proc;
+    QStringList commands;
+    commands.append("-Command");
+    commands.append("Get-WmiObject Win32_Processor | Measure-Object -Property LoadPercentage -Average | Select Average");
+    proc.start("powershell", commands);
+    proc.waitForFinished(-1);
+    QString output(proc.readAllStandardOutput());
+    QStringList split_output = output.split(QRegExp("\\s+"), QString::SkipEmptyParts);
+
+    QString utilization = split_output.value(split_output.length() - 1);
+    return utilization;
+}
+
+void PowerMgmt::getCurrentCPUUtilizationStart(QProcess &proc) {
+    QStringList commands;
+    commands.append("-Command");
+    commands.append("Get-WmiObject Win32_Processor | Measure-Object -Property LoadPercentage -Average | Select Average");
+    proc.start("powershell", commands);
+}
+
+QString PowerMgmt::getCurrentCPUUtilizationRead(QProcess &proc) {
+    proc.waitForFinished(-1);
+    QString output(proc.readAllStandardOutput());
+    QStringList split_output = output.split(QRegExp("\\s+"), QString::SkipEmptyParts);
+
+    QString utilization = split_output.value(split_output.length() - 1);
+    return utilization;
+}
+
+QString PowerMgmt::getTotalRAM() {
+    QProcess proc;
+    QStringList commands;
+    commands.append("-Command");
+    commands.append("Get-CimInstance Win32_PhysicalMemory | Measure-Object -Property capacity -Sum");
+    proc.start("powershell", commands);
+    proc.waitForFinished(-1);
+    QString output(proc.readAllStandardOutput());
+    output = output.replace("\\n", ",");
+    output = output.replace("\\r", "");
+    output = output.simplified();
+    return output;
+}
+
+QString PowerMgmt::getCurrentRAMUtilization() {
+    QProcess proc;
+    QStringList commands;
+    commands.append("-Command");
+    commands.append("Get-Counter '\\Memory\\Available MBytes'");
+    proc.start("powershell", commands);
+    proc.waitForFinished(-1);
+    QString output(proc.readAllStandardOutput());
+    QStringList split_output = output.split(QRegExp("\\s+"), QString::SkipEmptyParts);
+    QString utilization = split_output.value(split_output.length() - 1);
+    return utilization;
+}
+
+void PowerMgmt::getCurrentRAMUtilizationStart(QProcess &proc) {
+    QStringList commands;
+    commands.append("-Command");
+    commands.append("Get-Counter '\\Memory\\Available MBytes'");
+    proc.start("powershell", commands);
+}
+
+QString PowerMgmt::getCurrentRAMUtilizationRead(QProcess& proc) {
+    proc.waitForFinished(-1);
+    QString output(proc.readAllStandardOutput());
+    QStringList split_output = output.split(QRegExp("\\s+"), QString::SkipEmptyParts);
+    QString utilization = split_output.value(split_output.length() - 1);
+    return utilization;
 }
 
