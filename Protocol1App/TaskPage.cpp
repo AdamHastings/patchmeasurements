@@ -43,7 +43,7 @@ void TaskPage::setupWindow(QString cities, QString photo, QString video) {
 
     subtask_e = new QCheckBox(this);
     subtask_e->setGeometry(QRect(M, M * 6, LINEWIDTH, M));
-    //subtask_e->setText("Save the Word document as a PDF named (click on File > Save As > This PC, and then select a folder and change \nthe document type from .docx to .pdf).");
+    subtask_e->setText("Save the Word document as a PDF  (click on File > Save As > This PC, and then select a folder and change \nthe document type from .docx to .pdf).");
     subtask_e->setEnabled(false);
 
     subtask_f = new QCheckBox(this);
@@ -53,7 +53,7 @@ void TaskPage::setupWindow(QString cities, QString photo, QString video) {
 
     subtask_g = new QCheckBox(this);
     subtask_g->setGeometry(QRect(M, M * 8, LINEWIDTH, M));
-    subtask_g->setText("Close your web browser. Close Microsoft Word and delete\nthe \"Task " + QString::number(task_number) + "\" document and PDF from your computer.");
+    //subtask_g->setText("Close your web browser. Close Microsoft Word and delete\nthe \"Task " + QString::number(task_number) + "\" document and PDF from your computer.");
     subtask_g->setEnabled(false);
 
     continue_btn = new QPushButton(this);
@@ -64,11 +64,16 @@ void TaskPage::setupWindow(QString cities, QString photo, QString video) {
 #endif
 }
 
-void TaskPage::resetPage(QString uni, int tasknum) {
-    QString text = "Save the Word document as a PDF named task" + QString::number(tasknum) + "_" + uni + " (click on File > Save As > This PC, and then\nselect a folder and then change the name and document type from .docx to .pdf).";
-    QString text2 = "In your web browser, go to https://www.cs.columbia.edu/~hastings/protocol1/mturk/db/upload.html \n and upload task" + QString::number(tasknum) + "_" + uni + ".pdf";
-    subtask_f->setText(text2);
-    subtask_e->setText(text);
+void TaskPage::resetPage(QString uni) {
+
+    QString docname = uni + "_task" + QString::number(task_number);
+
+    subtask_a->setText("Open up Microsoft Word. Create a new document and name it " + docname);
+    
+    subtask_f->setText("In your web browser, go to https://www.cs.columbia.edu/~hastings/protocol1/mturk/db/upload.html \n and upload " + docname +  ".pdf");
+
+    subtask_g->setText("Close your web browser. Close Microsoft Word and delete " + docname + ".pdf and \n" + docname + ".docx from your computer.");
+
 }
 
 void TaskPage::logCPUUtilization() {

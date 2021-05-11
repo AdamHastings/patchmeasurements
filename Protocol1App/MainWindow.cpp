@@ -100,17 +100,17 @@ void MainWindow::showGoodbye() {
 }
 
 void MainWindow::showTask1() {
-    ui.task1->resetPage(QString::fromStdString(ui.form->uni_str), 1);
+    ui.task1->resetPage(QString::fromStdString(ui.form->uni_str));
     ui.stackedWidget->setCurrentWidget(ui.task1);
 }
 
 void MainWindow::showTask2() {
-    ui.task2->resetPage(QString::fromStdString(ui.form->uni_str), 2);
+    ui.task2->resetPage(QString::fromStdString(ui.form->uni_str));
     ui.stackedWidget->setCurrentWidget(ui.task2);
 }
 
 void MainWindow::showTask3() {
-    ui.task3->resetPage(QString::fromStdString(ui.form->uni_str), 3);
+    ui.task3->resetPage(QString::fromStdString(ui.form->uni_str));
     ui.stackedWidget->setCurrentWidget(ui.task3);
 }
 

@@ -22,7 +22,7 @@ public:
     QString ram_utilizations = "";
     void logCPUUtilization();
     void logRAMUtilization();
-    void resetPage(QString uni, int tasknum);
+    void resetPage(QString uni);
     
 
     QLabel* title;
