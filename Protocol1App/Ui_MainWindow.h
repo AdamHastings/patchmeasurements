@@ -86,6 +86,8 @@ public:
         std::ifstream infile("cfg.txt");
         std::getline(infile, slowdownstr);
         SLOWDOWN = std::stoi(slowdownstr);
+
+        srand((unsigned)time(NULL));
     }
 
     void setupUi(QMainWindow* MainWindow)

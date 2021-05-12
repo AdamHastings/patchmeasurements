@@ -115,7 +115,6 @@ void MainWindow::showTask3() {
 }
 
 void MainWindow::pickThrottledTask() {
-    srand((unsigned)time(NULL));
     throttled_task = rand() % 2 + 2;
     unthrottled_task = (throttled_task == 2) ? 3 : 2;
 }
@@ -225,7 +224,7 @@ void MainWindow::showRank() {
 }
 
 void MainWindow::showCompare() {
-    ui.compare->setLabels(ui.rank->listWidget);
+    //vui.compare->setLabels(ui.rank->listWidget);
     ui.stackedWidget->setCurrentWidget(ui.compare);
 }
 
@@ -240,7 +239,7 @@ void MainWindow::showPostTasks() {
 
 void MainWindow::showWTA() {
     offer = 0;
-    ui.wta->header->setText("Would you be willing to accept a permanent " + QString::number(SLOWDOWN) + "% SLOWDOWN on this computer in exchange for ");
+    ui.wta->header->setText("Would you be willing to make this computer run " + QString::number(SLOWDOWN) + "% slower in exchange for ");
     ui.wta->updateOffer(offer);
     ui.stackedWidget->setCurrentWidget(ui.wta);
 }
@@ -252,12 +251,22 @@ QString MainWindow::createResultsString() {
     s += "throttled_task," + QString::number(throttled_task) + "\n";
     s += "unthrottled_task," + QString::number(unthrottled_task) + "\n";
     s += "SLOWDOWN," + QString::number(SLOWDOWN) + "\n";
-    s += "fastest," + ui.rank->listWidget->item(0)->text() + "\n";
-    s += "middle," + ui.rank->listWidget->item(1)->text() + "\n";
-    s += "slowest," + ui.rank->listWidget->item(2)->text() + "\n";
-    s += "fastest_vs_middle," + QString::number(ui.compare->arr1->getClicked()) + "\n";
-    s += "middle_vs_slowest," + QString::number(ui.compare->arr2->getClicked()) + "\n";
-    s += "fastest_vs_slowest," + QString::number(ui.compare->arr3->getClicked()) + "\n";
+    // s += "fastest," + ui.rank->listWidget->item(0)->text() + "\n";
+    // s += "middle," + ui.rank->listWidget->item(1)->text() + "\n";
+    // s += "slowest," + ui.rank->listWidget->item(2)->text() + "\n";
+    // s += "fastest_vs_middle," + QString::number(ui.compare->arr1->getClicked()) + "\n";
+    // s += "middle_vs_slowest," + QString::number(ui.compare->arr2->getClicked()) + "\n";
+    // s += "fastest_vs_slowest," + QString::number(ui.compare->arr3->getClicked()) + "\n";
+    s += "ranking,";
+    if (ui.rank->task2_slower->isChecked()) {
+        s += "task2_slower\n";
+    }
+    else if (ui.rank->task3_slower->isChecked()) {
+        s += "task3_slower\n";
+    }
+    else {
+        s += "no_difference\n";
+    }
     s += "pre_task_freq," + QString::number(preTasksFreq) + "\n";
     s += "task1_freq," + QString::number(task1Freq) + "\n";
     s += "task2_freq," + QString::number(task2Freq) + "\n";
@@ -465,6 +474,7 @@ MainWindow::MainWindow(QWidget *parent)
     connect(ui.monitor->continue_btn, &QPushButton::clicked, this, &MainWindow::showMonitorNext);
     connect(ui.primary->continue_btn, &QPushButton::clicked, this, &MainWindow::showPrimaryNext);
     connect(ui.internet->continue_btn, &QPushButton::clicked, this, &MainWindow::showInternetNext);
+    connect(ui.form->continue_btn, &QPushButton::clicked, this, &MainWindow::showPatch0);
 
     connect(ui.patch0->continue_btn, &QPushButton::clicked, this, &MainWindow::showTask1);
     connect(ui.task1->continue_btn, &QPushButton::clicked, this, &MainWindow::showPatch1);
@@ -474,15 +484,14 @@ MainWindow::MainWindow(QWidget *parent)
     connect(ui.task3->continue_btn, &QPushButton::clicked, this, &MainWindow::showPatch3);
     connect(ui.patch3->continue_btn, &QPushButton::clicked, this, &MainWindow::showPostTasks);
     connect(ui.posttasks->continue_btn, &QPushButton::clicked, this, &MainWindow::showRank);
-    connect(ui.rank->continue_btn, &QPushButton::clicked, this, &MainWindow::showCompare);
-    connect(ui.compare->continue_btn, &QPushButton::clicked, this, &MainWindow::showPreWTA);
+    connect(ui.rank->continue_btn, &QPushButton::clicked, this, &MainWindow::showPreWTA);
+    //connect(ui.compare->continue_btn, &QPushButton::clicked, this, &MainWindow::showPreWTA);
     connect(ui.preWTA->continue_btn, &QPushButton::clicked, this, &MainWindow::showWTA);
     connect(ui.wta->yes_btn, &QPushButton::clicked, this, &MainWindow::updateOffer_yes);
     connect(ui.wta->no_btn, &QPushButton::clicked, this, &MainWindow::updateOffer_no);
     connect(ui.usage->continue_btn, &QPushButton::clicked, this, &MainWindow::showHours);
     connect(ui.hours->continue_btn, &QPushButton::clicked, this, &MainWindow::showImprove);
     //connect(ui.form->continue_btn, &QPushButton::clicked, this, &MainWindow::showDebrief);
-    connect(ui.form->continue_btn, &QPushButton::clicked, this, &MainWindow::showPatch0);
     connect(ui.improve->continue_btn, &QPushButton::clicked, this, &MainWindow::showDecrease);
     connect(ui.decrease->continue_btn, &QPushButton::clicked, this, &MainWindow::showDebrief);
     connect(ui.debrief->yes_btn, &QPushButton::clicked, this, &MainWindow::showWithdraw);
@@ -494,7 +503,7 @@ MainWindow::MainWindow(QWidget *parent)
 
 #ifdef QT_DEBUG
     qDebug() << QSslSocket::supportsSsl() << QSslSocket::sslLibraryBuildVersionString() << QSslSocket::sslLibraryVersionString();
-    connect(ui.start->continue_btn, &QPushButton::clicked, this, &MainWindow::showImprove);
+    connect(ui.start->continue_btn, &QPushButton::clicked, this, &MainWindow::showPostTasks);
 #endif
 
 }
