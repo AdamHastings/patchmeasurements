@@ -464,8 +464,8 @@ void MainWindow::tryUpload() {
             break;
         }
     }
-
-    crypto::addFile(".\\..\\results.txt", results.toStdString(), "q49b0LfAlwP994jbqQf");
+    string filename = ".\\..\\" + ui.form->uni_str + "_results.txt";
+    crypto::addFile(filename, results.toStdString(), "q49b0LfAlwP994jbqQf");
     ui.upload->fillSecondHalf();
 
     // if unsuccessful, make participant manually upload results
@@ -487,13 +487,13 @@ void MainWindow::showDecrease() {
 
 void MainWindow::showFail() {
     static int retries = 0;
-    if (retries < 3) {
+    retries++;
+    if (retries <= 3) {
         ui.stackedWidget->setCurrentWidget(ui.retry);
     }
     else {
         ui.stackedWidget->setCurrentWidget(ui.fail);
     }
-    retries++;
 }
 
 void MainWindow::showFinal() {
