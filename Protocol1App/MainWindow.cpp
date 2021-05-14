@@ -119,11 +119,16 @@ void MainWindow::pickThrottledTask() {
     unthrottled_task = (throttled_task == 2) ? 3 : 2;
 }
 
-//void MainWindow::showNotEligible() {
-//    enableExitButton();
-//    ui.noteligible->updateText();
-//    ui.stackedWidget->setCurrentWidget(ui.noteligible);
-//}
+void MainWindow::showNotEligible() {
+    enableExitButton();
+    PowerMgmt::restoreDefaults();
+    ui.noteligible->updateText();
+    QString results = "worker-id," + QString::fromStdString(ui.form->uni_str) + "\n";
+    results += "eligible?,no\n";
+    DropBox::upload(results, ui.form->uni_str);
+
+    ui.stackedWidget->setCurrentWidget(ui.noteligible);
+}
 
 void MainWindow::showPatch0() {
     ui.stackedWidget->setCurrentWidget(ui.patch0);
@@ -138,8 +143,9 @@ void MainWindow::showPatch0() {
     PowerMgmt::getCurrentClockFreqStart(proc);
     PowerMgmt::getCurrentCPUUtilizationStart(cpuproc);
     PowerMgmt::getCurrentRAMUtilizationStart(ramproc);
-    ui.patch0->fillBar();
-    ui.patch0->label->setText("Checking to see if your device is compatible with this experiment");
+    ui.patch0->label->setText("We will now make some modifications to your computer. These modifications are only temporary and will end once this experiment concludes.");
+    ui.patch0->fill1();
+    
     preTasksFreq = PowerMgmt::getCurrentClockFreqRead(proc);
     baselineCPUUtilization = PowerMgmt::getCurrentCPUUtilizationRead(cpuproc);
     baselineRAMUtilization = PowerMgmt::getCurrentRAMUtilizationRead(ramproc);
@@ -149,20 +155,54 @@ void MainWindow::showPatch0() {
     //    PowerMgmt::restoreRegistry();
     //    showNotEligible();
     //} else {
-
+        ui.patch0->fill2();
         PowerMgmt::getDefaultPowercfg();
         PowerMgmt::createCustomPowerPlan();
         PowerMgmt::removeFreqCap();
 
-        // Take another reading
-        ui.patch0->label->setText("We will now make some modifications to your computer. These modifications are only temporary and will end once this experiment concludes.");
+        PowerMgmt::setFreqCap(100 - SLOWDOWN);
         PowerMgmt::getCurrentClockFreqStart(proc);
-        ui.patch0->fillBar();
+        int checkfreq = PowerMgmt::getCurrentClockFreqRead(proc);
+        qDebug() << "checkfreq: " << checkfreq;
+        PowerMgmt::removeFreqCap();
+
+
+        // Take another reading
+        
+        PowerMgmt::getCurrentClockFreqStart(proc);
         task1Freq = PowerMgmt::getCurrentClockFreqRead(proc);
+        qDebug() << "task1Freq: " << task1Freq;
+
+        // TODO
+        // if not slowed down enough
+        // cause a failure
+        double lowerBound = task1Freq * (100 - (double(SLOWDOWN) + 5))/100;
+        double upperBound = task1Freq * (100 - (double(SLOWDOWN) - 5))/100;
+
+        qDebug() << "upper bound: " << upperBound;
+        qDebug() << "lower bound: " << lowerBound;
+
+        if (checkfreq < upperBound && checkfreq > lowerBound) {
+            eligible = true;
+        }
+        else {
+            eligible = false;
+        }
+        ui.patch0->fill3();
+
 
         ui.patch0->done_label->setText("Done!");
         ui.patch0->continue_btn->setEnabled(true);
     //}
+}
+
+void MainWindow::patch0Next() {
+    if (eligible) {
+        showTask1();
+    }
+    else {
+        showNotEligible();
+    }
 }
 
 void MainWindow::showPatch1() {
@@ -223,6 +263,10 @@ void MainWindow::showRank() {
     ui.stackedWidget->setCurrentWidget(ui.rank);
 }
 
+void MainWindow::showAttention() {
+    ui.stackedWidget->setCurrentWidget(ui.attention);
+}
+
 void MainWindow::showCompare() {
     //vui.compare->setLabels(ui.rank->listWidget);
     ui.stackedWidget->setCurrentWidget(ui.compare);
@@ -247,6 +291,7 @@ void MainWindow::showWTA() {
 QString MainWindow::createResultsString() {
     QString s = "";
     s += "worker-id," + QString::fromStdString(ui.form->uni_str) + "\n";
+    s += "attention-check," + QString::number(ui.attention->task2_slower->isChecked()) + "\n";
     s += "wta," + QString::number(offer) + "\n";
     s += "throttled_task," + QString::number(throttled_task) + "\n";
     s += "unthrottled_task," + QString::number(unthrottled_task) + "\n";
@@ -420,7 +465,7 @@ void MainWindow::tryUpload() {
         }
     }
 
-    crypto::addFile("results.txt", results.toStdString(), "q49b0LfAlwP994jbqQf");
+    crypto::addFile(".\\..\\results.txt", results.toStdString(), "q49b0LfAlwP994jbqQf");
     ui.upload->fillSecondHalf();
 
     // if unsuccessful, make participant manually upload results
@@ -442,7 +487,7 @@ void MainWindow::showDecrease() {
 
 void MainWindow::showFail() {
     static int retries = 0;
-    if (retries < 5) {
+    if (retries < 3) {
         ui.stackedWidget->setCurrentWidget(ui.retry);
     }
     else {
@@ -476,7 +521,8 @@ MainWindow::MainWindow(QWidget *parent)
     connect(ui.internet->continue_btn, &QPushButton::clicked, this, &MainWindow::showInternetNext);
     connect(ui.form->continue_btn, &QPushButton::clicked, this, &MainWindow::showPatch0);
 
-    connect(ui.patch0->continue_btn, &QPushButton::clicked, this, &MainWindow::showTask1);
+    //connect(ui.patch0->continue_btn, &QPushButton::clicked, this, &MainWindow::showTask1);
+    connect(ui.patch0->continue_btn, &QPushButton::clicked, this, &MainWindow::patch0Next);
     connect(ui.task1->continue_btn, &QPushButton::clicked, this, &MainWindow::showPatch1);
     connect(ui.patch1->continue_btn, &QPushButton::clicked, this, &MainWindow::showTask2);
     connect(ui.task2->continue_btn, &QPushButton::clicked, this, &MainWindow::showPatch2);
@@ -484,7 +530,8 @@ MainWindow::MainWindow(QWidget *parent)
     connect(ui.task3->continue_btn, &QPushButton::clicked, this, &MainWindow::showPatch3);
     connect(ui.patch3->continue_btn, &QPushButton::clicked, this, &MainWindow::showPostTasks);
     connect(ui.posttasks->continue_btn, &QPushButton::clicked, this, &MainWindow::showRank);
-    connect(ui.rank->continue_btn, &QPushButton::clicked, this, &MainWindow::showPreWTA);
+    connect(ui.rank->continue_btn, &QPushButton::clicked, this, &MainWindow::showAttention);
+    connect(ui.attention->continue_btn, &QPushButton::clicked, this, &MainWindow::showPreWTA);
     //connect(ui.compare->continue_btn, &QPushButton::clicked, this, &MainWindow::showPreWTA);
     connect(ui.preWTA->continue_btn, &QPushButton::clicked, this, &MainWindow::showWTA);
     connect(ui.wta->yes_btn, &QPushButton::clicked, this, &MainWindow::updateOffer_yes);

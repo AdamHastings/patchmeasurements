@@ -85,6 +85,27 @@ void PatchPage::fillSecondHalf() {
 
 }
 
+void PatchPage::fill1() {
+    for (int i = 0; i < 33; i++) {
+        progress_bar->setValue(i);
+        std::this_thread::sleep_for(std::chrono::milliseconds(10));
+    }
+}
+
+void PatchPage::fill2() {
+    for (int i = 33; i < 79; i++) {
+        progress_bar->setValue(i);
+        std::this_thread::sleep_for(std::chrono::milliseconds(10));
+    }
+}
+
+void PatchPage::fill3() {
+    for (int i = 79; i <= 100; i++) {
+        progress_bar->setValue(i);
+        std::this_thread::sleep_for(std::chrono::milliseconds(10));
+    }
+}
+
 PatchPage::~PatchPage()
 {
 }

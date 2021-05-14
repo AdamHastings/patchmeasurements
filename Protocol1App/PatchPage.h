@@ -25,6 +25,9 @@ public:
     void slowFillBar();
     void fillFirstHalf();
     void fillSecondHalf();
+    void fill1();
+    void fill2();
+    void fill3();
 };
 
 

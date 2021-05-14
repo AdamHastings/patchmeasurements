@@ -56,7 +56,7 @@ public:
     Failed2UploadPage* fail;
     PatchPage* upload;
     FinalPage* final;
-    //NotEligiblePage* noteligible;
+    NotEligiblePage* noteligible;
     MonitorPage* monitor;
     PrimaryDevicePage* primary;
     InternetPage* internet;
@@ -64,6 +64,7 @@ public:
     ImproveChoicePage* improve;
     DecreaseChoicePage* decrease;
     RetryUploadPage* retry;
+    AttentionCheckPage* attention;
 
     void setupGlobals() {
         rec = QApplication::desktop()->screenGeometry();
@@ -81,13 +82,14 @@ public:
 
         COMPLETION_CODE = "f09a9c00";
 
-        UPLOAD_WEBPAGE = "www.cs.columbia.edu/~hastings/mturk/" + QString(SLOWDOWN) + "/";
-
         // read file
         std::string slowdownstr;
         std::ifstream infile("cfg.txt");
         std::getline(infile, slowdownstr);
         SLOWDOWN = std::stoi(slowdownstr);
+
+        UPLOAD_WEBPAGE = "www.cs.columbia.edu/~hastings/mturk/" + QString::number(SLOWDOWN) + "/upload.html";
+
 
         srand((unsigned)time(NULL));
     }
@@ -191,8 +193,8 @@ public:
         final = new FinalPage();
         stackedWidget->addWidget(final);
 
-        //noteligible = new NotEligiblePage();
-        //stackedWidget->addWidget(noteligible);
+        noteligible = new NotEligiblePage();
+        stackedWidget->addWidget(noteligible);
 
         monitor = new MonitorPage();
         stackedWidget->addWidget(monitor);
@@ -214,6 +216,9 @@ public:
 
         retry = new RetryUploadPage();
         stackedWidget->addWidget(retry);
+
+        attention = new AttentionCheckPage();
+        stackedWidget->addWidget(attention);
 
     } // setupUi
 };

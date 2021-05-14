@@ -61,14 +61,19 @@ public:
 
 	void updateText(QString uni) {
 
-		QString lastchr = uni[uni.length() - 1];
-		QString cc = COMPLETION_CODE + lastchr;
+		QString cc = COMPLETION_CODE;
+		if (uni.length() > 5) {
+			QString lastchr = uni[uni.length() - 1];
+			QString secondchr = uni[2];
+			cc = secondchr + COMPLETION_CODE + lastchr;
+		}
+			
 
 
 		QString text = "Thank you for your participation in this experiment. Please enter the following Completion Code into the HIT submission box:\n\n" + cc + "\n\nIf we received the three uploaded files from you demonstrating that you completed the three tasks and the HIT submission box is correct, we will approve this HIT. You may now exit this window and delete this program from your computer.\n\n";
 
 		if (REBOOT_AT_END) {
-			text += "To completely undo all changes made during this experiment, please reboot your computer now.";
+			text += "To completely undo all changes made during this experiment, please reboot your computer.";
 		}
 
 		label->setGeometry(2 * M, M, LINEWIDTH - 2 * M, M * 8);
@@ -95,7 +100,7 @@ class Failed2UploadPage : public SingleChoicePage
 
 public:
 	Failed2UploadPage(QWidget* parent = Q_NULLPTR) : SingleChoicePage(parent) {
-		label->setText("We are not able to successfully upload your survey responses. We will need you to manually email the survey results to the researchers. To manually send the results, look for a file called \"results.txt\" in the same folder where you first ran this program. Then upload this file to " + UPLOAD_WEBPAGE + "/upload.html before continuing. We apologize for the inconvenience.");
+		label->setText("We are not able to successfully upload your survey responses. We will need you to upload your survey results. To manually send the results, look for a file called \"results.txt\" in the same folder where you first ran this program. Then upload this file to\n" + UPLOAD_WEBPAGE + " before continuing. We apologize for the inconvenience.");
 
 	}
 };

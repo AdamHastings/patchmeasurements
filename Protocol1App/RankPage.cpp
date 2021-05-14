@@ -17,7 +17,7 @@ RankPage::RankPage(QWidget* parent)
 
 {
 
-	QLabel* label = new QLabel("Please select the option that most closely matches your experience while completing the tasks.", this);
+	label = new QLabel("Please select the option that most closely matches your experience while completing the tasks.", this);
 	label->setAlignment(Qt::AlignVCenter | Qt::AlignJustify);
 	label->setWordWrap(true);
 	label->setGeometry(QRect(M, M/2, LINEWIDTH, 2 * M));
@@ -93,4 +93,15 @@ RankPage::RankPage(QWidget* parent)
 
 RankPage::~RankPage()
 {
+}
+
+AttentionCheckPage::AttentionCheckPage(QWidget* parent) : RankPage(parent) {
+	label->setText("Please select the option that is first (highest) in the list below regardless of what most closely matches your experience while completing the tasks.");
+	label->setAlignment(Qt::AlignVCenter | Qt::AlignJustify);
+	label->setWordWrap(true);
+	label->setGeometry(QRect(M, M / 2, LINEWIDTH, 2 * M));
+
+	task2_slower->setGeometry(2 * M, 3 * M, LINEWIDTH - 2 * M, M);
+	task3_slower->setGeometry(2 * M, 4 * M, LINEWIDTH - 2 * M, M);
+	nodifference->setGeometry(2 * M, 5 * M, LINEWIDTH - 2 * M, M);
 }

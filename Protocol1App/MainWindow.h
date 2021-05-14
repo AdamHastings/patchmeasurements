@@ -38,6 +38,7 @@ private:
     double task3Freq = -1;
     double postTasksFreq = -1;
     QString system_info;
+    bool  eligible;
 
     void showStartNext();
     void showModNext();
@@ -71,7 +72,9 @@ private:
     void tryUpload();
     void showFail();
     void showFinal();
-    //void showNotEligible();
+    void showNotEligible();
+    void patch0Next();
+    void showAttention();
 
     //std::string createResultsString();
     QString createResultsString();
