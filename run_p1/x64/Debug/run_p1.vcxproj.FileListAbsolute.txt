@@ -1,2 +1,0 @@
-C:\Users\Administrator\patchmeasurements\run_p1\x64\Debug\run_p1.exe
-C:\Users\Administrator\patchmeasurements\run_p1\x64\Debug\run_p1.pdb
