@@ -81,6 +81,8 @@ public:
 
         COMPLETION_CODE = "f09a9c00";
 
+        UPLOAD_WEBPAGE = "www.cs.columbia.edu/~hastings/mturk/" + QString(SLOWDOWN) + "/";
+
         // read file
         std::string slowdownstr;
         std::ifstream infile("cfg.txt");

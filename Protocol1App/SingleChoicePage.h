@@ -95,7 +95,7 @@ class Failed2UploadPage : public SingleChoicePage
 
 public:
 	Failed2UploadPage(QWidget* parent = Q_NULLPTR) : SingleChoicePage(parent) {
-		label->setText("We are not able to successfully upload your survey responses. We will need you to manually email the survey results to the researchers. To manually send the results, look for a file called \"results.txt\" in the same folder where you first ran this program. Attach this document to an email titled \"Results\" and send it to hastings-experiment@cs.columbia.edu.\n\nPlease send this email before continuing. We apologize for the inconvenience.");
+		label->setText("We are not able to successfully upload your survey responses. We will need you to manually email the survey results to the researchers. To manually send the results, look for a file called \"results.txt\" in the same folder where you first ran this program. Then upload this file to " + UPLOAD_WEBPAGE + "/upload.html before continuing. We apologize for the inconvenience.");
 
 	}
 };

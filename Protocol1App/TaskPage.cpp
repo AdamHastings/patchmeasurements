@@ -70,7 +70,7 @@ void TaskPage::resetPage(QString uni) {
 
     subtask_a->setText("Open up Microsoft Word. Create a new document and name it " + docname);
     
-    subtask_f->setText("In your web browser, go to https://www.cs.columbia.edu/~hastings/protocol1/mturk/db/upload.html \n and upload " + docname +  ".pdf");
+    subtask_f->setText("In your web browser, go to " + UPLOAD_WEBPAGE + " \n and upload " + docname +  ".pdf");
 
     subtask_g->setText("Close your web browser. Close Microsoft Word and delete " + docname + ".pdf and \n" + docname + ".docx from your computer.");
 
