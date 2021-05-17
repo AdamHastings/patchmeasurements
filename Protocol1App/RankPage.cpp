@@ -101,6 +101,10 @@ AttentionCheckPage::AttentionCheckPage(QWidget* parent) : RankPage(parent) {
 	label->setWordWrap(true);
 	label->setGeometry(QRect(M, M / 2, LINEWIDTH, 2 * M));
 
+	task2_slower->setText("Task 1 was the hardest");
+	task3_slower->setText("Task 2 was the hardest");
+	nodifference->setText("Task 3 was the hardest");
+
 	task2_slower->setGeometry(2 * M, 3 * M, LINEWIDTH - 2 * M, M);
 	task3_slower->setGeometry(2 * M, 4 * M, LINEWIDTH - 2 * M, M);
 	nodifference->setGeometry(2 * M, 5 * M, LINEWIDTH - 2 * M, M);
