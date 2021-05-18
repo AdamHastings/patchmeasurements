@@ -125,6 +125,9 @@ void MainWindow::showNotEligible() {
     ui.noteligible->updateText();
     QString results = "worker-id," + QString::fromStdString(ui.form->uni_str) + "\n";
     results += "eligible?,no\n";
+    results += "SLOWDOWN," + QString::number(SLOWDOWN) + "\n";
+    results += "task1_freq," + QString::number(task1Freq) + "\n";
+    results += "check_freq," + QString::number(checkFreq) + "\n";
     DropBox::upload(results, ui.form->uni_str);
 
     ui.stackedWidget->setCurrentWidget(ui.noteligible);
@@ -162,8 +165,8 @@ void MainWindow::showPatch0() {
 
         PowerMgmt::setFreqCap(100 - SLOWDOWN);
         PowerMgmt::getCurrentClockFreqStart(proc);
-        int checkfreq = PowerMgmt::getCurrentClockFreqRead(proc);
-        qDebug() << "checkfreq: " << checkfreq;
+        checkFreq = PowerMgmt::getCurrentClockFreqRead(proc);
+        qDebug() << "checkFreq: " << checkFreq;
         PowerMgmt::removeFreqCap();
 
 
@@ -182,7 +185,7 @@ void MainWindow::showPatch0() {
         qDebug() << "upper bound: " << upperBound;
         qDebug() << "lower bound: " << lowerBound;
 
-        if (checkfreq < upperBound && checkfreq > lowerBound) {
+        if (checkFreq < upperBound && checkFreq > lowerBound) {
             eligible = true;
         }
         else {
@@ -549,8 +552,7 @@ MainWindow::MainWindow(QWidget *parent)
     
 
 #ifdef QT_DEBUG
-    qDebug() << QSslSocket::supportsSsl() << QSslSocket::sslLibraryBuildVersionString() << QSslSocket::sslLibraryVersionString();
-    connect(ui.start->continue_btn, &QPushButton::clicked, this, &MainWindow::showPostTasks);
+    //connect(ui.start->continue_btn, &QPushButton::clicked, this, &MainWindow::showPostTasks);
 #endif
 
 }
