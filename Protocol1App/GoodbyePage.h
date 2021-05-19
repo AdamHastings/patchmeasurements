@@ -38,9 +38,9 @@ public:
 	void updateText() {
 		QString text = "Thank you for your interest in this experiment. Unfortunately, your device is not compatible with this program, and we can't consider you for participation. We apologize for any inconvenience. Any changes to your device have been undone.\n\n";
 
-		//if (REBOOT_AT_END) {
-		//	text += "\n\nTo completely undo all changes made during this experiment, please reboot your computer now.";
-		//}
+		if (REBOOT_AT_END) {
+			text += "\n\nDid you reboot your computer when asked? This could be the reason why this program failed. If you didn't reboot your computer when prompted, re-run this program first and then reboot when prompted.";
+		}
 		label->setText(text);
 	}
 };

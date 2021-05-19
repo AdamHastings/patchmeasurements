@@ -295,6 +295,7 @@ QString MainWindow::createResultsString() {
     QString s = "";
     s += "worker-id," + QString::fromStdString(ui.form->uni_str) + "\n";
     s += "attention-check," + QString::number(ui.attention->task2_slower->isChecked()) + "\n";
+    s += "incentive-compatible,yes\n";
     s += "wta," + QString::number(offer) + "\n";
     s += "throttled_task," + QString::number(throttled_task) + "\n";
     s += "unthrottled_task," + QString::number(unthrottled_task) + "\n";

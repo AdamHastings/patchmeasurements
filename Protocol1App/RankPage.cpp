@@ -17,7 +17,7 @@ RankPage::RankPage(QWidget* parent)
 
 {
 
-	label = new QLabel("Please select the option that most closely matches your experience while completing the tasks.", this);
+	label = new QLabel("Your computer may have been slowed down during either Task 2 or Task 3. We will now ask you to pick during which (if any) of the tasks your computer was slowed down. Only one of the answers below is correct. To incentivize you to answer to the best of your ability, we will award you a bonus of $0.25 if you choose correctly.", this);
 	label->setAlignment(Qt::AlignVCenter | Qt::AlignJustify);
 	label->setWordWrap(true);
 	label->setGeometry(QRect(M, M/2, LINEWIDTH, 2 * M));
@@ -26,9 +26,9 @@ RankPage::RankPage(QWidget* parent)
 	nodifference = new QRadioButton(this);
 	task3_slower = new QRadioButton(this);
 
-	task2_slower->setText("My computer's speed felt slower during Task 2 than during Task 3");
-	task3_slower->setText("My computer's speed felt slower during Task 3 than during Task 2");
-	nodifference->setText("My computer's speed felt the same during Task 2 and Task 3"); 
+	task2_slower->setText("My computer was running slower during Task 2 than during Task 3");
+	task3_slower->setText("My computer was running slower during Task 3 than during Task 2");
+	nodifference->setText("My computer was running at same speed during Task 2 and Task 3"); 
 
 	int rand1 = rand() % 3;
 	int rand2 = rand() % 2;
