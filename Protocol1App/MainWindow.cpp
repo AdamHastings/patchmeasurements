@@ -188,8 +188,9 @@ void MainWindow::showPatch0() {
         // TODO
         // if not slowed down enough
         // cause a failure
-        double lowerBound = task1Freq * (100 - (double(SLOWDOWN) + 5))/100;
-        double upperBound = task1Freq * (100 - (double(SLOWDOWN) - 5))/100;
+        int tolerance = 8;
+        double lowerBound = task1Freq * (100 - (double(SLOWDOWN) + tolerance))/100;
+        double upperBound = task1Freq * (100 - (double(SLOWDOWN) - tolerance))/100;
 
         qDebug() << "upper bound: " << upperBound;
         qDebug() << "lower bound: " << lowerBound;
