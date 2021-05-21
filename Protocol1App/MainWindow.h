@@ -76,6 +76,7 @@ private:
     void showNotEligible();
     void patch0Next();
     void showAttention();
+    void showPriorNext();
 
     //std::string createResultsString();
     QString createResultsString();

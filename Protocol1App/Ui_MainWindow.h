@@ -65,6 +65,7 @@ public:
     DecreaseChoicePage* decrease;
     RetryUploadPage* retry;
     AttentionCheckPage* attention;
+    PriorParticipationPage* prior;
 
     void setupGlobals() {
         rec = QApplication::desktop()->screenGeometry();
@@ -219,6 +220,9 @@ public:
 
         attention = new AttentionCheckPage();
         stackedWidget->addWidget(attention);
+
+        prior = new PriorParticipationPage();
+        stackedWidget->addWidget(prior);
 
     } // setupUi
 };

@@ -80,6 +80,15 @@ void MainWindow::showPrimaryNext() {
         showGoodbye();
     }
     else {
+        ui.stackedWidget->setCurrentWidget(ui.prior);
+    }
+}
+
+void MainWindow::showPriorNext() {
+    if (ui.prior->not_consent_btn->isChecked()) {
+        showGoodbye();
+    }
+    else {
         ui.stackedWidget->setCurrentWidget(ui.internet);
     }
 }
@@ -522,7 +531,9 @@ MainWindow::MainWindow(QWidget *parent)
     connect(ui.mod->continue_btn, &QPushButton::clicked, this, &MainWindow::showModNext);
     connect(ui.monitor->continue_btn, &QPushButton::clicked, this, &MainWindow::showMonitorNext);
     connect(ui.primary->continue_btn, &QPushButton::clicked, this, &MainWindow::showPrimaryNext);
+    connect(ui.prior->continue_btn, &QPushButton::clicked, this, &MainWindow::showPriorNext);
     connect(ui.internet->continue_btn, &QPushButton::clicked, this, &MainWindow::showInternetNext);
+
     connect(ui.form->continue_btn, &QPushButton::clicked, this, &MainWindow::showPatch0);
 
     //connect(ui.patch0->continue_btn, &QPushButton::clicked, this, &MainWindow::showTask1);

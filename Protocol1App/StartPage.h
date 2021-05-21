@@ -49,6 +49,18 @@ public:
 	}
 };
 
+class PriorParticipationPage : public StartPage
+{
+	Q_OBJECT
+public:
+	PriorParticipationPage(QWidget* parent = Q_NULLPTR) : StartPage(parent) {
+		label->setText("You may participate in this study only once. Have you participated in this study before?");
+
+		consent_btn->setText("I have not participated in this study before");
+		not_consent_btn->setText("I have already participated in this study");
+	}
+};
+
 
 class PrimaryDevicePage : public StartPage
 {
