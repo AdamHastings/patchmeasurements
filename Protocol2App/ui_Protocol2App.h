@@ -65,6 +65,8 @@ public:
     CompNotEligiblePage* noteligible;
     WaitPage* waitfinal;
     RetryPage* retryfinal;
+    MoreDaysPage* more;
+    UploadFailPage* fail;
 
 
 
@@ -83,6 +85,8 @@ public:
         TOTAL_DAYS = 14;
         OFFER = 8;
         COMPLETION_CODE = "F3185EE0";
+
+        UPLOAD_WEBPAGE = "www.cs.columbia.edu/~hastings/mturk/" + QString::number(SLOWDOWN) + "/upload.html";
 #ifdef QT_DEBUG
         //TOTAL_DAYS = 2;
 #endif
@@ -200,6 +204,12 @@ public:
 
         retryfinal = new RetryPage();
         stackedWidget->addWidget(retryfinal);
+
+        more = new MoreDaysPage();
+        stackedWidget->addWidget(more);
+
+        fail = new UploadFailPage();
+        stackedWidget->addWidget(fail);
 
     } // setupUi
 };

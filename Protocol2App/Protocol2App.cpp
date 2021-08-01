@@ -263,7 +263,12 @@ void Protocol2App::tryFinalUpload() {
     else {
         snapshot_reason = "decline";
     }
+
+#ifdef QT_DEBUG
+    snapshot_reason = "timeout";
     qDebug() << "snapshot reason: " << snapshot_reason;
+#endif
+
     SysUtils::takeSnapshot(snapshot_reason);
     ui.waitfinal->continue_btn->setEnabled(true);
 }
@@ -273,13 +278,23 @@ void Protocol2App::tryFinalUploadNext() {
     QString timestamp = SysUtils::getTimestamp();
     QString date = timestamp.split(QRegExp("\\s+"), QString::SkipEmptyParts)[0];
     QString filename = date + "-" + snapshot_reason + ".txt";
+    static int retries = 0;
+    const int ATTEMPTS = 3;
 
     if (DropBox::uploadSuccessful(uni, filename)) {
         showNoMore();
     }
     else {
-        showFinalRetry();
+        retries++;
+        if (retries < ATTEMPTS)
+            showFinalRetry();
+        else
+            showUploadFail();
     }
+}
+
+void Protocol2App::showUploadFail() {
+    ui.stackedWidget->setCurrentWidget(ui.fail);
 }
 
 void Protocol2App::showFinalRetry() {
@@ -315,7 +330,6 @@ void Protocol2App::showCheat() {
 void Protocol2App::showSurveyNext() {
     if (days == TOTAL_DAYS) {
         // This is the first time
-        //showHours();
         showImprove();
     }
     else {
@@ -335,70 +349,16 @@ void Protocol2App::showDecrease() {
     ui.stackedWidget->setCurrentWidget(ui.decrease);
 }
 
+void Protocol2App::showMoreDays() {
+    ui.stackedWidget->setCurrentWidget(ui.more);
+}
+
 void Protocol2App::showUsage() {
     ui.stackedWidget->setCurrentWidget(ui.usage);
 }
 
 void Protocol2App::showTimeoutSplash() {
     ui.stackedWidget->setCurrentWidget(ui.timeout);
-}
-
-Protocol2App::Protocol2App(QWidget *parent)
-    : QMainWindow(parent)
-{
-    ui.setupUi(this);
-
-    // If this isn't the first time, load values from the registry
-    if (RegistryUtils::getRegKey("days").isValid()) {
-        resetProgram();
-    }
-    else {
-        days = TOTAL_DAYS;
-    }
-     
-    //connect(ui.start->consent_btn, &QPushButton::clicked, this, &Protocol2App::showStartNext);
-    //connect(ui.start->not_consent_btn, &QPushButton::clicked, this, &Protocol2App::showGoodbye);
-    connect(ui.start->continue_btn, &QPushButton::clicked, this, &Protocol2App::showStartNext);
-    //connect(ui.mod->consent_btn, &QPushButton::clicked, this, &Protocol2App::showFormPage);
-    //connect(ui.mod->not_consent_btn, &QPushButton::clicked, this, &Protocol2App::showGoodbye);
-    connect(ui.mod->continue_btn, &QPushButton::clicked, this, &Protocol2App::showModNext);
-
-    connect(ui.primary->continue_btn, &QPushButton::clicked, this, &Protocol2App::showPrimaryNext);
-
-    connect(ui.internet->continue_btn, &QPushButton::clicked, this, &Protocol2App::showInternetNext);
-
-    connect(ui.form->continue_btn, &QPushButton::clicked, this, &Protocol2App::showHours);
-
-    connect(ui.hours->continue_btn, &QPushButton::clicked, this, &Protocol2App::showHoursNext);
-
-
-    connect(ui.hmonitor->continue_btn, &QPushButton::clicked, this, &Protocol2App::showHMonitorNext);
-    connect(ui.hmin->continue_btn, &QPushButton::clicked, this, &Protocol2App::showHMinNext);
-
-    connect(ui.wta->continue_btn, &QPushButton::clicked, this, &Protocol2App::WTAnext);
-    connect(ui.survey->continue_btn, &QPushButton::clicked, this, &Protocol2App::showSurveyNext);
-    //connect(ui.cheat->continue_btn, &QPushButton::clicked, this, &Protocol2App::showHours);
-    connect(ui.cheat->continue_btn, &QPushButton::clicked, this, &Protocol2App::showImprove);
-    //connect(ui.hours->continue_btn, &QPushButton::clicked, this, &Protocol2App::showImprove);
-    connect(ui.improve->continue_btn, &QPushButton::clicked, this, &Protocol2App::showDecrease);
-    connect(ui.decrease->continue_btn, &QPushButton::clicked, this, &Protocol2App::showUsage);
-    //connect(ui.usage->continue_btn, &QPushButton::clicked, this, &Protocol2App::showNoMore);
-    connect(ui.usage->continue_btn, &QPushButton::clicked, this, &Protocol2App::tryFinalUpload);
-    connect(ui.waitfinal->continue_btn, &QPushButton::clicked, this, &Protocol2App::tryFinalUploadNext);
-    connect(ui.retryfinal->continue_btn, &QPushButton::clicked, this, &Protocol2App::tryFinalUpload);
-
-    connect(ui.timeout->continue_btn, &QPushButton::clicked, this, &Protocol2App::showCheat);
-
-    connect(ui.wait->continue_btn, &QPushButton::clicked, this, &Protocol2App::tryUploadNext);
-    connect(ui.retry->continue_btn, &QPushButton::clicked, this, &Protocol2App::tryUpload);
-
-#ifdef QT_DEBUG
-
-    RegistryUtils::setRegKey("UNI", "akh2167");
-    Protocol2App::setUNI("akh2167");
-
-    connect(ui.start->consent_btn, &QPushButton::clicked, this, &Protocol2App::showUsage);
-#endif
 }
 
 void Protocol2App::closeEvent(QCloseEvent* event) {
@@ -493,4 +453,48 @@ int Protocol2App::getAcceptances() {
 
 void Protocol2App::setAcceptances(int input) {
     acceptances = input;
+}
+
+Protocol2App::Protocol2App(QWidget* parent)
+    : QMainWindow(parent)
+{
+    ui.setupUi(this);
+
+    // If this isn't the first time, load values from the registry
+    if (RegistryUtils::getRegKey("days").isValid()) {
+        resetProgram();
+    }
+    else {
+        days = TOTAL_DAYS;
+    }
+
+    connect(ui.start->continue_btn, &QPushButton::clicked, this, &Protocol2App::showStartNext);
+    connect(ui.mod->continue_btn, &QPushButton::clicked, this, &Protocol2App::showModNext);
+    connect(ui.primary->continue_btn, &QPushButton::clicked, this, &Protocol2App::showPrimaryNext);
+    connect(ui.internet->continue_btn, &QPushButton::clicked, this, &Protocol2App::showInternetNext);
+    connect(ui.form->continue_btn, &QPushButton::clicked, this, &Protocol2App::showHours);
+    connect(ui.hours->continue_btn, &QPushButton::clicked, this, &Protocol2App::showHoursNext);
+    connect(ui.hmonitor->continue_btn, &QPushButton::clicked, this, &Protocol2App::showHMonitorNext);
+    connect(ui.hmin->continue_btn, &QPushButton::clicked, this, &Protocol2App::showHMinNext);
+    connect(ui.wta->continue_btn, &QPushButton::clicked, this, &Protocol2App::WTAnext);
+    connect(ui.survey->continue_btn, &QPushButton::clicked, this, &Protocol2App::showSurveyNext);
+    connect(ui.cheat->continue_btn, &QPushButton::clicked, this, &Protocol2App::showMoreDays);
+    connect(ui.more->continue_btn, &QPushButton::clicked, this, &Protocol2App::showImprove);
+    connect(ui.improve->continue_btn, &QPushButton::clicked, this, &Protocol2App::showDecrease);
+    connect(ui.decrease->continue_btn, &QPushButton::clicked, this, &Protocol2App::showUsage);
+    connect(ui.usage->continue_btn, &QPushButton::clicked, this, &Protocol2App::tryFinalUpload);
+    connect(ui.waitfinal->continue_btn, &QPushButton::clicked, this, &Protocol2App::tryFinalUploadNext);
+    connect(ui.retryfinal->continue_btn, &QPushButton::clicked, this, &Protocol2App::tryFinalUpload);
+    connect(ui.timeout->continue_btn, &QPushButton::clicked, this, &Protocol2App::showCheat);
+    connect(ui.wait->continue_btn, &QPushButton::clicked, this, &Protocol2App::tryUploadNext);
+    connect(ui.retry->continue_btn, &QPushButton::clicked, this, &Protocol2App::tryUpload);
+
+
+#ifdef QT_DEBUG
+
+    RegistryUtils::setRegKey("UNI", "akh2167");
+    Protocol2App::setUNI("akh2167");
+
+    connect(ui.start->consent_btn, &QPushButton::clicked, this, &Protocol2App::showCheat);
+#endif
 }

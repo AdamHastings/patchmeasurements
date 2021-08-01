@@ -70,6 +70,9 @@ private:
     void tryFinalUploadNext();
     void showFinalRetry();
     void showHoursNext();
+    void showMoreDays();
+    void showUploadFail();
+    void showPreUpload();
 
     void closeEvent(QCloseEvent* event);
     void resetProgram();

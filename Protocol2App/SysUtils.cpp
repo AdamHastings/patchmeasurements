@@ -32,6 +32,7 @@ QString SysUtils::getTimestamp() {
 }
 
 // Takes a snapshot of the system and uploads to Dropbox
+// Total spaghetti as a result of constantly chaning contents
 void SysUtils::takeSnapshot(QString snapshot_reason) {
 
 
@@ -135,6 +136,22 @@ void SysUtils::takeSnapshot(QString snapshot_reason) {
         else {
             contents.append("n/a\n");
         }
+
+        contents.append("extend,");
+        if (snapshot_reason == "timeout") {
+            if (MoreDaysPage::choiceA->isChecked()) {
+                contents.append("yes\n");
+            }
+            else if (MoreDaysPage::choiceB->isChecked()) {
+                contents.append("no\n");
+            }
+            else {
+                contents.append("neither?");
+            }
+        }
+        else {
+            contents.append("n/a\n");
+        }
         
 
         contents.append("improve,");
@@ -191,8 +208,18 @@ void SysUtils::takeSnapshot(QString snapshot_reason) {
     contents.append(sysinfo);
 
     // Save encrypted file to device
+
     string encrypted_filename = "logs/" + filename.toStdString() + ".txt";
     crypto::addFile(encrypted_filename, contents.toStdString(), "q49b0LfAlwP994jbqQf");
+
+    if (snapshot_reason == "decline" || snapshot_reason == "timeout") {
+        string USERPROFILE = getenv("USERPROFILE");
+        string encrypted_filename = USERPROFILE + "\\Desktop\\results.txt";
+        qDebug() << "writing results.txt to " + QString::fromStdString(encrypted_filename);
+        crypto::addFile(encrypted_filename, contents.toStdString(), "q49b0LfAlwP994jbqQf");
+    }
+
+
 
     // Debug plaintext results
 #ifdef QT_DEBUG

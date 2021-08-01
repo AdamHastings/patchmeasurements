@@ -94,3 +94,75 @@ DecreaseChoicePage::~DecreaseChoicePage()
 {
 }
 
+ChoicePage::ChoicePage(QWidget* parent) {
+	label = new QLabel(this);
+	label->setWordWrap(true);
+	label->setAlignment(Qt::AlignJustify);
+	label->setGeometry(M, 2 * M, LINEWIDTH, 4 * M);
+
+	choiceA = new QRadioButton(this);
+	choiceA->setGeometry(2 * M, M * 4, LINEWIDTH - 2 * M, BUTTON_HEIGHT);
+
+	choiceB = new QRadioButton(this);
+	choiceB->setGeometry(2 * M, M * 5 + BUTTON_HEIGHT, LINEWIDTH - 2 * M, BUTTON_HEIGHT);
+
+	continue_btn = new QPushButton(this);
+	continue_btn->setGeometry(QRect(W / 2 - BUTTON_WIDTH / 2, M * 9, BUTTON_WIDTH, BUTTON_HEIGHT));
+	continue_btn->setText("Continue");
+	continue_btn->setEnabled(false);
+
+	connect(this->choiceA, &QRadioButton::clicked, this, &ChoicePage::checkContinue);
+	connect(this->choiceB, &QRadioButton::clicked, this, &ChoicePage::checkContinue);
+}
+
+void ChoicePage::checkContinue() {
+	if (choiceA->isChecked() || choiceB->isChecked()) {
+		continue_btn->setEnabled(true);
+	}
+	else {
+		continue_btn->setEnabled(false);
+	}
+}
+
+QRadioButton* MoreDaysPage::choiceA;
+QRadioButton* MoreDaysPage::choiceB;
+
+
+MoreDaysPage::MoreDaysPage(QWidget* parent) {
+	label->setText("If given the option, would you choose to keep your computer slow for additional days in exchange for $" + QString(OFFER) + " per day?");
+	choiceA->setText("Yes");
+	choiceB->setText("No");
+}
+
+
+SingleChoicePage::SingleChoicePage(QWidget* parent) {
+	label = new QLabel(this);
+	label->setWordWrap(true);
+	label->setAlignment(Qt::AlignJustify);
+	label->setGeometry(M, 2 * M, LINEWIDTH, 4 * M);
+
+	choice = new QCheckBox(this);
+	choice->setGeometry(2 * M, M * 4, LINEWIDTH - 2 * M, BUTTON_HEIGHT);
+
+	continue_btn = new QPushButton(this);
+	continue_btn->setGeometry(QRect(W / 2 - BUTTON_WIDTH / 2, M * 9, BUTTON_WIDTH, BUTTON_HEIGHT));
+	continue_btn->setText("Continue");
+	continue_btn->setEnabled(false);
+
+	connect(this->choice, &QCheckBox::clicked, this, &SingleChoicePage::checkContinue);
+}
+
+void SingleChoicePage::checkContinue() {
+	if (choice->isChecked()) {
+		continue_btn->setEnabled(true);
+	}
+	else {
+		continue_btn->setEnabled(false);
+	}
+}
+
+UploadFailPage::UploadFailPage(QWidget* parent) {
+	label->setText("We had trouble uploading your results. We will need you to upload your survey results. To manually send the results, look for a file called \"results.txt\" on your Desktop. Then upload this file to\n" + UPLOAD_WEBPAGE + " before continuing. We apologize for the inconvenience.");
+
+	choice->setText("I have successfully uploaded the file \"results.txt\" to the above website");
+}

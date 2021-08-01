@@ -25,6 +25,8 @@ inline QString COMPLETION_CODE;
 inline int OFFER;
 inline int TOTAL_DAYS;
 inline int WAIT_PERIOD;
+inline QString UPLOAD_WEBPAGE;
+
 
 
 #endif

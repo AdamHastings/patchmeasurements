@@ -188,7 +188,7 @@ public:
 	QPushButton* continue_btn;
 
 	WaitPage(QWidget* parent = Q_NULLPTR) : ExitPage(parent) {
-		label->setText("Please wait while we send your survey responses to the researchers.");
+		label->setText("Press Continue to send your survey responses to the researchers.");
 
 		continue_btn = new QPushButton(this);
 		continue_btn->setGeometry(QRect(W / 2 - BUTTON_WIDTH / 2, M * 8, BUTTON_WIDTH, BUTTON_HEIGHT));

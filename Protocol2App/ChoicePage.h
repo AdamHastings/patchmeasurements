@@ -4,6 +4,8 @@
 #include <QLabel>
 #include <QPushButton>
 #include <QRadioButton>
+#include <QCheckBox>
+#include "Globals.h"
 
 class ImproveChoicePage : public QWidget
 {
@@ -37,4 +39,51 @@ public:
 
 private:
 	void checkContinue();
+};
+
+class ChoicePage : public QWidget
+{
+	Q_OBJECT
+
+public:
+	
+	QPushButton* continue_btn;
+	QLabel* label;
+	static QRadioButton* choiceA;
+	static QRadioButton* choiceB;
+
+	ChoicePage(QWidget* parent = Q_NULLPTR);
+
+protected:
+	virtual void checkContinue();
+};
+
+class MoreDaysPage : public ChoicePage
+{
+public:
+	MoreDaysPage(QWidget* parent = Q_NULLPTR);
+};
+
+class SingleChoicePage : public QWidget
+{
+	Q_OBJECT
+
+public:
+
+	QPushButton* continue_btn;
+	QLabel* label;
+	QCheckBox* choice;
+
+	SingleChoicePage(QWidget* parent = Q_NULLPTR);
+
+protected:
+	virtual void checkContinue();
+	//virtual bool getChoice();
+
+};
+
+class UploadFailPage : public SingleChoicePage
+{
+public:
+	UploadFailPage(QWidget* parent = Q_NULLPTR);
 };
