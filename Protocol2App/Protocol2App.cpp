@@ -252,10 +252,14 @@ void Protocol2App::acceptOffer() {
     ui.stackedWidget->setCurrentWidget(ui.onemore);*/
 }
 
+void Protocol2App::showPreUpload() {
+    ui.waitfinal->continue_btn->setEnabled(true);
+    ui.stackedWidget->setCurrentWidget(ui.waitfinal);
+}
+
 void Protocol2App::tryFinalUpload() {
     ui.waitfinal->continue_btn->setEnabled(false);
-    ui.stackedWidget->setCurrentWidget(ui.waitfinal);
-
+    /*ui.stackedWidget->setCurrentWidget(ui.waitfinal);*/
 
     if (days == 0) {
         snapshot_reason = "timeout";
@@ -271,6 +275,8 @@ void Protocol2App::tryFinalUpload() {
 
     SysUtils::takeSnapshot(snapshot_reason);
     ui.waitfinal->continue_btn->setEnabled(true);
+
+    tryFinalUploadNext();
 }
 
 void Protocol2App::tryFinalUploadNext() {
@@ -293,21 +299,15 @@ void Protocol2App::tryFinalUploadNext() {
     }
 }
 
-void Protocol2App::showUploadFail() {
-    ui.stackedWidget->setCurrentWidget(ui.fail);
-}
-
 void Protocol2App::showFinalRetry() {
     ui.stackedWidget->setCurrentWidget(ui.retryfinal);
 }
 
+void Protocol2App::showUploadFail() {
+    ui.stackedWidget->setCurrentWidget(ui.fail);
+}
+
 void Protocol2App::showNoMore() {
-    /*if (days == 0) {
-        SysUtils::takeSnapshot("timeout");
-    }
-    else {
-        SysUtils::takeSnapshot("decline");
-    }*/
     ui.nomore->resetPage(days, acceptances, uni);
     enableExitButton();
     ui.stackedWidget->setCurrentWidget(ui.nomore);
@@ -482,12 +482,13 @@ Protocol2App::Protocol2App(QWidget* parent)
     connect(ui.more->continue_btn, &QPushButton::clicked, this, &Protocol2App::showImprove);
     connect(ui.improve->continue_btn, &QPushButton::clicked, this, &Protocol2App::showDecrease);
     connect(ui.decrease->continue_btn, &QPushButton::clicked, this, &Protocol2App::showUsage);
-    connect(ui.usage->continue_btn, &QPushButton::clicked, this, &Protocol2App::tryFinalUpload);
-    connect(ui.waitfinal->continue_btn, &QPushButton::clicked, this, &Protocol2App::tryFinalUploadNext);
-    connect(ui.retryfinal->continue_btn, &QPushButton::clicked, this, &Protocol2App::tryFinalUpload);
+    connect(ui.usage->continue_btn, &QPushButton::clicked, this, &Protocol2App::showPreUpload);
+    connect(ui.waitfinal->continue_btn, &QPushButton::clicked, this, &Protocol2App::tryFinalUpload);
+    connect(ui.retryfinal->continue_btn, &QPushButton::clicked, this, &Protocol2App::showPreUpload);
     connect(ui.timeout->continue_btn, &QPushButton::clicked, this, &Protocol2App::showCheat);
     connect(ui.wait->continue_btn, &QPushButton::clicked, this, &Protocol2App::tryUploadNext);
     connect(ui.retry->continue_btn, &QPushButton::clicked, this, &Protocol2App::tryUpload);
+    connect(ui.fail->continue_btn, &QPushButton::clicked, this, &Protocol2App::showNoMore);
 
 
 #ifdef QT_DEBUG
