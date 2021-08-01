@@ -20,6 +20,8 @@
 #include "UsagePage.h"
 #include "ChoicePage.h"
 #include "PatchPage.h"
+#include <fstream>
+
 
 #include "RegistryUtils.h"
 #include "DropBox.h"
@@ -80,11 +82,27 @@ public:
         BUTTON_WIDTH = W / 4;
         BUTTON_HEIGHT = H / 16;
 
-        SLOWDOWN = 30;
         BASELINE = 3;
         TOTAL_DAYS = 14;
-        OFFER = 8;
+        
         COMPLETION_CODE = "F3185EE0";
+
+        // read file
+        std::string slowdownstr;
+        std::ifstream slowdown_infile("scfg.txt");
+        std::getline(slowdown_infile, slowdownstr);
+        SLOWDOWN = std::stoi(slowdownstr);
+        qDebug() << "---";
+        qDebug() << SLOWDOWN;
+        qDebug() << "---";
+
+        std::string offerstr;
+        std::ifstream offer_infile("ocfg.txt");
+        std::getline(offer_infile, offerstr);
+        OFFER = std::stod(offerstr);
+        qDebug() << "---";
+        qDebug() << OFFER;
+        qDebug() << "---";
 
         UPLOAD_WEBPAGE = "www.cs.columbia.edu/~hastings/mturk/" + QString::number(SLOWDOWN) + "/upload.html";
 #ifdef QT_DEBUG

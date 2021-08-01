@@ -1,7 +1,6 @@
 #include "ChoicePage.h"
 #include "Globals.h"
-
-
+#include <QDebug>
 
 
 QRadioButton* ImproveChoicePage::perf_btn;
@@ -129,7 +128,9 @@ QRadioButton* MoreDaysPage::choiceB;
 
 
 MoreDaysPage::MoreDaysPage(QWidget* parent) {
-	label->setText("If given the option, would you choose to keep your computer slow for additional days in exchange for $" + QString(OFFER) + " per day?");
+	qDebug() << "******OFFER: ";
+	qDebug() << QString::number(OFFER);
+	label->setText("If given the option, would you choose to keep your computer slow for additional days in exchange for $" + QString::number(OFFER) + " per day?");
 	choiceA->setText("Yes");
 	choiceB->setText("No");
 }

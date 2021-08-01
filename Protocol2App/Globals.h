@@ -22,7 +22,7 @@ inline int BUTTON_HEIGHT = H / 16;
 inline int SLOWDOWN;
 inline int BASELINE;
 inline QString COMPLETION_CODE;
-inline int OFFER;
+inline double OFFER;
 inline int TOTAL_DAYS;
 inline int WAIT_PERIOD;
 inline QString UPLOAD_WEBPAGE;
