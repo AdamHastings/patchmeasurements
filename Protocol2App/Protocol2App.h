@@ -73,6 +73,7 @@ private:
     void showMoreDays();
     void showUploadFail();
     void showPreUpload();
+    void showFailNext();
 
     void closeEvent(QCloseEvent* event);
     void resetProgram();

@@ -285,7 +285,10 @@ void Protocol2App::tryFinalUploadNext() {
     QString date = timestamp.split(QRegExp("\\s+"), QString::SkipEmptyParts)[0];
     QString filename = date + "-" + snapshot_reason + ".txt";
     static int retries = 0;
-    const int ATTEMPTS = 3;
+    int ATTEMPTS = 3;
+#ifdef QT_DEBUG
+    ATTEMPTS = 1;
+#endif
 
     if (DropBox::uploadSuccessful(uni, filename)) {
         showNoMore();
@@ -308,6 +311,13 @@ void Protocol2App::showUploadFail() {
 }
 
 void Protocol2App::showNoMore() {
+    // remove previously created file
+    string USERPROFILE = getenv("USERPROFILE");
+    string filename = USERPROFILE + "\\OneDrive\\Desktop\\results.txt";
+    remove(filename.c_str());
+    filename = USERPROFILE + "\\Desktop\\results.txt";
+    remove(filename.c_str());
+
     ui.nomore->resetPage(days, acceptances, uni);
     enableExitButton();
     ui.stackedWidget->setCurrentWidget(ui.nomore);
@@ -496,6 +506,6 @@ Protocol2App::Protocol2App(QWidget* parent)
     RegistryUtils::setRegKey("UNI", "akh2167");
     Protocol2App::setUNI("akh2167");
 
-    connect(ui.start->consent_btn, &QPushButton::clicked, this, &Protocol2App::showCheat);
+    connect(ui.start->consent_btn, &QPushButton::clicked, this, &Protocol2App::showUsage);
 #endif
 }

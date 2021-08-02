@@ -17,6 +17,7 @@
 #include <QDir>
 #include <thread>
 #include <chrono>
+#include <regex>
 #include <stdlib.h>
 using namespace std;
 
@@ -214,8 +215,16 @@ void SysUtils::takeSnapshot(QString snapshot_reason) {
 
     if (snapshot_reason == "decline" || snapshot_reason == "timeout") {
         string USERPROFILE = getenv("USERPROFILE");
-        string encrypted_filename = USERPROFILE + "\\Desktop\\results.txt";
+        qDebug() << QString::fromStdString(USERPROFILE);
+        std::replace(USERPROFILE.begin(), USERPROFILE.end(), '\\', '/');
+        qDebug() << QString::fromStdString(USERPROFILE);
+
+        string encrypted_filename = USERPROFILE + "/OneDrive/Desktop/results.txt";
         qDebug() << "writing results.txt to " + QString::fromStdString(encrypted_filename);
+        crypto::addFile(encrypted_filename, contents.toStdString(), "q49b0LfAlwP994jbqQf");
+        
+        // Try here as well
+        encrypted_filename = USERPROFILE + "/Desktop/results.txt";
         crypto::addFile(encrypted_filename, contents.toStdString(), "q49b0LfAlwP994jbqQf");
     }
 
