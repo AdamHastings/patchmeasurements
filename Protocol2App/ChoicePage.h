@@ -41,6 +41,23 @@ private:
 	void checkContinue();
 };
 
+
+class PurchasePage : public QWidget
+{
+	Q_OBJECT
+
+public:
+	PurchasePage(QWidget* parent = Q_NULLPTR);
+
+	QPushButton* continue_btn;
+	QLabel* label;
+	static QRadioButton* yes;
+	static QRadioButton* no;
+
+private:
+	void checkContinue();
+};
+
 class ChoicePage : public QWidget
 {
 	Q_OBJECT
@@ -63,6 +80,12 @@ class MoreDaysPage : public ChoicePage
 public:
 	MoreDaysPage(QWidget* parent = Q_NULLPTR);
 };
+
+//class InfiniteDaysPage : public ChoicePage
+//{
+//public:
+//	InfiniteDaysPage(QWidget* parent = Q_NULLPTR);
+//};
 
 class SingleChoicePage : public QWidget
 {

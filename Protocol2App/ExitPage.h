@@ -8,6 +8,12 @@
 #include "SysUtils.h"
 #include <QPushButton>
 
+//QString base64_encode(QString string) {
+//	QByteArray ba;
+//	ba.append(string);
+//	return ba.toBase64();
+//}
+
 class ExitPage : public QWidget
 {
 	Q_OBJECT
@@ -43,11 +49,14 @@ public:
 
 	void resetPage(int days, QString uni) {
 		QString lastchr = uni[uni.length() - 1];
-		QString cc = COMPLETION_CODE + lastchr;
+		//QString cc = COMPLETION_CODE + lastchr;
+		QByteArray ba;
+		ba.append(uni);
+		QString cc = ba.toBase64();
 
 		QString labeltext;
 		if (days == TOTAL_DAYS) {
-			labeltext = "Your computer has been slowed down. You may now redeem your baseline compensation of " + QString::number(BASELINE) + " by entering the completion code " + cc + " into Mechanical Turk. Additional earnings will later be paid via bonus payments in Mechanical Turk.\n\n";
+			labeltext = "Your computer has been slowed down. You may now redeem your baseline compensation of " + QString::number(BASELINE) + " by entering the completion code \n\n" + cc + "\n\n into Mechanical Turk. Additional earnings will later be paid via bonus payments in Mechanical Turk.\n\n";
 		}
 		else {
 			labeltext = "Your computer will remain slowed down for another 24 hours. ";
@@ -69,7 +78,11 @@ public:
 
 	void resetPage(int days, int acceptances, QString uni) {
 		QString lastchr = uni[uni.length() - 1];
-		QString cc = COMPLETION_CODE + lastchr;
+		//QString cc = COMPLETION_CODE + lastchr;
+		QByteArray ba;
+		ba.append(uni);
+		QString cc = ba.toBase64();
+
 		QString text;
 		if (days == TOTAL_DAYS) {
 			text = "Thank you for your participation! You have earned a baseline participation compensation of $" + QString::number(BASELINE) + " but will not earn any additional compensation. You may redeem this compensation via the following Mechanical Turk Completion Code:\n\n" + cc + "\n\nYou may now exit this window. Afterwards, please delete this program from your computer by running the \"uninstall\" program.";
@@ -175,7 +188,11 @@ public:
 
 	void resetPage(QString uni) {
 		QString lastchr = uni[uni.length() - 1];
-		QString cc = COMPLETION_CODE + lastchr;
+		//QString cc = COMPLETION_CODE + lastchr;
+		QByteArray ba;
+		ba.append(uni);
+		QString cc = ba.toBase64();
+		
 		label->setText("We are sorry, but we were either unable to correctly change your computer's speed or unable to upload your results. We will award you the baseline compensation for your participation thus far, but unfortunately your computer is not compatible with running the rest of the experiment. Any temporary changes made to your computer have been undone.\n\nTo reedem the baseline compensation, please enter the following completion code into the HIT on Mechanical Turk:\n\n" + cc);
 	}
 };

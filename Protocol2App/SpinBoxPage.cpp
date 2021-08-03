@@ -1,4 +1,4 @@
-#include "HoursPage.h"
+#include "SpinBoxPage.h"
 #include "Globals.h"
 
 
@@ -32,4 +32,32 @@ HoursPage::HoursPage(QWidget* parent)
 
 HoursPage::~HoursPage()
 {
+}
+
+QSpinBox* DaysPage::spin;
+
+void DaysPage::enableContinue() {
+	continue_btn->setEnabled(true);
+}
+
+DaysPage::DaysPage(QWidget* parent)
+	: QWidget(parent)
+{
+
+	label = new QLabel(this);
+	label->setText("How many days a week do you typically spend on this computer?");
+	label->setAlignment(Qt::AlignCenter);
+	label->setGeometry(M, M, LINEWIDTH, M);
+
+	spin = new QSpinBox(this);
+	spin->setMinimum(0);
+	spin->setMaximum(7);
+	spin->setGeometry(W / 2 - M, M * 5, 2 * M, M);
+
+	continue_btn = new QPushButton(this);
+	continue_btn->setText("Continue");
+	continue_btn->setEnabled(false);
+	continue_btn->setGeometry(W / 2 - BUTTON_WIDTH / 2, M * 8, BUTTON_WIDTH, BUTTON_HEIGHT);
+
+	connect(this->spin, &QSpinBox::textChanged, this, &DaysPage::enableContinue);
 }

@@ -40,3 +40,28 @@ private:
 	void checkIfContinue();
 	void handleOther();
 };
+
+
+class SellingPointsPage : public QWidget
+{
+	Q_OBJECT
+
+public:
+	SellingPointsPage(QWidget* parent = Q_NULLPTR);
+
+	static QCheckBox* performance;
+	static QCheckBox* looks;
+	static QCheckBox* price;
+	static QCheckBox* security;
+	static QCheckBox* os;
+	static QCheckBox* apps;
+	static QCheckBox* other;
+	static QLineEdit* input;
+
+	QPushButton* continue_btn;
+
+private:
+	QLabel* label;
+	void checkIfContinue();
+	void handleOther();
+};

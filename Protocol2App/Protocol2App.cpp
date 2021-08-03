@@ -168,6 +168,7 @@ void Protocol2App::showGoodbye() {
     ui.stackedWidget->setCurrentWidget(ui.goodbye);
 }
 
+
 void Protocol2App::tryUpload() {
     ui.wait->continue_btn->setEnabled(false);
     ui.stackedWidget->setCurrentWidget(ui.wait);
@@ -185,7 +186,7 @@ void Protocol2App::tryUploadNext() {
     QString timestamp = SysUtils::getTimestamp();
     QString date = timestamp.split(QRegExp("\\s+"), QString::SkipEmptyParts)[0];
     QString filename = date + "-" + snapshot_reason + ".txt";
-    
+
     ui.wait->continue_btn->setEnabled(false);
     if (days == TOTAL_DAYS) {
         if (num_tries >= MAX_TRIES) {
@@ -208,7 +209,7 @@ void Protocol2App::tryUploadNext() {
             return;
         }
     }
-    if (DropBox::uploadSuccessful(uni, filename)) { 
+    if (DropBox::uploadSuccessful(uni, filename)) {
         // the upload worked // proceed with app
         ui.onemore->resetPage(days, uni);
         enableExitButton();
@@ -269,7 +270,7 @@ void Protocol2App::tryFinalUpload() {
     }
 
 #ifdef QT_DEBUG
-    snapshot_reason = "timeout";
+    snapshot_reason = "decline";
     qDebug() << "snapshot reason: " << snapshot_reason;
 #endif
 
@@ -340,7 +341,7 @@ void Protocol2App::showCheat() {
 void Protocol2App::showSurveyNext() {
     if (days == TOTAL_DAYS) {
         // This is the first time
-        showImprove();
+        showPurchase();
     }
     else {
         showCheat();
@@ -349,6 +350,10 @@ void Protocol2App::showSurveyNext() {
 
 void Protocol2App::showHours() {
     ui.stackedWidget->setCurrentWidget(ui.hours);
+}
+
+void Protocol2App::showDays() {
+    ui.stackedWidget->setCurrentWidget(ui.days);
 }
 
 void Protocol2App::showImprove() {
@@ -365,6 +370,23 @@ void Protocol2App::showMoreDays() {
 
 void Protocol2App::showUsage() {
     ui.stackedWidget->setCurrentWidget(ui.usage);
+}
+
+void Protocol2App::showPurchase() {
+    ui.stackedWidget->setCurrentWidget(ui.purchase);
+}
+
+void Protocol2App::showSellpoints() {
+    ui.stackedWidget->setCurrentWidget(ui.selling);
+}
+
+void Protocol2App::showPurchaseNext() {
+    if (ui.purchase->yes->isChecked()) {
+        showSellpoints();
+    }
+    else {
+        showImprove();
+    }
 }
 
 void Protocol2App::showTimeoutSplash() {
@@ -482,14 +504,17 @@ Protocol2App::Protocol2App(QWidget* parent)
     connect(ui.mod->continue_btn, &QPushButton::clicked, this, &Protocol2App::showModNext);
     connect(ui.primary->continue_btn, &QPushButton::clicked, this, &Protocol2App::showPrimaryNext);
     connect(ui.internet->continue_btn, &QPushButton::clicked, this, &Protocol2App::showInternetNext);
-    connect(ui.form->continue_btn, &QPushButton::clicked, this, &Protocol2App::showHours);
+    connect(ui.form->continue_btn, &QPushButton::clicked, this, &Protocol2App::showDays);
+    connect(ui.days->continue_btn, &QPushButton::clicked, this, &Protocol2App::showHours);
     connect(ui.hours->continue_btn, &QPushButton::clicked, this, &Protocol2App::showHoursNext);
     connect(ui.hmonitor->continue_btn, &QPushButton::clicked, this, &Protocol2App::showHMonitorNext);
     connect(ui.hmin->continue_btn, &QPushButton::clicked, this, &Protocol2App::showHMinNext);
     connect(ui.wta->continue_btn, &QPushButton::clicked, this, &Protocol2App::WTAnext);
     connect(ui.survey->continue_btn, &QPushButton::clicked, this, &Protocol2App::showSurveyNext);
     connect(ui.cheat->continue_btn, &QPushButton::clicked, this, &Protocol2App::showMoreDays);
-    connect(ui.more->continue_btn, &QPushButton::clicked, this, &Protocol2App::showImprove);
+    connect(ui.more->continue_btn, &QPushButton::clicked, this, &Protocol2App::showPurchase);
+    connect(ui.purchase->continue_btn, &QPushButton::clicked, this, &Protocol2App::showPurchaseNext);
+    connect(ui.selling->continue_btn, &QPushButton::clicked, this, &Protocol2App::showImprove);
     connect(ui.improve->continue_btn, &QPushButton::clicked, this, &Protocol2App::showDecrease);
     connect(ui.decrease->continue_btn, &QPushButton::clicked, this, &Protocol2App::showUsage);
     connect(ui.usage->continue_btn, &QPushButton::clicked, this, &Protocol2App::showPreUpload);
@@ -503,9 +528,9 @@ Protocol2App::Protocol2App(QWidget* parent)
 
 #ifdef QT_DEBUG
 
-    RegistryUtils::setRegKey("UNI", "akh2167");
-    Protocol2App::setUNI("akh2167");
+    //RegistryUtils::setRegKey("UNI", "akh2167");
+    Protocol2App::setUNI("akh216777777777777776");
 
-    connect(ui.start->consent_btn, &QPushButton::clicked, this, &Protocol2App::showUsage);
+    //connect(ui.start->consent_btn, &QPushButton::clicked, this, &Protocol2App::showNoMore);
 #endif
 }

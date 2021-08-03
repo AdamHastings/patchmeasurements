@@ -111,7 +111,7 @@
     <ClCompile Include="DropBox.cpp" />
     <ClCompile Include="ExitPage.cpp" />
     <ClCompile Include="FormPage.cpp" />
-    <ClCompile Include="HoursPage.cpp" />
+    <ClCompile Include="SpinBoxPage.cpp" />
     <ClCompile Include="PatchPage.cpp" />
     <ClCompile Include="PowerMgmt.cpp" />
     <ClCompile Include="RegistryUtils.cpp" />
@@ -152,7 +152,7 @@
     <ClInclude Include="DropBox.h" />
     <ClInclude Include="Globals.h" />
     <QtMoc Include="PatchPage.h" />
-    <QtMoc Include="HoursPage.h" />
+    <QtMoc Include="SpinBoxPage.h" />
     <ClInclude Include="PowerMgmt.h" />
     <ClInclude Include="RegistryUtils.h" />
     <QtMoc Include="RegistryEditPage.h" />

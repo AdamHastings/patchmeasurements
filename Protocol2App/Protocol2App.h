@@ -57,6 +57,7 @@ private:
     void showCheat();
     void showUsage();
     void showHours();
+    void showDays();
     void showNoMore();
     void showSurveyNext();
     void showImprove();
@@ -74,6 +75,9 @@ private:
     void showUploadFail();
     void showPreUpload();
     void showFailNext();
+    void showPurchase();
+    void showPurchaseNext();
+    void showSellpoints();
 
     void closeEvent(QCloseEvent* event);
     void resetProgram();

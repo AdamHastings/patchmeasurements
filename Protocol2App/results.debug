@@ -1,0 +1,196 @@
+action,bad_freqs
+timestamp,08-03-2021 08-59-10
+days_remaining,7
+uni,akh2167
+wta_offer,4.5
+slowdown,20
+acceptances,1
+earnings,4.5
+freq,1585.85
+hours,50
+days,5
+WindowsBuildLabEx,18362.1.amd64fre.19h1_release.190318-1202
+WindowsCurrentVersion,6.3
+WindowsEditionId,Core
+WindowsInstallationType,Client
+WindowsInstallDateFromRegistry,8/26/2020 8:33:23 PM
+WindowsProductId,00325-80000-00000-AAOEM
+WindowsProductName,Windows 10 Home
+WindowsRegisteredOrganization,
+WindowsRegisteredOwner,
+WindowsSystemRoot,C:\WINDOWS
+WindowsVersion,1909
+BiosCharacteristics,{7; 9; 11; 12...}
+BiosBIOSVersion,{DELL   - 1072009; 1.4.0; American Megatrends - 5000B}
+BiosBuildNumber,
+BiosCaption,1.4.0
+BiosCodeSet,
+BiosCurrentLanguage,en|US|iso8859-1
+BiosDescription,1.4.0
+BiosEmbeddedControllerMajorVersion,255
+BiosEmbeddedControllerMinorVersion,255
+BiosFirmwareType,Uefi
+BiosIdentificationCode,
+BiosInstallableLanguages,2
+BiosInstallDate,
+BiosLanguageEdition,
+BiosListOfLanguages,{en|US|iso8859-1; }
+BiosManufacturer,Dell Inc.
+BiosName,1.4.0
+BiosOtherTargetOS,
+BiosPrimaryBIOS,True
+BiosReleaseDate,5/24/2018 8:00:00 PM
+BiosSeralNumber,9G5PJR2
+BiosSMBIOSBIOSVersion,1.4.0
+BiosSMBIOSMajorVersion,3
+BiosSMBIOSMinorVersion,0
+BiosSMBIOSPresent,True
+BiosSoftwareElementState,Running
+BiosStatus,OK
+BiosSystemBiosMajorVersion,1
+BiosSystemBiosMinorVersion,4
+BiosTargetOperatingSystem,0
+BiosVersion,DELL   - 1072009
+CsAdminPasswordStatus,Unknown
+CsAutomaticManagedPagefile,True
+CsAutomaticResetBootOption,True
+CsAutomaticResetCapability,True
+CsBootOptionOnLimit,
+CsBootOptionOnWatchDog,
+CsBootROMSupported,True
+CsBootStatus,{0; 0; 0; 0...}
+CsBootupState,Normal boot
+CsCaption,D9G5PJR2
+CsChassisBootupState,Safe
+CsChassisSKUNumber,Notebook
+CsCurrentTimeZone,-240
+CsDaylightInEffect,True
+CsDescription,AT/AT COMPATIBLE
+CsDNSHostName,D9G5PJR2
+CsDomain,WORKGROUP
+CsDomainRole,StandaloneWorkstation
+CsEnableDaylightSavingsTime,True
+CsFrontPanelResetStatus,Unknown
+CsHypervisorPresent,False
+CsInfraredSupported,False
+CsInitialLoadInfo,
+CsInstallDate,
+CsKeyboardPasswordStatus,Unknown
+CsLastLoadInfo,
+CsManufacturer,Dell Inc.
+CsModel,XPS 13 9370
+CsName,D9G5PJR2
+CsNetworkAdapters,{Wi-Fi 2; Bluetooth Network Connection 3; Local Area Connection; Local Area Connection 2...}
+CsNetworkServerModeEnabled,True
+CsNumberOfLogicalProcessors,8
+CsNumberOfProcessors,1
+CsProcessors,{Intel(R) Core(TM) i7-8550U CPU @ 1.80GHz}
+CsOEMStringArray,{Dell System; 1[07E6]; 3[1.0]; 12[www.dell.com]...}
+CsPartOfDomain,False
+CsPauseAfterReset,-1
+CsPCSystemType,Mobile
+CsPCSystemTypeEx,Mobile
+CsPowerManagementCapabilities,
+CsPowerManagementSupported,
+CsPowerOnPasswordStatus,Unknown
+CsPowerState,Unknown
+CsPowerSupplyState,Safe
+CsPrimaryOwnerContact,
+CsPrimaryOwnerName,
+CsResetCapability,Other
+CsResetCount,-1
+CsResetLimit,-1
+CsRoles,{LM_Workstation; LM_Server; NT}
+CsStatus,OK
+CsSupportContactDescription,
+CsSystemFamily,XPS
+CsSystemSKUNumber,07E6
+CsSystemType,x64-based PC
+CsThermalState,Safe
+CsTotalPhysicalMemory,16978501632
+CsPhyicallyInstalledMemory,16777216
+CsUserName,D9G5PJR2\Administrator
+CsWakeUpType,PowerSwitch
+CsWorkgroup,WORKGROUP
+OsName,Microsoft Windows 10 Home
+OsType,WINNT
+OsOperatingSystemSKU,WindowsHome
+OsVersion,10.0.18363
+OsCSDVersion,
+OsBuildNumber,18363
+OsHotFixes,{KB4601556; KB4517245; KB4535680; KB4559309...}
+OsBootDevice,\Device\HarddiskVolume1
+OsSystemDevice,\Device\HarddiskVolume3
+OsSystemDirectory,C:\WINDOWS\system32
+OsSystemDrive,C:
+OsWindowsDirectory,C:\WINDOWS
+OsCountryCode,1
+OsCurrentTimeZone,-240
+OsLocaleID,0409
+OsLocale,en-US
+OsLocalDateTime,8/3/2021 8:59:10 AM
+OsLastBootUpTime,7/30/2021 6:02:24 PM
+OsUptime,3.14:56:46.0705893
+OsBuildType,Multiprocessor Free
+OsCodeSet,1252
+OsDataExecutionPreventionAvailable,True
+OsDataExecutionPrevention32BitApplications,True
+OsDataExecutionPreventionDrivers,True
+OsDataExecutionPreventionSupportPolicy,OptIn
+OsDebug,False
+OsDistributed,False
+OsEncryptionLevel,256
+OsForegroundApplicationBoost,Maximum
+OsTotalVisibleMemorySize,16580568
+OsFreePhysicalMemory,5740880
+OsTotalVirtualMemorySize,22211412
+OsFreeVirtualMemory,3182992
+OsInUseVirtualMemory,19028420
+OsTotalSwapSpaceSize,
+OsSizeStoredInPagingFiles,5630844
+OsFreeSpaceInPagingFiles,5105776
+OsPagingFiles,{C:\pagefile.sys}
+OsHardwareAbstractionLayer,10.0.18362.1411
+OsInstallDate,8/26/2020 4:33:23 PM
+OsManufacturer,Microsoft Corporation
+OsMaxNumberOfProcesses,4294967295
+OsMaxProcessMemorySize,137438953344
+OsMuiLanguages,{en-US}
+OsNumberOfLicensedUsers,0
+OsNumberOfProcesses,338
+OsNumberOfUsers,2
+OsOrganization,
+OsArchitecture,64-bit
+OsLanguage,en-US
+OsProductSuites,{TerminalServicesSingleSession; HomeEdition}
+OsOtherTypeDescription,
+OsPAEEnabled,
+OsPortableOperatingSystem,False
+OsPrimary,True
+OsProductType,WorkStation
+OsRegisteredUser,
+OsSerialNumber,00325-80000-00000-AAOEM
+OsServicePackMajorVersion,0
+OsServicePackMinorVersion,0
+OsStatus,OK
+OsSuites,{TerminalServices; TerminalServicesSingleSession; HomeEdition}
+OsServerLevel,
+KeyboardLayout,en-US
+TimeZone,(UTC-05:00) Eastern Time (US & Canada)
+LogonServer,\\D9G5PJR2
+PowerPlatformRole,Mobile
+HyperVisorPresent,False
+HyperVRequirementDataExecutionPreventionAvailable,True
+HyperVRequirementSecondLevelAddressTranslation,True
+HyperVRequirementVirtualizationFirmwareEnabled,True
+HyperVRequirementVMMonitorModeExtensions,True
+DeviceGuardSmartStatus,Off
+DeviceGuardRequiredSecurityProperties,
+DeviceGuardAvailableSecurityProperties,
+DeviceGuardSecurityServicesConfigured,
+DeviceGuardSecurityServicesRunning,
+DeviceGuardCodeIntegrityPolicyEnforcementStatus,
+DeviceGuardUserModeCodeIntegrityPolicyEnforcementStatus,
+
+
+

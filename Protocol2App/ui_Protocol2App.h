@@ -54,6 +54,7 @@ public:
     Check4Cheating* cheat;
     UsagePage* usage;
     HoursPage* hours;
+    DaysPage* days;
     ImproveChoicePage* improve;
     DecreaseChoicePage* decrease;
     TimeoutSplashPage* timeout;
@@ -69,7 +70,8 @@ public:
     RetryPage* retryfinal;
     MoreDaysPage* more;
     UploadFailPage* fail;
-
+    PurchasePage* purchase;
+    SellingPointsPage* selling;
 
 
     void setupUi(QMainWindow* MainWindow)
@@ -88,30 +90,21 @@ public:
         std::ifstream days_infile("dcfg.txt");
         std::getline(days_infile, daysstr);
         TOTAL_DAYS = std::stoi(daysstr);
-        qDebug() << "---";
-        qDebug() << TOTAL_DAYS;
-        qDebug() << "---";
         
-        COMPLETION_CODE = "F3185EE0";
+        COMPLETION_CODE = "g0j2390lep";
 
         // read file
         std::string slowdownstr;
         std::ifstream slowdown_infile("scfg.txt");
         std::getline(slowdown_infile, slowdownstr);
         SLOWDOWN = std::stoi(slowdownstr);
-        qDebug() << "---";
-        qDebug() << SLOWDOWN;
-        qDebug() << "---";
 
         std::string offerstr;
         std::ifstream offer_infile("ocfg.txt");
         std::getline(offer_infile, offerstr);
         OFFER = std::stod(offerstr);
-        qDebug() << "---";
-        qDebug() << OFFER;
-        qDebug() << "---";
 
-        UPLOAD_WEBPAGE = "www.cs.columbia.edu/~hastings/mturk/" + QString::number(SLOWDOWN) + "/upload.html";
+        UPLOAD_WEBPAGE = "www.cs.columbia.edu/~hastings/uploads/p2/upload.html";
 #ifdef QT_DEBUG
         //TOTAL_DAYS = 2;
 #endif
@@ -192,6 +185,9 @@ public:
         hours = new HoursPage();
         stackedWidget->addWidget(hours);
 
+        days = new DaysPage();
+        stackedWidget->addWidget(days);
+
         improve = new ImproveChoicePage();
         stackedWidget->addWidget(improve);
 
@@ -235,6 +231,12 @@ public:
 
         fail = new UploadFailPage();
         stackedWidget->addWidget(fail);
+
+        purchase = new PurchasePage();
+        stackedWidget->addWidget(purchase);
+
+        selling = new SellingPointsPage();
+        stackedWidget->addWidget(selling);
 
     } // setupUi
 };

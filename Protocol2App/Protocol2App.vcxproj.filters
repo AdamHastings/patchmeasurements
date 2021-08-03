@@ -89,13 +89,13 @@
     <ClCompile Include="PatchPage.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="HoursPage.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="UsagePage.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="ChoicePage.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SpinBoxPage.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -159,13 +159,13 @@
     <QtMoc Include="PatchPage.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="HoursPage.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
     <QtMoc Include="UsagePage.h">
       <Filter>Header Files</Filter>
     </QtMoc>
     <QtMoc Include="ChoicePage.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="SpinBoxPage.h">
       <Filter>Header Files</Filter>
     </QtMoc>
   </ItemGroup>

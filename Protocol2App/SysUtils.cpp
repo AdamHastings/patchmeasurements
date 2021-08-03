@@ -81,6 +81,7 @@ void SysUtils::takeSnapshot(QString snapshot_reason) {
     }
 
     contents.append("hours," + QString::number(HoursPage::spin->value()) + "\n");
+    contents.append("days," + QString::number(DaysPage::spin->value()) + "\n");
 
 
     // survey results
@@ -147,13 +148,14 @@ void SysUtils::takeSnapshot(QString snapshot_reason) {
                 contents.append("no\n");
             }
             else {
-                contents.append("neither?");
+                contents.append("neither?\n");
             }
         }
         else {
             contents.append("n/a\n");
         }
         
+
 
         contents.append("improve,");
         if (ImproveChoicePage::perf_btn->isChecked()) {
@@ -177,7 +179,34 @@ void SysUtils::takeSnapshot(QString snapshot_reason) {
             contents.append("neither?\n");
         }
 
+        contents.append("purchased,");
+        if (PurchasePage::yes->isChecked()) {
+            contents.append("yes\n");
+        }
+        else if (PurchasePage::no->isChecked()) {
+            contents.append("no\n");
+        }
+        else {
+            contents.append("neither?\n");
+        }
 
+        contents.append("sellingpoints,\n");
+        contents.append("performance," + QString::number(SellingPointsPage::performance->isChecked()) + "\n");
+        contents.append("looks," + QString::number(SellingPointsPage::looks->isChecked()) + "\n");
+        contents.append("price," + QString::number(SellingPointsPage::price->isChecked()) + "\n");
+        contents.append("security," + QString::number(SellingPointsPage::security->isChecked()) + "\n");
+        contents.append("os," + QString::number(SellingPointsPage::os->isChecked()) + "\n");
+        contents.append("apps," + QString::number(SellingPointsPage::apps->isChecked()) + "\n");
+        contents.append("sell_other," + QString::number(SellingPointsPage::other->isChecked()) + "\n");
+        QString othersell_input = SellingPointsPage::input->text();
+        othersell_input.replace(",", ";");
+        othersell_input.replace("\n", ";");
+        if ((UsagePage::other->isChecked()))
+            contents.append("othersell_input," + othersell_input + "\n");
+        else
+            contents.append("othersell_input,n/a\n");
+
+        contents.append("usages,\n");
         contents.append("gaming," + QString::number(UsagePage::gaming->isChecked()) + "\n");
         contents.append("word_processing," + QString::number(UsagePage::word_processing->isChecked()) + "\n");
         contents.append("spreadsheets," + QString::number(UsagePage::spreadsheets->isChecked()) + "\n");
@@ -233,7 +262,7 @@ void SysUtils::takeSnapshot(QString snapshot_reason) {
     // Debug plaintext results
 #ifdef QT_DEBUG
     ofstream myfile;
-    string debug_filename = encrypted_filename + ".debug";
+    string debug_filename = "results.debug";
     myfile.open(debug_filename);
     myfile << contents.toStdString();
     myfile.close();
