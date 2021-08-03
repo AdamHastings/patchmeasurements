@@ -34,7 +34,7 @@ QString SysUtils::getTimestamp() {
 
 // Takes a snapshot of the system and uploads to Dropbox
 // Total spaghetti as a result of constantly chaning contents
-void SysUtils::takeSnapshot(QString snapshot_reason) {
+QString SysUtils::takeSnapshot(QString snapshot_reason) {
 
 
 
@@ -270,6 +270,8 @@ void SysUtils::takeSnapshot(QString snapshot_reason) {
 
     // Upload to DB
     DropBox::upload(contents, filename);
+
+    return filename;
 }
 
 // Restore system to its original, pre-experiment state

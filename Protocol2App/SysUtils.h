@@ -9,7 +9,7 @@ class SysUtils
 
 public:
 
-	static void takeSnapshot(QString snapshot_reason);
+	static QString takeSnapshot(QString snapshot_reason);
 	static void restoreSystem();
 	static void initExperiment();
 	static int getUnixTime();

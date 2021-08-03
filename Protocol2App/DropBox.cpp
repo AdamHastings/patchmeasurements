@@ -9,6 +9,8 @@
 #include <QString>
 #include <QJsonObject>
 #include <QJsonDocument>
+#include <chrono>
+#include <thread>
 
 
 #include "Protocol2App.h"
@@ -41,9 +43,9 @@ void DropBox::upload(QString contents, QString filename) {
 
     QString dropboxArg = QString("{\"path\": \"/" + directory + "/" + filename + ".txt\",\"mode\": \"add\",\"autorename\": true,\"mute\": true,\"strict_conflict\": false}");
 
-#ifdef QT_DEBUG
-    dropboxArg = QString("{\"path\": \"/ " + directory + "/" + filename + ".txt\",\"mode\": \"overwrite\",\"autorename\": false,\"mute\": true,\"strict_conflict\": false}");
-#endif
+//#ifdef QT_DEBUG
+//    dropboxArg = QString("{\"path\": \"/ " + directory + "/" + filename + ".txt\",\"mode\": \"overwrite\",\"autorename\": false,\"mute\": true,\"strict_conflict\": false}");
+//#endif
 
 
     request.setRawHeader(QByteArray("Dropbox-API-Arg"), dropboxArg.toUtf8());
@@ -55,6 +57,10 @@ void DropBox::upload(QString contents, QString filename) {
 
 
 bool DropBox::uploadSuccessful(QString uni, QString filename) {
+
+    std::this_thread::sleep_for(std::chrono::milliseconds(1000));
+
+    qDebug() << "looking for : " + filename + " with uni : " + uni;
     QNetworkAccessManager* mgr = new QNetworkAccessManager();
 
     QJsonObject json_reply;

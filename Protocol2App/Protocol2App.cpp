@@ -170,44 +170,55 @@ void Protocol2App::showGoodbye() {
 
 
 void Protocol2App::tryUpload() {
-    ui.wait->continue_btn->setEnabled(false);
+    ui.wait->continue_btn->setEnabled(true);
     ui.stackedWidget->setCurrentWidget(ui.wait);
     //ui.tryupload->fillFirstHalf();
-    SysUtils::takeSnapshot(snapshot_reason);
-    //ui.tryupload->fillSecondHalf();
-    ui.wait->continue_btn->setEnabled(true);
+    
 }
 
 void Protocol2App::tryUploadNext() {
     static int num_tries;
     int MAX_TRIES = 3;
 
+
     // check if upload exists
-    QString timestamp = SysUtils::getTimestamp();
-    QString date = timestamp.split(QRegExp("\\s+"), QString::SkipEmptyParts)[0];
-    QString filename = date + "-" + snapshot_reason + ".txt";
+    //QString timestamp = SysUtils::getTimestamp();
+    //QString date = timestamp.split(QRegExp("\\s+"), QString::SkipEmptyParts)[0];
+    //QString filename = date + "-" + snapshot_reason + ".txt";
+    //ui.wait->continue_btn->setEnabled(false);
+    QString filename = SysUtils::takeSnapshot(snapshot_reason);
+    filename += ".txt";
+//#ifdef QT_DEBUG
+//    num_tries = 3;
+//#endif
 
     ui.wait->continue_btn->setEnabled(false);
     if (days == TOTAL_DAYS) {
         if (num_tries >= MAX_TRIES) {
             // It just doesn't work. There's no precedent of it working, either
+            qDebug() << "num tries exceeded";
             SysUtils::takeSnapshot("num_tries_exceeded");
             SysUtils::restoreSystem();
+            ui.noteligible->resetPage(uni);
             enableExitButton();
             ui.stackedWidget->setCurrentWidget(ui.noteligible);
             return;
         }
         // check that freqs are acceptable
-        else if (accept_freq > (start_freq * 0.8)
+#ifndef QT_DEBUG
+        else if (accept_freq > (start_freq * 0.8) // TODO CHECK THIS!!
             || accept_freq == 0
             || start_freq == 0
             ) {
+            qDebug() << "bad freqs";
             SysUtils::takeSnapshot("bad_freqs");
             SysUtils::restoreSystem();
+            ui.noteligible->resetPage(uni);
             enableExitButton();
             ui.stackedWidget->setCurrentWidget(ui.noteligible);
             return;
         }
+#endif
     }
     if (DropBox::uploadSuccessful(uni, filename)) {
         // the upload worked // proceed with app
@@ -529,8 +540,8 @@ Protocol2App::Protocol2App(QWidget* parent)
 #ifdef QT_DEBUG
 
     //RegistryUtils::setRegKey("UNI", "akh2167");
-    Protocol2App::setUNI("akh216777777777777776");
+    //Protocol2App::setUNI("akh216777777777777776");
 
-    //connect(ui.start->consent_btn, &QPushButton::clicked, this, &Protocol2App::showNoMore);
+    //connect(ui.start->consent_btn, &QPushButton::clicked, this, &Protocol2App::showWTA);
 #endif
 }
