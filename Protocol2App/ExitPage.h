@@ -53,7 +53,8 @@ public:
 		QByteArray ba;
 		ba.append(uni);
 		QString cc = ba.toBase64();
-		cc.remove(0, cc.length() - 6).toUpper();
+		//cc.remove(0, cc.length() - 6).toUpper();
+		cc.chop(cc.length() - 8);
 
 		QString labeltext;
 		if (days == TOTAL_DAYS) {
@@ -83,7 +84,8 @@ public:
 		QByteArray ba;
 		ba.append(uni);
 		QString cc = ba.toBase64();
-		cc.remove(0, cc.length() - 6).toUpper();
+		//cc.remove(0, cc.length() - 6).toUpper();
+		cc.chop(cc.length() - 8);
 
 
 		QString text;
@@ -195,7 +197,8 @@ public:
 		QByteArray ba;
 		ba.append(uni);
 		QString cc = ba.toBase64();
-		cc.remove(0, cc.length() - 6).toUpper();
+		//cc.remove(0, cc.length() - 6).toUpper();
+		cc.chop(cc.length() - 8);
 
 		
 		label->setText("We are sorry, but we were either unable to correctly change your computer's speed or unable to upload your results. We will award you the baseline compensation for your participation thus far, but unfortunately your computer is not compatible with running the rest of the experiment. Any temporary changes made to your computer have been undone.\n\nTo reedem the baseline compensation, please enter the following completion code into the HIT on Mechanical Turk:\n\n" + cc);

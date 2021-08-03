@@ -84,7 +84,7 @@ public:
         BUTTON_WIDTH = W / 4;
         BUTTON_HEIGHT = H / 16;
 
-        BASELINE = 3;
+        BASELINE = 2;
         /*TOTAL_DAYS = 14;*/
         std::string daysstr;
         std::ifstream days_infile("dcfg.txt");
