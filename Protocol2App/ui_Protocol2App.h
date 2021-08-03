@@ -16,7 +16,7 @@
 #include "RegistryEditPage.h"
 #include "SurveyPage.h"
 #include "Check4Cheating.h"
-#include "HoursPage.h"
+#include "SpinBoxPage.h"
 #include "UsagePage.h"
 #include "ChoicePage.h"
 #include "PatchPage.h"
@@ -83,7 +83,14 @@ public:
         BUTTON_HEIGHT = H / 16;
 
         BASELINE = 3;
-        TOTAL_DAYS = 14;
+        /*TOTAL_DAYS = 14;*/
+        std::string daysstr;
+        std::ifstream days_infile("dcfg.txt");
+        std::getline(days_infile, daysstr);
+        TOTAL_DAYS = std::stoi(daysstr);
+        qDebug() << "---";
+        qDebug() << TOTAL_DAYS;
+        qDebug() << "---";
         
         COMPLETION_CODE = "F3185EE0";
 
