@@ -58,7 +58,7 @@ public:
 
 		QString labeltext;
 		if (days == TOTAL_DAYS) {
-			labeltext = "Your computer has been slowed down. You may now redeem your baseline compensation of " + QString::number(BASELINE) + " by entering the completion code \n\n" + cc + "\n\n into Mechanical Turk. Additional earnings will later be paid via bonus payments in Mechanical Turk.\n\n";
+			labeltext = "Your computer has been slowed down. You may now redeem your baseline compensation of $" + QString::number(BASELINE) + " by submitting the following completion for the HIT:\n\n" + cc + "\n\nAdditional earnings will later be paid via bonus payments in Mechanical Turk.\n\n";
 		}
 		else {
 			labeltext = "Your computer will remain slowed down for another 24 hours. ";

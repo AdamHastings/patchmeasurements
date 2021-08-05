@@ -109,7 +109,11 @@ public:
         //TOTAL_DAYS = 2;
 #endif
 
-        WAIT_PERIOD = 60 * 60 * 24; // one day, in seconds
+        std::string timesleepstr;
+        std::ifstream sleep_infile("tcfg.txt");
+        std::getline(sleep_infile, timesleepstr);
+        WAIT_PERIOD = std::stoi(timesleepstr);
+        // WAIT_PERIOD = 86400; // one day, in seconds
         // WAIT_PERIOD = 60 * 60; // One hour
         // WAIT_PERIOD = 1 * 60; // 1 Minute
         // WAIT_PERIOD = 5; // 5 seconds

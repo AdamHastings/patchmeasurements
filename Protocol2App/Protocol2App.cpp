@@ -206,7 +206,7 @@ void Protocol2App::tryUploadNext() {
         }
         // check that freqs are acceptable
 #ifndef QT_DEBUG
-        else if (accept_freq > (start_freq * 0.8) // TODO CHECK THIS!!
+        else if (accept_freq > (start_freq * (100.0 - double(SLOWDOWN))/100.0 * 1.03) // 3% for some tolerance
             || accept_freq == 0
             || start_freq == 0
             ) {
