@@ -9,7 +9,8 @@ void uninstall() {
     std::string AppName = "HastingsExperiment";
     std::cout << "\nUninstalling program...\n";
     //std::filesystem::copy(AppName, "c:/Program Files/" + AppName, std::filesystem::copy_options::recursive);
-    std::filesystem::remove_all("c:/Program Files/" + AppName);
+    std::filesystem::remove_all("C:/Program Files/HastingsExperiment");
+
 
     std::cout << "\n\nDone!\n\n";
 }
