@@ -49,6 +49,16 @@ public:
 	}
 };
 
+class QualifiedPage : public SingleChoicePage
+{
+	Q_OBJECT
+
+public:
+	QualifiedPage(QWidget* parent = Q_NULLPTR) : SingleChoicePage(parent) {
+		label->setText("Congratulations! Your device is compatible with this program and you are qualified for further participation. We will now ask you to complete some tasks. We will pay you a $5 bonus for completing the tasks in addition to the $0.20 earned for qualifying.");
+	}
+};
+
 class FinalPage : public SingleChoicePage
 {
 	Q_OBJECT

@@ -129,16 +129,16 @@ void MainWindow::pickThrottledTask() {
 }
 
 void MainWindow::showNotEligible() {
-    enableExitButton();
     PowerMgmt::restoreDefaults();
-    ui.noteligible->updateText();
+    ui.noteligible->updateText(QString::fromStdString(ui.form->uni_str));
     QString results = "worker-id," + QString::fromStdString(ui.form->uni_str) + "\n";
     results += "eligible?,no\n";
     results += "SLOWDOWN," + QString::number(SLOWDOWN) + "\n";
+    results += "CsEnabled_default," + QString::number(REBOOT_AT_END) + "\n";
     results += "task1_freq," + QString::number(task1Freq) + "\n";
     results += "check_freq," + QString::number(checkFreq) + "\n";
     DropBox::upload(results, ui.form->uni_str);
-
+    enableExitButton();
     ui.stackedWidget->setCurrentWidget(ui.noteligible);
 }
 
@@ -155,7 +155,7 @@ void MainWindow::showPatch0() {
     PowerMgmt::getCurrentClockFreqStart(proc);
     PowerMgmt::getCurrentCPUUtilizationStart(cpuproc);
     PowerMgmt::getCurrentRAMUtilizationStart(ramproc);
-    ui.patch0->label->setText("We will now make some modifications to your computer. These modifications are only temporary and will end once this experiment concludes.");
+    ui.patch0->label->setText("We will now try to make some modifications to your computer to see if your device is compatible. These modifications are only temporary and will end once this experiment concludes.");
     ui.patch0->fill1();
     
     preTasksFreq = PowerMgmt::getCurrentClockFreqRead(proc);
@@ -211,7 +211,7 @@ void MainWindow::showPatch0() {
 
 void MainWindow::patch0Next() {
     if (eligible) {
-        showTask1();
+        ui.stackedWidget->setCurrentWidget(ui.qual);
     }
     else {
         showNotEligible();
@@ -539,6 +539,7 @@ MainWindow::MainWindow(QWidget *parent)
 
     //connect(ui.patch0->continue_btn, &QPushButton::clicked, this, &MainWindow::showTask1);
     connect(ui.patch0->continue_btn, &QPushButton::clicked, this, &MainWindow::patch0Next);
+    connect(ui.qual->continue_btn, &QPushButton::clicked, this, &MainWindow::showTask1);
     connect(ui.task1->continue_btn, &QPushButton::clicked, this, &MainWindow::showPatch1);
     connect(ui.patch1->continue_btn, &QPushButton::clicked, this, &MainWindow::showTask2);
     connect(ui.task2->continue_btn, &QPushButton::clicked, this, &MainWindow::showPatch2);

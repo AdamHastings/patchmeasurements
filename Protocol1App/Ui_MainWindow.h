@@ -66,6 +66,7 @@ public:
     RetryUploadPage* retry;
     AttentionCheckPage* attention;
     PriorParticipationPage* prior;
+    QualifiedPage* qual;
 
     void setupGlobals() {
         rec = QApplication::desktop()->screenGeometry();
@@ -223,6 +224,9 @@ public:
 
         prior = new PriorParticipationPage();
         stackedWidget->addWidget(prior);
+
+        qual = new QualifiedPage();
+        stackedWidget->addWidget(qual);
 
     } // setupUi
 };
