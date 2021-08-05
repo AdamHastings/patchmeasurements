@@ -1,12 +1,28 @@
-#include <windows.h>
 #include <string>
 #include <stdio.h>
 #include <tchar.h>
+#include <windows.h>
+#include <iostream>
+#include <filesystem>
+
 
 
 #pragma warning(disable : 4996) //_CRT_SECURE_NO_WARNINGS
 
-int main() {
+
+
+int WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, char*, int nShowCmd) {
+
+    std::filesystem::current_path("C:/Program Files/HastingsExperiment"); //setting path
+
+
+    /*std::wstring cmd_line = L".\Experiment.exe";
+    std::wstring open = L"open";
+    std::cout << ShellExecute(NULL, open.c_str(), cmd_line.c_str(), NULL, NULL, SW_SHOW);*/
+
+
+    std::string cmd_line = "Experiment.exe";
+
     // additional information
     STARTUPINFO si;
     PROCESS_INFORMATION pi;
@@ -16,7 +32,6 @@ int main() {
     si.cb = sizeof(si);
     ZeroMemory(&pi, sizeof(pi));
 
-    std::string cmd_line = "C:\\Program Files\\HastingsExperiment\\Experiment.exe";
 
     TCHAR tszCmdLine[1024] = { 0 };
     mbstowcs(tszCmdLine, cmd_line.c_str(), 1024);
@@ -25,7 +40,7 @@ int main() {
     //LPCWSTR commandline = "C:\Program Files\My Company\doit.exe";
 
 
-    // start the program up
+    //// start the program up
     CreateProcess(NULL, // the path
         tszCmdLine,     // Command line
         NULL,           // Process handle not inheritable
@@ -37,6 +52,10 @@ int main() {
         &si,            // Pointer to STARTUPINFO structure
         &pi             // Pointer to PROCESS_INFORMATION structure (removed extra parentheses)
     );
+
+    // Wait until child process exits.
+   //  WaitForSingleObject(pi.hProcess, INFINITE);
+
     // Close process and thread handles. 
     CloseHandle(pi.hProcess);
     CloseHandle(pi.hThread);
