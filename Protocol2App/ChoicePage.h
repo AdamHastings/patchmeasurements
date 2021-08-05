@@ -77,6 +77,8 @@ protected:
 
 class MoreDaysPage : public ChoicePage
 {
+	Q_OBJECT
+
 public:
 	MoreDaysPage(QWidget* parent = Q_NULLPTR);
 };

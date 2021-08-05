@@ -1,25 +1,25 @@
 action,decline
-timestamp,08-03-2021 09-39-50
-days_remaining,0
-uni,akh2167
+timestamp,08-05-2021 02-17-08
+days_remaining,7
+uni,
 wta_offer,4.5
 slowdown,20
-acceptances,4
-earnings,18
-freq,1586.12
-hours,50
-days,6
+acceptances,0
+earnings,0
+freq,3782.86
+hours,0
+days,0
 not_enough_money,0
 mistrust,0
 other_users,0
-malfunction,0
+malfunction,n/a
 other,0
-cheated,
-extend,n/a
+cheated,n/a
+extend,yes
 improve,security
-decrease,performance
+decrease,security
 purchased,yes
-sellingpoints,
+sellingpoints:,
 performance,0
 looks,0
 price,0
@@ -27,8 +27,8 @@ security,0
 os,0
 apps,0
 sell_other,1
-othersell_input,n/a
-usages,
+othersell_input,test otherselll;;;.....;;/.;/.;\n\n\n
+usages:,
 gaming,0
 word_processing,0
 spreadsheets,0
@@ -36,7 +36,7 @@ programming,0
 streaming,0
 video_editing,0
 animation,0
-design_tools,1
+design_tools,0
 web_searches,0
 email,0
 e_reading,0
@@ -45,8 +45,8 @@ video_calls,0
 crypto_mining,0
 photo_storage,0
 shopping,0
-other,0
-other_input,n/a
+other,1
+other_input,
 WindowsBuildLabEx,18362.1.amd64fre.19h1_release.190318-1202
 WindowsCurrentVersion,6.3
 WindowsEditionId,Core
@@ -166,9 +166,9 @@ OsCountryCode,1
 OsCurrentTimeZone,-240
 OsLocaleID,0409
 OsLocale,en-US
-OsLocalDateTime,8/3/2021 9:39:51 AM
-OsLastBootUpTime,7/30/2021 6:02:24 PM
-OsUptime,3.15:37:26.6315359
+OsLocalDateTime,8/5/2021 2:17:08 AM
+OsLastBootUpTime,8/4/2021 11:47:48 PM
+OsUptime,02:29:20.4864386
 OsBuildType,Multiprocessor Free
 OsCodeSet,1252
 OsDataExecutionPreventionAvailable,True
@@ -180,13 +180,13 @@ OsDistributed,False
 OsEncryptionLevel,256
 OsForegroundApplicationBoost,Maximum
 OsTotalVisibleMemorySize,16580568
-OsFreePhysicalMemory,5051232
-OsTotalVirtualMemorySize,22211412
-OsFreeVirtualMemory,2817208
-OsInUseVirtualMemory,19394204
+OsFreePhysicalMemory,7126948
+OsTotalVirtualMemorySize,19070936
+OsFreeVirtualMemory,6885732
+OsInUseVirtualMemory,12185204
 OsTotalSwapSpaceSize,
-OsSizeStoredInPagingFiles,5630844
-OsFreeSpaceInPagingFiles,5080640
+OsSizeStoredInPagingFiles,2490368
+OsFreeSpaceInPagingFiles,2465840
 OsPagingFiles,{C:\pagefile.sys}
 OsHardwareAbstractionLayer,10.0.18362.1411
 OsInstallDate,8/26/2020 4:33:23 PM
@@ -195,7 +195,7 @@ OsMaxNumberOfProcesses,4294967295
 OsMaxProcessMemorySize,137438953344
 OsMuiLanguages,{en-US}
 OsNumberOfLicensedUsers,0
-OsNumberOfProcesses,343
+OsNumberOfProcesses,284
 OsNumberOfUsers,2
 OsOrganization,
 OsArchitecture,64-bit

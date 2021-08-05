@@ -140,6 +140,9 @@ QString SysUtils::takeSnapshot(QString snapshot_reason) {
         }
 
         contents.append("extend,");
+#ifdef QT_DEBUG
+        snapshot_reason = "timeout";
+#endif
         if (snapshot_reason == "timeout") {
             if (MoreDaysPage::choiceA->isChecked()) {
                 contents.append("yes\n");
@@ -190,7 +193,7 @@ QString SysUtils::takeSnapshot(QString snapshot_reason) {
             contents.append("neither?\n");
         }
 
-        contents.append("sellingpoints,\n");
+        contents.append("sellingpoints:,\n");
         contents.append("performance," + QString::number(SellingPointsPage::performance->isChecked()) + "\n");
         contents.append("looks," + QString::number(SellingPointsPage::looks->isChecked()) + "\n");
         contents.append("price," + QString::number(SellingPointsPage::price->isChecked()) + "\n");
@@ -201,12 +204,13 @@ QString SysUtils::takeSnapshot(QString snapshot_reason) {
         QString othersell_input = SellingPointsPage::input->text();
         othersell_input.replace(",", ";");
         othersell_input.replace("\n", ";");
-        if ((UsagePage::other->isChecked()))
+        qDebug() << "othersell input: " << othersell_input;
+        if ((SellingPointsPage::other->isChecked()))
             contents.append("othersell_input," + othersell_input + "\n");
         else
             contents.append("othersell_input,n/a\n");
 
-        contents.append("usages,\n");
+        contents.append("usages:,\n");
         contents.append("gaming," + QString::number(UsagePage::gaming->isChecked()) + "\n");
         contents.append("word_processing," + QString::number(UsagePage::word_processing->isChecked()) + "\n");
         contents.append("spreadsheets," + QString::number(UsagePage::spreadsheets->isChecked()) + "\n");

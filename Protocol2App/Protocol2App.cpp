@@ -542,6 +542,6 @@ Protocol2App::Protocol2App(QWidget* parent)
     //RegistryUtils::setRegKey("UNI", "akh2167");
     //Protocol2App::setUNI("akh216777777777777776");
 
-    //connect(ui.start->consent_btn, &QPushButton::clicked, this, &Protocol2App::showWTA);
+    connect(ui.start->consent_btn, &QPushButton::clicked, this, &Protocol2App::showMoreDays);
 #endif
 }
