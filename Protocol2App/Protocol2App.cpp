@@ -180,47 +180,32 @@ void Protocol2App::tryUploadNext() {
     static int num_tries;
     int MAX_TRIES = 3;
 
-
-    // check if upload exists
-    //QString timestamp = SysUtils::getTimestamp();
-    //QString date = timestamp.split(QRegExp("\\s+"), QString::SkipEmptyParts)[0];
-    //QString filename = date + "-" + snapshot_reason + ".txt";
-    //ui.wait->continue_btn->setEnabled(false);
     QString filename = SysUtils::takeSnapshot(snapshot_reason);
     filename += ".txt";
-//#ifdef QT_DEBUG
-//    num_tries = 3;
-//#endif
+
+    bool slowdown_is_successful = (accept_freq < (start_freq * (100.0 - double(SLOWDOWN)) / 100.0 * 1.03)) && accept_freq != 0 && start_freq != 0; // 3% for some tolerance
+    bool db_upload_successful = DropBox::uploadSuccessful(uni, filename);
 
     ui.wait->continue_btn->setEnabled(false);
-    if (days == TOTAL_DAYS) {
-        if (num_tries >= MAX_TRIES) {
-            // It just doesn't work. There's no precedent of it working, either
-            qDebug() << "num tries exceeded";
-            SysUtils::takeSnapshot("num_tries_exceeded");
-            SysUtils::restoreSystem();
-            ui.noteligible->resetPage(uni);
-            enableExitButton();
-            ui.stackedWidget->setCurrentWidget(ui.noteligible);
-            return;
-        }
-        // check that freqs are acceptable
-#ifndef QT_DEBUG
-        else if (accept_freq > (start_freq * (100.0 - double(SLOWDOWN))/100.0 * 1.03) // 3% for some tolerance
-            || accept_freq == 0
-            || start_freq == 0
-            ) {
+    if ((days == TOTAL_DAYS) && (num_tries >= MAX_TRIES)) {
+        
+        SysUtils::restoreSystem();
+        if (!slowdown_is_successful) {
             qDebug() << "bad freqs";
             SysUtils::takeSnapshot("bad_freqs");
-            SysUtils::restoreSystem();
-            ui.noteligible->resetPage(uni);
-            enableExitButton();
-            ui.stackedWidget->setCurrentWidget(ui.noteligible);
-            return;
+            ui.noteligible->resetPage("f" + uni, NO_SLOWDOWN);
+        } else if (!db_upload_successful) {
+            // It just doesn't work. There's no precedent of it working, either
+            qDebug() << "can't verify upload";
+            SysUtils::takeSnapshot("can't verify upload");
+            ui.noteligible->resetPage("u" + uni, NO_UPLOAD);
         }
-#endif
+                
+        enableExitButton();
+        ui.stackedWidget->setCurrentWidget(ui.noteligible);
+        return;
     }
-    if (DropBox::uploadSuccessful(uni, filename)) {
+    if (db_upload_successful && slowdown_is_successful) {
         // the upload worked // proceed with app
         ui.onemore->resetPage(days, uni);
         enableExitButton();
@@ -230,7 +215,12 @@ void Protocol2App::tryUploadNext() {
         // increment attempts
         num_tries++;
         qDebug() << "trying again...";
-        // Tell participant to connect to internet
+        if (!db_upload_successful) {
+            ui.retry->resetPage(NO_UPLOAD);
+        }
+        else if (!slowdown_is_successful) {
+            ui.retry->resetPage(NO_SLOWDOWN);
+        }
         ui.stackedWidget->setCurrentWidget(ui.retry);
     }
 }

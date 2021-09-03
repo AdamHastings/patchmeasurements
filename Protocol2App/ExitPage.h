@@ -8,11 +8,10 @@
 #include "SysUtils.h"
 #include <QPushButton>
 
-//QString base64_encode(QString string) {
-//	QByteArray ba;
-//	ba.append(string);
-//	return ba.toBase64();
-//}
+typedef enum retry_reason_t {
+	NO_UPLOAD,
+	NO_SLOWDOWN
+};
 
 class ExitPage : public QWidget
 {
@@ -175,11 +174,21 @@ public:
 	QPushButton* continue_btn;
 
 	RetryPage(QWidget* parent = Q_NULLPTR) : ExitPage(parent) {
-		label->setText("The results failed to send correctly. This is likely because you are not connected to the internet. Please make sure you are connected to the internet and click the button below to try again.");
-
 		continue_btn = new QPushButton(this);
 		continue_btn->setGeometry(QRect(W / 2 - BUTTON_WIDTH / 2, M * 8, BUTTON_WIDTH, BUTTON_HEIGHT));
 		continue_btn->setText("Retry");
+	}
+
+	void resetPage(retry_reason_t reason) {
+		if (reason == NO_UPLOAD) {
+			label->setText("The results failed to send correctly. This is likely because you are not connected to the internet. Please make sure you are connected to the internet and click the button below to try again.");
+		}
+		else if (reason == NO_SLOWDOWN) {
+			label->setText("We had trouble slowing down your computer. Click the button below to try again.");
+		}
+		else {
+			label->setText("This program ran into an unspecified problem. Please click the button below to try again.");
+		}
 	}
 };
 
@@ -191,17 +200,25 @@ public:
 	CompNotEligiblePage(QWidget* parent = Q_NULLPTR) : ExitPage(parent) {
 	}
 
-	void resetPage(QString uni) {
+	void resetPage(QString uni, retry_reason_t reason) {
 		QString lastchr = uni[uni.length() - 1];
 		//QString cc = COMPLETION_CODE + lastchr;
 		QByteArray ba;
-		ba.append("-" + uni);
+		ba.append(uni);
 		QString cc = ba.toBase64();
 		//cc.remove(0, cc.length() - 6).toUpper();
 		cc.chop(cc.length() - 8);
 
+		if (reason == NO_UPLOAD) {
+			label->setText("We are sorry, but we were unable to upload your results. We will award you the baseline compensation for your participation thus far, but unfortunately your computer is not compatible with running the rest of the experiment. Any temporary changes made to your computer have been undone.\n\nTo reedem the baseline compensation, please enter the following completion code into the HIT on Mechanical Turk:\n\n" + cc);
+		}
+		else if (reason == NO_SLOWDOWN) {
+			label->setText("We are sorry, but we were unable to change your computer's speed. We will award you the baseline compensation for your participation thus far, but unfortunately your computer is not compatible with running the rest of the experiment. Any temporary changes made to your computer have been undone.\n\nTo reedem the baseline compensation, please enter the following completion code into the HIT on Mechanical Turk:\n\n" + cc);
+		}
+		else {
+			label->setText("We are sorry, but your computer is incompatible with this experiment. We will award you the baseline compensation for your participation thus far, but unfortunately your computer is not compatible with running the rest of the experiment. Any temporary changes made to your computer have been undone.\n\nTo reedem the baseline compensation, please enter the following completion code into the HIT on Mechanical Turk:\n\n" + cc);
+		}
 		
-		label->setText("We are sorry, but we were either unable to correctly change your computer's speed or unable to upload your results. We will award you the baseline compensation for your participation thus far, but unfortunately your computer is not compatible with running the rest of the experiment. Any temporary changes made to your computer have been undone.\n\nTo reedem the baseline compensation, please enter the following completion code into the HIT on Mechanical Turk:\n\n" + cc);
 	}
 };
 
