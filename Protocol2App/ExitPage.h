@@ -51,7 +51,7 @@ public:
 		QString lastchr = uni[uni.length() - 1];
 		//QString cc = COMPLETION_CODE + lastchr;
 		QByteArray ba;
-		ba.append(uni);
+		ba.append("o" + uni);
 		QString cc = ba.toBase64();
 		//cc.remove(0, cc.length() - 6).toUpper();
 		cc.chop(cc.length() - 8);
@@ -82,7 +82,7 @@ public:
 		QString lastchr = uni[uni.length() - 1];
 		//QString cc = COMPLETION_CODE + lastchr;
 		QByteArray ba;
-		ba.append(uni);
+		ba.append("n" + uni);
 		QString cc = ba.toBase64();
 		//cc.remove(0, cc.length() - 6).toUpper();
 		cc.chop(cc.length() - 8);
@@ -195,7 +195,7 @@ public:
 		QString lastchr = uni[uni.length() - 1];
 		//QString cc = COMPLETION_CODE + lastchr;
 		QByteArray ba;
-		ba.append(uni);
+		ba.append("-" + uni);
 		QString cc = ba.toBase64();
 		//cc.remove(0, cc.length() - 6).toUpper();
 		cc.chop(cc.length() - 8);
