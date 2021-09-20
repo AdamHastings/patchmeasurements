@@ -206,7 +206,7 @@ void Protocol2App::tryUploadNext() {
         ui.stackedWidget->setCurrentWidget(ui.noteligible);
         return;
     }
-    if (db_upload_successful && slowdown_is_successful) {
+    if (db_upload_successful && (slowdown_is_successful || (days != TOTAL_DAYS))) {
         // the upload worked // proceed with app
         ui.onemore->resetPage(days, uni);
         enableExitButton();
