@@ -243,19 +243,15 @@ public:
 	}
 };
 
-class TestEligibilityPage : public ExitPage
-{
-	Q_OBJECT
-
-public:
-	QPushButton* continue_btn;
-
-	TestEligibilityPage(QWidget* parent = Q_NULLPTR) : ExitPage(parent) {
-		label->setText("Press wait while we determine if your device is eligible to participate in this study. This may take up to a minute.");
-
-		continue_btn = new QPushButton(this);
-		continue_btn->setGeometry(QRect(W / 2 - BUTTON_WIDTH / 2, M * 8, BUTTON_WIDTH, BUTTON_HEIGHT));
-		continue_btn->setText("Continue");
-		continue_btn->setEnabled(false);
-	}
-};
+//class TestEligibilityPage : public ExitPage
+//{
+//	Q_OBJECT
+//
+//public:
+//	QPushButton* continue_btn;
+//
+//	TestEligibilityPage(QWidget* parent = Q_NULLPTR) : ExitPage(parent) {
+//		label->setText("Press wait while we determine if your device is eligible to participate in this study. This may take up to a minute.");
+//
+//	}
+//};

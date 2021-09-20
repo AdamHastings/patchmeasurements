@@ -55,13 +55,13 @@ void Protocol2App::showStartNext() {
         //disableExitButton();
         //ui.stackedWidget->setCurrentWidget(ui.form);
         //ui.stackedWidget->setCurrentWidget(ui.primary);
+        //ui.stackedWidget->setCurrentWidget(ui.test);
         testEligibility();
     }
     
 }
 
 void Protocol2App::testEligibility() {
-    ui.stackedWidget->setCurrentWidget(ui.test);
     
     // see if getsysteminfo returns a non-null results
     QProcess proc, proc2;

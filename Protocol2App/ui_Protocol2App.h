@@ -72,7 +72,7 @@ public:
     UploadFailPage* fail;
     PurchasePage* purchase;
     SellingPointsPage* selling;
-    TestEligibilityPage* test;
+    //TestEligibilityPage* test;
     
 
 
@@ -244,8 +244,8 @@ public:
         selling = new SellingPointsPage();
         stackedWidget->addWidget(selling);
 
-        test = new TestEligibilityPage();
-        stackedWidget->addWidget(test);
+        //test = new TestEligibilityPage();
+        //stackedWidget->addWidget(test);
 
     } // setupUi
 };
