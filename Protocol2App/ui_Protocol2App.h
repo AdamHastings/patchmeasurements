@@ -72,6 +72,8 @@ public:
     UploadFailPage* fail;
     PurchasePage* purchase;
     SellingPointsPage* selling;
+    TestEligibilityPage* test;
+    
 
 
     void setupUi(QMainWindow* MainWindow)
@@ -241,6 +243,9 @@ public:
 
         selling = new SellingPointsPage();
         stackedWidget->addWidget(selling);
+
+        test = new TestEligibilityPage();
+        stackedWidget->addWidget(test);
 
     } // setupUi
 };

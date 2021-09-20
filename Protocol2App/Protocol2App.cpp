@@ -54,10 +54,31 @@ void Protocol2App::showStartNext() {
         //getDefaultPowercfg();
         //disableExitButton();
         //ui.stackedWidget->setCurrentWidget(ui.form);
-        ui.stackedWidget->setCurrentWidget(ui.primary);
-
+        //ui.stackedWidget->setCurrentWidget(ui.primary);
+        testEligibility();
     }
     
+}
+
+void Protocol2App::testEligibility() {
+    ui.stackedWidget->setCurrentWidget(ui.test);
+    
+    // see if getsysteminfo returns a non-null results
+    QProcess proc, proc2;
+    PowerMgmt::getCurrentClockFreqStart(proc);
+    double freq = PowerMgmt::getCurrentClockFreqRead(proc);
+    PowerMgmt::getSystemConfigStart(proc2);
+    QString sysinfo = PowerMgmt::getSystemConfigRead(proc2);
+
+
+    // see if frequency is not zero
+    // if both these conditions are met
+    if (freq != 0 && sysinfo.length() > 5) {
+        ui.stackedWidget->setCurrentWidget(ui.primary);
+    } else {
+        ui.noteligible->resetPage("incompatible", INCOMPATIBLE);
+        ui.stackedWidget->setCurrentWidget(ui.noteligible);
+    }
 }
 
 void Protocol2App::showModNext() {

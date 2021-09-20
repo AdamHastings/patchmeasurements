@@ -78,6 +78,7 @@ private:
     void showPurchase();
     void showPurchaseNext();
     void showSellpoints();
+    void testEligibility();
 
     void closeEvent(QCloseEvent* event);
     void resetProgram();
