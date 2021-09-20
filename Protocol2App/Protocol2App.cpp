@@ -190,15 +190,16 @@ void Protocol2App::tryUploadNext() {
     if ((days == TOTAL_DAYS) && (num_tries >= MAX_TRIES)) {
         
         SysUtils::restoreSystem();
-        if (!slowdown_is_successful) {
-            qDebug() << "bad freqs";
-            SysUtils::takeSnapshot("bad_freqs");
-            ui.noteligible->resetPage("f" + uni, NO_SLOWDOWN);
-        } else if (!db_upload_successful) {
+        
+        if (!db_upload_successful) {
             // It just doesn't work. There's no precedent of it working, either
             qDebug() << "can't verify upload";
             SysUtils::takeSnapshot("can't verify upload");
             ui.noteligible->resetPage("u" + uni, NO_UPLOAD);
+        } else if (!slowdown_is_successful) {
+            qDebug() << "bad freqs";
+            SysUtils::takeSnapshot("bad_freqs");
+            ui.noteligible->resetPage("f" + uni, NO_SLOWDOWN);
         }
                 
         enableExitButton();
