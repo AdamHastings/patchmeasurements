@@ -319,6 +319,7 @@ void Protocol2App::tryFinalUploadNext() {
     }
     else {
         retries++;
+        ui.retryfinal->resetPage(NO_UPLOAD);
         if (retries < ATTEMPTS)
             showFinalRetry();
         else
