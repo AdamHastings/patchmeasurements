@@ -7,6 +7,8 @@
 #include "typedefs.h"
 #include "aes.h"
 #include "sha256.h"
+#include <QString>
+
 using namespace std;
 
 class crypto
@@ -17,6 +19,8 @@ public:
 	static string getHMAC(string content, vector<BYTE> key);
 	static bool checkIntegrity();
 	static void DecryptFile(string filename, string password);
+
+	static QString encodeWorkerID(QString WorkerID);
 
 	static vector<BYTE> generateKey(string password);
 	static vector<BYTE> generateKey2(string password);

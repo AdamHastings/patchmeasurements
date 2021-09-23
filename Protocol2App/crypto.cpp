@@ -147,6 +147,14 @@ string crypto::getHMAC(string contents, vector<BYTE> key) {
     return retbuf;
 }
 
+QString crypto::encodeWorkerID(QString WorkerID) {
+    vector<BYTE> enc_key = generateKey("q49b0LfAlwP994jbqQf");
+
+    auto [encrypted_contents, iv_str, num_blocks] = EncryptFile(WorkerID.toStdString(), enc_key);
+    return QString::fromStdString(encrypted_contents);
+
+}
+
 void crypto::addFile(string filename, string content, string password) {
     vector<BYTE> enc_key = generateKey(password);
     vector<BYTE> mac_key = generateKey2(password);
