@@ -205,22 +205,28 @@ public:
 		QString lastchr = uni[uni.length() - 1];
 		//QString cc = COMPLETION_CODE + lastchr;
 		QByteArray ba;
-		ba.append(uni);
-		QString cc = ba.toBase64();
-		//cc.remove(0, cc.length() - 6).toUpper();
-		cc.chop(cc.length() - 8);
+		
 
 		if (reason == NO_UPLOAD) {
-			label->setText("We are sorry, but we were unable to upload your results. We will award you the baseline compensation for your participation thus far, but unfortunately your computer is not compatible with running the rest of the experiment. Any temporary changes made to your computer have been undone.\n\nTo reedem the baseline compensation, please enter the following completion code into the HIT on Mechanical Turk:\n\n" + cc + "\n\nAfterwards, please delete this program from your computer by running the \"uninstall\" program.");
+			//ba.append("u" + uni);
+			//QString cc = ba.toBase64();
+			//cc.chop(cc.length() - 8);
+			label->setText("We are sorry, but we were unable to upload your results. Unfortunately your computer is not compatible with running the rest of the experiment. Any temporary changes made to your computer have been undone. Please delete this program from your computer by running the \"uninstall\" program.");
 		}
 		else if (reason == NO_SLOWDOWN) {
+			ba.append("f" + uni);
+			QString cc = ba.toBase64();
+			cc.chop(cc.length() - 8);
 			label->setText("We are sorry, but we were unable to change your computer's speed. We will award you the baseline compensation for your participation thus far, but unfortunately your computer is not compatible with running the rest of the experiment. Any temporary changes made to your computer have been undone.\n\nTo reedem the baseline compensation, please enter the following completion code into the HIT on Mechanical Turk:\n\n" + cc + "\n\nAfterwards, please delete this program from your computer by running the \"uninstall\" program.");
 		}
 		else if (reason == INCOMPATIBLE) {
 			label->setText("We are sorry, but your computer is incompatible with this experiment, and cannot participate in this study. No changes to your device have been made. This may be because you are not running this program in Windows 10 on a desktop or laptop device, or because you are running this program in a virtual machine. Please delete this program from your computer by running the \"uninstall\" program.");
 		}
 		else {
-			label->setText("We are sorry, but your computer is incompatible with this experiment. We will award you the baseline compensation for your participation thus far, but unfortunately your computer is not compatible with running the rest of the experiment. Any temporary changes made to your computer have been undone.\n\nTo reedem the baseline compensation, please enter the following completion code into the HIT on Mechanical Turk:\n\n" + cc + "\n\nAfterwards, please delete this program from your computer by running the \"uninstall\" program.");
+			ba.append("?" + uni);
+			QString cc = ba.toBase64();
+			cc.chop(cc.length() - 8);
+			label->setText("We are sorry, but your computer is incompatible with this experiment. Unfortunately your computer is not compatible with running the rest of the experiment. Any temporary changes made to your computer have been undone. Please delete this program from your computer by running the \"uninstall\" program.");
 		}
 		
 	}

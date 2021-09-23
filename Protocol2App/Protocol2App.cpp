@@ -216,11 +216,11 @@ void Protocol2App::tryUploadNext() {
             // It just doesn't work. There's no precedent of it working, either
             qDebug() << "can't verify upload";
             SysUtils::takeSnapshot("can't verify upload");
-            ui.noteligible->resetPage("u" + uni, NO_UPLOAD);
+            ui.noteligible->resetPage(uni, NO_UPLOAD);
         } else if (!slowdown_is_successful) {
             qDebug() << "bad freqs";
             SysUtils::takeSnapshot("bad_freqs");
-            ui.noteligible->resetPage("f" + uni, NO_SLOWDOWN);
+            ui.noteligible->resetPage(uni, NO_SLOWDOWN);
         }
                 
         enableExitButton();
