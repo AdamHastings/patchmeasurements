@@ -208,7 +208,7 @@ void Protocol2App::tryUploadNext() {
     bool db_upload_successful = DropBox::uploadSuccessful(uni, filename);
 
     ui.wait->continue_btn->setEnabled(false);
-    if ((days == TOTAL_DAYS) && (num_tries >= MAX_TRIES)) {
+    if ((days == TOTAL_DAYS) && (num_tries >= (MAX_TRIES - 1))) {
         
         SysUtils::restoreSystem();
         
