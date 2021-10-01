@@ -111,4 +111,6 @@ class UploadFailPage : public SingleChoicePage
 {
 public:
 	UploadFailPage(QWidget* parent = Q_NULLPTR);
+
+	void resetPage(QString id);
 };

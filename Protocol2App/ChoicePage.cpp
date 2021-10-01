@@ -178,6 +178,10 @@ UploadFailPage::UploadFailPage(QWidget* parent) {
 	choice->setText("I have successfully uploaded the file \"results.txt\" to the above website");
 }
 
+void UploadFailPage::resetPage(QString id) {
+	label->setText("We had trouble uploading your results. We will need you to upload your survey results. To manually send the results, look for a file called \"" + id + "\" on your Desktop. Then upload this file to\n" + UPLOAD_WEBPAGE + " before continuing. We apologize for the inconvenience.");
+}
+
 
 void PurchasePage::checkContinue() {
 	if (yes->isChecked() || no->isChecked()) {

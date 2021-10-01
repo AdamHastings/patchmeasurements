@@ -332,6 +332,7 @@ void Protocol2App::showFinalRetry() {
 }
 
 void Protocol2App::showUploadFail() {
+    ui.fail->resetPage(uni);
     ui.stackedWidget->setCurrentWidget(ui.fail);
 }
 
