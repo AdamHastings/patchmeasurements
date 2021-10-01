@@ -339,9 +339,9 @@ void Protocol2App::showUploadFail() {
 void Protocol2App::showNoMore() {
     // remove previously created file
     string USERPROFILE = getenv("USERPROFILE");
-    string filename = USERPROFILE + "\\OneDrive\\Desktop\\results.txt";
+    string filename = USERPROFILE + "\\OneDrive\\Desktop\\" + uni.toStdString() + ".txt";
     remove(filename.c_str());
-    filename = USERPROFILE + "\\Desktop\\results.txt";
+    filename = USERPROFILE + "\\Desktop\\" + uni.toStdString() + ".txt";
     remove(filename.c_str());
 
     ui.nomore->resetPage(days, acceptances, uni);

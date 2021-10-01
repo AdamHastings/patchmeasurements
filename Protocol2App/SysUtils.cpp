@@ -252,12 +252,12 @@ QString SysUtils::takeSnapshot(QString snapshot_reason) {
         std::replace(USERPROFILE.begin(), USERPROFILE.end(), '\\', '/');
         qDebug() << QString::fromStdString(USERPROFILE);
 
-        string encrypted_filename = USERPROFILE + "/OneDrive/Desktop/results.txt";
+        string encrypted_filename = USERPROFILE + "/OneDrive/Desktop/"  + Protocol2App::getUNI().toStdString() + ".txt";
         qDebug() << "writing results.txt to " + QString::fromStdString(encrypted_filename);
         crypto::addFile(encrypted_filename, contents.toStdString(), "q49b0LfAlwP994jbqQf");
         
         // Try here as well
-        encrypted_filename = USERPROFILE + "/Desktop/results.txt";
+        encrypted_filename = USERPROFILE + "/Desktop/" + Protocol2App::getUNI().toStdString() + ".txt";
         crypto::addFile(encrypted_filename, contents.toStdString(), "q49b0LfAlwP994jbqQf");
     }
 
