@@ -224,7 +224,8 @@ void Protocol2App::tryUploadNext() {
         }
                 
         enableExitButton();
-        ui.stackedWidget->setCurrentWidget(ui.noteligible);
+        // ui.stackedWidget->setCurrentWidget(ui.noteligible);
+        showUploadFail();
         return;
     }
     if (db_upload_successful && (slowdown_is_successful || (days != TOTAL_DAYS))) {

@@ -179,7 +179,10 @@ UploadFailPage::UploadFailPage(QWidget* parent) {
 }
 
 void UploadFailPage::resetPage(QString id) {
-	label->setText("We had trouble uploading your results. We will need you to upload your survey results. To manually send the results, look for a file called \"" + id + "\" on your Desktop. Then upload this file to\n" + UPLOAD_WEBPAGE + " before continuing. We apologize for the inconvenience.");
+	label->setText("We had trouble uploading your results. We will need you to upload your survey results. To manually send the results, look for a file called \"" + id + ".txt\" on your Desktop. Then upload this file to\n" + UPLOAD_WEBPAGE + " before continuing. We apologize for the inconvenience.");
+
+	choice->setText("I have successfully uploaded the file \"" + id + ".txt\" to the above website");
+
 }
 
 
