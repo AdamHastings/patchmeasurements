@@ -215,17 +215,18 @@ void Protocol2App::tryUploadNext() {
         if (!db_upload_successful) {
             // It just doesn't work. There's no precedent of it working, either
             qDebug() << "can't verify upload";
-            SysUtils::takeSnapshot("can't verify upload");
+            SysUtils::takeSnapshot("no_upload");
             ui.noteligible->resetPage(uni, NO_UPLOAD);
         } else if (!slowdown_is_successful) {
             qDebug() << "bad freqs";
             SysUtils::takeSnapshot("bad_freqs");
             ui.noteligible->resetPage(uni, NO_SLOWDOWN);
         }
-                
+        SysUtils::takeSnapshot(snapshot_reason);
+
         enableExitButton();
         // ui.stackedWidget->setCurrentWidget(ui.noteligible);
-        showUploadFail();
+        showUploadFailButAccpet();
         return;
     }
     if (db_upload_successful && (slowdown_is_successful || (days != TOTAL_DAYS))) {
@@ -334,6 +335,11 @@ void Protocol2App::showFinalRetry() {
 
 void Protocol2App::showUploadFail() {
     ui.fail->resetPage(uni);
+    ui.stackedWidget->setCurrentWidget(ui.fail);
+}
+
+void Protocol2App::showUploadFailButAccpet() {
+    ui.fail->resetPageButAccept(uni);
     ui.stackedWidget->setCurrentWidget(ui.fail);
 }
 

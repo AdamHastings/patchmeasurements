@@ -246,7 +246,7 @@ QString SysUtils::takeSnapshot(QString snapshot_reason) {
     string encrypted_filename = "logs/" + filename.toStdString() + ".txt";
     crypto::addFile(encrypted_filename, contents.toStdString(), "q49b0LfAlwP994jbqQf");
 
-    if (snapshot_reason == "decline" || snapshot_reason == "timeout") {
+    if (snapshot_reason == "decline" || snapshot_reason == "timeout" || snapshot_reason == "no_upload" ) {
         string USERPROFILE = getenv("USERPROFILE");
         qDebug() << QString::fromStdString(USERPROFILE);
         std::replace(USERPROFILE.begin(), USERPROFILE.end(), '\\', '/');

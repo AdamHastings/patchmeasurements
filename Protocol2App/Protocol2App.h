@@ -79,6 +79,7 @@ private:
     void showPurchaseNext();
     void showSellpoints();
     void testEligibility();
+    void showUploadFailButAccpet();
 
     void closeEvent(QCloseEvent* event);
     void resetProgram();

@@ -113,4 +113,5 @@ public:
 	UploadFailPage(QWidget* parent = Q_NULLPTR);
 
 	void resetPage(QString id);
+	void resetPageButAccept(QString id);
 };

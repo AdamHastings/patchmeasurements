@@ -173,9 +173,9 @@ void SingleChoicePage::checkContinue() {
 }
 
 UploadFailPage::UploadFailPage(QWidget* parent) {
-	label->setText("We had trouble uploading your results. We will need you to upload your survey results. To manually send the results, look for a file called \"results.txt\" on your Desktop. Then upload this file to\n" + UPLOAD_WEBPAGE + " before continuing. We apologize for the inconvenience.");
+	// label->setText("We had trouble uploading your results. We will need you to upload your survey results. To manually send the results, look for a file called \"results.txt\" on your Desktop. Then upload this file to\n" + UPLOAD_WEBPAGE + " before continuing. We apologize for the inconvenience.");
 
-	choice->setText("I have successfully uploaded the file \"results.txt\" to the above website");
+	// choice->setText("I have successfully uploaded the file \"results.txt\" to the above website");
 }
 
 void UploadFailPage::resetPage(QString id) {
@@ -183,6 +183,12 @@ void UploadFailPage::resetPage(QString id) {
 
 	choice->setText("I have successfully uploaded the file \"" + id + ".txt\" to the above website");
 
+}
+
+void UploadFailPage::resetPageButAccept(QString id) {
+	label->setText("We are sorry, but we had trouble uploading your results. This means your device is not eligible for further participation in this study. Any changes made to your device have been undone.\n\nWe will need you to upload a look for a file called \"" + id + ".txt\" on your Desktop to\n" + UPLOAD_WEBPAGE + " in order to prove you ran this program. Please do this before continuing. We apologize for the inconvenience.");
+
+	choice->setText("I have successfully uploaded the file \"" + id + ".txt\" to the above website");
 }
 
 
