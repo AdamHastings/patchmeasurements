@@ -1,0 +1,20 @@
+﻿  aes.cpp
+  decrypt.cpp
+C:\Users\Administrator\patchmeasurements\decrypt\decrypt.cpp(47,23): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Administrator\patchmeasurements\decrypt\decrypt.cpp(171,23): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Administrator\patchmeasurements\decrypt\decrypt.cpp(191,23): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Administrator\patchmeasurements\decrypt\decrypt.cpp(183,14): warning C4101: 'plaintext_block': unreferenced local variable
+C:\Users\Administrator\patchmeasurements\decrypt\decrypt.cpp(162,14): warning C4101: 'c': unreferenced local variable
+  sha256.cpp
+C:\Users\Administrator\patchmeasurements\decrypt\sha256.cpp(136,21): warning C4244: '=': conversion from 'unsigned __int64' to 'BYTE', possible loss of data
+C:\Users\Administrator\patchmeasurements\decrypt\sha256.cpp(137,30): warning C4244: '=': conversion from 'unsigned __int64' to 'BYTE', possible loss of data
+C:\Users\Administrator\patchmeasurements\decrypt\sha256.cpp(138,30): warning C4244: '=': conversion from 'unsigned __int64' to 'BYTE', possible loss of data
+C:\Users\Administrator\patchmeasurements\decrypt\sha256.cpp(139,30): warning C4244: '=': conversion from 'unsigned __int64' to 'BYTE', possible loss of data
+C:\Users\Administrator\patchmeasurements\decrypt\sha256.cpp(140,30): warning C4244: '=': conversion from 'unsigned __int64' to 'BYTE', possible loss of data
+C:\Users\Administrator\patchmeasurements\decrypt\sha256.cpp(141,30): warning C4244: '=': conversion from 'unsigned __int64' to 'BYTE', possible loss of data
+C:\Users\Administrator\patchmeasurements\decrypt\sha256.cpp(142,30): warning C4244: '=': conversion from 'unsigned __int64' to 'BYTE', possible loss of data
+  Generating code
+  Previous IPDB not found, fall back to full compilation.
+  All 347 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
+  Finished generating code
+  decrypt.vcxproj -> C:\Users\Administrator\patchmeasurements\decrypt\Release\decrypt.exe
