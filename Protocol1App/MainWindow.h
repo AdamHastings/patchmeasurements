@@ -39,7 +39,7 @@ private:
     double task3Freq = -1;
     double postTasksFreq = -1;
     QString system_info;
-    bool  eligible;
+    bool  eligible = false;
 
     void showStartNext();
     void showModNext();

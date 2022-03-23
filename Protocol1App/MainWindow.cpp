@@ -143,6 +143,7 @@ void MainWindow::showNotEligible() {
 }
 
 void MainWindow::showPatch0() {
+    // Why is this set multiple times? Too afraid to change it though :)
     ui.stackedWidget->setCurrentWidget(ui.patch0);
     ui.stackedWidget->setCurrentWidget(ui.patch0);
     ui.stackedWidget->setCurrentWidget(ui.patch0);
@@ -172,38 +173,40 @@ void MainWindow::showPatch0() {
         PowerMgmt::createCustomPowerPlan();
         PowerMgmt::removeFreqCap();
 
-        PowerMgmt::setFreqCap(100 - SLOWDOWN);
-        PowerMgmt::getCurrentClockFreqStart(proc);
-        checkFreq = PowerMgmt::getCurrentClockFreqRead(proc);
-        qDebug() << "checkFreq: " << checkFreq;
-        PowerMgmt::removeFreqCap();
-
-
         // Take another reading
-        
         PowerMgmt::getCurrentClockFreqStart(proc);
         task1Freq = PowerMgmt::getCurrentClockFreqRead(proc);
         qDebug() << "task1Freq: " << task1Freq;
 
-        // TODO
-        // if not slowed down enough
-        // cause a failure
-        int tolerance = 8;
-        double lowerBound = task1Freq * (100 - (double(SLOWDOWN) + tolerance))/100;
-        double upperBound = task1Freq * (100 - (double(SLOWDOWN) - tolerance))/100;
 
-        qDebug() << "upper bound: " << upperBound;
-        qDebug() << "lower bound: " << lowerBound;
+        int num_attempts = 3;
 
-        if (checkFreq < upperBound && checkFreq > lowerBound) {
-            eligible = true;
+        // Let's first try this
+        MAX_FREQ_PERCENTAGE = SLOWDOWN;
+
+        for (int i = 0; i < num_attempts; i++) {
+
+            PowerMgmt::setFreqCap(100 - MAX_FREQ_PERCENTAGE);
+            PowerMgmt::getCurrentClockFreqStart(proc);
+            checkFreq = PowerMgmt::getCurrentClockFreqRead(proc);
+            qDebug() << "checkFreq: " << checkFreq;
+           
+
+
+            int tolerance = 5;
+            double lowerBound = task1Freq * (100 - (double(SLOWDOWN) + tolerance)) / 100;
+            double upperBound = task1Freq * (100 - (double(SLOWDOWN) - tolerance)) / 100;
+
+            qDebug() << "upper bound: " << upperBound;
+            qDebug() << "lower bound: " << lowerBound;
+
+            if (checkFreq < upperBound && checkFreq > lowerBound) {
+                eligible = true;
+                break;
+            }
         }
-        else {
-            eligible = false;
-        }
+
         ui.patch0->fill3();
-
-
         ui.patch0->done_label->setText("Done!");
         ui.patch0->continue_btn->setEnabled(true);
     //}
@@ -221,7 +224,7 @@ void MainWindow::patch0Next() {
 void MainWindow::showPatch1() {
     ui.stackedWidget->setCurrentWidget(ui.patch1);
     if (throttled_task == 2)
-        PowerMgmt::setFreqCap(100 - SLOWDOWN);
+        PowerMgmt::setFreqCap(100 - MAX_FREQ_PERCENTAGE);
 
     // Take a reading
     QProcess proc;
@@ -236,7 +239,7 @@ void MainWindow::showPatch1() {
 void MainWindow::showPatch2() {
     ui.stackedWidget->setCurrentWidget(ui.patch2);
     if (throttled_task == 3)
-        PowerMgmt::setFreqCap(100 - SLOWDOWN);
+        PowerMgmt::setFreqCap(100 - MAX_FREQ_PERCENTAGE);
     else
         PowerMgmt::removeFreqCap();
 
@@ -448,8 +451,6 @@ void MainWindow::showWithdrawNext() {
         showDebrief();
     }
 }
-
-
 
 void MainWindow::tryUpload() {
 
