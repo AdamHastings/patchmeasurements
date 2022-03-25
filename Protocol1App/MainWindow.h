@@ -33,7 +33,8 @@ private:
     double preTasksFreq = -1;
     QString baselineCPUUtilization = "";
     QString baselineRAMUtilization = "";
-    double checkFreq = -1;
+    // double checkFreq = -1;
+    double attemptFreqs[3] = { -1, -1, -1 };
     double task1Freq = -1;
     double task2Freq = -1;
     double task3Freq = -1;

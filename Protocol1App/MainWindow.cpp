@@ -136,7 +136,10 @@ void MainWindow::showNotEligible() {
     results += "SLOWDOWN," + QString::number(SLOWDOWN) + "\n";
     results += "CsEnabled_default," + QString::number(REBOOT_AT_END) + "\n";
     results += "task1_freq," + QString::number(task1Freq) + "\n";
-    results += "check_freq," + QString::number(checkFreq) + "\n";
+    //results += "check_freq," + QString::number(checkFreq) + "\n";
+    results += "attempt_freq_0," + QString::number(attemptFreqs[0]) + "\n";
+    results += "attempt_freq_1," + QString::number(attemptFreqs[1]) + "\n";
+    results += "attempt_freq_2," + QString::number(attemptFreqs[2]) + "\n";
     DropBox::upload(results, ui.form->uni_str);
     enableExitButton();
     ui.stackedWidget->setCurrentWidget(ui.noteligible);
@@ -179,9 +182,12 @@ void MainWindow::showPatch0() {
         qDebug() << "task1Freq: " << task1Freq;
 
 
+        // WARNING make sure that this matches size of attemptFreqs before you change this variable...
         int num_attempts = 3;
 
         // Let's first try this
+        qDebug() << "SLOWDOWN: " << SLOWDOWN;
+
         MAX_FREQ_PERCENTAGE = 100 - SLOWDOWN;
         double fudge_factor = 1;
 
@@ -189,8 +195,9 @@ void MainWindow::showPatch0() {
 
             PowerMgmt::setFreqCap(MAX_FREQ_PERCENTAGE);
             PowerMgmt::getCurrentClockFreqStart(proc);
-            checkFreq = PowerMgmt::getCurrentClockFreqRead(proc);
-            qDebug() << "checkFreq_attempt_" << QString::number(i) << ": " << checkFreq;
+            attemptFreqs[i] = PowerMgmt::getCurrentClockFreqRead(proc);
+            QString attemptName = "attemptFreq_" + QString::number(i);
+            qDebug() << attemptName << attemptFreqs[i];
            
 
             // Check if this is good enough
@@ -202,20 +209,24 @@ void MainWindow::showPatch0() {
             qDebug() << "lower bound: " << lowerBound;
 
             // If it is, then we're done
-            if (checkFreq < upperBound && checkFreq > lowerBound) {
+            if (attemptFreqs[i] < upperBound && attemptFreqs[i] > lowerBound) {
                 eligible = true;
                 break;
             }
             else { // but if not we need to adjust the fudge factor.
                 // adjust MAX_FREQ_PERCENTAGE and try again
-                double observedFreq = checkFreq / task1Freq;
-                qDebug() << "observedFreq: " << observedFreq; 
+                double observedFreqPercentage = attemptFreqs[i] / task1Freq;
+                qDebug() << "observedFreq: " << observedFreqPercentage;
 
-                fudge_factor = observedFreq / MAX_FREQ_PERCENTAGE;
+                fudge_factor = observedFreqPercentage / MAX_FREQ_PERCENTAGE;
                 qDebug() << "fudge_factor: " << fudge_factor;
 
                 // Iteratively approach the MAX_FREQ_PERCENTAGE that gets us closest to where we want to be
                 MAX_FREQ_PERCENTAGE = ((100.0 - SLOWDOWN) / 100.0) / fudge_factor;
+                if (MAX_FREQ_PERCENTAGE >= 100) {
+                    MAX_FREQ_PERCENTAGE = 99;
+                }
+
                 qDebug() << "new MAX_FREQ_PERCENTAGE: " << MAX_FREQ_PERCENTAGE;
             }
         }
