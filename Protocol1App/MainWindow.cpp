@@ -136,13 +136,17 @@ void MainWindow::showNotEligible() {
     results += "SLOWDOWN," + QString::number(SLOWDOWN) + "\n";
     results += "CsEnabled_default," + QString::number(REBOOT_AT_END) + "\n";
     results += "task1_freq," + QString::number(task1Freq) + "\n";
-    results += "check_freq," + QString::number(checkFreq) + "\n";
+    //results += "check_freq," + QString::number(checkFreq) + "\n";
+    results += "attempt_freq_0," + QString::number(attemptFreqs[0]) + "\n";
+    results += "attempt_freq_1," + QString::number(attemptFreqs[1]) + "\n";
+    results += "attempt_freq_2," + QString::number(attemptFreqs[2]) + "\n";
     DropBox::upload(results, ui.form->uni_str);
     enableExitButton();
     ui.stackedWidget->setCurrentWidget(ui.noteligible);
 }
 
 void MainWindow::showPatch0() {
+    // Why is this set multiple times? Too afraid to change it though :)
     ui.stackedWidget->setCurrentWidget(ui.patch0);
     ui.stackedWidget->setCurrentWidget(ui.patch0);
     ui.stackedWidget->setCurrentWidget(ui.patch0);
@@ -172,38 +176,62 @@ void MainWindow::showPatch0() {
         PowerMgmt::createCustomPowerPlan();
         PowerMgmt::removeFreqCap();
 
-        PowerMgmt::setFreqCap(100 - SLOWDOWN);
-        PowerMgmt::getCurrentClockFreqStart(proc);
-        checkFreq = PowerMgmt::getCurrentClockFreqRead(proc);
-        qDebug() << "checkFreq: " << checkFreq;
-        PowerMgmt::removeFreqCap();
-
-
         // Take another reading
-        
         PowerMgmt::getCurrentClockFreqStart(proc);
         task1Freq = PowerMgmt::getCurrentClockFreqRead(proc);
         qDebug() << "task1Freq: " << task1Freq;
 
-        // TODO
-        // if not slowed down enough
-        // cause a failure
-        int tolerance = 8;
-        double lowerBound = task1Freq * (100 - (double(SLOWDOWN) + tolerance))/100;
-        double upperBound = task1Freq * (100 - (double(SLOWDOWN) - tolerance))/100;
 
-        qDebug() << "upper bound: " << upperBound;
-        qDebug() << "lower bound: " << lowerBound;
+        // WARNING make sure that this matches size of attemptFreqs before you change this variable...
+        int num_attempts = 3;
 
-        if (checkFreq < upperBound && checkFreq > lowerBound) {
-            eligible = true;
+        // Let's first try this
+        qDebug() << "SLOWDOWN: " << SLOWDOWN;
+
+        MAX_FREQ_PERCENTAGE = 100 - SLOWDOWN;
+        double fudge_factor = 1;
+
+        for (int i = 0; i < num_attempts; i++) {
+
+            PowerMgmt::setFreqCap(MAX_FREQ_PERCENTAGE);
+            PowerMgmt::getCurrentClockFreqStart(proc);
+            attemptFreqs[i] = PowerMgmt::getCurrentClockFreqRead(proc);
+            QString attemptName = "attemptFreq_" + QString::number(i);
+            qDebug() << attemptName << attemptFreqs[i];
+           
+
+            // Check if this is good enough
+            int tolerance = 5;
+            double lowerBound = task1Freq * (100 - (double(SLOWDOWN) + tolerance)) / 100;
+            double upperBound = task1Freq * (100 - (double(SLOWDOWN) - tolerance)) / 100;
+
+            qDebug() << "upper bound: " << upperBound;
+            qDebug() << "lower bound: " << lowerBound;
+
+            // If it is, then we're done
+            if (attemptFreqs[i] < upperBound && attemptFreqs[i] > lowerBound) {
+                eligible = true;
+                break;
+            }
+            else { // but if not we need to adjust the fudge factor.
+                // adjust MAX_FREQ_PERCENTAGE and try again
+                double observedFreqPercentage = attemptFreqs[i] / task1Freq;
+                qDebug() << "observedFreq: " << observedFreqPercentage;
+
+                fudge_factor = observedFreqPercentage / MAX_FREQ_PERCENTAGE;
+                qDebug() << "fudge_factor: " << fudge_factor;
+
+                // Iteratively approach the MAX_FREQ_PERCENTAGE that gets us closest to where we want to be
+                MAX_FREQ_PERCENTAGE = ((100.0 - SLOWDOWN) / 100.0) / fudge_factor;
+                if (MAX_FREQ_PERCENTAGE >= 100) {
+                    MAX_FREQ_PERCENTAGE = 99;
+                }
+
+                qDebug() << "new MAX_FREQ_PERCENTAGE: " << MAX_FREQ_PERCENTAGE;
+            }
         }
-        else {
-            eligible = false;
-        }
+
         ui.patch0->fill3();
-
-
         ui.patch0->done_label->setText("Done!");
         ui.patch0->continue_btn->setEnabled(true);
     //}
@@ -221,7 +249,7 @@ void MainWindow::patch0Next() {
 void MainWindow::showPatch1() {
     ui.stackedWidget->setCurrentWidget(ui.patch1);
     if (throttled_task == 2)
-        PowerMgmt::setFreqCap(100 - SLOWDOWN);
+        PowerMgmt::setFreqCap(MAX_FREQ_PERCENTAGE);
 
     // Take a reading
     QProcess proc;
@@ -236,7 +264,7 @@ void MainWindow::showPatch1() {
 void MainWindow::showPatch2() {
     ui.stackedWidget->setCurrentWidget(ui.patch2);
     if (throttled_task == 3)
-        PowerMgmt::setFreqCap(100 - SLOWDOWN);
+        PowerMgmt::setFreqCap(MAX_FREQ_PERCENTAGE);
     else
         PowerMgmt::removeFreqCap();
 
@@ -448,8 +476,6 @@ void MainWindow::showWithdrawNext() {
         showDebrief();
     }
 }
-
-
 
 void MainWindow::tryUpload() {
 
