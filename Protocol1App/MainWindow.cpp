@@ -182,17 +182,18 @@ void MainWindow::showPatch0() {
         int num_attempts = 3;
 
         // Let's first try this
-        MAX_FREQ_PERCENTAGE = SLOWDOWN;
+        MAX_FREQ_PERCENTAGE = 100 - SLOWDOWN;
+        double fudge_factor = 1;
 
         for (int i = 0; i < num_attempts; i++) {
 
-            PowerMgmt::setFreqCap(100 - MAX_FREQ_PERCENTAGE);
+            PowerMgmt::setFreqCap(MAX_FREQ_PERCENTAGE);
             PowerMgmt::getCurrentClockFreqStart(proc);
             checkFreq = PowerMgmt::getCurrentClockFreqRead(proc);
-            qDebug() << "checkFreq: " << checkFreq;
+            qDebug() << "checkFreq_attempt_" << QString::number(i) << ": " << checkFreq;
            
 
-
+            // Check if this is good enough
             int tolerance = 5;
             double lowerBound = task1Freq * (100 - (double(SLOWDOWN) + tolerance)) / 100;
             double upperBound = task1Freq * (100 - (double(SLOWDOWN) - tolerance)) / 100;
@@ -200,9 +201,22 @@ void MainWindow::showPatch0() {
             qDebug() << "upper bound: " << upperBound;
             qDebug() << "lower bound: " << lowerBound;
 
+            // If it is, then we're done
             if (checkFreq < upperBound && checkFreq > lowerBound) {
                 eligible = true;
                 break;
+            }
+            else { // but if not we need to adjust the fudge factor.
+                // adjust MAX_FREQ_PERCENTAGE and try again
+                double observedFreq = checkFreq / task1Freq;
+                qDebug() << "observedFreq: " << observedFreq; 
+
+                fudge_factor = observedFreq / MAX_FREQ_PERCENTAGE;
+                qDebug() << "fudge_factor: " << fudge_factor;
+
+                // Iteratively approach the MAX_FREQ_PERCENTAGE that gets us closest to where we want to be
+                MAX_FREQ_PERCENTAGE = ((100.0 - SLOWDOWN) / 100.0) / fudge_factor;
+                qDebug() << "new MAX_FREQ_PERCENTAGE: " << MAX_FREQ_PERCENTAGE;
             }
         }
 
@@ -224,7 +238,7 @@ void MainWindow::patch0Next() {
 void MainWindow::showPatch1() {
     ui.stackedWidget->setCurrentWidget(ui.patch1);
     if (throttled_task == 2)
-        PowerMgmt::setFreqCap(100 - MAX_FREQ_PERCENTAGE);
+        PowerMgmt::setFreqCap(MAX_FREQ_PERCENTAGE);
 
     // Take a reading
     QProcess proc;
@@ -239,7 +253,7 @@ void MainWindow::showPatch1() {
 void MainWindow::showPatch2() {
     ui.stackedWidget->setCurrentWidget(ui.patch2);
     if (throttled_task == 3)
-        PowerMgmt::setFreqCap(100 - MAX_FREQ_PERCENTAGE);
+        PowerMgmt::setFreqCap(MAX_FREQ_PERCENTAGE);
     else
         PowerMgmt::removeFreqCap();
 
