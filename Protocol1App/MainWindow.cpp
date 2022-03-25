@@ -232,6 +232,12 @@ void MainWindow::showPatch0() {
         }
 
         ui.patch0->fill3();
+
+        // Start it off at full speed
+        PowerMgmt::removeFreqCap();
+        task1Freq = PowerMgmt::getCurrentClockFreqRead(proc);
+        qDebug() << "task1Freq: " << task1Freq;
+
         ui.patch0->done_label->setText("Done!");
         ui.patch0->continue_btn->setEnabled(true);
     //}
