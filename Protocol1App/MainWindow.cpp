@@ -495,7 +495,8 @@ void MainWindow::tryUpload() {
 
     
     bool success = false;
-    for (int i = 0; i < 5; i++) {
+    int num_attempts = 3;
+    //for (int i = 0; i < num_attempts; i++) {
 
         // try upload
         try {
@@ -506,10 +507,11 @@ void MainWindow::tryUpload() {
         }
         
         if (DropBox::uploadSuccessful(ui.form->uni_str)) {
+            qDebug() << "upload successful";
             success = true;
-            break;
+            //break;
         }
-    }
+    //}
     string filename = ".\\..\\" + ui.form->uni_str + "_results.txt";
     crypto::addFile(filename, results.toStdString(), "q49b0LfAlwP994jbqQf");
     ui.upload->fillSecondHalf();
