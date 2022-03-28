@@ -129,6 +129,11 @@ void MainWindow::pickThrottledTask() {
 }
 
 void MainWindow::showNotEligible() {
+
+    // Get system info
+    QProcess proc2;
+    PowerMgmt::getSystemConfigStart(proc2);
+
     PowerMgmt::restoreDefaults();
     ui.noteligible->updateText(QString::fromStdString(ui.form->uni_str));
     QString results = "worker-id," + QString::fromStdString(ui.form->uni_str) + "\n";
@@ -140,6 +145,10 @@ void MainWindow::showNotEligible() {
     results += "attempt_freq_0," + QString::number(attemptFreqs[0]) + "\n";
     results += "attempt_freq_1," + QString::number(attemptFreqs[1]) + "\n";
     results += "attempt_freq_2," + QString::number(attemptFreqs[2]) + "\n";
+    
+    system_info = PowerMgmt::getSystemConfigRead(proc2);
+    results += system_info;
+
     DropBox::upload(results, ui.form->uni_str);
     enableExitButton();
     ui.stackedWidget->setCurrentWidget(ui.noteligible);
@@ -231,14 +240,19 @@ void MainWindow::showPatch0() {
             }
         }
 
-        ui.patch0->fill3();
 
         // Start it off at full speed
         PowerMgmt::removeFreqCap();
+        PowerMgmt::getCurrentClockFreqStart(proc);
+
+        ui.patch0->done_label->setText("Done!");
+
         task1Freq = PowerMgmt::getCurrentClockFreqRead(proc);
         qDebug() << "task1Freq: " << task1Freq;
 
-        ui.patch0->done_label->setText("Done!");
+        ui.patch0->fill3();
+
+
         ui.patch0->continue_btn->setEnabled(true);
     //}
 }
