@@ -157,9 +157,9 @@ void MainWindow::showNotEligible() {
 void MainWindow::showPatch0() {
     // Why is this set multiple times? Too afraid to change it though :)
     ui.stackedWidget->setCurrentWidget(ui.patch0);
-    ui.stackedWidget->setCurrentWidget(ui.patch0);
-    ui.stackedWidget->setCurrentWidget(ui.patch0);
-    ui.stackedWidget->setCurrentWidget(ui.patch0);
+    //ui.stackedWidget->setCurrentWidget(ui.patch0);
+    //ui.stackedWidget->setCurrentWidget(ui.patch0);
+    //ui.stackedWidget->setCurrentWidget(ui.patch0);
 
     // Take a reading
     QProcess proc;
