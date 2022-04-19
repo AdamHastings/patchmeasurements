@@ -113,6 +113,10 @@ public:
 		label->setText("We are not able to successfully upload your survey responses. We will need you to upload your survey results. To manually send the results, look for a file called \"results.txt\" in the same folder where you first ran this program. Then upload this file to\n" + UPLOAD_WEBPAGE + " before continuing. We apologize for the inconvenience.");
 
 	}
+
+	void update_text(QString uni) {
+		label->setText("We are not able to successfully upload your survey responses. We will need you to upload your survey results. To manually send the results, look for a file called \"" + uni + "_results.txt\" in the same folder where you first ran this program. Then upload this file to\n" + UPLOAD_WEBPAGE + " before continuing. We apologize for the inconvenience.");
+	}
 };
 
 class RetryUploadPage : public SingleChoicePage

@@ -554,6 +554,7 @@ void MainWindow::showFail() {
         ui.stackedWidget->setCurrentWidget(ui.retry);
     }
     else {
+        ui.fail->update_text(QString::fromStdString(ui.form->uni_str));
         ui.stackedWidget->setCurrentWidget(ui.fail);
     }
 }
