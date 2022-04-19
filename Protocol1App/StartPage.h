@@ -67,7 +67,7 @@ class PrimaryDevicePage : public StartPage
 	Q_OBJECT
 public:
 	PrimaryDevicePage(QWidget* parent = Q_NULLPTR) : StartPage(parent) {
-		label->setText("This experiment requires that the device you are currently using is your primary computer. A \"primary computer\" is a computer that you use more than any other computer. For the purposes of this experiment, do not consider your phone as a primary computer.\n\nIs the computer you are currently using right now your primary computer?");
+		label->setText("This experiment requires that the device you are currently using is your primary computer and is NOT a Virtual Machine (VM) or cloud instance (like EC2). A \"primary computer\" is a computer that you use more than any other computer. For the purposes of this experiment, do not consider your phone as a primary computer.\n\nIs the computer you are currently using right now your primary computer?");
 		consent_btn->setText("Yes");
 		not_consent_btn->setText("No");
 	}
