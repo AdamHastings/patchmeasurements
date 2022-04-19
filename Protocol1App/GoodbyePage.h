@@ -45,7 +45,7 @@ public:
 		}
 
 
-		QString text = "Thank you for your interest in this experiment. Unfortunately, your device is not compatible with this program, and we can't consider you for further participation. Please enter the following Completion Code into the HIT:\n\n" + cc + "\n\n";
+		QString text = "Thank you for your interest in this experiment. Unfortunately, your device is not compatible with this program, and we can't consider you for further participation. Any temporary changes to your device have been undone.\n\nYou may now delete this program from your device. ";// Please enter the following Completion Code into the HIT : \n\n" + cc + "\n\n";
 
 		if (REBOOT_AT_END) {
 			text += "\n\nDid you reboot your computer when asked? This could be the reason why this program failed to work on your device. If you didn't reboot your computer when prompted and would still like to try to participate, you may re-run this program first and then reboot when prompted.";
